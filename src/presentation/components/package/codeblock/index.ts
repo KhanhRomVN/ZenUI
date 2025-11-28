@@ -1,0 +1,30 @@
+export { default as CodeBlock } from "./CodeBlock";
+export type {
+  CodeBlockProps,
+  CodeBlockLanguage,
+  CodeBlockTheme,
+  CodeBlockSize,
+  CodeBlockSpacing,
+  CodeBlockBorder,
+  CodeBlockShadow,
+  CodeBlockToolbarAction,
+  CodeBlockState,
+  CodeBlockToolbarConfig,
+  CodeBlockHeaderMode,
+  CodeBlockTab,
+  CodeBlockExpandConfig,
+} from "./CodeBlock.types";
+export {
+  parseSize,
+  parseSpacing,
+  parseBorder,
+  parseShadow,
+  getPresetDimensions,
+  getMonacoLanguage,
+  getLanguageDisplayName,
+  copyToClipboard,
+  getDefaultMonacoOptions,
+  getContainerStyle,
+  countLines,
+  getCodeHeight,
+} from "./CodeBlock.utils";

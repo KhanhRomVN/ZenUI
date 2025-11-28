@@ -1,0 +1,336 @@
+import { CSSProperties } from "react";
+import {
+  CodeBlockSize,
+  CodeBlockSpacing,
+  CodeBlockBorder,
+  CodeBlockShadow,
+  CodeBlockLanguage,
+} from "./CodeBlock.types";
+
+/**
+ * Convert size value to CSS value
+ */
+export const parseSize = (
+  size: string | number | undefined,
+  defaultValue: string
+): string => {
+  if (!size) return defaultValue;
+
+  if (typeof size === "number") {
+    return `${size}px`;
+  }
+
+  // Handle fractions like "1/2", "1/3", "1/4"
+  if (size.includes("/")) {
+    const [numerator, denominator] = size.split("/").map(Number);
+    if (!isNaN(numerator) && !isNaN(denominator) && denominator !== 0) {
+      return `${(numerator / denominator) * 100}%`;
+    }
+  }
+
+  // Handle special values
+  if (size === "full") return "100%";
+  if (size === "screen") return "100vh";
+  if (size === "auto") return "auto";
+
+  return size;
+};
+
+/**
+ * Parse spacing values (padding, margin)
+ */
+export const parseSpacing = (spacing: CodeBlockSpacing | undefined): string => {
+  if (!spacing) return "";
+
+  if (spacing.all !== undefined) {
+    return parseSize(spacing.all, "");
+  }
+
+  const top = spacing.top ? parseSize(spacing.top, "0") : "0";
+  const right = spacing.right ? parseSize(spacing.right, "0") : "0";
+  const bottom = spacing.bottom ? parseSize(spacing.bottom, "0") : "0";
+  const left = spacing.left ? parseSize(spacing.left, "0") : "0";
+
+  return `${top} ${right} ${bottom} ${left}`;
+};
+
+/**
+ * Parse border properties
+ */
+export const parseBorder = (
+  border: CodeBlockBorder | undefined
+): CSSProperties => {
+  if (!border) return {};
+
+  const styles: CSSProperties = {};
+
+  if (border.width) {
+    (styles as any).borderWidth = parseSpacing(border.width);
+  }
+
+  if (border.style) {
+    (styles as any).borderStyle = border.style;
+  }
+
+  if (border.color) {
+    (styles as any).borderColor = border.color;
+  }
+
+  if (border.radius) {
+    (styles as any).borderRadius = parseSpacing(border.radius);
+  }
+
+  return styles;
+};
+
+/**
+ * Parse shadow properties
+ */
+export const parseShadow = (
+  shadow: CodeBlockShadow | CodeBlockShadow[] | undefined
+): string => {
+  if (!shadow) return "";
+
+  if (Array.isArray(shadow)) {
+    return shadow.map((s) => parseSingleShadow(s)).join(", ");
+  }
+
+  return parseSingleShadow(shadow);
+};
+
+const parseSingleShadow = (shadow: CodeBlockShadow): string => {
+  const offsetX = parseSize(shadow.offsetX, "0");
+  const offsetY = parseSize(shadow.offsetY, "0");
+  const blur = parseSize(shadow.blur, "0");
+  const spread = parseSize(shadow.spread, "0");
+  const color = shadow.color || "rgba(0, 0, 0, 0.1)";
+  const inset = shadow.inset ? "inset " : "";
+
+  return `${inset}${offsetX} ${offsetY} ${blur} ${spread} ${color}`;
+};
+
+/**
+ * Get preset dimensions based on size
+ */
+export const getPresetDimensions = (
+  size: CodeBlockSize
+): { width: string; height: string } => {
+  const presets: Record<CodeBlockSize, { width: string; height: string }> = {
+    sm: { width: "100%", height: "200px" },
+    md: { width: "100%", height: "400px" },
+    lg: { width: "100%", height: "600px" },
+    xl: { width: "100%", height: "800px" },
+    full: { width: "100%", height: "100vh" },
+  };
+
+  return presets[size] || presets.md;
+};
+
+/**
+ * Get Monaco language from CodeBlockLanguage
+ */
+export const getMonacoLanguage = (language: CodeBlockLanguage): string => {
+  const languageMap: Record<CodeBlockLanguage, string> = {
+    javascript: "javascript",
+    typescript: "typescript",
+    python: "python",
+    java: "java",
+    csharp: "csharp",
+    cpp: "cpp",
+    c: "c",
+    go: "go",
+    rust: "rust",
+    php: "php",
+    ruby: "ruby",
+    swift: "swift",
+    kotlin: "kotlin",
+    scala: "scala",
+    html: "html",
+    css: "css",
+    scss: "scss",
+    less: "less",
+    json: "json",
+    xml: "xml",
+    yaml: "yaml",
+    markdown: "markdown",
+    sql: "sql",
+    shell: "shell",
+    bash: "bash",
+    powershell: "powershell",
+    dockerfile: "dockerfile",
+    plaintext: "plaintext",
+  };
+
+  return languageMap[language] || "plaintext";
+};
+
+/**
+ * Get display name for language
+ */
+export const getLanguageDisplayName = (language: CodeBlockLanguage): string => {
+  const displayNames: Record<CodeBlockLanguage, string> = {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    csharp: "C#",
+    cpp: "C++",
+    c: "C",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    scala: "Scala",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    less: "Less",
+    json: "JSON",
+    xml: "XML",
+    yaml: "YAML",
+    markdown: "Markdown",
+    sql: "SQL",
+    shell: "Shell",
+    bash: "Bash",
+    powershell: "PowerShell",
+    dockerfile: "Dockerfile",
+    plaintext: "Plain Text",
+  };
+
+  return displayNames[language] || language.toUpperCase();
+};
+
+/**
+ * Copy text to clipboard
+ */
+export const copyToClipboard = async (text: string): Promise<boolean> => {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } else {
+      // Fallback for older browsers
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      const successful = document.execCommand("copy");
+      textArea.remove();
+      return successful;
+    }
+  } catch (err) {
+    console.error("Failed to copy text: ", err);
+    return false;
+  }
+};
+
+/**
+ * Get default Monaco editor options
+ */
+export const getDefaultMonacoOptions = (props: any): any => {
+  return {
+    automaticLayout: true,
+    scrollBeyondLastLine: false,
+    minimap: {
+      enabled: props.showMinimap ?? false,
+    },
+    lineNumbers: props.showLineNumbers ? "on" : "off",
+    wordWrap: props.wordWrap || "off",
+    fontSize: props.fontSize || 14,
+    fontFamily: props.fontFamily || "Consolas, 'Courier New', monospace",
+    tabSize: props.tabSize || 2,
+    insertSpaces: props.insertSpaces ?? true,
+    readOnly: props.readOnly || !props.editable,
+    renderLineHighlight: props.highlightActiveLine ? "all" : "none",
+    scrollbar: {
+      vertical: "auto",
+      horizontal: "auto",
+      verticalScrollbarSize: 10,
+      horizontalScrollbarSize: 10,
+    },
+    overviewRulerLanes: 0,
+    hideCursorInOverviewRuler: true,
+    overviewRulerBorder: false,
+  };
+};
+
+/**
+ * Build container style
+ */
+export const getContainerStyle = (props: any): CSSProperties => {
+  const baseStyle: CSSProperties = {
+    position: "relative",
+    overflow: "hidden",
+    backgroundColor: props.backgroundColor || "transparent",
+    borderRadius: parseSize(props.borderRadius, "8px"),
+  };
+
+  // Apply opacity
+  if (props.opacity !== undefined) {
+    (baseStyle as any).opacity = props.opacity;
+  }
+
+  // Apply padding
+  const paddingValue = parseSpacing(props.padding);
+  if (paddingValue) {
+    (baseStyle as any).padding = paddingValue;
+  }
+
+  // Apply margin
+  const marginValue = parseSpacing(props.margin);
+  if (marginValue) {
+    (baseStyle as any).margin = marginValue;
+  }
+
+  // Apply border
+  const borderStyles = parseBorder(props.border);
+  Object.assign(baseStyle, borderStyles);
+
+  // Apply shadow
+  const shadowValue = parseShadow(props.shadow);
+  if (shadowValue) {
+    (baseStyle as any).boxShadow = shadowValue;
+  }
+
+  return baseStyle;
+};
+
+/**
+ * Count number of lines in code
+ */
+export const countLines = (code: string): number => {
+  if (!code) return 0;
+  return code.split("\n").length;
+};
+
+/**
+ * Get code height based on line count and expand state
+ */
+export const getCodeHeight = (
+  lineCount: number,
+  isExpanded: boolean,
+  expandConfig?: {
+    collapsedLines?: number;
+    expandedLines?: number;
+  }
+): string => {
+  const collapsedLines = expandConfig?.collapsedLines || 10;
+  const expandedLines = expandConfig?.expandedLines || 50;
+  const lineHeight = 19; // Default Monaco line height
+
+  if (!isExpanded && lineCount > collapsedLines) {
+    return `${collapsedLines * lineHeight}px`;
+  }
+
+  if (isExpanded && lineCount > expandedLines) {
+    return `${expandedLines * lineHeight}px`;
+  }
+
+  return `${lineCount * lineHeight}px`;
+};

@@ -1,274 +1,128 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
+import { LucideIcon, Loader2 } from "lucide-react";
 import { ButtonProps } from "./Button.types";
 import {
-  buildButtonStyles,
-  buildHoverStyles,
-  buildActiveStyles,
-  buildDisabledStyles,
-  buildLoadingStyles,
+  getButtonSizeStyles,
   getIconSize,
-  mergeAnimation,
+  getLoadingSpinner,
+  shouldShowIcon,
+  getContentAlignment,
 } from "./Button.utils";
 
-/**
- * Button Component
- *
- * Component button linh hoạt với hỗ trợ:
- * - Custom styling (padding, margin, border, shadow)
- * - Animation (hover, click, loading)
- * - Icon support (từ packages hoặc emoji SVG)
- * - Multiple states (normal, hover, active, disabled, loading)
- */
 const Button: React.FC<ButtonProps> = ({
+  size = 100,
+  width = "fit",
   children,
-  size = "md",
-  align = "center",
-  className = "",
   loading = false,
   disabled = false,
-  fullWidth = false,
-  iconConfig,
-  animation: animationProp,
+  icon,
+  align = "right",
+  className = "",
   onClick,
+  loadingText,
+  iconPosition = "left",
   ...props
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isActive, setIsActive] = useState(false);
+  const isDisabled = disabled || loading;
 
-  // Merge animation config
-  const animation = useMemo(
-    () => mergeAnimation(animationProp),
-    [animationProp]
-  );
+  // Kiểm tra xem button có text hay không
+  const hasText = React.Children.count(children) > 0;
 
-  // Check if button has text content
-  const hasText =
-    children !== undefined && children !== null && children !== "";
+  // Xác định xem có nên hiển thị icon hay không
+  const showIcon = shouldShowIcon(icon, loading);
 
-  // Get icon/emoji from config
-  const IconComponent = iconConfig?.icon;
-  const emoji = iconConfig?.emoji;
-  const iconPosition = iconConfig?.position || "left";
-  const iconSize = getIconSize(size, hasText, iconConfig?.size);
+  // Lấy styles dựa trên size và width
+  const sizeStyles = getButtonSizeStyles(size, width, hasText, showIcon);
 
-  // Build styles
-  const baseStyles = useMemo(() => {
-    return buildButtonStyles(size, hasText, {
-      width: props.width,
-      height: props.height,
-      minWidth: props.minWidth,
-      maxWidth: props.maxWidth,
-      padding: props.padding,
-      margin: props.margin,
-      border: props.border,
-      shadow: props.shadow,
-      backgroundColor: props.backgroundColor,
-      color: props.color,
-      fontSize: props.fontSize,
-      fontWeight: props.fontWeight,
-      opacity: props.opacity,
-      fullWidth,
-    });
-  }, [size, hasText, props, fullWidth]);
+  // Lấy icon size
+  const iconSize = getIconSize(size, hasText);
 
-  const hoverStyles = useMemo(() => {
-    return buildHoverStyles({
-      hoverBackgroundColor: props.hoverBackgroundColor,
-      hoverColor: props.hoverColor,
-      hoverBorder: props.hoverBorder,
-      hoverShadow: props.hoverShadow,
-    });
-  }, [props]);
+  // Lấy alignment styles
+  const alignmentStyles = getContentAlignment(align);
 
-  const activeStyles = useMemo(() => {
-    return buildActiveStyles({
-      activeBackgroundColor: props.activeBackgroundColor,
-      activeColor: props.activeColor,
-      activeBorder: props.activeBorder,
-      activeShadow: props.activeShadow,
-    });
-  }, [props]);
-
-  const disabledStyles = useMemo(() => buildDisabledStyles(), []);
-  const loadingStyles = useMemo(() => buildLoadingStyles(), []);
-
-  // Compute final styles based on state
-  const computedStyles = useMemo(() => {
-    let styles = { ...baseStyles };
-
-    // Apply alignment
-    if (align === "left") {
-      styles.justifyContent = "flex-start";
-    } else if (align === "right") {
-      styles.justifyContent = "flex-end";
-    }
-
-    // Apply hover styles
-    if (isHovered && animation.hover && !disabled && !loading) {
-      styles = { ...styles, ...hoverStyles };
-      if (animation.hoverScale) {
-        styles.transform = `scale(${animation.hoverScale})`;
-      }
-    }
-
-    // Apply active styles
-    if (isActive && animation.click && !disabled && !loading) {
-      styles = { ...styles, ...activeStyles };
-      if (animation.clickScale) {
-        styles.transform = `scale(${animation.clickScale})`;
-      }
-    }
-
-    // Apply disabled styles
-    if (disabled) {
-      styles = { ...styles, ...disabledStyles };
-    }
-
-    // Apply loading styles
-    if (loading) {
-      styles = { ...styles, ...loadingStyles };
-    }
-
-    // Apply animation duration
-    if (animation.duration) {
-      styles.transition = `all ${animation.duration}ms ease-in-out`;
-    }
-
-    return styles;
-  }, [
-    baseStyles,
-    hoverStyles,
-    activeStyles,
-    disabledStyles,
-    loadingStyles,
-    isHovered,
-    isActive,
-    disabled,
-    loading,
-    animation,
-    align,
-  ]);
-
-  // Loading spinner component
-  const LoadingSpinner = () => (
-    <svg
-      className="animate-spin"
-      style={{
-        width: props.loadingSize || iconSize,
-        height: props.loadingSize || iconSize,
-      }}
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <circle
-        className="opacity-25"
-        cx="12"
-        cy="12"
-        r="10"
-        stroke={props.loadingColor || "currentColor"}
-        strokeWidth="4"
-      />
-      <path
-        className="opacity-75"
-        fill={props.loadingColor || "currentColor"}
-        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-      />
-    </svg>
-  );
-
-  // Render icon or emoji
+  // Render icon
   const renderIcon = () => {
-    // If both icon and emoji provided, prioritize icon
-    if (IconComponent && emoji) {
-      console.warn(
-        "Button: Both icon and emoji provided in iconConfig. Only icon will be rendered."
-      );
-    }
-
-    if (IconComponent) {
-      return (
-        <IconComponent className={iconConfig?.className} size={iconSize} />
-      );
-    }
-
-    if (emoji) {
-      return (
-        <span
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: iconSize,
-            height: iconSize,
-          }}
-        >
-          {emoji}
-        </span>
-      );
-    }
-
-    return null;
-  };
-
-  // Handle click with animation
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (disabled || loading) return;
-
-    if (animation.click) {
-      setIsActive(true);
-      setTimeout(() => setIsActive(false), animation.duration || 200);
-    }
-
-    onClick?.(e);
-  };
-
-  // Render content based on icon position and loading state
-  const renderContent = () => {
     if (loading) {
-      return (
-        <>
-          {animation.loading && <LoadingSpinner />}
-          {props.loadingText || children}
-        </>
-      );
+      const spinnerConfig = getLoadingSpinner(size, hasText);
+      return <Loader2 size={spinnerConfig.size} className="animate-spin" />;
     }
 
-    const icon = renderIcon();
+    if (!icon) return null;
 
-    if (iconPosition === "left") {
+    // Nếu icon là LucideIcon
+    if (typeof icon === "function") {
+      const IconComponent = icon as LucideIcon;
+      return <IconComponent size={iconSize} />;
+    }
+
+    // Nếu icon là ReactNode (emoji, SVG, text, etc.)
+    return (
+      <span
+        className="button-icon-content"
+        style={{
+          fontSize: hasText
+            ? `${Math.max(iconSize - 2, 12)}px`
+            : `${iconSize}px`,
+          lineHeight: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {icon}
+      </span>
+    );
+  };
+
+  // Render content với đúng thứ tự icon và text
+  const renderContent = () => {
+    const iconElement = renderIcon();
+
+    if (!hasText) {
+      return iconElement;
+    }
+
+    if (iconPosition === "right") {
       return (
         <>
-          {icon}
           {children}
+          {iconElement}
         </>
       );
     }
 
+    // Mặc định là left
     return (
       <>
+        {iconElement}
         {children}
-        {icon}
       </>
     );
   };
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!isDisabled && onClick) {
+      onClick(e);
+    }
+  };
+
   return (
     <button
-      {...props}
-      style={computedStyles}
-      className={className}
-      disabled={disabled || loading}
-      onClick={handleClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        setIsActive(false);
+      className={`button-base ${className}`.trim()}
+      style={{
+        ...sizeStyles,
+        ...alignmentStyles,
+        opacity: isDisabled ? 0.6 : 1,
+        cursor: isDisabled ? "not-allowed" : "pointer",
       }}
-      onMouseDown={() => setIsActive(true)}
-      onMouseUp={() => setIsActive(false)}
+      disabled={isDisabled}
+      onClick={handleClick}
+      {...props}
     >
       {renderContent()}
+      {loading && loadingText && (
+        <span className="button-loading-text">{loadingText}</span>
+      )}
     </button>
   );
 };

@@ -182,7 +182,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
 
       try {
         let themeData;
-        let themeName;
+        let themeName: string;
 
         const presetName = getPresetThemeName();
 
@@ -199,7 +199,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
           ? builtInThemes[`./themes/${presetName}.json`]
           : null;
 
-        if (themeLoader) {
+        if (themeLoader && presetName) {
           // Theme found - load it
           themeData = await themeLoader();
           themeName = presetName;

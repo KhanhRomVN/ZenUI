@@ -134,7 +134,6 @@ function ExpandExample() {
               },
             ]}
             activeTabId="npm"
-            debug={true}
           />
         </section>
 

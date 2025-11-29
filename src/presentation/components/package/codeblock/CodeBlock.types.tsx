@@ -39,9 +39,10 @@ export type CodeBlockLanguage =
 export type CodeBlockTheme = "vs-dark" | "vs-light" | "hc-black" | "hc-light";
 
 /**
- * Kích thước của code block
+ * Kích thước của code block (scale percentage)
+ * 100 = 100% (mặc định), 120 = 120% (phóng to 1.2x), 80 = 80% (thu nhỏ 0.8x)
  */
-export type CodeBlockSize = "sm" | "md" | "lg" | "xl" | "full";
+export type CodeBlockSize = number;
 
 /**
  * Interface định nghĩa spacing
@@ -103,7 +104,7 @@ export interface CodeBlockProps {
   theme?: CodeBlockTheme;
   /** Chiều rộng của code block */
   width?: string | number;
-  /** Kích thước preset */
+  /** Kích thước scale (100 = 100%, 120 = 120%, etc.) */
   size?: CodeBlockSize;
   /** Tiêu đề của code block */
   title?: string;

@@ -7,6 +7,14 @@ module.exports = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
+  safelist: [
+    "bg-card-background",
+    "bg-input-background",
+    "bg-dialog-background",
+    "bg-dropdown-background",
+    "bg-sidebar-background",
+    "bg-drawer-background",
+  ],
   theme: {
     extend: {
       colors: {
@@ -47,10 +55,6 @@ module.exports = {
           borderHover: "var(--button-border-hover)",
           secondBg: "var(--button-second-bg)",
           secondBgHover: "var(--button-second-bg-hover)",
-        },
-        bookmarkItem: {
-          bg: "var(--bookmark-item-bg)",
-          text: "var(--bookmark-item-text)",
         },
         drawer: {
           background: "var(--drawer-background)",

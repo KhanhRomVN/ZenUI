@@ -110,20 +110,10 @@ const parseSingleShadow = (shadow: CodeBlockShadow): string => {
 };
 
 /**
- * Get preset dimensions based on size
+ * Get scale value from size percentage
  */
-export const getPresetDimensions = (
-  size: CodeBlockSize
-): { width: string; height: string } => {
-  const presets: Record<CodeBlockSize, { width: string; height: string }> = {
-    sm: { width: "100%", height: "200px" },
-    md: { width: "100%", height: "400px" },
-    lg: { width: "100%", height: "600px" },
-    xl: { width: "100%", height: "800px" },
-    full: { width: "100%", height: "100vh" },
-  };
-
-  return presets[size] || presets.md;
+export const getScaleFromSize = (size: number = 100): number => {
+  return size / 100;
 };
 
 /**
@@ -266,6 +256,7 @@ export const getDefaultMonacoOptions = (props: any): any => {
         ? "all"
         : "line"
       : "none",
+    theme: props.theme || "vs-dark",
     scrollbar: {
       vertical: "auto",
       horizontal: "auto",
@@ -303,9 +294,13 @@ export const getContainerStyle = (props: any): CSSProperties => {
   const baseStyle: CSSProperties = {
     position: "relative",
     overflow: "hidden",
-    backgroundColor: props.backgroundColor || "transparent",
-    borderRadius: parseSize(props.borderRadius, "8px"),
   };
+
+  // Apply borderRadius
+  const borderRadiusValue = parseSize(props.borderRadius, "8px");
+  if (borderRadiusValue) {
+    (baseStyle as any).borderRadius = borderRadiusValue;
+  }
 
   // Apply opacity
   if (props.opacity !== undefined) {

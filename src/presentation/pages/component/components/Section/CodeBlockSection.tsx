@@ -22,6 +22,7 @@ const CodeBlockSection = () => {
 function MyComponent() {
   return (
     <CodeBlock
+       
       code={\`console.log("Hello World");\`}
       language="javascript"
       theme="vs-dark"
@@ -44,6 +45,7 @@ console.log(fibonacci(10)); // Output: 55`;
 function TabsExample() {
   return (
     <CodeBlock
+       
       code=""
       language="javascript"
       theme="vs-dark"
@@ -74,6 +76,7 @@ function ExpandExample() {
   return (
     <CodeBlock
       code={longCodeContent}
+       
       language="python"
       theme="vs-dark"
       expandConfig={{
@@ -131,6 +134,7 @@ function ExpandExample() {
               },
             ]}
             activeTabId="npm"
+            debug={true}
           />
         </section>
 

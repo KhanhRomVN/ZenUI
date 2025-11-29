@@ -46,6 +46,7 @@ export function ThemeProvider({
     } else {
       // Apply Default Dark theme on first load
       const defaultDarkPreset = {
+        name: "Default Dark",
         primary: "#3686ff",
         background: "#0a0a0a",
         textPrimary: "#ececec",
@@ -121,7 +122,22 @@ export function ThemeProvider({
 
   const applyPresetTheme = (preset: any) => {
     applyCSSVariables(preset);
-    localStorage.setItem(`${storageKey}-preset`, JSON.stringify(preset));
+    // Save preset with name for CodeBlock theme detection
+    const presetWithName = {
+      ...preset,
+      name: preset.name, // Ensure name is saved
+    };
+    localStorage.setItem(
+      `${storageKey}-preset`,
+      JSON.stringify(presetWithName)
+    );
+
+    // Dispatch custom event to notify CodeBlock components
+    window.dispatchEvent(
+      new CustomEvent("theme-preset-changed", {
+        detail: { presetName: preset.name },
+      })
+    );
   };
 
   useEffect(() => {

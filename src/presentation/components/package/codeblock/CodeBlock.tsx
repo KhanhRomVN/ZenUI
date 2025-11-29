@@ -1,23 +1,24 @@
 import { useState, useEffect, useRef } from "react";
-import Editor, { OnMount, OnChange } from "@monaco-editor/react";
+import Editor, { OnMount, OnChange, useMonaco } from "@monaco-editor/react";
 import { Copy, Check } from "lucide-react";
 import { CodeBlockProps } from "./CodeBlock.types";
 import {
   parseSize,
-  getPresetDimensions,
+  getScaleFromSize,
   getMonacoLanguage,
   copyToClipboard,
   getDefaultMonacoOptions,
   getContainerStyle,
   countLines,
 } from "./CodeBlock.utils";
+import { useTheme } from "../../../providers/theme-provider";
 
 const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
   language,
   theme = "vs-dark",
   width,
-  size = "md",
+  size = 100,
   title,
   className = "",
   editable = false,
@@ -64,14 +65,15 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const [copied, setCopied] = useState(false);
   const [currentCode, setCurrentCode] = useState(code);
   const [currentTabId, setCurrentTabId] = useState(activeTabId || tabs[0]?.id);
+  const [customTheme, setCustomTheme] = useState<string | null>(null);
+  const [isLoadingTheme, setIsLoadingTheme] = useState(false);
   const editorRef = useRef<any>(null);
   const monacoRef = useRef<any>(null);
+  const monaco = useMonaco();
 
-  // Get dimensions
-  const dimensions = size
-    ? getPresetDimensions(size)
-    : { width: "100%", height: "400px" };
-  const finalWidth = parseSize(width, dimensions.width || "100%");
+  // Get scale from size
+  const scale = getScaleFromSize(size);
+  const finalWidth = parseSize(width, "100%");
 
   // Calculate height based on line count
   const lineCount = countLines(currentCode);
@@ -127,10 +129,104 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     }
   }, [currentCode, lineCount]);
 
+  // Get current preset theme from localStorage
+  const getPresetThemeName = (): string => {
+    try {
+      const savedPreset = localStorage.getItem("vite-ui-theme-preset");
+      if (savedPreset) {
+        const preset = JSON.parse(savedPreset);
+        return preset.name || "Default Dark";
+      }
+    } catch (e) {
+      console.error("Failed to get preset theme", e);
+    }
+    return "Default Dark";
+  };
+
+  // Load custom theme based on preset theme name
+  useEffect(() => {
+    if (!monaco) return;
+
+    const loadCustomTheme = async () => {
+      try {
+        let themeData;
+        let themeName;
+        const presetName = getPresetThemeName();
+
+        if (debug) {
+          console.log("📦 Current preset theme:", presetName);
+        }
+
+        // Map preset theme name to theme files
+        switch (presetName) {
+          case "Default Dark":
+            themeData = await import("./themes/DefaultDark.json");
+            themeName = "default-dark";
+            break;
+          case "Default Light":
+            themeData = await import("./themes/DefaultLight.json");
+            themeName = "default-light";
+            break;
+          case "Midnight Dark":
+            themeData = await import("./themes/MidnightDark.json");
+            themeName = "midnight-dark";
+            break;
+          case "Indigo Light":
+            themeData = await import("./themes/IndigoLight.json");
+            themeName = "indigo-light";
+            break;
+          default:
+            // Fallback to default based on theme mode
+            if (theme === "vs-dark" || theme === "hc-black") {
+              themeData = await import("./themes/DefaultDark.json");
+              themeName = "default-dark";
+            } else {
+              themeData = await import("./themes/DefaultLight.json");
+              themeName = "default-light";
+            }
+        }
+
+        monaco.editor.defineTheme(themeName, themeData.default as any);
+        setCustomTheme(themeName);
+
+        if (debug) {
+          console.log(`✅ Theme loaded successfully: ${themeName}`);
+        }
+      } catch (error) {
+        console.error("❌ Error loading custom theme:", error);
+        setCustomTheme(null);
+      }
+    };
+
+    loadCustomTheme();
+
+    // Listen for theme preset changes
+    const handleThemeChange = (event: Event) => {
+      const customEvent = event as CustomEvent;
+      if (debug) {
+        console.log(
+          "🔄 Theme changed, reloading:",
+          customEvent.detail?.presetName
+        );
+      }
+      loadCustomTheme();
+    };
+
+    window.addEventListener("theme-preset-changed", handleThemeChange);
+
+    return () => {
+      window.removeEventListener("theme-preset-changed", handleThemeChange);
+    };
+  }, [monaco, theme, debug]);
+
   // Handle editor mount
   const handleEditorDidMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
     monacoRef.current = monaco;
+
+    if (debug) {
+      console.log("🎨 Editor mounted with theme:", customTheme || theme);
+    }
 
     // Auto focus if needed
     if (autoFocus) {
@@ -205,13 +301,13 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
       readOnly,
       editable,
       highlightActiveLine,
+      theme,
     }),
     ...monacoOptions,
   };
 
   // Container style
   const containerStyle = getContainerStyle({
-    backgroundColor,
     borderRadius,
     opacity,
     padding,
@@ -220,12 +316,26 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     shadow,
   });
 
+  // Debug logs for component render
+  if (debug) {
+    console.group("🔧 CodeBlock - Render Debug");
+    console.log("📊 Props:", {
+      className,
+      theme,
+      customTheme,
+    });
+    console.log("🎨 Container style:", containerStyle);
+    console.groupEnd();
+  }
+
   return (
     <div
       className={className}
       style={{
         ...containerStyle,
         width: finalWidth,
+        transform: `scale(${scale})`,
+        transformOrigin: "top left",
       }}
     >
       {/* Header/Toolbar */}
@@ -447,7 +557,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
             defaultLanguage={getMonacoLanguage(getCurrentLanguage())}
             language={getMonacoLanguage(getCurrentLanguage())}
             value={currentCode}
-            theme={theme}
+            theme={customTheme || theme}
             options={editorOptions}
             onMount={handleEditorDidMount}
             onChange={handleEditorChange}

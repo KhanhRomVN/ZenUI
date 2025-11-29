@@ -18,7 +18,7 @@ export {
   parseSpacing,
   parseBorder,
   parseShadow,
-  getPresetDimensions,
+  getScaleFromSize,
   getMonacoLanguage,
   getLanguageDisplayName,
   copyToClipboard,

@@ -1,6 +1,6 @@
 import React from "react";
 import { useTheme } from "../../providers/theme-provider";
-import { PRESET_THEMES } from "../../constants/theme-presets.ts";
+import { PRESET_THEMES } from "../../constants/theme-presets";
 import { Drawer } from "../package/drawer";
 
 interface ThemeDrawerProps {

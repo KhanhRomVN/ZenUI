@@ -80,17 +80,16 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
 
   // Calculate height based on line count
   const lineCount = countLines(currentCode);
-  const maxLines = 30; // Maximum 30 lines before scrolling
+  const maxLines = 20; // Maximum 20 lines before scrolling
 
   const lineHeight = 19;
   const editorTopPadding = 4;
   const editorBottomPadding = 4;
   const displayLines = Math.min(lineCount, maxLines);
-  const minHeight = 100; // Minimum height in pixels
-  const editorHeight = Math.max(
-    minHeight,
-    displayLines * lineHeight + editorTopPadding + editorBottomPadding
-  );
+  const calculatedHeight =
+    displayLines * lineHeight + editorTopPadding + editorBottomPadding;
+  const minHeight = lineHeight + editorTopPadding + editorBottomPadding; // Minimum = 1 line height
+  const editorHeight = Math.max(minHeight, calculatedHeight);
   const finalHeight = `${Math.ceil(editorHeight)}px`;
 
   // Handle tab change

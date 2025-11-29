@@ -350,3 +350,13 @@ export const countLines = (code: string): number => {
 
   return Math.max(1, lastNonEmptyLine);
 };
+
+/**
+ * Get all built-in theme loaders using Vite's glob import
+ * Returns object with theme paths as keys and loader functions as values
+ */
+export const getBuiltInThemes = (): Record<string, () => Promise<any>> => {
+  // Use Vite's glob import to load all JSON files in themes folder
+  // This is evaluated at build time, so it's safe and efficient
+  return import.meta.glob("./themes/*.json");
+};

@@ -10,6 +10,7 @@ import {
   getDefaultMonacoOptions,
   getContainerStyle,
   countLines,
+  getBuiltInThemes,
 } from "./CodeBlock.utils";
 import { useTheme } from "../../../providers/theme-provider";
 
@@ -17,6 +18,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
   language,
   theme = "vs-dark",
+  themesFolder,
   width,
   size = 100,
   title,
@@ -67,6 +69,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const [currentTabId, setCurrentTabId] = useState(activeTabId || tabs[0]?.id);
   const [customTheme, setCustomTheme] = useState<string | null>(null);
   const [isLoadingTheme, setIsLoadingTheme] = useState(false);
+  const [customThemeError, setCustomThemeError] = useState<string | null>(null);
   const editorRef = useRef<any>(null);
   const monacoRef = useRef<any>(null);
   const monaco = useMonaco();
@@ -135,66 +138,128 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
       const savedPreset = localStorage.getItem("vite-ui-theme-preset");
       if (savedPreset) {
         const preset = JSON.parse(savedPreset);
-        return preset.name || "Default Dark";
+        // Return name without spaces (e.g., "MidnightDark" not "Midnight Dark")
+        return preset.name || "DefaultDark";
       }
     } catch (e) {
       console.error("Failed to get preset theme", e);
     }
-    return "Default Dark";
+    return "DefaultDark";
   };
 
-  // Load custom theme based on preset theme name
+  // Load custom theme - Simplified version with themesFolder
   useEffect(() => {
     if (!monaco) return;
 
     const loadCustomTheme = async () => {
+      setIsLoadingTheme(true);
+      setCustomThemeError(null);
+
       try {
         let themeData;
         let themeName;
+
+        // Priority 1: Load from themesFolder if provided
+        if (themesFolder) {
+          // Get theme name from localStorage preset
+          const presetThemeName = getPresetThemeName();
+
+          if (debug) {
+            console.log("🎨 Loading theme from folder:", {
+              folder: themesFolder,
+              theme: presetThemeName,
+            });
+          }
+
+          try {
+            // Load theme using ThemeLoader
+            const { CodeBlockThemeLoader } = await import(
+              "./CodeBlock.themeLoader"
+            );
+            themeData = await CodeBlockThemeLoader.loadTheme(
+              themesFolder,
+              presetThemeName
+            );
+
+            themeName = presetThemeName;
+            monaco.editor.defineTheme(themeName, themeData as any);
+            setCustomTheme(themeName);
+
+            if (debug) {
+              console.log(`✅ Custom theme loaded: ${themeName}`);
+            }
+
+            setIsLoadingTheme(false);
+            return;
+          } catch (error) {
+            // If custom theme fails, fallback to built-in themes
+            if (debug) {
+              console.warn(
+                `⚠️ Failed to load custom theme "${presetThemeName}", falling back to built-in themes`
+              );
+            }
+          }
+        }
+
+        // Priority 2: Load from built-in themes (fallback)
         const presetName = getPresetThemeName();
 
         if (debug) {
-          console.log("📦 Current preset theme:", presetName);
+          console.log("📦 Loading built-in theme:", presetName);
         }
 
-        // Map preset theme name to theme files
-        switch (presetName) {
-          case "Default Dark":
-            themeData = await import("./themes/DefaultDark.json");
-            themeName = "default-dark";
-            break;
-          case "Default Light":
-            themeData = await import("./themes/DefaultLight.json");
-            themeName = "default-light";
-            break;
-          case "Midnight Dark":
-            themeData = await import("./themes/MidnightDark.json");
-            themeName = "midnight-dark";
-            break;
-          case "Indigo Light":
-            themeData = await import("./themes/IndigoLight.json");
-            themeName = "indigo-light";
-            break;
-          default:
-            // Fallback to default based on theme mode
-            if (theme === "vs-dark" || theme === "hc-black") {
-              themeData = await import("./themes/DefaultDark.json");
-              themeName = "default-dark";
-            } else {
-              themeData = await import("./themes/DefaultLight.json");
-              themeName = "default-light";
-            }
+        // Get all built-in themes dynamically
+        const builtInThemes = getBuiltInThemes();
+        const themeLoader = builtInThemes[`./themes/${presetName}.json`];
+
+        if (themeLoader) {
+          // Theme found - load it
+          themeData = await themeLoader();
+          themeName = presetName;
+        } else {
+          // Theme not found - fallback to default theme based on theme prop
+          if (debug) {
+            console.warn(
+              `⚠️ Theme "${presetName}" not found, falling back to default`
+            );
+          }
+
+          const fallbackTheme =
+            theme === "vs-dark" || theme === "hc-black"
+              ? "DefaultDark"
+              : "DefaultLight";
+          const fallbackLoader =
+            builtInThemes[`./themes/${fallbackTheme}.json`];
+
+          if (fallbackLoader) {
+            themeData = await fallbackLoader();
+            themeName = fallbackTheme;
+          } else {
+            throw new Error("No built-in themes available");
+          }
         }
 
         monaco.editor.defineTheme(themeName, themeData.default as any);
         setCustomTheme(themeName);
 
         if (debug) {
-          console.log(`✅ Theme loaded successfully: ${themeName}`);
+          console.log(`✅ Built-in theme loaded: ${themeName}`);
         }
       } catch (error) {
-        console.error("❌ Error loading custom theme:", error);
+        console.error("❌ Error loading theme:", error);
         setCustomTheme(null);
+        setCustomThemeError(
+          error instanceof Error ? error.message : "Unknown error"
+        );
+
+        // Final fallback to built-in Monaco theme
+        setCustomTheme(theme);
+
+        if (debug) {
+          console.warn(`⚠️ Falling back to built-in Monaco theme: ${theme}`);
+        }
+      } finally {
+        setIsLoadingTheme(false);
       }
     };
 
@@ -217,7 +282,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     return () => {
       window.removeEventListener("theme-preset-changed", handleThemeChange);
     };
-  }, [monaco, theme, debug]);
+  }, [monaco, theme, themesFolder, debug]);
 
   // Handle editor mount
   const handleEditorDidMount: OnMount = (editor, monaco) => {

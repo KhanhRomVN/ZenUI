@@ -100,8 +100,11 @@ export interface CodeBlockProps {
 
   // ==================== BASIC CONFIGURATION ====================
 
-  /** Theme của editor */
+  /** Theme của editor - built-in themes */
   theme?: CodeBlockTheme;
+
+  /** Path to folder containing theme JSON files (e.g., "/themes" or "./themes") */
+  themesFolder?: string;
   /** Chiều rộng của code block */
   width?: string | number;
   /** Kích thước scale (100 = 100%, 120 = 120%, etc.) */
@@ -252,4 +255,31 @@ export interface CodeBlockTab {
   label: string;
   content: string;
   language: CodeBlockLanguage;
+}
+
+/**
+ * Interface cho custom theme JSON
+ */
+export interface CodeBlockThemeData {
+  name: string;
+  type: "vs" | "vs-dark" | "hc-black" | "hc-light";
+  colors: {
+    "editor.background": string;
+    "editor.foreground": string;
+    "editor.lineHighlightBackground"?: string;
+    "editorLineNumber.foreground"?: string;
+    "editorLineNumber.activeForeground"?: string;
+    "editorGutter.background"?: string;
+    "editor.selectionBackground"?: string;
+    "editor.inactiveSelectionBackground"?: string;
+    [key: string]: string | undefined;
+  };
+  tokenColors: Array<{
+    scope?: string | string[];
+    settings: {
+      foreground?: string;
+      background?: string;
+      fontStyle?: string;
+    };
+  }>;
 }

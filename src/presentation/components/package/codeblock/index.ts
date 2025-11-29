@@ -25,4 +25,7 @@ export {
   getDefaultMonacoOptions,
   getContainerStyle,
   countLines,
+  getBuiltInThemes,
 } from "./CodeBlock.utils";
+export type { CodeBlockThemeData } from "./CodeBlock.types";
+export { CodeBlockThemeLoader } from "./CodeBlock.themeLoader";

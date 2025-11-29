@@ -39,7 +39,7 @@ export interface PresetThemeType {
 export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
   light: [
     {
-      name: "Default Light",
+      name: "DefaultLight",
       primary: "#3686ff",
       background: "#ffffff",
       textPrimary: "#0f172a",
@@ -69,7 +69,7 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       clockGradientTo: "#1d4ed8",
     },
     {
-      name: "Indigo Light",
+      name: "IndigoLight",
       primary: "#4f46e5",
       background: "#eef2ff",
       textPrimary: "#3730a3",
@@ -101,7 +101,7 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
   ],
   dark: [
     {
-      name: "Default Dark",
+      name: "DefaultDark",
       primary: "#3686ff",
       background: "#0a0a0a",
       textPrimary: "#ececec",
@@ -131,7 +131,7 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       clockGradientTo: "#418dfe",
     },
     {
-      name: "Midnight Dark",
+      name: "MidnightDark",
       primary: "#6366f1",
       background: "#020617",
       textPrimary: "#e2e8f0",

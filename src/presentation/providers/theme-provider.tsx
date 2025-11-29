@@ -46,7 +46,7 @@ export function ThemeProvider({
     } else {
       // Apply Default Dark theme on first load
       const defaultDarkPreset = {
-        name: "Default Dark",
+        name: "DefaultDark",
         primary: "#3686ff",
         background: "#0a0a0a",
         textPrimary: "#ececec",

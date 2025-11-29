@@ -208,6 +208,11 @@ export interface CodeBlockProps {
   loading?: boolean;
   /** Custom loading component */
   loadingComponent?: ReactNode;
+
+  // ==================== DEBUG ====================
+
+  /** Enable debug logs (default: false) */
+  debug?: boolean;
 }
 
 /**
@@ -248,14 +253,4 @@ export interface CodeBlockTab {
   label: string;
   content: string;
   language: CodeBlockLanguage;
-}
-
-/**
- * Interface cho expand/collapse config
- */
-export interface CodeBlockExpandConfig {
-  enabled?: boolean;
-  collapsedLines?: number;
-  expandedLines?: number;
-  showExpandButton?: boolean;
 }

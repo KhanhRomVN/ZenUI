@@ -156,7 +156,6 @@ function ExpandExample() {
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
-            height={300}
           />
 
           {/* Live Demo */}
@@ -170,7 +169,6 @@ function ExpandExample() {
               theme="vs-dark"
               showLineNumbers={true}
               readOnly={true}
-              height={250}
             />
           </div>
         </section>
@@ -217,7 +215,6 @@ function ExpandExample() {
                 },
               ]}
               activeTabId="js"
-              height={250}
             />
 
             <div className="mt-4">
@@ -230,7 +227,6 @@ function ExpandExample() {
                 headerIcon={<FileCode size={16} />}
                 filePath="src/components/TabsExample.tsx"
                 showLineNumbers={true}
-                height={350}
               />
             </div>
           </div>
@@ -284,7 +280,6 @@ print(filtered)`}
                 headerIcon={<FileCode size={16} />}
                 filePath="src/components/ExpandExample.tsx"
                 showLineNumbers={true}
-                height={250}
               />
             </div>
           </div>
@@ -317,7 +312,6 @@ print(filtered)`}
                   onClick: () => alert("Downloading..."),
                 },
               ]}
-              height={180}
             />
           </div>
         </section>

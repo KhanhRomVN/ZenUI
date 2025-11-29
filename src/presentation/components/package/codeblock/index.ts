@@ -12,7 +12,6 @@ export type {
   CodeBlockToolbarConfig,
   CodeBlockHeaderMode,
   CodeBlockTab,
-  CodeBlockExpandConfig,
 } from "./CodeBlock.types";
 export {
   parseSize,

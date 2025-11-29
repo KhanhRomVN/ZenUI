@@ -341,6 +341,17 @@ export const getContainerStyle = (props: any): CSSProperties => {
  * Count number of lines in code
  */
 export const countLines = (code: string): number => {
-  if (!code) return 1; // Return 1 instead of 0 for empty code
-  return code.split("\n").length;
+  if (!code || code.trim() === "") return 1;
+
+  const lines = code.split("\n");
+  // Remove empty lines at the end for accurate height calculation
+  let lastNonEmptyLine = lines.length;
+  for (let i = lines.length - 1; i >= 0; i--) {
+    if (lines[i].trim() !== "") {
+      lastNonEmptyLine = i + 1;
+      break;
+    }
+  }
+
+  return Math.max(1, lastNonEmptyLine);
 };

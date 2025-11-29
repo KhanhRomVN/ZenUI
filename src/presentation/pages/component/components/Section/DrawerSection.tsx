@@ -124,7 +124,7 @@ function MyComponent() {
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
-            height={400}
+            debug={true}
           />
 
           {/* Drawer Component */}

@@ -70,6 +70,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const [customTheme, setCustomTheme] = useState<string | null>(null);
   const [isLoadingTheme, setIsLoadingTheme] = useState(false);
   const [customThemeError, setCustomThemeError] = useState<string | null>(null);
+  const [themeColors, setThemeColors] = useState<any>(null);
   const editorRef = useRef<any>(null);
   const monacoRef = useRef<any>(null);
   const monaco = useMonaco();
@@ -80,14 +81,17 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
 
   // Calculate height based on line count
   const lineCount = countLines(currentCode);
-  const maxLines = 20; // Maximum 20 lines
+  const maxLines = 30; // Maximum 30 lines before scrolling
 
   const lineHeight = 19;
   const editorTopPadding = 4;
   const editorBottomPadding = 4;
-  const displayLines = Math.max(1, Math.min(lineCount, maxLines));
-  const editorHeight =
-    displayLines * lineHeight + editorTopPadding + editorBottomPadding;
+  const displayLines = Math.min(lineCount, maxLines);
+  const minHeight = 100; // Minimum height in pixels
+  const editorHeight = Math.max(
+    minHeight,
+    displayLines * lineHeight + editorTopPadding + editorBottomPadding
+  );
   const finalHeight = `${Math.ceil(editorHeight)}px`;
 
   // Handle tab change
@@ -184,6 +188,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
             themeName = presetThemeName;
             monaco.editor.defineTheme(themeName, themeData as any);
             setCustomTheme(themeName);
+            setThemeColors(themeData.colors);
 
             if (debug) {
               console.log(`✅ Custom theme loaded: ${themeName}`);
@@ -241,6 +246,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
 
         monaco.editor.defineTheme(themeName, themeData.default as any);
         setCustomTheme(themeName);
+        setThemeColors(themeData.default.colors);
 
         if (debug) {
           console.log(`✅ Built-in theme loaded: ${themeName}`);
@@ -413,8 +419,11 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
             padding: "0.5rem 0.75rem",
             backgroundColor:
               toolbarBackgroundColor ||
+              themeColors?.["editor.background"] ||
               (theme === "vs-dark" ? "#1e1e1e" : "#ffffff"),
-            borderBottom: "1px solid rgba(128, 128, 128, 0.2)",
+            borderBottom: `1px solid ${
+              themeColors?.["editorWidget.border"] || "rgba(128, 128, 128, 0.2)"
+            }`,
           }}
         >
           {/* Left side: Icon + Title/Path + Tabs */}
@@ -440,7 +449,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
                 style={{
                   fontSize: "0.8125rem",
                   fontWeight: 500,
-                  color: theme === "vs-dark" ? "#ffffff" : "#000000",
+                  color:
+                    themeColors?.["editor.foreground"] ||
+                    (theme === "vs-dark" ? "#ffffff" : "#000000"),
                   fontFamily: "monospace",
                 }}
               >
@@ -453,7 +464,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
                 style={{
                   fontSize: "0.8125rem",
                   fontWeight: 600,
-                  color: theme === "vs-dark" ? "#ffffff" : "#000000",
+                  color:
+                    themeColors?.["editor.foreground"] ||
+                    (theme === "vs-dark" ? "#ffffff" : "#000000"),
                 }}
               >
                 {title}
@@ -478,9 +491,12 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
                       border: "none",
                       background:
                         currentTabId === tab.id
-                          ? "rgba(255, 255, 255, 0.1)"
+                          ? themeColors?.["tab.activeBackground"] ||
+                            "rgba(255, 255, 255, 0.1)"
                           : "transparent",
-                      color: theme === "vs-dark" ? "#ffffff" : "#000000",
+                      color:
+                        themeColors?.["editor.foreground"] ||
+                        (theme === "vs-dark" ? "#ffffff" : "#000000"),
                       cursor: "pointer",
                       fontSize: "0.8125rem",
                       fontWeight: currentTabId === tab.id ? 600 : 400,
@@ -537,7 +553,10 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
                 ) : (
                   <Copy
                     size={16}
-                    color={theme === "vs-dark" ? "#ffffff" : "#000000"}
+                    color={
+                      themeColors?.["editor.foreground"] ||
+                      (theme === "vs-dark" ? "#ffffff" : "#000000")
+                    }
                   />
                 )}
               </button>
@@ -591,7 +610,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         }}
         style={{
           height: finalHeight,
-          overflow: lineCount > maxLines ? "auto" : "hidden",
+          overflow: "hidden",
           position: "relative",
         }}
       >
@@ -602,14 +621,18 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: theme === "vs-dark" ? "#1e1e1e" : "#ffffff",
+              backgroundColor:
+                themeColors?.["editor.background"] ||
+                (theme === "vs-dark" ? "#1e1e1e" : "#ffffff"),
             }}
           >
             {loadingComponent || (
               <div
                 style={{
                   fontSize: "0.875rem",
-                  color: theme === "vs-dark" ? "#ffffff" : "#000000",
+                  color:
+                    themeColors?.["editor.foreground"] ||
+                    (theme === "vs-dark" ? "#ffffff" : "#000000"),
                 }}
               >
                 Đang tải editor...
@@ -633,13 +656,17 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: theme === "vs-dark" ? "#1e1e1e" : "#ffffff",
+                  backgroundColor:
+                    themeColors?.["editor.background"] ||
+                    (theme === "vs-dark" ? "#1e1e1e" : "#ffffff"),
                 }}
               >
                 <div
                   style={{
                     fontSize: "0.875rem",
-                    color: theme === "vs-dark" ? "#ffffff" : "#000000",
+                    color:
+                      themeColors?.["editor.foreground"] ||
+                      (theme === "vs-dark" ? "#ffffff" : "#000000"),
                   }}
                 >
                   Đang tải Monaco Editor...

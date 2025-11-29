@@ -383,18 +383,6 @@ print(filtered)`}
                   </tr>
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      height
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string | number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">auto</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Height of code block
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       width
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">

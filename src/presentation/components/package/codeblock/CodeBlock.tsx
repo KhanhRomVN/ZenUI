@@ -16,7 +16,6 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
   language,
   theme = "vs-dark",
-  height,
   width,
   size = "md",
   title,
@@ -78,37 +77,13 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const lineCount = countLines(currentCode);
   const maxLines = 20; // Maximum 20 lines
 
-  let finalHeight: string;
-  if (height) {
-    finalHeight = parseSize(height, "400px");
-  } else {
-    const lineHeight = 19;
-    const editorTopPadding = 4;
-    const editorBottomPadding = 4;
-    const displayLines = Math.max(1, Math.min(lineCount, maxLines));
-    const editorHeight =
-      displayLines * lineHeight + editorTopPadding + editorBottomPadding;
-    finalHeight = `${Math.ceil(editorHeight)}px`;
-
-    if (debug) {
-      console.group("🔍 [Height Calculation]");
-      console.log("📊 lineCount:", lineCount);
-      console.log("📏 lineHeight:", lineHeight);
-      console.log("🔼 editorTopPadding:", editorTopPadding);
-      console.log("🔽 editorBottomPadding:", editorBottomPadding);
-      console.log("✨ displayLines:", displayLines);
-      console.log(
-        "🧮 Formula:",
-        `${displayLines} × ${lineHeight} + ${editorTopPadding} + ${editorBottomPadding}`
-      );
-      console.log("📦 editorHeight:", editorHeight);
-      console.log("📦 finalHeight:", finalHeight);
-      console.log(
-        "ℹ️ Note: Toolbar is rendered separately, not included in editor height"
-      );
-      console.groupEnd();
-    }
-  }
+  const lineHeight = 19;
+  const editorTopPadding = 4;
+  const editorBottomPadding = 4;
+  const displayLines = Math.max(1, Math.min(lineCount, maxLines));
+  const editorHeight =
+    displayLines * lineHeight + editorTopPadding + editorBottomPadding;
+  const finalHeight = `${Math.ceil(editorHeight)}px`;
 
   // Handle tab change
   const handleTabChange = (tabId: string) => {
@@ -156,71 +131,6 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const handleEditorDidMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
     monacoRef.current = monaco;
-
-    if (debug) {
-      setTimeout(() => {
-        const editorDom = editor.getDomNode();
-        if (!editorDom) return;
-
-        console.group("🎨 [Monaco Editor DOM Analysis]");
-
-        console.log("📦 Editor DOM:");
-        console.log("  - offsetHeight:", editorDom.offsetHeight);
-        console.log("  - scrollHeight:", editorDom.scrollHeight);
-        console.log("  - clientHeight:", editorDom.clientHeight);
-
-        const viewLines = editorDom.querySelector(".view-lines");
-        if (viewLines) {
-          console.log("📏 View Lines:");
-          console.log(
-            "  - offsetHeight:",
-            (viewLines as HTMLElement).offsetHeight
-          );
-          console.log(
-            "  - scrollHeight:",
-            (viewLines as HTMLElement).scrollHeight
-          );
-
-          const lines = viewLines.querySelectorAll(".view-line");
-          console.log("  - Line count:", lines.length);
-          if (lines.length > 0) {
-            const firstLine = lines[0] as HTMLElement;
-            console.log("  - First line height:", firstLine.offsetHeight);
-          }
-        }
-
-        const linesContent = editorDom.querySelector(".lines-content");
-        if (linesContent) {
-          const style = window.getComputedStyle(linesContent as Element);
-          console.log("📝 Lines Content:");
-          console.log("  - paddingTop:", style.paddingTop);
-          console.log("  - paddingBottom:", style.paddingBottom);
-          console.log("  - height:", style.height);
-        }
-
-        const overflowGuard = editorDom.querySelector(".overflow-guard");
-        if (overflowGuard) {
-          console.log("🛡️ Overflow Guard:");
-          console.log(
-            "  - offsetHeight:",
-            (overflowGuard as HTMLElement).offsetHeight
-          );
-        }
-
-        const viewportWrapper = editorDom.querySelector(
-          ".monaco-scrollable-element"
-        );
-        if (viewportWrapper) {
-          console.log("📺 Viewport Wrapper:");
-          console.log(
-            "  - offsetHeight:",
-            (viewportWrapper as HTMLElement).offsetHeight
-          );
-        }
-
-        console.groupEnd();
-      }, 500);
-    }
 
     // Auto focus if needed
     if (autoFocus) {
@@ -499,44 +409,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         ref={(el) => {
           if (el && debug) {
             setTimeout(() => {
-              console.group("📦 [Container Measurements]");
-              console.log("🎯 Container (wrapper div):");
-              console.log("  - offsetHeight:", el.offsetHeight);
-              console.log("  - scrollHeight:", el.scrollHeight);
-              console.log("  - clientHeight:", el.clientHeight);
-              console.log("  - set height:", finalHeight);
-              console.log(
-                "  - computed height:",
-                window.getComputedStyle(el).height
-              );
-
-              console.log("⚠️ Analysis:");
               const wastedSpace = el.clientHeight - el.scrollHeight;
-              console.log("  - Wasted space:", wastedSpace, "px");
-              console.log(
-                "  - Has scrollbar:",
-                el.scrollHeight > el.clientHeight
-              );
-
-              if (wastedSpace > 0) {
-                console.log(
-                  "💡 Solution: Giảm calculatedHeight xuống",
-                  wastedSpace,
-                  "px"
-                );
-                console.log(
-                  "💡 Hoặc giảm editorTopPadding/editorBottomPadding"
-                );
-              } else if (wastedSpace < 0) {
-                console.log(
-                  "💡 Solution: Tăng calculatedHeight lên",
-                  Math.abs(wastedSpace),
-                  "px"
-                );
-              } else {
-                console.log("✅ Height calculation is perfect!");
-              }
-
               console.groupEnd();
             }, 600);
           }

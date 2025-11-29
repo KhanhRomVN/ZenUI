@@ -101,8 +101,6 @@ export interface CodeBlockProps {
 
   /** Theme của editor */
   theme?: CodeBlockTheme;
-  /** Chiều cao của code block */
-  height?: string | number;
   /** Chiều rộng của code block */
   width?: string | number;
   /** Kích thước preset */

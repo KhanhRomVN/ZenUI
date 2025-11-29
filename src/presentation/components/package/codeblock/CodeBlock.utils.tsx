@@ -237,6 +237,9 @@ export const getDefaultMonacoOptions = (props: any): any => {
   // Determine readOnly state: true if readOnly=true OR if editable=false
   const isReadOnly = props.readOnly === true || props.editable === false;
 
+  // Calculate left padding: nếu không có line numbers thì tăng padding left
+  const leftPadding = !props.showLineNumbers || !props.showGutter ? 20 : 12;
+
   return {
     automaticLayout: true,
     scrollBeyondLastLine: false,
@@ -244,11 +247,11 @@ export const getDefaultMonacoOptions = (props: any): any => {
       enabled: props.showMinimap ?? false,
     },
     lineNumbers: props.showLineNumbers ? "on" : "off",
-    lineNumbersMinChars: props.showGutter ? 2 : 0,
-    glyphMargin: props.showGutter ?? true,
-    folding: props.showGutter ?? true,
-    lineDecorationsWidth: props.showGutter ? 10 : 0,
-    renderValidationDecorations: props.showGutter ? "on" : "off",
+    lineNumbersMinChars: props.showLineNumbers ? 3 : 0,
+    glyphMargin: false,
+    folding: false,
+    lineDecorationsWidth: 0,
+    renderValidationDecorations: "off",
     renderLineHighlightOnlyWhenFocus: !props.showLineHighlight,
     wordWrap: props.wordWrap || "off",
     fontSize: props.fontSize || 14,
@@ -278,9 +281,13 @@ export const getDefaultMonacoOptions = (props: any): any => {
     },
     padding: {
       top: 8,
-      right: 12,
       bottom: 8,
-      left: 12,
+      left: leftPadding,
+    },
+    // Tắt validation và error markers
+    validate: false,
+    semanticHighlighting: {
+      enabled: false,
     },
   };
 };

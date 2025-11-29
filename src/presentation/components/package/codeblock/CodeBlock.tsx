@@ -541,10 +541,13 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
           background-color: rgba(255, 0, 0, 0.1) !important;
         }
         .monaco-editor .margin {
-          padding-left: 0px !important;
+          padding-left: 8px !important;
         }
         .monaco-editor .margin .line-numbers {
-          padding-right: 16px !important;
+          padding-right: 8px !important;
+        }
+        .monaco-editor .lines-content {
+          padding-left: 16px !important;
         }
       `}</style>
     </div>

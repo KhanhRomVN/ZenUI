@@ -18,7 +18,6 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
   language,
   theme = "vs-dark",
-  themesFolder,
   width,
   size = 100,
   title,
@@ -110,9 +109,23 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
       const tab = tabs.find((t) => t.id === currentTabId);
       if (tab) {
         setCurrentCode(tab.content);
+        // Force theme update after content changes
+        if (editorRef.current && monaco) {
+          setTimeout(() => {
+            const currentTheme = customTheme || theme;
+            monaco.editor.setTheme(currentTheme);
+            editorRef.current?.layout();
+            // Force re-render to update toolbar colors
+            editorRef.current?.trigger(
+              "source",
+              "editor.action.formatDocument",
+              {}
+            );
+          }, 50);
+        }
       }
     }
-  }, [headerMode, currentTabId, tabs]);
+  }, [headerMode, currentTabId, tabs, monaco, customTheme, theme]);
 
   // Get current language
   const getCurrentLanguage = () => {
@@ -129,29 +142,38 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
 
   // Force layout update when code changes
   useEffect(() => {
-    if (editorRef.current) {
+    if (editorRef.current && monaco) {
       setTimeout(() => {
+        const currentTheme = customTheme || theme;
+        monaco.editor.setTheme(currentTheme);
         editorRef.current?.layout();
       }, 0);
     }
-  }, [currentCode, lineCount]);
+  }, [currentCode, lineCount, monaco, customTheme, theme]);
+
+  // Maintain theme when copied state changes
+  useEffect(() => {
+    if (editorRef.current && monaco && (customTheme || theme)) {
+      const currentTheme = customTheme || theme;
+      monaco.editor.setTheme(currentTheme);
+    }
+  }, [copied, monaco, customTheme, theme]);
 
   // Get current preset theme from localStorage
-  const getPresetThemeName = (): string => {
+  const getPresetThemeName = (): string | null => {
     try {
       const savedPreset = localStorage.getItem("vite-ui-theme-preset");
       if (savedPreset) {
         const preset = JSON.parse(savedPreset);
         // Return name without spaces (e.g., "MidnightDark" not "Midnight Dark")
-        return preset.name || "DefaultDark";
+        return preset.name || null;
       }
     } catch (e) {
       console.error("Failed to get preset theme", e);
     }
-    return "DefaultDark";
+    return null;
   };
 
-  // Load custom theme - Simplified version with themesFolder
   useEffect(() => {
     if (!monaco) return;
 
@@ -163,82 +185,42 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         let themeData;
         let themeName;
 
-        // Priority 1: Load from themesFolder if provided
-        if (themesFolder) {
-          // Get theme name from localStorage preset
-          const presetThemeName = getPresetThemeName();
-
-          if (debug) {
-            console.log("🎨 Loading theme from folder:", {
-              folder: themesFolder,
-              theme: presetThemeName,
-            });
-          }
-
-          try {
-            // Load theme using ThemeLoader
-            const { CodeBlockThemeLoader } = await import(
-              "./CodeBlock.themeLoader"
-            );
-            themeData = await CodeBlockThemeLoader.loadTheme(
-              themesFolder,
-              presetThemeName
-            );
-
-            themeName = presetThemeName;
-            monaco.editor.defineTheme(themeName, themeData as any);
-            setCustomTheme(themeName);
-            setThemeColors(themeData.colors);
-
-            if (debug) {
-              console.log(`✅ Custom theme loaded: ${themeName}`);
-            }
-
-            setIsLoadingTheme(false);
-            return;
-          } catch (error) {
-            // If custom theme fails, fallback to built-in themes
-            if (debug) {
-              console.warn(
-                `⚠️ Failed to load custom theme "${presetThemeName}", falling back to built-in themes`
-              );
-            }
-          }
-        }
-
-        // Priority 2: Load from built-in themes (fallback)
         const presetName = getPresetThemeName();
 
         if (debug) {
-          console.log("📦 Loading built-in theme:", presetName);
+          console.log(
+            "📦 Loading built-in theme:",
+            presetName || "none (will use first available)"
+          );
         }
 
         // Get all built-in themes dynamically
         const builtInThemes = getBuiltInThemes();
-        const themeLoader = builtInThemes[`./themes/${presetName}.json`];
+        const themeLoader = presetName
+          ? builtInThemes[`./themes/${presetName}.json`]
+          : null;
 
         if (themeLoader) {
           // Theme found - load it
           themeData = await themeLoader();
           themeName = presetName;
         } else {
-          // Theme not found - fallback to default theme based on theme prop
+          // Theme not found - fallback to first available theme
           if (debug) {
             console.warn(
-              `⚠️ Theme "${presetName}" not found, falling back to default`
+              `⚠️ Theme "${presetName}" not found, falling back to first available theme`
             );
           }
 
-          const fallbackTheme =
-            theme === "vs-dark" || theme === "hc-black"
-              ? "DefaultDark"
-              : "DefaultLight";
-          const fallbackLoader =
-            builtInThemes[`./themes/${fallbackTheme}.json`];
-
-          if (fallbackLoader) {
-            themeData = await fallbackLoader();
-            themeName = fallbackTheme;
+          const availableThemes = Object.keys(builtInThemes);
+          if (availableThemes.length > 0) {
+            const firstThemePath = availableThemes[0];
+            const firstThemeLoader = builtInThemes[firstThemePath];
+            themeData = await firstThemeLoader();
+            // Extract theme name from path: "./themes/MyTheme.json" -> "MyTheme"
+            themeName = firstThemePath
+              .replace("./themes/", "")
+              .replace(".json", "");
           } else {
             throw new Error("No built-in themes available");
           }
@@ -247,6 +229,11 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         monaco.editor.defineTheme(themeName, themeData.default as any);
         setCustomTheme(themeName);
         setThemeColors(themeData.default.colors);
+
+        // Force apply theme to existing editor instance
+        if (editorRef.current) {
+          monaco.editor.setTheme(themeName);
+        }
 
         if (debug) {
           console.log(`✅ Built-in theme loaded: ${themeName}`);
@@ -288,7 +275,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     return () => {
       window.removeEventListener("theme-preset-changed", handleThemeChange);
     };
-  }, [monaco, theme, themesFolder, debug]);
+  }, [monaco, theme, debug]);
 
   // Handle editor mount
   const handleEditorDidMount: OnMount = (editor, monaco) => {
@@ -412,6 +399,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
       {/* Header/Toolbar */}
       {showToolbar && (
         <div
+          key={`toolbar-${currentTabId}-${customTheme || theme}`}
           style={{
             display: "flex",
             alignItems: "center",

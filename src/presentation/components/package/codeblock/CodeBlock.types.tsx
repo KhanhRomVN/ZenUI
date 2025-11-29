@@ -103,8 +103,6 @@ export interface CodeBlockProps {
   /** Theme của editor - built-in themes */
   theme?: CodeBlockTheme;
 
-  /** Path to folder containing theme JSON files (e.g., "/themes" or "./themes") */
-  themesFolder?: string;
   /** Chiều rộng của code block */
   width?: string | number;
   /** Kích thước scale (100 = 100%, 120 = 120%, etc.) */

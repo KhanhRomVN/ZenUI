@@ -113,7 +113,6 @@ function ExpandExample() {
             code={npmInstallCode}
             language="bash"
             theme="vs-dark"
-            themesFolder="/themes"
             showLineNumbers={false}
             showGutter={false}
             showLineHighlight={false}
@@ -154,7 +153,6 @@ function ExpandExample() {
             code={basicUsageCode}
             language="typescript"
             theme="vs-dark"
-            themesFolder="/themes"
             readOnly={true}
             headerMode="path"
             headerIcon={<FileCode size={16} />}
@@ -173,7 +171,6 @@ function ExpandExample() {
               code={exampleCode}
               language="javascript"
               theme="vs-dark"
-              themesFolder="/themes"
               showLineNumbers={true}
               readOnly={true}
             />
@@ -199,7 +196,6 @@ function ExpandExample() {
               code=""
               language="javascript"
               theme="vs-dark"
-              themesFolder="/themes"
               headerMode="tabs"
               headerIcon={<FileCode size={16} />}
               tabs={[
@@ -230,7 +226,6 @@ function ExpandExample() {
                 code={tabsExampleCode}
                 language="typescript"
                 theme="vs-dark"
-                themesFolder="/themes"
                 readOnly={true}
                 headerMode="path"
                 headerIcon={<FileCode size={16} />}
@@ -276,7 +271,6 @@ filtered = filter_by_length(processed)
 print(filtered)`}
               language="python"
               theme="vs-dark"
-              themesFolder="/themes"
               readOnly={true}
             />
 
@@ -285,7 +279,6 @@ print(filtered)`}
                 code={expandExampleCode}
                 language="typescript"
                 theme="vs-dark"
-                themesFolder="/themes"
                 readOnly={true}
                 headerMode="path"
                 headerIcon={<FileCode size={16} />}
@@ -309,7 +302,6 @@ print(filtered)`}
               code={`function calculateSum(a, b) {\n  return a + b;\n}\n\nconst result = calculateSum(5, 3);\nconsole.log(result); // Output: 8`}
               language="javascript"
               theme="vs-dark"
-              themesFolder="/themes"
               readOnly={true}
               showLineNumbers={true}
               toolbarActions={[

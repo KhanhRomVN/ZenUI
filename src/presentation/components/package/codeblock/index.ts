@@ -26,5 +26,4 @@ export {
   getDefaultMonacoOptions,
   getContainerStyle,
   countLines,
-  getCodeHeight,
 } from "./CodeBlock.utils";

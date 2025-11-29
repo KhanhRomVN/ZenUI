@@ -6,12 +6,10 @@ import {
   parseSize,
   getPresetDimensions,
   getMonacoLanguage,
-  getLanguageDisplayName,
   copyToClipboard,
   getDefaultMonacoOptions,
   getContainerStyle,
   countLines,
-  getCodeHeight,
 } from "./CodeBlock.utils";
 
 const CodeBlock: React.FC<CodeBlockProps> = ({
@@ -62,11 +60,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   tabs = [],
   activeTabId,
   onTabChange,
-  expandConfig,
 }) => {
   const [copied, setCopied] = useState(false);
   const [currentCode, setCurrentCode] = useState(code);
-  const [isExpanded, setIsExpanded] = useState(false);
   const [currentTabId, setCurrentTabId] = useState(activeTabId || tabs[0]?.id);
   const editorRef = useRef<any>(null);
   const monacoRef = useRef<any>(null);
@@ -77,25 +73,24 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     : { width: "100%", height: "400px" };
   const finalWidth = parseSize(width, dimensions.width || "100%");
 
-  // Calculate height based on expand config
+  // Calculate height based on line count
   const lineCount = countLines(currentCode);
-  const shouldShowExpandButton =
-    expandConfig?.enabled && lineCount > (expandConfig?.collapsedLines || 10);
+  const maxLines = 20; // Maximum 20 lines
 
   let finalHeight: string;
-  if (expandConfig?.enabled && !height) {
-    finalHeight = getCodeHeight(lineCount, isExpanded, expandConfig);
-  } else if (height) {
+  if (height) {
     finalHeight = parseSize(height, "400px");
   } else {
-    // Auto height based on line count
+    // Auto height based on line count, max 20 lines
     const lineHeight = 19;
-    const editorPadding = 16; // top 8px + bottom 8px
-    const calculatedHeight = lineCount * lineHeight + editorPadding;
-    finalHeight = `${calculatedHeight}px`;
+    const toolbarHeight = showToolbar ? 41 : 0; // Height of toolbar/header
+    const verticalPadding = 8; // Top + bottom padding
+    const displayLines = Math.max(1, Math.min(lineCount, maxLines));
+    const calculatedHeight =
+      displayLines * lineHeight + verticalPadding + toolbarHeight;
+    finalHeight = `${Math.ceil(calculatedHeight)}px`;
   }
 
-  // Update code when prop changes
   // Handle tab change
   const handleTabChange = (tabId: string) => {
     setCurrentTabId(tabId);
@@ -104,11 +99,6 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
       setCurrentCode(tab.content);
       onTabChange?.(tabId);
     }
-  };
-
-  // Handle expand/collapse
-  const handleToggleExpand = () => {
-    setIsExpanded(!isExpanded);
   };
 
   // Update current code when tabs change
@@ -133,6 +123,15 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   useEffect(() => {
     setCurrentCode(code);
   }, [code]);
+
+  // Force layout update when code changes
+  useEffect(() => {
+    if (editorRef.current) {
+      setTimeout(() => {
+        editorRef.current?.layout();
+      }, 0);
+    }
+  }, [currentCode, lineCount]);
 
   // Handle editor mount
   const handleEditorDidMount: OnMount = (editor, monaco) => {
@@ -415,64 +414,10 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
       <div
         style={{
           height: finalHeight,
-          overflow: "hidden",
+          overflow: lineCount > maxLines ? "auto" : "hidden",
           position: "relative",
         }}
       >
-        {/* Action Buttons Row */}
-        <div
-          style={{
-            position: "absolute",
-            top: "0.5rem",
-            right: "0.5rem",
-            zIndex: 10,
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
-          }}
-        >
-          {/* Expand/Collapse Text + Button */}
-          {shouldShowExpandButton && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.5rem 0.75rem",
-                background: "rgba(0, 0, 0, 0.5)",
-                borderRadius: "4px",
-                backdropFilter: "blur(4px)",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "0.75rem",
-                  fontWeight: 500,
-                  color: theme === "vs-dark" ? "#ffffff" : "#000000",
-                }}
-              >
-                {isExpanded ? "Thu gọn" : "Mở rộng"}
-              </span>
-              <button
-                onClick={handleToggleExpand}
-                title={isExpanded ? "Thu gọn" : "Mở rộng"}
-                style={{
-                  padding: "0.25rem",
-                  border: "none",
-                  background: "transparent",
-                  color: theme === "vs-dark" ? "#ffffff" : "#000000",
-                  cursor: "pointer",
-                  fontSize: "0.75rem",
-                  display: "flex",
-                  alignItems: "center",
-                  transition: "all 0.2s",
-                }}
-              >
-                {isExpanded ? "↑" : "↓"}
-              </button>
-            </div>
-          )}
-        </div>
         {loading ? (
           <div
             style={{

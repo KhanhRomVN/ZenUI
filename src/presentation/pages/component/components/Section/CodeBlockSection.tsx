@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { Drawer } from "../../../../components/package/drawer";
 import { CodeBlock } from "../../../../components/package/codeblock";
-import { FileCode } from "lucide-react";
+import { FileCode, Play, Download } from "lucide-react";
 import RightPanel from "../RightPanel";
 
-const DrawerSection = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
+const CodeBlockSection = () => {
   // Navigation sections for right panel
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
     { id: "usage", label: "Usage" },
+    { id: "examples", label: "Examples" },
     { id: "props", label: "Props" },
   ];
 
@@ -19,29 +17,71 @@ const DrawerSection = () => {
 
   const yarnInstallCode = `yarn add @khanhromvn/zenui`;
 
-  const basicUsageCode = `import { useState } from "react";
-import { Drawer } from "@khanhromvn/zenui";
+  const basicUsageCode = `import { CodeBlock } from "@khanhromvn/zenui";
 
 function MyComponent() {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <div>
-      <button onClick={() => setIsOpen(true)}>
-        Open Drawer
-      </button>
+    <CodeBlock
+      code={\`console.log("Hello World");\`}
+      language="javascript"
+      theme="vs-dark"
+      showLineNumbers={true}
+      readOnly={true}
+    />
+  );
+}`;
 
-      <Drawer
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        title="My Drawer"
-        direction="right"
-      >
-        <div style={{ padding: "1.5rem" }}>
-          <p>Your content goes here</p>
-        </div>
-      </Drawer>
-    </div>
+  const exampleCode = `function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Test the function
+console.log(fibonacci(10)); // Output: 55`;
+
+  const tabsExampleCode = `import { CodeBlock } from "@khanhromvn/zenui";
+
+function TabsExample() {
+  return (
+    <CodeBlock
+      code=""
+      language="javascript"
+      theme="vs-dark"
+      headerMode="tabs"
+      headerIcon={<FileCode size={16} />}
+      tabs={[
+        {
+          id: "js",
+          label: "JavaScript",
+          content: "console.log('Hello from JS');",
+          language: "javascript",
+        },
+        {
+          id: "ts",
+          label: "TypeScript",
+          content: "const message: string = 'Hello TS';",
+          language: "typescript",
+        },
+      ]}
+      activeTabId="js"
+    />
+  );
+}`;
+
+  const expandExampleCode = `import { CodeBlock } from "@khanhromvn/zenui";
+
+function ExpandExample() {
+  return (
+    <CodeBlock
+      code={longCodeContent}
+      language="python"
+      theme="vs-dark"
+      expandConfig={{
+        enabled: true,
+        collapsedLines: 10,
+        expandedLines: 30,
+      }}
+    />
   );
 }`;
 
@@ -50,12 +90,14 @@ function MyComponent() {
       <div className="max-w-4xl mx-auto">
         {/* ABOUT SECTION */}
         <section id="about" className="mb-12">
-          <h1 className="text-4xl font-bold text-text-primary mb-3">Drawer</h1>
+          <h1 className="text-4xl font-bold text-text-primary mb-3">
+            Code Block
+          </h1>
           <p className="text-lg text-text-secondary leading-relaxed">
-            A flexible and customizable drawer/sidebar component with multiple
-            animation types, positioning options, and extensive styling
-            capabilities. Perfect for navigation menus, filters, forms, and side
-            panels.
+            A powerful and feature-rich code editor component powered by Monaco
+            Editor. Perfect for displaying code snippets, building online code
+            editors, or creating interactive coding tutorials with syntax
+            highlighting, multiple themes, and extensive customization options.
           </p>
         </section>
 
@@ -98,19 +140,9 @@ function MyComponent() {
             Basic Usage
           </h2>
           <p className="text-text-secondary mb-6">
-            Here's a simple example to get you started with the Drawer
+            Here's a simple example to get you started with the CodeBlock
             component.
           </p>
-
-          {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6 flex items-center justify-center">
-            <button
-              onClick={() => setIsOpen(true)}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
-            >
-              Open Drawer
-            </button>
-          </div>
 
           {/* Code Example */}
           <CodeBlock
@@ -124,41 +156,170 @@ function MyComponent() {
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
-            height={400}
+            height={300}
           />
 
-          {/* Drawer Component */}
-          <Drawer
-            isOpen={isOpen}
-            onClose={() => setIsOpen(false)}
-            title="Example Drawer"
-            subtitle="This is a basic drawer example"
-            direction="right"
-          >
-            <div className="p-6">
-              <h3 className="text-lg font-semibold text-text-primary mb-3">
-                Welcome to Drawer Component
-              </h3>
-              <p className="text-text-secondary mb-4">
-                This is the content area where you can place any React
-                components, forms, lists, or custom content.
-              </p>
-              <div className="space-y-2">
-                <p className="text-sm text-text-secondary">
-                  • Fully customizable appearance
-                </p>
-                <p className="text-sm text-text-secondary">
-                  • Multiple animation options
-                </p>
-                <p className="text-sm text-text-secondary">
-                  • Position from any edge
-                </p>
-                <p className="text-sm text-text-secondary">
-                  • Responsive design
-                </p>
-              </div>
+          {/* Live Demo */}
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Live Demo
+            </h3>
+            <CodeBlock
+              code={exampleCode}
+              language="javascript"
+              theme="vs-dark"
+              showLineNumbers={true}
+              readOnly={true}
+              height={250}
+            />
+          </div>
+        </section>
+
+        {/* EXAMPLES SECTION */}
+        <section id="examples" className="mb-12">
+          <h2 className="text-2xl font-semibold text-text-primary mb-4">
+            Advanced Examples
+          </h2>
+
+          {/* Tabs Example */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              With Tabs
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Display multiple code snippets in tabs for easy comparison.
+            </p>
+
+            <CodeBlock
+              code=""
+              language="javascript"
+              theme="vs-dark"
+              headerMode="tabs"
+              headerIcon={<FileCode size={16} />}
+              tabs={[
+                {
+                  id: "js",
+                  label: "JavaScript",
+                  content: `console.log("Hello from JavaScript!");\n\nfunction greet(name) {\n  return \`Hello, \${name}!\`;\n}\n\ngreet("World");`,
+                  language: "javascript",
+                },
+                {
+                  id: "ts",
+                  label: "TypeScript",
+                  content: `const message: string = "Hello TypeScript";\n\ninterface User {\n  name: string;\n  age: number;\n}\n\nconst user: User = {\n  name: "Alice",\n  age: 25\n};`,
+                  language: "typescript",
+                },
+                {
+                  id: "py",
+                  label: "Python",
+                  content: `def greet(name):\n    return f"Hello, {name}!"\n\nprint(greet("World"))`,
+                  language: "python",
+                },
+              ]}
+              activeTabId="js"
+              height={250}
+            />
+
+            <div className="mt-4">
+              <CodeBlock
+                code={tabsExampleCode}
+                language="typescript"
+                theme="vs-dark"
+                readOnly={true}
+                headerMode="path"
+                headerIcon={<FileCode size={16} />}
+                filePath="src/components/TabsExample.tsx"
+                showLineNumbers={true}
+                height={350}
+              />
             </div>
-          </Drawer>
+          </div>
+
+          {/* Expand/Collapse Example */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              With Expand/Collapse
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Automatically collapse long code and allow users to expand it.
+            </p>
+
+            <CodeBlock
+              code={`# Python Example - Data Processing
+
+def process_data(data):
+    """Process raw data and return cleaned results"""
+    result = []
+    
+    for item in data:
+        if item is not None:
+            cleaned = item.strip().lower()
+            result.append(cleaned)
+    
+    return result
+
+# Example usage
+raw_data = ["  Hello  ", "WORLD", None, "  Python  "]
+processed = process_data(raw_data)
+print(processed)
+
+# Advanced filtering
+def filter_by_length(items, min_length=3):
+    return [item for item in items if len(item) >= min_length]
+
+filtered = filter_by_length(processed)
+print(filtered)`}
+              language="python"
+              theme="vs-dark"
+              readOnly={true}
+            />
+
+            <div className="mt-4">
+              <CodeBlock
+                code={expandExampleCode}
+                language="typescript"
+                theme="vs-dark"
+                readOnly={true}
+                headerMode="path"
+                headerIcon={<FileCode size={16} />}
+                filePath="src/components/ExpandExample.tsx"
+                showLineNumbers={true}
+                height={250}
+              />
+            </div>
+          </div>
+
+          {/* Custom Toolbar Actions */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              With Custom Toolbar Actions
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Add custom buttons to the toolbar for running code or downloading
+              files.
+            </p>
+
+            <CodeBlock
+              code={`function calculateSum(a, b) {\n  return a + b;\n}\n\nconst result = calculateSum(5, 3);\nconsole.log(result); // Output: 8`}
+              language="javascript"
+              theme="vs-dark"
+              readOnly={true}
+              showLineNumbers={true}
+              toolbarActions={[
+                {
+                  icon: <Play size={16} />,
+                  label: "Run Code",
+                  onClick: () => alert("Running code..."),
+                },
+                {
+                  icon: <Download size={16} />,
+                  label: "Download",
+                  onClick: () => alert("Downloading..."),
+                },
+              ]}
+              height={180}
+            />
+          </div>
         </section>
 
         {/* PROPS SECTION */}
@@ -167,7 +328,7 @@ function MyComponent() {
             Props
           </h2>
           <p className="text-text-secondary mb-6">
-            Complete list of props available for the Drawer component.
+            Complete list of props available for the CodeBlock component.
           </p>
 
           <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
@@ -192,86 +353,38 @@ function MyComponent() {
                 <tbody className="divide-y divide-border-default">
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      isOpen*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Controls the open/closed state
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onClose*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      () =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Callback when drawer closes
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      children*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Content to display inside drawer
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      title
+                      code*
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
                       string
                     </td>
                     <td className="px-6 py-4 text-text-secondary">-</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Title in the header
+                      Code content to display
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      subtitle
+                      language*
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
+                      CodeBlockLanguage
                     </td>
                     <td className="px-6 py-4 text-text-secondary">-</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Subtitle below the title
+                      Programming language
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      direction
+                      theme
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "left" | "right" | "top" | "bottom"
+                      "vs-dark" | "vs-light" | "hc-black" | "hc-light"
                     </td>
-                    <td className="px-6 py-4 text-text-secondary">"right"</td>
+                    <td className="px-6 py-4 text-text-secondary">"vs-dark"</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Slide direction
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      width
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string | number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"25%"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Width (left/right drawers)
+                      Editor theme
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -281,105 +394,153 @@ function MyComponent() {
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
                       string | number
                     </td>
-                    <td className="px-6 py-4 text-text-secondary">"25%"</td>
+                    <td className="px-6 py-4 text-text-secondary">auto</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Height (top/bottom drawers)
+                      Height of code block
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      animationType
+                      width
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "slide" | "scale" | "fade" | "bounce" | "elastic"
+                      string | number
                     </td>
-                    <td className="px-6 py-4 text-text-secondary">"slide"</td>
+                    <td className="px-6 py-4 text-text-secondary">"100%"</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Animation type
+                      Width of code block
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      overlayOpacity
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">0.5</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Backdrop opacity (0-1)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      enableBlur
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Enable backdrop blur effect
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      hideHeader
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Hide the header section
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showCloseButton
+                      showLineNumbers
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
                       boolean
                     </td>
                     <td className="px-6 py-4 text-text-secondary">true</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Show close button in header
+                      Show line numbers
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      closeOnOverlayClick
+                      readOnly
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      boolean
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">false</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Read-only mode
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      editable
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      boolean
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">false</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Allow editing code
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      showCopyButton
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
                       boolean
                     </td>
                     <td className="px-6 py-4 text-text-secondary">true</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Close when clicking overlay
+                      Show copy button
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      headerActions
+                      headerMode
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      "tabs" | "path" | "none"
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">"none"</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Header display mode
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      headerIcon
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
                       ReactNode
                     </td>
                     <td className="px-6 py-4 text-text-secondary">-</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Custom actions in header
+                      Icon in header
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      footerActions
+                      filePath
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
+                      string
                     </td>
                     <td className="px-6 py-4 text-text-secondary">-</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Custom actions in footer
+                      File path (when headerMode="path")
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      tabs
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      CodeBlockTab[]
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">[]</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Tabs (when headerMode="tabs")
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      expandConfig
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      CodeBlockExpandConfig
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">-</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Expand/collapse configuration
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      toolbarActions
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      CodeBlockToolbarAction[]
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">[]</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Custom toolbar actions
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      onChange
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      (value: string) =&gt; void
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">-</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Callback when code changes
                     </td>
                   </tr>
                 </tbody>
@@ -395,4 +556,4 @@ function MyComponent() {
   );
 };
 
-export default DrawerSection;
+export default CodeBlockSection;

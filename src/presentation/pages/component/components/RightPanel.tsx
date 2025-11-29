@@ -11,13 +11,19 @@ const RightPanel: React.FC<RightPanelProps> = ({ sections }) => {
   const [activeSection, setActiveSection] = useState<string>(sections[0]?.id);
 
   useEffect(() => {
+    const mainContent = document.getElementById("main-content");
+
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100;
+      if (!mainContent) return;
+
+      const scrollPosition = mainContent.scrollTop + 100;
 
       for (const section of sections) {
         const element = document.getElementById(section.id);
         if (element) {
-          const { offsetTop, offsetHeight } = element;
+          const offsetTop = element.offsetTop - mainContent.offsetTop;
+          const offsetHeight = element.offsetHeight;
+
           if (
             scrollPosition >= offsetTop &&
             scrollPosition < offsetTop + offsetHeight
@@ -29,17 +35,24 @@ const RightPanel: React.FC<RightPanelProps> = ({ sections }) => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check initial position
+    if (mainContent) {
+      mainContent.addEventListener("scroll", handleScroll);
+      handleScroll(); // Check initial position
+    }
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      if (mainContent) {
+        mainContent.removeEventListener("scroll", handleScroll);
+      }
+    };
   }, [sections]);
 
   const scrollToSection = (sectionId: string) => {
+    const mainContent = document.getElementById("main-content");
     const element = document.getElementById(sectionId);
-    if (element) {
-      const offsetTop = element.offsetTop - 80; // 80px offset for better visibility
-      window.scrollTo({
+    if (element && mainContent) {
+      const offsetTop = element.offsetTop - mainContent.offsetTop - 80; // 80px offset for better visibility
+      mainContent.scrollTo({
         top: offsetTop,
         behavior: "smooth",
       });

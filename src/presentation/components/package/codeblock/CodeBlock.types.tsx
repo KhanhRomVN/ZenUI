@@ -127,11 +127,6 @@ export interface CodeBlockProps {
   /** Callback khi chuyển tab */
   onTabChange?: (tabId: string) => void;
 
-  // ==================== EXPAND/COLLAPSE CONFIGURATION ====================
-
-  /** Expand/collapse config */
-  expandConfig?: CodeBlockExpandConfig;
-
   // ==================== EDITOR BEHAVIOR ====================
 
   /** Cho phép chỉnh sửa code */

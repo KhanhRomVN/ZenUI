@@ -1,17 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
-
 const ComponentSidebar = () => {
   const location = useLocation();
   const currentSection =
     new URLSearchParams(location.search).get("section") || "drawer";
 
-  const components = [{ name: "Drawer", slug: "drawer" }];
+  // Tự động sắp xếp components theo thứ tự A-Z
+  const components = [
+    { name: "Code Block", slug: "codeblock" },
+    { name: "Drawer", slug: "drawer" },
+  ].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
-    <aside className="w-64 border-r border-border-default bg-sidebar-background h-full overflow-y-auto p-4">
-      <h2 className="text-lg font-semibold text-text-primary mb-4">
-        Components
-      </h2>
+    <aside className="w-64 h-full overflow-y-auto p-4">
       <nav className="space-y-1">
         {components.map((component) => (
           <Link
@@ -30,5 +30,4 @@ const ComponentSidebar = () => {
     </aside>
   );
 };
-
 export default ComponentSidebar;

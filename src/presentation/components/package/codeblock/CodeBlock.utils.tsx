@@ -243,6 +243,8 @@ export const getDefaultMonacoOptions = (props: any): any => {
   return {
     automaticLayout: true,
     scrollBeyondLastLine: false,
+    scrollBeyondLastColumn: 0,
+    fixedOverflowWidgets: true,
     minimap: {
       enabled: props.showMinimap ?? false,
     },
@@ -267,8 +269,10 @@ export const getDefaultMonacoOptions = (props: any): any => {
     scrollbar: {
       vertical: "auto",
       horizontal: "auto",
-      verticalScrollbarSize: 10,
-      horizontalScrollbarSize: 10,
+      verticalScrollbarSize: 0,
+      horizontalScrollbarSize: 0,
+      handleMouseWheel: false,
+      alwaysConsumeMouseWheel: false,
     },
     overviewRulerLanes: 0,
     hideCursorInOverviewRuler: true,
@@ -280,8 +284,8 @@ export const getDefaultMonacoOptions = (props: any): any => {
       bracketPairsHorizontal: false,
     },
     padding: {
-      top: 8,
-      bottom: 8,
+      top: 4,
+      bottom: 4,
       left: leftPadding,
     },
     // Tắt validation và error markers
@@ -337,32 +341,6 @@ export const getContainerStyle = (props: any): CSSProperties => {
  * Count number of lines in code
  */
 export const countLines = (code: string): number => {
-  if (!code) return 0;
+  if (!code) return 1; // Return 1 instead of 0 for empty code
   return code.split("\n").length;
-};
-
-/**
- * Get code height based on line count and expand state
- */
-export const getCodeHeight = (
-  lineCount: number,
-  isExpanded: boolean,
-  expandConfig?: {
-    collapsedLines?: number;
-    expandedLines?: number;
-  }
-): string => {
-  const collapsedLines = expandConfig?.collapsedLines || 10;
-  const expandedLines = expandConfig?.expandedLines || 50;
-  const lineHeight = 19; // Default Monaco line height
-
-  if (!isExpanded && lineCount > collapsedLines) {
-    return `${collapsedLines * lineHeight}px`;
-  }
-
-  if (isExpanded && lineCount > expandedLines) {
-    return `${expandedLines * lineHeight}px`;
-  }
-
-  return `${lineCount * lineHeight}px`;
 };

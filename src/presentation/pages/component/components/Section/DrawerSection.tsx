@@ -15,11 +15,9 @@ const DrawerSection = () => {
     { id: "props", label: "Props" },
   ];
 
-  const installCode = `npm install @khanhromvn/zenui
-# or
-yarn add @khanhromvn/zenui`;
+  const npmInstallCode = `npm install @khanhromvn/zenui`;
 
-  const importCode = `import { Drawer } from '@khanhromvn/zenui';`;
+  const yarnInstallCode = `yarn add @khanhromvn/zenui`;
 
   const basicUsageCode = `import { useState } from "react";
 import { Drawer } from "@khanhromvn/zenui";
@@ -66,33 +64,32 @@ function MyComponent() {
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Installation
           </h2>
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-sm font-medium text-text-secondary mb-2">
-                Install the package
-              </h3>
-              <CodeBlock
-                code={installCode}
-                language="bash"
-                theme="vs-dark"
-                showLineNumbers={false}
-                showToolbar={false}
-              />
-            </div>
-
-            <div>
-              <h3 className="text-sm font-medium text-text-secondary mb-2">
-                Import the component
-              </h3>
-              <CodeBlock
-                code={importCode}
-                language="typescript"
-                theme="vs-dark"
-                showLineNumbers={false}
-                showToolbar={false}
-              />
-            </div>
-          </div>
+          <CodeBlock
+            code={npmInstallCode}
+            language="bash"
+            theme="vs-dark"
+            showLineNumbers={false}
+            showGutter={false}
+            showLineHighlight={false}
+            readOnly={true}
+            headerMode="tabs"
+            headerIcon={<FileCode size={16} />}
+            tabs={[
+              {
+                id: "npm",
+                label: "npm",
+                content: npmInstallCode,
+                language: "bash",
+              },
+              {
+                id: "yarn",
+                label: "yarn",
+                content: yarnInstallCode,
+                language: "bash",
+              },
+            ]}
+            activeTabId="npm"
+          />
         </section>
 
         {/* USAGE SECTION */}
@@ -120,10 +117,13 @@ function MyComponent() {
             code={basicUsageCode}
             language="typescript"
             theme="vs-dark"
+            readOnly={true}
             headerMode="path"
             headerIcon={<FileCode size={16} />}
             filePath="src/components/BasicExample.tsx"
-            showLineNumbers
+            showLineNumbers={true}
+            showGutter={true}
+            showLineHighlight={false}
             height={400}
           />
 

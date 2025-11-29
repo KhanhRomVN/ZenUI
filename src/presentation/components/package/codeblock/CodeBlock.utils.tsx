@@ -234,6 +234,9 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
  * Get default Monaco editor options
  */
 export const getDefaultMonacoOptions = (props: any): any => {
+  // Determine readOnly state: true if readOnly=true OR if editable=false
+  const isReadOnly = props.readOnly === true || props.editable === false;
+
   return {
     automaticLayout: true,
     scrollBeyondLastLine: false,
@@ -241,13 +244,23 @@ export const getDefaultMonacoOptions = (props: any): any => {
       enabled: props.showMinimap ?? false,
     },
     lineNumbers: props.showLineNumbers ? "on" : "off",
+    lineNumbersMinChars: props.showGutter ? 2 : 0,
+    glyphMargin: props.showGutter ?? true,
+    folding: props.showGutter ?? true,
+    lineDecorationsWidth: props.showGutter ? 10 : 0,
+    renderValidationDecorations: props.showGutter ? "on" : "off",
+    renderLineHighlightOnlyWhenFocus: !props.showLineHighlight,
     wordWrap: props.wordWrap || "off",
     fontSize: props.fontSize || 14,
     fontFamily: props.fontFamily || "Consolas, 'Courier New', monospace",
     tabSize: props.tabSize || 2,
     insertSpaces: props.insertSpaces ?? true,
-    readOnly: props.readOnly || !props.editable,
-    renderLineHighlight: props.highlightActiveLine ? "all" : "none",
+    readOnly: isReadOnly,
+    renderLineHighlight: props.showLineHighlight
+      ? props.highlightActiveLine
+        ? "all"
+        : "line"
+      : "none",
     scrollbar: {
       vertical: "auto",
       horizontal: "auto",
@@ -257,6 +270,18 @@ export const getDefaultMonacoOptions = (props: any): any => {
     overviewRulerLanes: 0,
     hideCursorInOverviewRuler: true,
     overviewRulerBorder: false,
+    guides: {
+      indentation: false,
+      highlightActiveIndentation: false,
+      bracketPairs: false,
+      bracketPairsHorizontal: false,
+    },
+    padding: {
+      top: 8,
+      right: 12,
+      bottom: 8,
+      left: 12,
+    },
   };
 };
 

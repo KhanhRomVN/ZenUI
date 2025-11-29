@@ -25,6 +25,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   className = "",
   editable = false,
   showLineNumbers = true,
+  showGutter = true,
+  showLineHighlight = true,
   showMinimap = false,
   wordWrap = "off",
   fontSize = 14,
@@ -88,7 +90,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   } else {
     // Auto height based on line count
     const lineHeight = 19;
-    const calculatedHeight = Math.max(lineCount * lineHeight, 50);
+    const editorPadding = 16; // top 8px + bottom 8px
+    const calculatedHeight = lineCount * lineHeight + editorPadding;
     finalHeight = `${calculatedHeight}px`;
   }
 
@@ -199,6 +202,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     ...getDefaultMonacoOptions({
       showMinimap,
       showLineNumbers,
+      showGutter,
+      showLineHighlight,
       wordWrap,
       fontSize,
       fontFamily,
@@ -235,168 +240,174 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0.5rem 0.75rem",
             backgroundColor:
               toolbarBackgroundColor ||
               (theme === "vs-dark" ? "#1e1e1e" : "#ffffff"),
             borderBottom: "1px solid rgba(128, 128, 128, 0.2)",
           }}
         >
-          {/* Main Toolbar Row */}
+          {/* Left side: Icon + Title/Path + Tabs */}
           <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "0.75rem 1rem",
-            }}
+            style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
           >
-            <div
-              style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
-            >
-              {/* Header Icon */}
-              {headerIcon && (
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  {headerIcon}
-                </div>
-              )}
+            {/* Header Icon */}
+            {headerIcon && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {headerIcon}
+              </div>
+            )}
 
-              {/* Title or File Path */}
-              {headerMode === "path" && filePath && (
-                <span
-                  style={{
-                    fontSize: "0.875rem",
-                    fontWeight: 500,
-                    color: theme === "vs-dark" ? "#ffffff" : "#000000",
-                    fontFamily: "monospace",
-                  }}
-                >
-                  {filePath}
-                </span>
-              )}
+            {/* Title or File Path */}
+            {headerMode === "path" && filePath && (
+              <span
+                style={{
+                  fontSize: "0.8125rem",
+                  fontWeight: 500,
+                  color: theme === "vs-dark" ? "#ffffff" : "#000000",
+                  fontFamily: "monospace",
+                }}
+              >
+                {filePath}
+              </span>
+            )}
 
-              {headerMode === "none" && title && (
-                <span
-                  style={{
-                    fontSize: "0.875rem",
-                    fontWeight: 600,
-                    color: theme === "vs-dark" ? "#ffffff" : "#000000",
-                  }}
-                >
-                  {title}
-                </span>
-              )}
-            </div>
+            {headerMode === "none" && title && (
+              <span
+                style={{
+                  fontSize: "0.8125rem",
+                  fontWeight: 600,
+                  color: theme === "vs-dark" ? "#ffffff" : "#000000",
+                }}
+              >
+                {title}
+              </span>
+            )}
 
-            <div
-              style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-            >
-              {/* Language badge */}
-              {showLanguageTag && (
-                <span
-                  style={{
-                    fontSize: "0.75rem",
-                    padding: "0.25rem 0.5rem",
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
-                    borderRadius: "4px",
-                    color: theme === "vs-dark" ? "#ffffff" : "#000000",
-                    textTransform: "uppercase",
-                    fontWeight: 500,
-                  }}
-                >
-                  {getLanguageDisplayName(getCurrentLanguage())}
-                </span>
-              )}
-
-              {/* Custom toolbar actions */}
-              {toolbarActions.map((action, index) => (
-                <button
-                  key={index}
-                  onClick={action.onClick}
-                  disabled={action.disabled}
-                  title={action.label}
-                  style={{
-                    padding: "0.5rem",
-                    border: "none",
-                    background: "transparent",
-                    cursor: action.disabled ? "not-allowed" : "pointer",
-                    borderRadius: "4px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transition: "background-color 0.2s",
-                    opacity: action.disabled ? 0.5 : 1,
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!action.disabled) {
-                      e.currentTarget.style.backgroundColor =
-                        "rgba(255, 255, 255, 0.1)";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "transparent";
-                  }}
-                >
-                  {action.icon}
-                </button>
-              ))}
-            </div>
+            {/* Tabs (inline with header) */}
+            {headerMode === "tabs" && tabs.length > 0 && (
+              <div
+                style={{
+                  display: "flex",
+                  gap: "0.25rem",
+                  alignItems: "center",
+                }}
+              >
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => handleTabChange(tab.id)}
+                    style={{
+                      padding: "0.375rem 0.75rem",
+                      border: "none",
+                      background:
+                        currentTabId === tab.id
+                          ? "rgba(255, 255, 255, 0.1)"
+                          : "transparent",
+                      color: theme === "vs-dark" ? "#ffffff" : "#000000",
+                      cursor: "pointer",
+                      fontSize: "0.8125rem",
+                      fontWeight: currentTabId === tab.id ? 600 : 400,
+                      borderRadius: "4px",
+                      transition: "all 0.2s",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (currentTabId !== tab.id) {
+                        e.currentTarget.style.backgroundColor =
+                          "rgba(255, 255, 255, 0.05)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (currentTabId !== tab.id) {
+                        e.currentTarget.style.backgroundColor = "transparent";
+                      }
+                    }}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Tabs Row */}
-          {headerMode === "tabs" && tabs.length > 0 && (
-            <div
-              style={{
-                display: "flex",
-                gap: "0.25rem",
-                padding: "0 1rem",
-                borderTop: "1px solid rgba(255, 255, 255, 0.05)",
-              }}
-            >
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => handleTabChange(tab.id)}
-                  style={{
-                    padding: "0.5rem 1rem",
-                    border: "none",
-                    background:
-                      currentTabId === tab.id
-                        ? "rgba(255, 255, 255, 0.1)"
-                        : "transparent",
-                    color: theme === "vs-dark" ? "#ffffff" : "#000000",
-                    cursor: "pointer",
-                    fontSize: "0.875rem",
-                    fontWeight: currentTabId === tab.id ? 600 : 400,
-                    borderBottom:
-                      currentTabId === tab.id
-                        ? "2px solid #3b82f6"
-                        : "2px solid transparent",
-                    transition: "all 0.2s",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (currentTabId !== tab.id) {
-                      e.currentTarget.style.backgroundColor =
-                        "rgba(255, 255, 255, 0.05)";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (currentTabId !== tab.id) {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                    }
-                  }}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          )}
+          {/* Right side: Copy button + Custom actions */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            {/* Copy button */}
+            {showCopyButton && (
+              <button
+                onClick={handleCopy}
+                title={copied ? "Đã copy!" : "Copy code"}
+                style={{
+                  padding: "0.375rem",
+                  border: "none",
+                  background: "transparent",
+                  cursor: "pointer",
+                  borderRadius: "4px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "background-color 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    "rgba(255, 255, 255, 0.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                }}
+              >
+                {copied ? (
+                  <Check size={16} color="#10b981" />
+                ) : (
+                  <Copy
+                    size={16}
+                    color={theme === "vs-dark" ? "#ffffff" : "#000000"}
+                  />
+                )}
+              </button>
+            )}
+
+            {/* Custom toolbar actions */}
+            {toolbarActions.map((action, index) => (
+              <button
+                key={index}
+                onClick={action.onClick}
+                disabled={action.disabled}
+                title={action.label}
+                style={{
+                  padding: "0.375rem",
+                  border: "none",
+                  background: "transparent",
+                  cursor: action.disabled ? "not-allowed" : "pointer",
+                  borderRadius: "4px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "background-color 0.2s",
+                  opacity: action.disabled ? 0.5 : 1,
+                }}
+                onMouseEnter={(e) => {
+                  if (!action.disabled) {
+                    e.currentTarget.style.backgroundColor =
+                      "rgba(255, 255, 255, 0.1)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                }}
+              >
+                {action.icon}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
@@ -460,41 +471,6 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
                 {isExpanded ? "↑" : "↓"}
               </button>
             </div>
-          )}
-
-          {/* Copy button */}
-          {showCopyButton && (
-            <button
-              onClick={handleCopy}
-              title={copied ? "Đã copy!" : "Copy code"}
-              style={{
-                padding: "0.5rem",
-                border: "none",
-                background: "rgba(0, 0, 0, 0.5)",
-                cursor: "pointer",
-                borderRadius: "4px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                transition: "all 0.2s",
-                backdropFilter: "blur(4px)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-              }}
-            >
-              {copied ? (
-                <Check size={16} color="#10b981" />
-              ) : (
-                <Copy
-                  size={16}
-                  color={theme === "vs-dark" ? "#ffffff" : "#000000"}
-                />
-              )}
-            </button>
           )}
         </div>
         {loading ? (
@@ -563,6 +539,12 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         }
         .line-decoration {
           background-color: rgba(255, 0, 0, 0.1) !important;
+        }
+        .monaco-editor .margin {
+          padding-left: 0px !important;
+        }
+        .monaco-editor .margin .line-numbers {
+          padding-right: 16px !important;
         }
       `}</style>
     </div>

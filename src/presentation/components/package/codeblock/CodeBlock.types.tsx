@@ -138,6 +138,10 @@ export interface CodeBlockProps {
   editable?: boolean;
   /** Hiển thị line numbers */
   showLineNumbers?: boolean;
+  /** Hiển thị gutter (vùng chứa line numbers) */
+  showGutter?: boolean;
+  /** Hiển thị line highlight khi focus */
+  showLineHighlight?: boolean;
   /** Hiển thị minimap */
   showMinimap?: boolean;
   /** Word wrap */

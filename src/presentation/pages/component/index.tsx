@@ -7,8 +7,6 @@ import ButtonSection from "./components/Section/ButtonSection";
 import CardSection from "./components/Section/CardSection";
 import CheckboxSection from "./components/Section/CheckboxSection";
 import CodeBlockSection from "./components/Section/CodeBlockSection";
-import ComboboxSection from "./components/Section/ComboboxSection";
-import DateTimePickerSection from "./components/Section/DateTimePickerSection";
 import DividerSection from "./components/Section/DividerSection";
 import DrawerSection from "./components/Section/DrawerSection";
 import DropdownSection from "./components/Section/DropdownSection";
@@ -40,10 +38,6 @@ const ComponentsPage = () => {
         return <CheckboxSection />;
       case "codeblock":
         return <CodeBlockSection />;
-      case "combobox":
-        return <ComboboxSection />;
-      case "datetimepicker":
-        return <DateTimePickerSection />;
       case "divider":
         return <DividerSection />;
       case "drawer":

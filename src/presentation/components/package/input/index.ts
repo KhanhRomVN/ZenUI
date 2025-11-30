@@ -2,14 +2,19 @@ export { default as Input } from "./Input";
 export type {
   InputProps,
   InputSize,
-  InputVariant,
+  InputType,
   InputIcon,
   InputSizeConfig,
+  HelperBoxItem,
 } from "./Input.types";
 export {
   getInputSizeStyles,
   getIconSize,
-  shouldShowIcon,
-  getInputVariantStyles,
+  shouldShowLeftIcon,
+  shouldShowRightIcons,
+  normalizeRightIcons,
+  getBaseInputStyles,
+  parseMultiTextValues,
+  formatMultiTextValues,
   validateInputProps,
 } from "./Input.utils";

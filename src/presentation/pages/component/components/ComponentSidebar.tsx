@@ -12,8 +12,6 @@ const ComponentSidebar = () => {
     { name: "Card", slug: "card" },
     { name: "Checkbox", slug: "checkbox" },
     { name: "Code Block", slug: "codeblock" },
-    { name: "Combobox", slug: "combobox" },
-    { name: "Date Time Picker", slug: "datetimepicker" },
     { name: "Divider", slug: "divider" },
     { name: "Drawer", slug: "drawer" },
     { name: "Dropdown", slug: "dropdown" },

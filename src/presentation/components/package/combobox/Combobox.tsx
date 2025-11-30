@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { ChevronDown, X, Search, Loader2 } from "lucide-react";
+import { ChevronDown, X, Search, Loader2, Plus } from "lucide-react";
 import {
   ComboboxProps,
   ComboboxOption,
@@ -34,6 +34,10 @@ const Combobox: React.FC<ComboboxProps> = ({
   clearable = true,
   emptyMessage = "No options found",
   searchable = true,
+  creatable = false,
+  creatableMessage = 'Create "%s"',
+  onCreate,
+  customItems,
   renderOption,
   renderSelected,
   ...props
@@ -58,8 +62,32 @@ const Combobox: React.FC<ComboboxProps> = ({
     }
   }, [value, options]);
 
+  // Merge options with customItems
+  const mergedOptions = React.useMemo(() => {
+    if (customItems && customItems.length > 0) {
+      return [
+        ...options,
+        ...customItems.map((item) => ({
+          value: item.value,
+          label: item.value,
+          content: item.content,
+          disabled: item.disabled,
+        })),
+      ];
+    }
+    return options;
+  }, [options, customItems]);
+
   // Filter options based on search
-  const filteredOptions = filterOptions(options, inputValue, searchable);
+  const filteredOptions = filterOptions(mergedOptions, inputValue, searchable);
+
+  // Check if we should show create option
+  const showCreateOption =
+    creatable &&
+    inputValue.trim() !== "" &&
+    !filteredOptions.some(
+      (opt) => opt.label.toLowerCase() === inputValue.toLowerCase()
+    );
 
   // Handle option selection
   const handleSelect = useCallback(
@@ -77,6 +105,30 @@ const Combobox: React.FC<ComboboxProps> = ({
     },
     [onChange]
   );
+
+  // Handle creating new option
+  const handleCreate = useCallback(() => {
+    const newValue = inputValue.trim();
+    if (!newValue) return;
+
+    const newOption: ComboboxOption = {
+      value: newValue,
+      label: newValue,
+    };
+
+    setSelectedOption(newOption);
+    setInputValue(newValue);
+    setIsOpen(false);
+    setHighlightedIndex(0);
+
+    if (onCreate) {
+      onCreate(newValue);
+    }
+
+    if (onChange) {
+      onChange(newValue, newOption);
+    }
+  }, [inputValue, onChange, onCreate]);
 
   // Handle input change
   const handleInputChange = useCallback(
@@ -115,22 +167,22 @@ const Combobox: React.FC<ComboboxProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!isOpen) return;
 
+    const maxIndex = filteredOptions.length + (showCreateOption ? 0 : -1);
+
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setHighlightedIndex((prev) =>
-          prev < filteredOptions.length - 1 ? prev + 1 : 0
-        );
+        setHighlightedIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
         break;
       case "ArrowUp":
         e.preventDefault();
-        setHighlightedIndex((prev) =>
-          prev > 0 ? prev - 1 : filteredOptions.length - 1
-        );
+        setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : maxIndex));
         break;
       case "Enter":
         e.preventDefault();
-        if (filteredOptions[highlightedIndex]) {
+        if (showCreateOption && highlightedIndex === filteredOptions.length) {
+          handleCreate();
+        } else if (filteredOptions[highlightedIndex]) {
           handleSelect(filteredOptions[highlightedIndex]);
         }
         break;
@@ -192,6 +244,7 @@ const Combobox: React.FC<ComboboxProps> = ({
     disabled,
     loading,
     searchable,
+    creatable,
   };
 
   return (
@@ -211,13 +264,12 @@ const Combobox: React.FC<ComboboxProps> = ({
                 : ""
             }
             ${success ? "border-green-500 focus:border-green-500" : ""}
-            ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+            ${disabled ? "opacity-50 cursor-not-allowed" : ""}
           `}
           style={{
             height: sizeStyles.height,
             padding: sizeStyles.padding,
           }}
-          onClick={() => !disabled && !loading && setIsOpen(!isOpen)}
         >
           {/* Search Icon */}
           {searchable && (
@@ -236,7 +288,8 @@ const Combobox: React.FC<ComboboxProps> = ({
             disabled={disabled || loading}
             onChange={(e) => handleInputChange(e.target.value)}
             onKeyDown={handleKeyDown}
-            onFocus={() => !disabled && setIsOpen(true)}
+            onFocus={() => !disabled && !loading && setIsOpen(true)}
+            onClick={() => !disabled && !loading && setIsOpen(true)}
             className={`
               flex-1 bg-transparent border-none outline-none
               placeholder-text-tertiary text-text-primary
@@ -289,42 +342,84 @@ const Combobox: React.FC<ComboboxProps> = ({
               shadow-lg py-1
             "
             role="listbox"
+            onMouseDown={(e) => e.preventDefault()}
           >
-            {filteredOptions.length === 0 ? (
+            {filteredOptions.length === 0 && !showCreateOption ? (
               <li className="px-4 py-2 text-text-secondary text-sm">
                 {emptyMessage}
               </li>
             ) : (
-              filteredOptions.map((option, index) => (
-                <li
-                  key={option.value}
-                  role="option"
-                  aria-selected={selectedOption?.value === option.value}
-                  className={`
-                    px-4 py-2 cursor-pointer transition-colors flex items-center
-                    ${index === highlightedIndex ? "bg-sidebar-item-hover" : ""}
-                    ${
-                      selectedOption?.value === option.value
-                        ? "bg-blue-50 text-blue-600"
-                        : ""
+              <>
+                {filteredOptions.map((option, index) => (
+                  <li
+                    key={option.value}
+                    role="option"
+                    aria-selected={selectedOption?.value === option.value}
+                    className={`
+                      px-4 py-2 cursor-pointer transition-colors flex items-center
+                      ${
+                        index === highlightedIndex
+                          ? "bg-sidebar-item-hover"
+                          : ""
+                      }
+                      ${
+                        selectedOption?.value === option.value
+                          ? "bg-blue-50 text-blue-600"
+                          : ""
+                      }
+                      ${
+                        option.disabled
+                          ? "opacity-50 cursor-not-allowed"
+                          : "hover:bg-sidebar-item-hover"
+                      }
+                    `}
+                    onClick={() => !option.disabled && handleSelect(option)}
+                    onMouseEnter={() =>
+                      !option.disabled && setHighlightedIndex(index)
                     }
-                    ${
-                      option.disabled
-                        ? "opacity-50 cursor-not-allowed"
-                        : "hover:bg-sidebar-item-hover"
+                  >
+                    {option.content ? (
+                      option.content
+                    ) : (
+                      <>
+                        {option.icon && (
+                          <span className="mr-2 flex-shrink-0">
+                            {option.icon}
+                          </span>
+                        )}
+                        {renderOption ? renderOption(option) : option.label}
+                      </>
+                    )}
+                  </li>
+                ))}
+                {showCreateOption && (
+                  <li
+                    role="option"
+                    className={`
+                      px-4 py-2 cursor-pointer transition-colors flex items-center
+                      border-t border-border-default
+                      ${
+                        highlightedIndex === filteredOptions.length
+                          ? "bg-sidebar-item-hover"
+                          : ""
+                      }
+                      hover:bg-sidebar-item-hover
+                    `}
+                    onClick={handleCreate}
+                    onMouseEnter={() =>
+                      setHighlightedIndex(filteredOptions.length)
                     }
-                  `}
-                  onClick={() => !option.disabled && handleSelect(option)}
-                  onMouseEnter={() =>
-                    !option.disabled && setHighlightedIndex(index)
-                  }
-                >
-                  {option.icon && (
-                    <span className="mr-2 flex-shrink-0">{option.icon}</span>
-                  )}
-                  {renderOption ? renderOption(option) : option.label}
-                </li>
-              ))
+                  >
+                    <Plus
+                      size={sizeStyles.iconSize}
+                      className="mr-2 flex-shrink-0 text-blue-600"
+                    />
+                    <span className="text-blue-600">
+                      {creatableMessage.replace("%s", inputValue)}
+                    </span>
+                  </li>
+                )}
+              </>
             )}
           </ul>
         )}

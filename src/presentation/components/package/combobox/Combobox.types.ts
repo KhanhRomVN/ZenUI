@@ -8,6 +8,8 @@ export interface ComboboxOption {
   label: string;
   disabled?: boolean;
   icon?: ReactNode;
+  /** Custom content to render instead of label */
+  content?: ReactNode;
 }
 
 /**
@@ -58,10 +60,22 @@ export interface ComboboxProps {
   emptyMessage?: string;
   /** Whether combobox is searchable */
   searchable?: boolean;
+  /** Allow creating new options when value doesn't exist */
+  creatable?: boolean;
+  /** Message shown when creating new option */
+  creatableMessage?: string;
+  /** Handler called when new option is created */
+  onCreate?: (value: string) => void;
   /** Custom render function for options */
   renderOption?: (option: ComboboxOption) => ReactNode;
   /** Custom render function for selected value */
   renderSelected?: (option: ComboboxOption) => ReactNode;
+  /** Array of custom ReactNode items to render as options */
+  customItems?: Array<{
+    value: string;
+    content: ReactNode;
+    disabled?: boolean;
+  }>;
   /** Additional props */
   [key: string]: any;
 }
@@ -86,4 +100,5 @@ export interface ComboboxContextType {
   disabled?: boolean;
   loading?: boolean;
   searchable?: boolean;
+  creatable?: boolean;
 }

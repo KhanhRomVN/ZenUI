@@ -1,0 +1,712 @@
+import { useState } from "react";
+import { Button } from "../../../../components/package/button";
+import { CodeBlock } from "../../../../components/package/codeblock";
+import { FileCode, Play, Download, Heart, Settings } from "lucide-react";
+import RightPanel from "../RightPanel";
+
+const ButtonSection = () => {
+  const [loading, setLoading] = useState(false);
+
+  // Navigation sections for right panel
+  const navigationSections = [
+    { id: "about", label: "About" },
+    { id: "install", label: "Install" },
+    { id: "usage", label: "Usage" },
+    { id: "examples", label: "Examples" },
+    { id: "props", label: "Props" },
+  ];
+
+  const npmInstallCode = `npm install @khanhromvn/zenui`;
+
+  const yarnInstallCode = `yarn add @khanhromvn/zenui`;
+
+  const basicUsageCode = `import { Button } from "@khanhromvn/zenui";
+import { Heart } from "lucide-react";
+
+function MyComponent() {
+  return (
+    <div className="flex gap-4 items-center justify-center flex-wrap">
+      <Button className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border hover:border-button-borderHover">
+        Click Me
+      </Button>
+      
+      <Button
+        icon={<Heart size={16} />}
+        className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border hover:border-button-borderHover"
+      >
+        With Icon
+      </Button>
+      
+      <Button
+        icon={<Heart size={16} />}
+        iconPosition="right"
+        className="bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border hover:border-button-borderHover"
+      >
+        Icon Right
+      </Button>
+    </div>
+  );
+}`;
+
+  const sizeExampleCode = `import { Button } from "@khanhromvn/zenui";
+
+function SizeExample() {
+  return (
+    <div className="flex gap-4 items-center justify-center flex-wrap">
+      <Button
+        size={80}
+        className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+      >
+        Small (80%)
+      </Button>
+      <Button
+        size={100}
+        className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+      >
+        Default (100%)
+      </Button>
+      <Button
+        size={120}
+        className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+      >
+        Large (120%)
+      </Button>
+      <Button
+        size={150}
+        className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+      >
+        Extra Large (150%)
+      </Button>
+    </div>
+  );
+}`;
+
+  const iconExampleCode = `import { Button } from "@khanhromvn/zenui";
+import { Play, Download, Settings, Heart } from "lucide-react";
+
+function IconExample() {
+  return (
+    <div className="flex gap-4 items-center justify-center flex-wrap">
+      <Button
+        icon={<Play size={16} />}
+        iconPosition="left"
+        className="bg-green-600 hover:bg-green-700 text-white border border-green-700"
+      >
+        Play
+      </Button>
+      <Button
+        icon={<Download size={16} />}
+        iconPosition="right"
+        className="bg-blue-600 hover:bg-blue-700 text-white border border-blue-700"
+      >
+        Download
+      </Button>
+      <Button
+        icon={<Settings size={16} />}
+        className="bg-gray-600 hover:bg-gray-700 text-white border border-gray-700"
+      />
+      <Button
+        icon={<Heart size={16} />}
+        iconPosition="left"
+        className="bg-red-600 hover:bg-red-700 text-white border border-red-700"
+      >
+        ❤️ Like
+      </Button>
+    </div>
+  );
+}`;
+
+  const stateExampleCode = `import { Button } from "@khanhromvn/zenui";
+import { useState } from "react";
+
+function StateExample() {
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
+  };
+
+  return (
+    <div className="flex gap-4 items-center justify-center flex-wrap">
+      <Button
+        loading={loading}
+        onClick={handleClick}
+        className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+      >
+        {loading ? "Loading..." : "Click to Load"}
+      </Button>
+      <Button
+        disabled={true}
+        className="bg-gray-400 text-gray-700 border border-gray-500 cursor-not-allowed"
+      >
+        Disabled Button
+      </Button>
+      <Button
+        loading={true}
+        loadingText="Processing..."
+        className="bg-purple-600 hover:bg-purple-700 text-white border border-purple-700"
+      >
+        With Loading Text
+      </Button>
+    </div>
+  );
+}`;
+
+  const handleLoadingDemo = () => {
+    setLoading(true);
+    setTimeout(() => setLoading(false), 2000);
+  };
+
+  return (
+    <>
+      <div className="max-w-4xl mx-auto">
+        {/* ABOUT SECTION */}
+        <section id="about" className="mb-12">
+          <h1 className="text-4xl font-bold text-text-primary mb-3">Button</h1>
+          <p className="text-lg text-text-secondary leading-relaxed">
+            A flexible and customizable button component with support for icons,
+            loading states, size variations, and extensive styling options.
+            Perfect for actions, forms, and interactive elements across your
+            application.
+          </p>
+        </section>
+
+        {/* INSTALL SECTION */}
+        <section id="install" className="mb-12">
+          <h2 className="text-2xl font-semibold text-text-primary mb-4">
+            Installation
+          </h2>
+          <CodeBlock
+            code={npmInstallCode}
+            language="bash"
+            theme="vs-dark"
+            showLineNumbers={false}
+            showGutter={false}
+            showLineHighlight={false}
+            readOnly={true}
+            headerMode="tabs"
+            headerIcon={<FileCode size={16} />}
+            tabs={[
+              {
+                id: "npm",
+                label: "npm",
+                content: npmInstallCode,
+                language: "bash",
+              },
+              {
+                id: "yarn",
+                label: "yarn",
+                content: yarnInstallCode,
+                language: "bash",
+              },
+            ]}
+            activeTabId="npm"
+          />
+        </section>
+
+        {/* USAGE SECTION */}
+        <section id="usage" className="mb-12">
+          <h2 className="text-2xl font-semibold text-text-primary mb-4">
+            Basic Usage
+          </h2>
+          <p className="text-text-secondary mb-6">
+            Here's a simple example to get you started with the Button
+            component.
+          </p>
+
+          {/* Live Demo */}
+          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
+            <Button className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border hover:border-button-borderHover">
+              Click Me
+            </Button>
+            <Button
+              icon={<Heart size={16} />}
+              className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border hover:border-button-borderHover"
+            >
+              With Icon
+            </Button>
+            <Button
+              icon={<Heart size={16} />}
+              iconPosition="right"
+              className="bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border hover:border-button-borderHover"
+            >
+              Icon Right
+            </Button>
+          </div>
+
+          {/* Code Example */}
+          <CodeBlock
+            code={basicUsageCode}
+            language="typescript"
+            theme="vs-dark"
+            readOnly={true}
+            headerMode="path"
+            headerIcon={<FileCode size={16} />}
+            filePath="src/components/BasicExample.tsx"
+            showLineNumbers={true}
+            showGutter={true}
+            showLineHighlight={false}
+          />
+        </section>
+
+        {/* EXAMPLES SECTION */}
+        <section id="examples" className="mb-12">
+          <h2 className="text-2xl font-semibold text-text-primary mb-4">
+            Advanced Examples
+          </h2>
+
+          {/* Size Variants */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Size Variants
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Control button size using percentage scale from 50% to 200%.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center justify-center flex-wrap">
+              <Button
+                size={80}
+                className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+              >
+                Small (80%)
+              </Button>
+              <Button
+                size={100}
+                className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+              >
+                Default (100%)
+              </Button>
+              <Button
+                size={120}
+                className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+              >
+                Large (120%)
+              </Button>
+              <Button
+                size={150}
+                className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+              >
+                Extra Large (150%)
+              </Button>
+            </div>
+
+            <CodeBlock
+              code={sizeExampleCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/SizeExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
+          {/* Icon Positions */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Icon Positions
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Add icons from lucide-react or use emoji, with flexible
+              positioning.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center justify-center flex-wrap">
+              <Button
+                icon={<Play size={16} />}
+                iconPosition="left"
+                className="bg-green-600 hover:bg-green-700 text-white border border-green-700"
+              >
+                Play
+              </Button>
+              <Button
+                icon={<Download size={16} />}
+                iconPosition="right"
+                className="bg-blue-600 hover:bg-blue-700 text-white border border-blue-700"
+              >
+                Download
+              </Button>
+              <Button
+                icon={<Settings size={16} />}
+                className="bg-gray-600 hover:bg-gray-700 text-white border border-gray-700"
+              />
+              <Button
+                icon={<Heart size={16} />}
+                iconPosition="left"
+                className="bg-red-600 hover:bg-red-700 text-white border border-red-700"
+              >
+                ❤️ Like
+              </Button>
+            </div>
+
+            <CodeBlock
+              code={iconExampleCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/IconExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
+          {/* Button States */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Button States
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Handle loading and disabled states with built-in visual feedback.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center justify-center flex-wrap">
+              <Button
+                loading={loading}
+                onClick={handleLoadingDemo}
+                className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+              >
+                {loading ? "Loading..." : "Click to Load"}
+              </Button>
+              <Button
+                disabled={true}
+                className="bg-gray-400 text-gray-700 border border-gray-500 cursor-not-allowed"
+              >
+                Disabled Button
+              </Button>
+              <Button
+                loading={true}
+                loadingText="Processing..."
+                className="bg-purple-600 hover:bg-purple-700 text-white border border-purple-700"
+              >
+                With Loading Text
+              </Button>
+            </div>
+
+            <CodeBlock
+              code={stateExampleCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/StateExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
+          {/* Width Variants */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Width Variants
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Control button width behavior with fit-content or full-width
+              options.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
+              <Button
+                width="fit"
+                className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+              >
+                Fit Content
+              </Button>
+              <Button
+                width="full"
+                className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+              >
+                Full Width
+              </Button>
+            </div>
+
+            <CodeBlock
+              code={`import { Button } from "@khanhromvn/zenui";
+
+function WidthExample() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Button
+        width="fit"
+        className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+      >
+        Fit Content
+      </Button>
+      <Button
+        width="full"
+        className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+      >
+        Full Width
+      </Button>
+    </div>
+  );
+}`}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/WidthExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
+          {/* Alignment */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Content Alignment
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Align button content to left, center, or right.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
+              <Button
+                width="full"
+                align="left"
+                icon={<Play size={16} />}
+                className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+              >
+                Left Aligned
+              </Button>
+              <Button
+                width="full"
+                align="center"
+                icon={<Heart size={16} />}
+                className="bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border"
+              >
+                Center Aligned
+              </Button>
+              <Button
+                width="full"
+                align="right"
+                icon={<Download size={16} />}
+                className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+              >
+                Right Aligned
+              </Button>
+            </div>
+
+            <CodeBlock
+              code={`import { Button } from "@khanhromvn/zenui";
+import { Play, Heart, Download } from "lucide-react";
+
+function AlignmentExample() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Button
+        width="full"
+        align="left"
+        icon={<Play size={16} />}
+        className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+      >
+        Left Aligned
+      </Button>
+      <Button
+        width="full"
+        align="center"
+        icon={<Heart size={16} />}
+        className="bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border"
+      >
+        Center Aligned
+      </Button>
+      <Button
+        width="full"
+        align="right"
+        icon={<Download size={16} />}
+        className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
+      >
+        Right Aligned
+      </Button>
+    </div>
+  );
+}`}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/AlignmentExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+        </section>
+
+        {/* PROPS SECTION */}
+        <section id="props" className="mb-12">
+          <h2 className="text-2xl font-semibold text-text-primary mb-4">
+            Props
+          </h2>
+          <p className="text-text-secondary mb-6">
+            Complete list of props available for the Button component.
+          </p>
+
+          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-input-background">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                      Prop
+                    </th>
+                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                      Type
+                    </th>
+                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                      Default
+                    </th>
+                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border-default">
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      size
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      number
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">100</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Button size (percentage scale: 50-200)
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      width
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      "fit" | "full"
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">"fit"</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Button width behavior
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      children
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      ReactNode
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">-</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Button content/text
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      loading
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      boolean
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">false</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Loading state
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      disabled
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      boolean
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">false</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Disabled state
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      icon
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      LucideIcon | ReactNode
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">-</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Icon (Lucide icon, emoji, SVG, text)
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      iconPosition
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      "left" | "right"
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">"left"</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Icon position (when icon and text present)
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      align
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      "left" | "center" | "right"
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">"right"</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Content alignment
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      loadingText
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      string
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">-</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Text to display when loading
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      className
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      string
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">""</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Custom CSS classes
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      onClick
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      (e: MouseEvent) =&gt; void
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">-</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Click event handler
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* Right Panel Navigation */}
+      <RightPanel sections={navigationSections} />
+    </>
+  );
+};
+
+export default ButtonSection;

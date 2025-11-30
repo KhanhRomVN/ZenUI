@@ -4,10 +4,25 @@ const ComponentSidebar = () => {
   const currentSection =
     new URLSearchParams(location.search).get("section") || "drawer";
 
-  // Tự động sắp xếp components theo thứ tự A-Z
   const components = [
+    { name: "Avatar", slug: "avatar" },
+    { name: "Badge", slug: "badge" },
+    { name: "Breadcrumb", slug: "breadcrumb" },
+    { name: "Button", slug: "button" },
+    { name: "Card", slug: "card" },
+    { name: "Checkbox", slug: "checkbox" },
     { name: "Code Block", slug: "codeblock" },
+    { name: "Combobox", slug: "combobox" },
+    { name: "Date Time Picker", slug: "datetimepicker" },
+    { name: "Divider", slug: "divider" },
     { name: "Drawer", slug: "drawer" },
+    { name: "Dropdown", slug: "dropdown" },
+    { name: "Input", slug: "input" },
+    { name: "Input OTP", slug: "input-otp" },
+    { name: "Menu Bar", slug: "menubar" },
+    { name: "Menu Tab", slug: "menutab" },
+    { name: "Modal", slug: "modal" },
+    { name: "Pagination", slug: "pagination" },
   ].sort((a, b) => a.name.localeCompare(b.name));
 
   return (

@@ -1,6 +1,6 @@
 {
   "name": "@khanhromvn/zenui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Modern, flexible and customizable UI component library for React + Vite + Tailwind CSS",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -39,7 +39,7 @@
   "bugs": {
     "url": "https://github.com/KhanhRomVN/ZenUI/issues"
   },
-  "homepage": "https://github.com/KhanhRomVN/ZenUI#readme",
+  "homepage": "https://zen-ui-one.vercel.app",
   "engines": {
     "node": ">=18.0.0"
   },

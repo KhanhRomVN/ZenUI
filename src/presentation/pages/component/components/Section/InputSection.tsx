@@ -12,6 +12,18 @@ const InputSection = () => {
   const [searchValue, setSearchValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
   const [comboboxOpen, setComboboxOpen] = useState(false);
+  const [countries, setCountries] = useState([
+    { value: "us", label: "United States" },
+    { value: "uk", label: "United Kingdom" },
+    { value: "ca", label: "Canada" },
+    { value: "au", label: "Australia" },
+    { value: "de", label: "Germany" },
+    { value: "fr", label: "France" },
+    { value: "jp", label: "Japan" },
+    { value: "kr", label: "South Korea" },
+    { value: "vn", label: "Vietnam" },
+    { value: "th", label: "Thailand" },
+  ]);
 
   // Navigation sections for right panel
   const navigationSections = [
@@ -202,59 +214,29 @@ function SizeExample() {
                       setComboboxOpen(false);
                       console.log("Selected:", value);
                     }}
+                    onCreate={(newValue) => {
+                      const newCountry = {
+                        value: newValue.toLowerCase().replace(/\s+/g, "-"),
+                        label: newValue,
+                      };
+                      setCountries([...countries, newCountry]);
+                      setSearchValue(newValue);
+                      setComboboxOpen(false);
+                      console.log("Created:", newCountry);
+                    }}
                     searchable
+                    creatable
+                    creatableMessage='Create country "%s"'
                     className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover"
                   >
-                    <ComboboxItem
-                      value="us"
-                      label="United States"
-                      className="hover:bg-dropdown-itemHover"
-                    />
-                    <ComboboxItem
-                      value="uk"
-                      label="United Kingdom"
-                      className="hover:bg-dropdown-itemHover"
-                    />
-                    <ComboboxItem
-                      value="ca"
-                      label="Canada"
-                      className="hover:bg-dropdown-itemHover"
-                    />
-                    <ComboboxItem
-                      value="au"
-                      label="Australia"
-                      className="hover:bg-dropdown-itemHover"
-                    />
-                    <ComboboxItem
-                      value="de"
-                      label="Germany"
-                      className="hover:bg-dropdown-itemHover"
-                    />
-                    <ComboboxItem
-                      value="fr"
-                      label="France"
-                      className="hover:bg-dropdown-itemHover"
-                    />
-                    <ComboboxItem
-                      value="jp"
-                      label="Japan"
-                      className="hover:bg-dropdown-itemHover"
-                    />
-                    <ComboboxItem
-                      value="kr"
-                      label="South Korea"
-                      className="hover:bg-dropdown-itemHover"
-                    />
-                    <ComboboxItem
-                      value="vn"
-                      label="Vietnam"
-                      className="hover:bg-dropdown-itemHover"
-                    />
-                    <ComboboxItem
-                      value="th"
-                      label="Thailand"
-                      className="hover:bg-dropdown-itemHover"
-                    />
+                    {countries.map((country) => (
+                      <ComboboxItem
+                        key={country.value}
+                        value={country.value}
+                        label={country.label}
+                        className="hover:bg-dropdown-itemHover"
+                      />
+                    ))}
                   </Combobox>
                 }
               />

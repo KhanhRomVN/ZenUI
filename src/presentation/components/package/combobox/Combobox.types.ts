@@ -5,6 +5,7 @@ export interface ComboboxOption {
   label: string;
   disabled?: boolean;
   icon?: ReactNode;
+  className?: string;
 }
 
 export type ComboboxSize = "sm" | "md" | "lg";

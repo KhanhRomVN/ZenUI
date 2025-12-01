@@ -132,7 +132,7 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       dialogBackground: "#1e1e1e",
       dropdownBackground: "#1e1e1e",
       dropdownItemHover: "#2d2d2d",
-      dropdownBorder: "#e72e2e",
+      dropdownBorder: "#3f3f3f",
       dropdownBorderHover: "#418dfe",
       sidebarBackground: "#131313",
       sidebarItemHover: "#1e1e1e",

@@ -170,6 +170,8 @@ export function ThemeProvider({
       dialogBackground: "--dialog-background",
       dropdownBackground: "--dropdown-background",
       dropdownItemHover: "--dropdown-item-hover",
+      dropdownBorder: "--dropdown-border",
+      dropdownBorderHover: "--dropdown-border-hover",
       sidebarBackground: "--sidebar-background",
       sidebarItemHover: "--sidebar-item-hover",
       sidebarItemFocus: "--sidebar-item-focus",

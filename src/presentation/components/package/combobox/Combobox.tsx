@@ -36,6 +36,7 @@ const Combobox: React.FC<ComboboxProps> = ({
           label: child.props.label || child.props.value,
           disabled: child.props.disabled,
           icon: child.props.icon,
+          className: child.props.className,
         });
       }
     });
@@ -142,6 +143,7 @@ const Combobox: React.FC<ComboboxProps> = ({
                 aria-selected={selectedOption?.value === option.value}
                 className={cn(
                   "px-4 py-2 cursor-pointer transition-colors flex items-center justify-between",
+                  option.className,
                   index === highlightedIndex &&
                     selectedOption?.value === option.value &&
                     "bg-blue-50 dark:bg-blue-900/20"

@@ -38,7 +38,7 @@ module.exports = {
           borderHover: "var(--input-border-hover)",
           borderFocus: "var(--input-border-focus)",
         },
-        dialog: {
+        dialog: { 
           background: "var(--dialog-background)",
         },
         dropdown: {

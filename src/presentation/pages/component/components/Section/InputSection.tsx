@@ -203,7 +203,7 @@ function SizeExample() {
                       console.log("Selected:", value);
                     }}
                     searchable
-                    className="bg-dropdown-background border border-dropdown-border"
+                    className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover"
                   >
                     <ComboboxItem
                       value="us"

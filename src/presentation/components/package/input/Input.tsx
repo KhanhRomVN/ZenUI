@@ -182,8 +182,6 @@ const Input: React.FC<InputProps> = ({
         className={cn(
           "flex items-center w-full transition-all duration-200 rounded-md",
           "border bg-transparent",
-          "border-gray-300 dark:border-gray-600",
-          "focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20",
           "placeholder:text-gray-400",
           sizeClasses,
           isDisabled && "opacity-50 cursor-not-allowed pointer-events-none",

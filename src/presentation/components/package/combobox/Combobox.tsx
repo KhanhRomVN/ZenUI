@@ -1,31 +1,50 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { X, Search, Loader2, Plus, Check } from "lucide-react";
+import { Plus, Check } from "lucide-react";
 import { cn } from "../../../../shared/utils/cn";
-import { ComboboxProps, ComboboxOption } from "./Combobox.types";
+import {
+  ComboboxProps,
+  ComboboxOption,
+  ComboboxItemProps,
+} from "./Combobox.types";
 import { getComboboxSizeStyles, filterOptions } from "./Combobox.utils";
 
 const Combobox: React.FC<ComboboxProps> = ({
-  options,
+  options: optionsProp,
   value,
   searchQuery = "",
-  placeholder = "Search...",
-  disabled = false,
-  loading = false,
   size = "md",
   className = "",
-  backgroundClassName = "",
-  borderClassName = "",
-  itemHoverClassName = "",
   onChange,
-  onSearch,
   emptyMessage = "No options found",
   searchable = true,
   creatable = false,
   creatableMessage = 'Create "%s"',
+  children,
   onCreate,
   renderOption,
   maxHeight = "240px",
 }) => {
+  // Parse children into options if provided
+  const childrenOptions: ComboboxOption[] = React.useMemo(() => {
+    if (!children) return [];
+
+    const items: ComboboxOption[] = [];
+    React.Children.forEach(children, (child) => {
+      if (React.isValidElement<ComboboxItemProps>(child)) {
+        items.push({
+          value: child.props.value,
+          label: child.props.label || child.props.value,
+          disabled: child.props.disabled,
+          icon: child.props.icon,
+        });
+      }
+    });
+    return items;
+  }, [children]);
+
+  // Use options from props or from children
+  const options = optionsProp || childrenOptions;
+
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<ComboboxOption | null>(
     options.find((opt) => opt.value === value) || null
@@ -89,30 +108,6 @@ const Combobox: React.FC<ComboboxProps> = ({
     }
   }, [searchQuery, onChange, onCreate]);
 
-  // Handle keyboard navigation
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    const maxIndex = filteredOptions.length + (showCreateOption ? 0 : -1);
-
-    switch (e.key) {
-      case "ArrowDown":
-        e.preventDefault();
-        setHighlightedIndex((prev) => (prev < maxIndex ? prev + 1 : 0));
-        break;
-      case "ArrowUp":
-        e.preventDefault();
-        setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : maxIndex));
-        break;
-      case "Enter":
-        e.preventDefault();
-        if (showCreateOption && highlightedIndex === filteredOptions.length) {
-          handleCreate();
-        } else if (filteredOptions[highlightedIndex]) {
-          handleSelect(filteredOptions[highlightedIndex]);
-        }
-        break;
-    }
-  };
-
   // Scroll highlighted option into view
   useEffect(() => {
     if (listboxRef.current) {
@@ -128,18 +123,11 @@ const Combobox: React.FC<ComboboxProps> = ({
   const sizeStyles = getComboboxSizeStyles(size);
 
   return (
-    <div
-      className={cn(
-        "w-full rounded-lg shadow-lg",
-        backgroundClassName || "bg-white dark:bg-gray-800",
-        borderClassName || "border border-gray-200 dark:border-gray-700",
-        className
-      )}
-    >
+    <div className={cn("w-full rounded-md border", className)}>
       {/* Options List */}
       <ul
         ref={listboxRef}
-        className="py-1 overflow-auto"
+        className="overflow-auto"
         style={{ maxHeight }}
         role="listbox"
       >
@@ -155,14 +143,8 @@ const Combobox: React.FC<ComboboxProps> = ({
                 className={cn(
                   "px-4 py-2 cursor-pointer transition-colors flex items-center justify-between",
                   index === highlightedIndex &&
-                    (itemHoverClassName || "bg-gray-100 dark:bg-gray-700"),
-                  selectedOption?.value === option.value &&
-                    "bg-blue-50 dark:bg-blue-900/20",
-                  option.disabled
-                    ? "opacity-50 cursor-not-allowed"
-                    : `hover:${
-                        itemHoverClassName || "bg-gray-100 dark:bg-gray-700"
-                      }`
+                    selectedOption?.value === option.value &&
+                    "bg-blue-50 dark:bg-blue-900/20"
                 )}
                 onClick={() => !option.disabled && handleSelect(option)}
                 onMouseEnter={() =>
@@ -200,13 +182,7 @@ const Combobox: React.FC<ComboboxProps> = ({
                 role="option"
                 className={cn(
                   "px-4 py-2 cursor-pointer transition-colors flex items-center gap-2",
-                  "border-t",
-                  borderClassName || "border-gray-200 dark:border-gray-700",
-                  highlightedIndex === filteredOptions.length &&
-                    (itemHoverClassName || "bg-gray-100 dark:bg-gray-700"),
-                  itemHoverClassName
-                    ? `hover:${itemHoverClassName}`
-                    : "hover:bg-gray-100 dark:bg-gray-700"
+                  "border-t"
                 )}
                 onClick={handleCreate}
                 onMouseEnter={() => setHighlightedIndex(filteredOptions.length)}

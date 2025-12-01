@@ -43,8 +43,8 @@ module.exports = {
         },
         dropdown: {
           background: "var(--dropdown-background)",
-          itemHover: "var(--dropdown-item-hover)",
           border: "var(--dropdown-border)",
+          itemHover: "var(--dropdown-item-hover)",
           borderHover: "var(--dropdown-border-hover)",  
         },
         sidebar: {

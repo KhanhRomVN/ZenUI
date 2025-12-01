@@ -1,23 +1,16 @@
 import { useState } from "react";
 import { Input } from "../../../../components/package/input";
 import { CodeBlock } from "../../../../components/package/codeblock";
-import {
-  FileCode,
-  Search,
-  Mail,
-  Eye,
-  User,
-  X,
-  ChevronDown,
-} from "lucide-react";
+import { FileCode, Search, X, ChevronDown } from "lucide-react";
 import RightPanel from "../RightPanel";
-import { Combobox } from "../../../../components/package/combobox";
+import {
+  Combobox,
+  ComboboxItem,
+} from "../../../../components/package/combobox";
 
 const InputSection = () => {
   const [searchValue, setSearchValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
-  const [tags, setTags] = useState(["React", "TypeScript"]);
   const [comboboxOpen, setComboboxOpen] = useState(false);
 
   // Navigation sections for right panel
@@ -203,18 +196,6 @@ function SizeExample() {
                 popoverContent={
                   <Combobox
                     searchQuery={searchValue}
-                    options={[
-                      { value: "us", label: "United States" },
-                      { value: "uk", label: "United Kingdom" },
-                      { value: "ca", label: "Canada" },
-                      { value: "au", label: "Australia" },
-                      { value: "de", label: "Germany" },
-                      { value: "fr", label: "France" },
-                      { value: "jp", label: "Japan" },
-                      { value: "kr", label: "South Korea" },
-                      { value: "vn", label: "Vietnam" },
-                      { value: "th", label: "Thailand" },
-                    ]}
                     value={searchValue}
                     onChange={(value, option) => {
                       setSearchValue(option.label);
@@ -222,10 +203,59 @@ function SizeExample() {
                       console.log("Selected:", value);
                     }}
                     searchable
-                    backgroundClassName="bg-dropdown-background"
-                    borderClassName="border-dropdown-border"
-                    itemHoverClassName="bg-dropdown-itemHover"
-                  />
+                    className="bg-dropdown-background border border-dropdown-border"
+                  >
+                    <ComboboxItem
+                      value="us"
+                      label="United States"
+                      className="hover:bg-dropdown-itemHover"
+                    />
+                    <ComboboxItem
+                      value="uk"
+                      label="United Kingdom"
+                      className="hover:bg-dropdown-itemHover"
+                    />
+                    <ComboboxItem
+                      value="ca"
+                      label="Canada"
+                      className="hover:bg-dropdown-itemHover"
+                    />
+                    <ComboboxItem
+                      value="au"
+                      label="Australia"
+                      className="hover:bg-dropdown-itemHover"
+                    />
+                    <ComboboxItem
+                      value="de"
+                      label="Germany"
+                      className="hover:bg-dropdown-itemHover"
+                    />
+                    <ComboboxItem
+                      value="fr"
+                      label="France"
+                      className="hover:bg-dropdown-itemHover"
+                    />
+                    <ComboboxItem
+                      value="jp"
+                      label="Japan"
+                      className="hover:bg-dropdown-itemHover"
+                    />
+                    <ComboboxItem
+                      value="kr"
+                      label="South Korea"
+                      className="hover:bg-dropdown-itemHover"
+                    />
+                    <ComboboxItem
+                      value="vn"
+                      label="Vietnam"
+                      className="hover:bg-dropdown-itemHover"
+                    />
+                    <ComboboxItem
+                      value="th"
+                      label="Thailand"
+                      className="hover:bg-dropdown-itemHover"
+                    />
+                  </Combobox>
                 }
               />
             </div>

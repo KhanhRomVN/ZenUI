@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { PRESET_THEMES } from "../constants/theme-presets";
 
 type Theme = "dark" | "light" | "system";
 
@@ -56,6 +57,9 @@ export function ThemeProvider({
         borderFocus: "#418dfe",
         cardBackground: "#242424",
         inputBackground: "#1e1e1e",
+        inputBorderDefault: "#353535",
+        inputBorderHover: "#418dfe",
+        inputBorderFocus: "#418dfe",
         dialogBackground: "#1e1e1e",
         dropdownBackground: "#1e1e1e",
         dropdownItemHover: "#2d2d2d",
@@ -81,6 +85,73 @@ export function ThemeProvider({
     }
   }, []);
 
+  // Auto-sync preset with latest changes in development
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      const syncInterval = setInterval(() => {
+        const savedPreset = localStorage.getItem(`${storageKey}-preset`);
+        if (savedPreset) {
+          try {
+            const preset = JSON.parse(savedPreset);
+            if (preset.name) {
+              const allPresets = [
+                ...PRESET_THEMES.light,
+                ...PRESET_THEMES.dark,
+              ];
+              const latestPreset = allPresets.find(
+                (p) => p.name === preset.name
+              );
+              if (latestPreset) {
+                // Compare if colors have changed
+                const hasChanges = Object.keys(latestPreset).some(
+                  (key) =>
+                    key !== "name" &&
+                    key !== "icon" &&
+                    key !== "description" &&
+                    latestPreset[key as keyof typeof latestPreset] !==
+                      preset[key]
+                );
+
+                if (hasChanges) {
+                  console.log(`[Theme Sync] Updating preset: ${preset.name}`);
+                  applyPresetTheme(latestPreset);
+                }
+              }
+            }
+          } catch (e) {
+            console.error("Failed to sync preset theme", e);
+          }
+        }
+      }, 2000); // Check every 2 seconds in development
+
+      return () => clearInterval(syncInterval);
+    }
+  }, [storageKey]);
+
+  // Watch for changes in theme presets during development
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      const checkPresetUpdate = () => {
+        const savedPreset = localStorage.getItem(`${storageKey}-preset`);
+        if (savedPreset) {
+          try {
+            const preset = JSON.parse(savedPreset);
+            applyCSSVariables(preset);
+          } catch (e) {
+            console.error("Failed to reload preset theme", e);
+          }
+        }
+      };
+
+      // Listen for custom event from HMR or manual refresh
+      window.addEventListener("theme-preset-reload", checkPresetUpdate);
+
+      return () => {
+        window.removeEventListener("theme-preset-reload", checkPresetUpdate);
+      };
+    }
+  }, [storageKey]);
+
   const applyCSSVariables = (preset: any) => {
     const root = window.document.documentElement;
     const cssVarMap: Record<string, string> = {
@@ -93,6 +164,9 @@ export function ThemeProvider({
       borderFocus: "--border-focus",
       cardBackground: "--card-background",
       inputBackground: "--input-background",
+      inputBorderDefault: "--input-border-default",
+      inputBorderHover: "--input-border-hover",
+      inputBorderFocus: "--input-border-focus",
       dialogBackground: "--dialog-background",
       dropdownBackground: "--dropdown-background",
       dropdownItemHover: "--dropdown-item-hover",
@@ -121,11 +195,21 @@ export function ThemeProvider({
   };
 
   const applyPresetTheme = (preset: any) => {
-    applyCSSVariables(preset);
+    // Find the latest preset from PRESET_THEMES if name matches
+    let latestPreset = preset;
+    if (preset.name) {
+      const allPresets = [...PRESET_THEMES.light, ...PRESET_THEMES.dark];
+      const foundPreset = allPresets.find((p) => p.name === preset.name);
+      if (foundPreset) {
+        latestPreset = foundPreset;
+      }
+    }
+
+    applyCSSVariables(latestPreset);
     // Save preset with name for CodeBlock theme detection
     const presetWithName = {
-      ...preset,
-      name: preset.name, // Ensure name is saved
+      ...latestPreset,
+      name: latestPreset.name, // Ensure name is saved
     };
     localStorage.setItem(
       `${storageKey}-preset`,
@@ -135,7 +219,7 @@ export function ThemeProvider({
     // Dispatch custom event to notify CodeBlock components
     window.dispatchEvent(
       new CustomEvent("theme-preset-changed", {
-        detail: { presetName: preset.name },
+        detail: { presetName: latestPreset.name },
       })
     );
   };

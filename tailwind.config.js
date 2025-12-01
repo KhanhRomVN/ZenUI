@@ -34,6 +34,9 @@ module.exports = {
         },
         input: {
           background: "var(--input-background)",
+          border: "var(--input-border-default)",
+          borderHover: "var(--input-border-hover)",
+          borderFocus: "var(--input-border-focus)",
         },
         dialog: {
           background: "var(--dialog-background)",
@@ -41,6 +44,8 @@ module.exports = {
         dropdown: {
           background: "var(--dropdown-background)",
           itemHover: "var(--dropdown-item-hover)",
+          border: "var(--dropdown-border)",
+          borderHover: "var(--dropdown-border-hover)",  
         },
         sidebar: {
           background: "var(--sidebar-background)",

@@ -11,9 +11,14 @@ export interface PresetThemeType {
   borderFocus?: string;
   cardBackground: string;
   inputBackground?: string;
+  inputBorderDefault?: string;
+  inputBorderHover?: string;
+  inputBorderFocus?: string;
   dialogBackground?: string;
   dropdownBackground?: string;
   dropdownItemHover?: string;
+  dropdownBorder?: string;
+  dropdownBorderHover?: string;
   sidebarBackground?: string;
   sidebarItemHover?: string;
   sidebarItemFocus?: string;
@@ -49,9 +54,14 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       borderFocus: "#cbd5e1",
       cardBackground: "#ffffff",
       inputBackground: "#ffffff",
+      inputBorderDefault: "#e2e8f0",
+      inputBorderHover: "#cbd5e1",
+      inputBorderFocus: "#3686ff",
       dialogBackground: "#ffffff",
       dropdownBackground: "#ffffff",
       dropdownItemHover: "#f8fafc",
+      dropdownBorder: "#e2e8f0",
+      dropdownBorderHover: "#cbd5e1",
       sidebarBackground: "#f9fafb",
       sidebarItemHover: "#f3f4f6",
       sidebarItemFocus: "#e5e7eb",
@@ -79,9 +89,14 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       borderFocus: "#a5b4fc",
       cardBackground: "#ffffff",
       inputBackground: "#ffffff",
+      inputBorderDefault: "#c7d2fe",
+      inputBorderHover: "#a5b4fc",
+      inputBorderFocus: "#4f46e5",
       dialogBackground: "#ffffff",
       dropdownBackground: "#ffffff",
       dropdownItemHover: "#e0e7ff",
+      dropdownBorder: "#c7d2fe",
+      dropdownBorderHover: "#a5b4fc",
       sidebarBackground: "#e0e7ff",
       sidebarItemHover: "#c7d2fe",
       sidebarItemFocus: "#a5b4fc",
@@ -111,9 +126,14 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       borderFocus: "#418dfe",
       cardBackground: "#242424",
       inputBackground: "#1e1e1e",
+      inputBorderDefault: "#3f3f3f",
+      inputBorderHover: "#418dfe",
+      inputBorderFocus: "#3686ff",
       dialogBackground: "#1e1e1e",
       dropdownBackground: "#1e1e1e",
       dropdownItemHover: "#2d2d2d",
+      dropdownBorder: "#e72e2e",
+      dropdownBorderHover: "#418dfe",
       sidebarBackground: "#131313",
       sidebarItemHover: "#1e1e1e",
       sidebarItemFocus: "#333333",
@@ -141,9 +161,14 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       borderFocus: "#6366f1",
       cardBackground: "#0f172a",
       inputBackground: "#1e293b",
+      inputBorderDefault: "#1e293b",
+      inputBorderHover: "#6366f1",
+      inputBorderFocus: "#6366f1",
       dialogBackground: "#0f172a",
       dropdownBackground: "#1e293b",
-      dropdownItemHover: "#334155",
+      dropdownItemHover: "#090c0f",
+      dropdownBorder: "#1e293b",
+      dropdownBorderHover: "#6366f1",
       sidebarBackground: "#0b0e2a",
       sidebarItemHover: "#0f172a",
       sidebarItemFocus: "#1e293b",

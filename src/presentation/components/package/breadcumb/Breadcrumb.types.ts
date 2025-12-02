@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { LucideIcon } from "lucide-react";
 
 /**
@@ -6,66 +7,44 @@ import { LucideIcon } from "lucide-react";
 export type BreadcrumbSize = number;
 
 /**
- * Loại separator
- */
-export type BreadcrumbSeparator = "chevron" | "slash" | "arrow";
-
-/**
- * Breadcrumb item
- */
-export interface BreadcrumbItem {
-  /** Unique identifier */
-  id?: string;
-
-  /** Label hiển thị */
-  label: string;
-
-  /** URL (optional) */
-  href?: string;
-
-  /** Custom icon */
-  icon?: LucideIcon;
-
-  /** Custom data */
-  [key: string]: any;
-}
-
-/**
  * Props chính của Breadcrumb component
  */
 export interface BreadcrumbProps {
-  /** Danh sách breadcrumb items */
-  items?: BreadcrumbItem[];
+  /** Children (BreadcrumbItem components) */
+  children: ReactNode;
+
+  /** Icon ngăn cách giữa các item */
+  separator?: LucideIcon | ReactNode;
 
   /** Kích thước breadcrumb */
   size?: BreadcrumbSize;
 
-  /** Loại separator */
-  separator?: BreadcrumbSeparator;
-
-  /** Hiển thị home icon */
-  showHomeIcon?: boolean;
-
-  /** Home URL */
-  homeHref?: string;
-
   /** Custom class name */
   className?: string;
-
-  /** Callback khi click vào item */
-  onItemClick?: (item: BreadcrumbItem, index: number) => void;
 
   /** Các props HTML nav khác */
   [key: string]: any;
 }
 
 /**
- * Interface cho breadcrumb size configuration
+ * Props của BreadcrumbItem component
  */
-export interface BreadcrumbSizeConfig {
-  /** Font size */
-  fontSize: string;
+export interface BreadcrumbItemProps {
+  /** Icon của item */
+  icon?: LucideIcon | ReactNode;
 
-  /** Line height */
-  lineHeight: number;
+  /** Text hiển thị */
+  text: string;
+
+  /** URL (optional) */
+  href?: string;
+
+  /** Click handler (optional) */
+  onClick?: () => void;
+
+  /** Custom class name */
+  className?: string;
+
+  /** Các props HTML khác */
+  [key: string]: any;
 }

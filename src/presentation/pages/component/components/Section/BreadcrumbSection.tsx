@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { Breadcrumb } from "../../../../components/package/breadcumb";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+} from "../../../../components/package/breadcumb";
 import { CodeBlock } from "../../../../components/package/codeblock";
-import { FileCode, Folder, FileText, Settings } from "lucide-react";
+import { FileCode, Folder, FileText, Settings, Home } from "lucide-react";
 import RightPanel from "../RightPanel";
 
 const BreadcrumbSection = () => {
@@ -18,83 +21,109 @@ const BreadcrumbSection = () => {
 
   const yarnInstallCode = `yarn add @khanhromvn/zenui`;
 
-  const basicUsageCode = `import { Breadcrumb } from "@khanhromvn/zenui";
+  const basicUsageCode = `import { Breadcrumb, BreadcrumbItem } from "@khanhromvn/zenui";
+import { Home, Folder, FileText } from "lucide-react";
 
 function MyComponent() {
-  const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: "Documents", href: "/documents" },
-    { label: "Projects", href: "/documents/projects" },
-    { label: "zenui.pdf" },
-  ];
-
   return (
-    <Breadcrumb 
-      items={breadcrumbItems}
-      showHomeIcon={true}
-      separator="chevron"
-    />
+    <Breadcrumb>
+      <BreadcrumbItem icon={Home} text="Home" href="/" />
+      <BreadcrumbItem icon={Folder} text="Documents" href="/documents" />
+      <BreadcrumbItem icon={Folder} text="Projects" href="/documents/projects" />
+      <BreadcrumbItem icon={FileText} text="zenui.pdf" />
+    </Breadcrumb>
   );
 }`;
 
-  const separatorExampleCode = `import { Breadcrumb } from "@khanhromvn/zenui";
+  const separatorExampleCode = `import { Breadcrumb, BreadcrumbItem } from "@khanhromvn/zenui";
+import { Home, Folder, FileText } from "lucide-react";
 
 function SeparatorExample() {
-  const items = [
-    { label: "Home", href: "/" },
-    { label: "Users", href: "/users" },
-    { label: "Profile" },
-  ];
-
   return (
     <div className="flex flex-col gap-4">
-      <Breadcrumb items={items} separator="chevron" />
-      <Breadcrumb items={items} separator="slash" />
-      <Breadcrumb items={items} separator="arrow" />
+      {/* With Icons */}
+      <Breadcrumb>
+        <BreadcrumbItem icon={Home} text="Home" href="/" />
+        <BreadcrumbItem icon={Folder} text="Documents" href="/documents" />
+        <BreadcrumbItem icon={FileText} text="zenui.pdf" />
+      </Breadcrumb>
+
+      {/* Without Icons */}
+      <Breadcrumb>
+        <BreadcrumbItem text="Home" href="/" />
+        <BreadcrumbItem text="Documents" href="/documents" />
+        <BreadcrumbItem text="zenui.pdf" />
+      </Breadcrumb>
     </div>
   );
 }`;
 
-  const sizeExampleCode = `import { Breadcrumb } from "@khanhromvn/zenui";
+  const sizeExampleCode = `import { Breadcrumb, BreadcrumbItem } from "@khanhromvn/zenui";
+import { Home, Folder, FileText } from "lucide-react";
 
 function SizeExample() {
-  const items = [
-    { label: "Home", href: "/" },
-    { label: "Components", href: "/components" },
-    { label: "Breadcrumb" },
-  ];
-
   return (
     <div className="flex flex-col gap-4">
-      <Breadcrumb items={items} size={80} />
-      <Breadcrumb items={items} size={100} />
-      <Breadcrumb items={items} size={120} />
-      <Breadcrumb items={items} size={150} />
+      <Breadcrumb size={80}>
+        <BreadcrumbItem icon={Home} text="Home" href="/" />
+        <BreadcrumbItem icon={Folder} text="Components" href="/components" />
+        <BreadcrumbItem icon={FileText} text="Breadcrumb" />
+      </Breadcrumb>
+
+      <Breadcrumb size={100}>
+        <BreadcrumbItem icon={Home} text="Home" href="/" />
+        <BreadcrumbItem icon={Folder} text="Components" href="/components" />
+        <BreadcrumbItem icon={FileText} text="Breadcrumb" />
+      </Breadcrumb>
+
+      <Breadcrumb size={120}>
+        <BreadcrumbItem icon={Home} text="Home" href="/" />
+        <BreadcrumbItem icon={Folder} text="Components" href="/components" />
+        <BreadcrumbItem icon={FileText} text="Breadcrumb" />
+      </Breadcrumb>
+
+      <Breadcrumb size={150}>
+        <BreadcrumbItem icon={Home} text="Home" href="/" />
+        <BreadcrumbItem icon={Folder} text="Components" href="/components" />
+        <BreadcrumbItem icon={FileText} text="Breadcrumb" />
+      </Breadcrumb>
     </div>
   );
 }`;
 
-  const clickHandlerExampleCode = `import { Breadcrumb } from "@khanhromvn/zenui";
+  const clickHandlerExampleCode = `import { Breadcrumb, BreadcrumbItem } from "@khanhromvn/zenui";
+import { Home, Folder, FileText } from "lucide-react";
 
 function ClickHandlerExample() {
-  const items = [
-    { label: "Home", href: "/" },
-    { label: "Products", href: "/products" },
-    { label: "Electronics", href: "/products/electronics" },
-    { label: "Smartphones" },
-  ];
-
-  const handleItemClick = (item, index) => {
-    console.log('Clicked:', item.label, 'at index:', index);
-    // Handle navigation or other actions
+  const handleItemClick = (label: string, index: number) => {
+    console.log('Clicked:', label, 'at index:', index);
   };
 
   return (
-    <Breadcrumb 
-      items={items}
-      onItemClick={handleItemClick}
-      showHomeIcon={true}
-    />
+    <Breadcrumb>
+      <BreadcrumbItem
+        icon={Home}
+        text="Home"
+        href="/"
+        onClick={() => handleItemClick("Home", 0)}
+      />
+      <BreadcrumbItem
+        icon={Folder}
+        text="Products"
+        href="/products"
+        onClick={() => handleItemClick("Products", 1)}
+      />
+      <BreadcrumbItem
+        icon={Folder}
+        text="Electronics"
+        href="/products/electronics"
+        onClick={() => handleItemClick("Electronics", 2)}
+      />
+      <BreadcrumbItem
+        icon={FileText}
+        text="Smartphones"
+      />
+    </Breadcrumb>
   );
 }`;
 
@@ -190,11 +219,20 @@ function ClickHandlerExample() {
 
           {/* Live Demo */}
           <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6">
-            <Breadcrumb
-              items={basicItems}
-              showHomeIcon={true}
-              separator="chevron"
-            />
+            <Breadcrumb>
+              <BreadcrumbItem icon={Home} text="Home" href="/" />
+              <BreadcrumbItem
+                icon={Folder}
+                text="Documents"
+                href="/documents"
+              />
+              <BreadcrumbItem
+                icon={Folder}
+                text="Projects"
+                href="/documents/projects"
+              />
+              <BreadcrumbItem icon={FileText} text="zenui.pdf" />
+            </Breadcrumb>
           </div>
 
           {/* Code Example */}
@@ -228,9 +266,33 @@ function ClickHandlerExample() {
             </p>
 
             <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
-              <Breadcrumb items={basicItems} separator="chevron" />
-              <Breadcrumb items={basicItems} separator="slash" />
-              <Breadcrumb items={basicItems} separator="arrow" />
+              <Breadcrumb>
+                <BreadcrumbItem icon={Home} text="Home" href="/" />
+                <BreadcrumbItem
+                  icon={Folder}
+                  text="Documents"
+                  href="/documents"
+                />
+                <BreadcrumbItem
+                  icon={Folder}
+                  text="Projects"
+                  href="/documents/projects"
+                />
+                <BreadcrumbItem icon={FileText} text="zenui.pdf" />
+              </Breadcrumb>
+
+              <Breadcrumb>
+                <BreadcrumbItem text="Home" href="/" />
+                <BreadcrumbItem text="Documents" href="/documents" />
+                <BreadcrumbItem text="Projects" href="/documents/projects" />
+                <BreadcrumbItem text="zenui.pdf" />
+              </Breadcrumb>
+
+              <Breadcrumb>
+                <BreadcrumbItem text="Home" href="/" />
+                <BreadcrumbItem text="Documents" href="/documents" />
+                <BreadcrumbItem text="Projects" />
+              </Breadcrumb>
             </div>
 
             <CodeBlock
@@ -255,10 +317,45 @@ function ClickHandlerExample() {
             </p>
 
             <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
-              <Breadcrumb items={basicItems} size={80} />
-              <Breadcrumb items={basicItems} size={100} />
-              <Breadcrumb items={basicItems} size={120} />
-              <Breadcrumb items={basicItems} size={150} />
+              <Breadcrumb size={80}>
+                <BreadcrumbItem icon={Home} text="Home" href="/" />
+                <BreadcrumbItem
+                  icon={Folder}
+                  text="Documents"
+                  href="/documents"
+                />
+                <BreadcrumbItem icon={FileText} text="Breadcrumb" />
+              </Breadcrumb>
+
+              <Breadcrumb size={100}>
+                <BreadcrumbItem icon={Home} text="Home" href="/" />
+                <BreadcrumbItem
+                  icon={Folder}
+                  text="Documents"
+                  href="/documents"
+                />
+                <BreadcrumbItem icon={FileText} text="Breadcrumb" />
+              </Breadcrumb>
+
+              <Breadcrumb size={120}>
+                <BreadcrumbItem icon={Home} text="Home" href="/" />
+                <BreadcrumbItem
+                  icon={Folder}
+                  text="Documents"
+                  href="/documents"
+                />
+                <BreadcrumbItem icon={FileText} text="Breadcrumb" />
+              </Breadcrumb>
+
+              <Breadcrumb size={150}>
+                <BreadcrumbItem icon={Home} text="Home" href="/" />
+                <BreadcrumbItem
+                  icon={Folder}
+                  text="Documents"
+                  href="/documents"
+                />
+                <BreadcrumbItem icon={FileText} text="Breadcrumb" />
+              </Breadcrumb>
             </div>
 
             <CodeBlock
@@ -288,11 +385,21 @@ function ClickHandlerExample() {
                 <h4 className="text-sm font-medium text-text-secondary mb-2">
                   E-commerce Website
                 </h4>
-                <Breadcrumb
-                  items={ecommerceItems}
-                  showHomeIcon={true}
-                  separator="chevron"
-                />
+                <Breadcrumb>
+                  <BreadcrumbItem icon={Home} text="Home" href="/" />
+                  <BreadcrumbItem icon={Folder} text="Shop" href="/shop" />
+                  <BreadcrumbItem
+                    icon={Folder}
+                    text="Electronics"
+                    href="/shop/electronics"
+                  />
+                  <BreadcrumbItem
+                    icon={Folder}
+                    text="Smartphones"
+                    href="/shop/electronics/phones"
+                  />
+                  <BreadcrumbItem icon={FileText} text="iPhone 15 Pro" />
+                </Breadcrumb>
               </div>
 
               {/* Settings Example */}
@@ -300,11 +407,25 @@ function ClickHandlerExample() {
                 <h4 className="text-sm font-medium text-text-secondary mb-2">
                   Settings Navigation
                 </h4>
-                <Breadcrumb
-                  items={settingsItems}
-                  showHomeIcon={true}
-                  separator="slash"
-                />
+                <Breadcrumb>
+                  <BreadcrumbItem icon={Home} text="Home" href="/" />
+                  <BreadcrumbItem
+                    icon={Settings}
+                    text="Settings"
+                    href="/settings"
+                  />
+                  <BreadcrumbItem
+                    icon={Settings}
+                    text="Account"
+                    href="/settings/account"
+                  />
+                  <BreadcrumbItem
+                    icon={Settings}
+                    text="Security"
+                    href="/settings/account/security"
+                  />
+                  <BreadcrumbItem text="Two-Factor Authentication" />
+                </Breadcrumb>
               </div>
 
               {/* Without Home Icon */}
@@ -312,34 +433,19 @@ function ClickHandlerExample() {
                 <h4 className="text-sm font-medium text-text-secondary mb-2">
                   Without Home Icon
                 </h4>
-                <Breadcrumb
-                  items={basicItems}
-                  showHomeIcon={false}
-                  separator="chevron"
-                />
+                <Breadcrumb>
+                  <BreadcrumbItem text="Documents" href="/documents" />
+                  <BreadcrumbItem text="Projects" href="/documents/projects" />
+                  <BreadcrumbItem text="zenui.pdf" />
+                </Breadcrumb>
               </div>
             </div>
 
             <CodeBlock
-              code={`import { Breadcrumb } from "@khanhromvn/zenui";
+              code={`import { Breadcrumb, BreadcrumbItem } from "@khanhromvn/zenui";
+import { Home, Folder, FileText, Settings } from "lucide-react";
 
 function RealWorldExample() {
-  const ecommerceItems = [
-    { label: "Home", href: "/" },
-    { label: "Shop", href: "/shop" },
-    { label: "Electronics", href: "/shop/electronics" },
-    { label: "Smartphones", href: "/shop/electronics/phones" },
-    { label: "iPhone 15 Pro" },
-  ];
-
-  const settingsItems = [
-    { label: "Home", href: "/" },
-    { label: "Settings", href: "/settings" },
-    { label: "Account", href: "/settings/account" },
-    { label: "Security", href: "/settings/account/security" },
-    { label: "Two-Factor Authentication" },
-  ];
-
   return (
     <div className="flex flex-col gap-6">
       {/* E-commerce Example */}
@@ -347,11 +453,13 @@ function RealWorldExample() {
         <h4 className="text-sm font-medium text-text-secondary mb-2">
           E-commerce Website
         </h4>
-        <Breadcrumb 
-          items={ecommerceItems}
-          showHomeIcon={true}
-          separator="chevron"
-        />
+        <Breadcrumb>
+          <BreadcrumbItem icon={Home} text="Home" href="/" />
+          <BreadcrumbItem icon={Folder} text="Shop" href="/shop" />
+          <BreadcrumbItem icon={Folder} text="Electronics" href="/shop/electronics" />
+          <BreadcrumbItem icon={Folder} text="Smartphones" href="/shop/electronics/phones" />
+          <BreadcrumbItem icon={FileText} text="iPhone 15 Pro" />
+        </Breadcrumb>
       </div>
 
       {/* Settings Example */}
@@ -359,11 +467,13 @@ function RealWorldExample() {
         <h4 className="text-sm font-medium text-text-secondary mb-2">
           Settings Navigation
         </h4>
-        <Breadcrumb 
-          items={settingsItems}
-          showHomeIcon={true}
-          separator="slash"
-        />
+        <Breadcrumb>
+          <BreadcrumbItem icon={Home} text="Home" href="/" />
+          <BreadcrumbItem icon={Settings} text="Settings" href="/settings" />
+          <BreadcrumbItem icon={Settings} text="Account" href="/settings/account" />
+          <BreadcrumbItem icon={Settings} text="Security" href="/settings/account/security" />
+          <BreadcrumbItem text="Two-Factor Authentication" />
+        </Breadcrumb>
       </div>
     </div>
   );
@@ -388,11 +498,27 @@ function RealWorldExample() {
             </p>
 
             <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
-              <Breadcrumb
-                items={basicItems}
-                showHomeIcon={true}
-                onItemClick={handleItemClick}
-              />
+              <Breadcrumb>
+                <BreadcrumbItem
+                  icon={Home}
+                  text="Home"
+                  href="/"
+                  onClick={() => handleItemClick({ label: "Home" }, 0)}
+                />
+                <BreadcrumbItem
+                  icon={Folder}
+                  text="Documents"
+                  href="/documents"
+                  onClick={() => handleItemClick({ label: "Documents" }, 1)}
+                />
+                <BreadcrumbItem
+                  icon={Folder}
+                  text="Projects"
+                  href="/documents/projects"
+                  onClick={() => handleItemClick({ label: "Projects" }, 2)}
+                />
+                <BreadcrumbItem icon={FileText} text="zenui.pdf" />
+              </Breadcrumb>
 
               {/* Click Log */}
               {clickLog.length > 0 && (
@@ -458,14 +584,28 @@ function RealWorldExample() {
                 <tbody className="divide-y divide-border-default">
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      items
+                      children
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      BreadcrumbItem[]
+                      ReactNode
                     </td>
-                    <td className="px-6 py-4 text-text-secondary">[]</td>
+                    <td className="px-6 py-4 text-text-secondary">-</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Breadcrumb items array
+                      BreadcrumbItem components
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      separator
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      LucideIcon | ReactNode
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      ChevronRight
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Separator icon between items
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -477,53 +617,7 @@ function RealWorldExample() {
                     </td>
                     <td className="px-6 py-4 text-text-secondary">100</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Breadcrumb size (percentage scale: 50-200)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      separator
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "chevron" | "slash" | "arrow"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"chevron"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Separator icon type
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showHomeIcon
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show home icon
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      homeHref
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"/"</td>
-                    <td className="px-6 py-4 text-text-secondary">Home URL</td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onItemClick
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (item: BreadcrumbItem, index: number) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Click event handler
+                      Breadcrumb size (percentage scale)
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -546,7 +640,7 @@ function RealWorldExample() {
           {/* BreadcrumbItem Type */}
           <div className="mt-8">
             <h3 className="text-xl font-semibold text-text-primary mb-4">
-              BreadcrumbItem Type
+              BreadcrumbItem Props
             </h3>
             <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
               <div className="overflow-x-auto">
@@ -554,13 +648,13 @@ function RealWorldExample() {
                   <thead className="bg-input-background">
                     <tr>
                       <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Property
+                        Prop
                       </th>
                       <th className="px-6 py-4 text-left text-text-primary font-semibold">
                         Type
                       </th>
                       <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Required
+                        Default
                       </th>
                       <th className="px-6 py-4 text-left text-text-primary font-semibold">
                         Description
@@ -570,30 +664,26 @@ function RealWorldExample() {
                   <tbody className="divide-y divide-border-default">
                     <tr className="hover:bg-gray-50">
                       <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        id
+                        icon
                       </td>
                       <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string
+                        LucideIcon | ReactNode
                       </td>
+                      <td className="px-6 py-4 text-text-secondary">-</td>
                       <td className="px-6 py-4 text-text-secondary">
-                        Optional
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Unique identifier
+                        Icon for the item
                       </td>
                     </tr>
                     <tr className="hover:bg-gray-50">
                       <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        label
+                        text
                       </td>
                       <td className="px-6 py-4 text-text-secondary font-mono text-xs">
                         string
                       </td>
+                      <td className="px-6 py-4 text-text-secondary">-</td>
                       <td className="px-6 py-4 text-text-secondary">
-                        Required
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Display text
+                        Display text (required)
                       </td>
                     </tr>
                     <tr className="hover:bg-gray-50">
@@ -603,25 +693,33 @@ function RealWorldExample() {
                       <td className="px-6 py-4 text-text-secondary font-mono text-xs">
                         string
                       </td>
+                      <td className="px-6 py-4 text-text-secondary">-</td>
                       <td className="px-6 py-4 text-text-secondary">
-                        Optional
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Link URL (omit for current page)
+                        Link URL (optional)
                       </td>
                     </tr>
                     <tr className="hover:bg-gray-50">
                       <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        icon
+                        onClick
                       </td>
                       <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        ReactNode
+                        () =&gt; void
                       </td>
+                      <td className="px-6 py-4 text-text-secondary">-</td>
                       <td className="px-6 py-4 text-text-secondary">
-                        Optional
+                        Click handler (optional)
                       </td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        className
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        string
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">""</td>
                       <td className="px-6 py-4 text-text-secondary">
-                        Custom icon
+                        Custom CSS classes
                       </td>
                     </tr>
                   </tbody>

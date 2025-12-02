@@ -1,16 +1,8 @@
 export { default as Breadcrumb } from "./Breadcrumb";
+export { default as BreadcrumbItem } from "./BreadcrumbItem";
 export type {
   BreadcrumbProps,
+  BreadcrumbItemProps,
   BreadcrumbSize,
-  BreadcrumbSeparator,
-  BreadcrumbItem,
-  BreadcrumbSizeConfig,
 } from "./Breadcrumb.types";
-export {
-  getBreadcrumbSizeStyles,
-  getSeparatorIcon,
-  shouldShowHomeIcon,
-  validateBreadcrumbProps,
-  generateBreadcrumbItems,
-  mergeStyles,
-} from "./Breadcrumb.utils";
+export { getBreadcrumbSizeStyles, getIconSize } from "./Breadcrumb.utils";

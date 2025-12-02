@@ -5,6 +5,7 @@ import {
   getBadgeVariantStyles,
   shouldShowDot,
 } from "./Badge.utils";
+import { cn } from "../../../../shared/utils/cn";
 
 const Badge: React.FC<BadgeProps> = ({
   children,
@@ -25,26 +26,21 @@ const Badge: React.FC<BadgeProps> = ({
 
   return (
     <span
-      className={`badge-base ${className}`.trim()}
+      className={cn(
+        "inline-flex items-center gap-1 whitespace-nowrap",
+        className
+      )}
       style={{
         ...sizeStyles,
         ...variantStyles,
-        display: "inline-flex",
-        alignItems: "center",
-        gap: "4px",
-        whiteSpace: "nowrap" as const,
       }}
       {...props}
     >
       {showDot && (
         <span
-          className="badge-dot"
+          className="w-1.5 h-1.5 rounded-full flex-shrink-0"
           style={{
-            width: "6px",
-            height: "6px",
-            borderRadius: "50%",
             backgroundColor: dotColor || variantStyles.color,
-            flexShrink: 0,
           }}
         />
       )}

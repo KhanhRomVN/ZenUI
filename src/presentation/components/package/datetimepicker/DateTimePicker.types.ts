@@ -36,9 +36,9 @@ export interface TimeFormat {
  */
 export interface DateTimePickerProps {
   /** Selected date/time value */
-  value?: Date;
+  value?: Date | null;
   /** Default value */
-  defaultValue?: Date;
+  defaultValue?: Date | null;
   /** Placeholder text */
   placeholder?: string;
   /** Disabled state */

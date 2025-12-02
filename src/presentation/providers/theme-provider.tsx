@@ -63,6 +63,8 @@ export function ThemeProvider({
         dialogBackground: "#1e1e1e",
         dropdownBackground: "#1e1e1e",
         dropdownItemHover: "#2d2d2d",
+        dropdownBorder: "#3f3f3f",
+        dropdownBorderHover: "#418dfe",
         sidebarBackground: "#131313",
         sidebarItemHover: "#1e1e1e",
         sidebarItemFocus: "#333333",
@@ -76,6 +78,18 @@ export function ThemeProvider({
         bookmarkItemBg: "#1e293b",
         bookmarkItemText: "#e2e8f0",
         drawerBackground: "#1e1e1e",
+        clockGradientFrom: "#3686ff",
+        clockGradientTo: "#418dfe",
+        cardShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.3)",
+        dialogShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
+        dropdownShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)",
+        // Table variables for DefaultDark
+        tableHeaderBg: "#1a1a1a",
+        tableRowBg: "#242424",
+        tableRowHoverBg: "#2d2d2d",
+        tableRowFocusBg: "#333333",
+        tableFooterBg: "#1a1a1a",
+        tableBorder: "#353535",
       };
       applyCSSVariables(defaultDarkPreset);
       localStorage.setItem(
@@ -187,6 +201,16 @@ export function ThemeProvider({
       drawerBackground: "--drawer-background",
       clockGradientFrom: "--clock-gradient-from",
       clockGradientTo: "--clock-gradient-to",
+      cardShadow: "--card-shadow",
+      dialogShadow: "--dialog-shadow",
+      dropdownShadow: "--dropdown-shadow",
+      // Table variables
+      tableHeaderBg: "--table-header-bg",
+      tableRowBg: "--table-row-bg",
+      tableRowHoverBg: "--table-row-hover-bg",
+      tableRowFocusBg: "--table-row-focus-bg",
+      tableFooterBg: "--table-footer-bg",
+      tableBorder: "--table-border",
     };
     Object.entries(preset).forEach(([key, value]) => {
       const cssVar = cssVarMap[key];

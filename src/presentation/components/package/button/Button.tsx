@@ -8,6 +8,7 @@ import {
   shouldShowIcon,
   getContentAlignment,
 } from "./Button.utils";
+import { cn } from "../../../../shared/utils/cn";
 
 const Button: React.FC<ButtonProps> = ({
   size = 100,
@@ -108,12 +109,15 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`button-base ${className}`.trim()}
+      className={cn(
+        "flex items-center transition-all duration-200 border-none outline-none font-medium whitespace-nowrap",
+        isDisabled && "opacity-60 cursor-not-allowed",
+        !isDisabled && "cursor-pointer",
+        className
+      )}
       style={{
         ...sizeStyles,
         ...alignmentStyles,
-        opacity: isDisabled ? 0.6 : 1,
-        cursor: isDisabled ? "not-allowed" : "pointer",
       }}
       disabled={isDisabled}
       onClick={handleClick}

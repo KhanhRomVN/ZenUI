@@ -9,6 +9,7 @@ import {
   getDotPosition,
   getDotIconSize,
 } from "./Avatar.utils";
+import { cn } from "../../../../shared/utils/cn";
 
 const Avatar: React.FC<AvatarProps> = ({
   size = 40,
@@ -87,17 +88,11 @@ const Avatar: React.FC<AvatarProps> = ({
 
     return (
       <div
-        className="avatar-icon-dot"
+        className="absolute rounded-full border-2 border-white flex items-center justify-center"
         style={{
-          position: "absolute",
           width: `${dotSize}px`,
           height: `${dotSize}px`,
-          borderRadius: "50%",
-          border: "2px solid #ffffff",
           backgroundColor: dotBgColor || "#10B981",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
           ...dotPosition,
         }}
       >
@@ -114,16 +109,13 @@ const Avatar: React.FC<AvatarProps> = ({
 
   return (
     <div
-      className={`avatar-base ${className}`.trim()}
+      className={cn(
+        "relative inline-flex items-center justify-center flex-shrink-0 select-none",
+        onClick ? "cursor-pointer" : "cursor-default",
+        className
+      )}
       style={{
         ...sizeStyles,
-        position: "relative",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexShrink: 0,
-        cursor: onClick ? "pointer" : "default",
-        userSelect: "none",
       }}
       onClick={handleClick}
       {...props}
@@ -133,13 +125,7 @@ const Avatar: React.FC<AvatarProps> = ({
         <img
           src={src}
           alt={alt || name || "Avatar"}
-          className="avatar-image"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            borderRadius: "inherit",
-          }}
+          className="w-full h-full object-cover rounded-[inherit]"
           onError={handleImageError}
         />
       )}
@@ -147,15 +133,9 @@ const Avatar: React.FC<AvatarProps> = ({
       {/* Fallback */}
       {(showFallback || showIcon) && (
         <div
-          className="avatar-fallback"
+          className="w-full h-full rounded-[inherit] flex items-center justify-center"
           style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "inherit",
             backgroundColor: fallbackBackground,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
           }}
         >
           {renderFallback()}

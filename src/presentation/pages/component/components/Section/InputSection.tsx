@@ -7,11 +7,24 @@ import {
   Combobox,
   ComboboxItem,
 } from "../../../../components/package/combobox";
+import {
+  DateTimePicker,
+  formatDate,
+} from "../../../../components/package/datetimepicker";
 
 const InputSection = () => {
   const [searchValue, setSearchValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
   const [comboboxOpen, setComboboxOpen] = useState(false);
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [dateTimeValue, setDateTimeValue] = useState<Date | null>(null);
+  const [tagInput, setTagInput] = useState("");
+  const [tags, setTags] = useState([
+    { id: 1, label: "React" },
+    { id: 2, label: "TypeScript" },
+    { id: 3, label: "Tailwind" },
+  ]);
   const [countries, setCountries] = useState([
     { value: "us", label: "United States" },
     { value: "uk", label: "United Kingdom" },
@@ -240,6 +253,176 @@ function SizeExample() {
                   </Combobox>
                 }
               />
+            </div>
+          </div>
+
+          {/* Calendar Type */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Calendar Input
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Date and time picker with calendar interface. Supports date-only,
+              time-only, and datetime modes.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-4">
+              {/* DateTime Picker */}
+              <Input
+                type="calendar"
+                placeholder="Select date and time"
+                value={
+                  dateTimeValue
+                    ? formatDate(dateTimeValue, "MM/dd/yyyy HH:mm")
+                    : ""
+                }
+                popoverOpen={calendarOpen}
+                onPopoverOpenChange={setCalendarOpen}
+                className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
+                popoverContent={
+                  <DateTimePicker
+                    mode="datetime"
+                    value={dateTimeValue}
+                    onChange={(date) => {
+                      setDateTimeValue(date);
+                      setCalendarOpen(false);
+                    }}
+                    showTimePicker={true}
+                    className="bg-dropdown-background border border-border-default rounded-md shadow-lg hover:border-border-hover"
+                  />
+                }
+              />
+            </div>
+          </div>
+
+          {/* Password Type with Validation */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Password Input with Validation
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Password input with inline validation panel showing requirements
+              in real-time.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-4">
+              <Input
+                type="password"
+                placeholder="Enter your password"
+                value={passwordValue}
+                onChange={(e) => setPasswordValue(e.target.value)}
+                className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
+                inlinePanel={
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`text-xs ${
+                          passwordValue.length >= 8
+                            ? "text-green-500"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {passwordValue.length >= 8 ? "✓" : "○"} At least 8
+                        characters
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`text-xs ${
+                          /[A-Z]/.test(passwordValue)
+                            ? "text-green-500"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {/[A-Z]/.test(passwordValue) ? "✓" : "○"} One uppercase
+                        letter
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`text-xs ${
+                          /[a-z]/.test(passwordValue)
+                            ? "text-green-500"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {/[a-z]/.test(passwordValue) ? "✓" : "○"} One lowercase
+                        letter
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`text-xs ${
+                          /[0-9]/.test(passwordValue)
+                            ? "text-green-500"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {/[0-9]/.test(passwordValue) ? "✓" : "○"} One number
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`text-xs ${
+                          /[!@#$%^&*]/.test(passwordValue)
+                            ? "text-green-500"
+                            : "text-gray-400"
+                        }`}
+                      >
+                        {/[!@#$%^&*]/.test(passwordValue) ? "✓" : "○"} One
+                        special character (!@#$%^&*)
+                      </span>
+                    </div>
+                  </div>
+                }
+              />
+            </div>
+          </div>
+
+          {/* Multi-Value Input */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Multi-Value Input with Tags
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Input that supports multiple values displayed as badges. Press
+              Enter to add tags.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-text-primary mb-2">
+                  Tags with Inline Panel
+                </label>
+                <Input
+                  type="text"
+                  placeholder="Type and press Enter..."
+                  value={tagInput}
+                  onChange={(e) => setTagInput(e.target.value)}
+                  onKeyDown={(e: { key: string }) => {
+                    if (e.key === "Enter" && tagInput.trim()) {
+                      setTags([
+                        ...tags,
+                        { id: Date.now(), label: tagInput.trim() },
+                      ]);
+                      setTagInput("");
+                    }
+                  }}
+                  multiValue={true}
+                  badges={tags}
+                  onBadgeRemove={(id) => {
+                    setTags(tags.filter((tag) => tag.id !== id));
+                  }}
+                  badgeColorMode="diverse"
+                  className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
+                  inlinePanel={
+                    <div className="text-xs text-text-secondary">
+                      💡 Tip: Tags are displayed above when inline panel is
+                      present
+                    </div>
+                  }
+                />
+              </div>
             </div>
           </div>
         </section>

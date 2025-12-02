@@ -1,80 +1,106 @@
 import { ReactNode } from "react";
 
-/**
- * Dropdown trigger type
- */
-export type DropdownTrigger = "click" | "hover";
-
-/**
- * Dropdown placement
- */
-export type DropdownPlacement =
-  | "top"
+export type DropdownPosition =
   | "top-left"
+  | "top-center"
   | "top-right"
-  | "bottom"
   | "bottom-left"
-  | "bottom-right";
+  | "bottom-center"
+  | "bottom-right"
+  | "left-top"
+  | "left-center"
+  | "left-bottom"
+  | "right-top"
+  | "right-center"
+  | "right-bottom";
 
-/**
- * Dropdown item types
- */
-export type DropdownItemType = "item" | "divider";
+export type DropdownSize = "sm" | "md" | "lg";
 
-/**
- * Dropdown item interface
- */
-export interface DropdownItem {
-  /** Loại item */
-  type?: DropdownItemType;
+export interface DropdownContextValue {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+  position: DropdownPosition;
+  size: DropdownSize;
+  closeOnSelect: boolean;
+  disabled: boolean;
+}
 
-  /** Label hiển thị */
-  label?: string;
+export interface DropdownProps {
+  /** Children components (DropdownTrigger, DropdownContent) */
+  children: ReactNode;
 
-  /** Icon (optional) */
-  icon?: ReactNode;
+  /** Position of dropdown content relative to trigger */
+  position?: DropdownPosition;
 
-  /** Có bị disabled không */
+  /** Size variant */
+  size?: DropdownSize;
+
+  /** Close dropdown when item is selected */
+  closeOnSelect?: boolean;
+
+  /** Disabled state */
   disabled?: boolean;
 
-  /** Custom data */
-  data?: any;
+  /** Controlled open state */
+  open?: boolean;
+
+  /** Callback when open state changes */
+  onOpenChange?: (open: boolean) => void;
+
+  /** Default open state (uncontrolled) */
+  defaultOpen?: boolean;
+
+  /** Custom className */
+  className?: string;
+}
+
+export interface DropdownTriggerProps {
+  /** Trigger content */
+  children: ReactNode;
+
+  /** Custom className */
+  className?: string;
+
+  /** Additional props */
+  [key: string]: any;
+}
+
+export interface DropdownContentProps {
+  /** Content */
+  children: ReactNode;
+
+  /** Custom className */
+  className?: string;
+
+  /** Max height */
+  maxHeight?: string;
+
+  /** Min width */
+  minWidth?: string;
+
+  /** Additional props */
+  [key: string]: any;
+}
+
+export interface DropdownItemProps {
+  /** Item content */
+  children?: ReactNode;
+
+  /** Disabled state */
+  disabled?: boolean;
 
   /** Click handler */
   onClick?: () => void;
-}
 
-/**
- * Props chính của Dropdown component
- */
-export interface DropdownProps {
-  /** Danh sách items */
-  items?: DropdownItem[];
-
-  /** Cách kích hoạt dropdown */
-  trigger?: DropdownTrigger;
-
-  /** Vị trí hiển thị menu */
-  placement?: DropdownPlacement;
-
-  /** Kích thước dropdown */
-  size?: number;
-
-  /** Trạng thái disabled */
-  disabled?: boolean;
-
-  /** Trigger content (custom) */
-  children?: ReactNode;
-
-  /** Custom class name */
+  /** Custom className */
   className?: string;
 
-  /** Custom style */
-  style?: React.CSSProperties;
+  /** Icon on the left */
+  leftIcon?: ReactNode;
 
-  /** Callback khi item được chọn */
-  onSelect?: (item: DropdownItem, index: number) => void;
+  /** Icon on the right */
+  rightIcon?: ReactNode;
 
-  /** Các props HTML div khác */
+  /** Additional props */
   [key: string]: any;
 }

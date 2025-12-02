@@ -1,134 +1,148 @@
 import { CSSProperties } from "react";
-import { DropdownPlacement, DropdownItem } from "./Dropdown.types";
+import { DropdownPosition, DropdownSize } from "./Dropdown.types";
 
 /**
- * Get dropdown styles based on size
+ * Get dropdown size styles
  */
-export const getDropdownStyles = (
-  size: number,
-  disabled: boolean
+export const getDropdownSizeStyles = (size: DropdownSize) => {
+  const sizes = {
+    sm: {
+      fontSize: "14px",
+      padding: "4px",
+      itemPadding: "8px 12px",
+      gap: "2px",
+      iconSize: 14,
+    },
+    md: {
+      fontSize: "14px",
+      padding: "6px",
+      itemPadding: "10px 14px",
+      gap: "4px",
+      iconSize: 16,
+    },
+    lg: {
+      fontSize: "16px",
+      padding: "8px",
+      itemPadding: "12px 16px",
+      gap: "6px",
+      iconSize: 18,
+    },
+  };
+
+  return sizes[size];
+};
+
+/**
+ * Get position styles for dropdown content
+ */
+export const getPositionStyles = (
+  position: DropdownPosition,
+  spacing: number = 8
 ): CSSProperties => {
-  const scale = size / 100;
+  const offset = `${spacing}px`;
 
-  // Base dimensions at 100% scale
-  const baseHeight = 40;
-  const basePaddingX = 16;
-  const baseFontSize = 14;
-  const baseBorderRadius = 6;
-  const baseGap = 8;
+  const positions: Record<DropdownPosition, CSSProperties> = {
+    // Top positions
+    "top-left": {
+      bottom: `calc(100% + ${spacing}px)`,
+      left: "0",
+    },
+    "top-center": {
+      bottom: `calc(100% + ${spacing}px)`,
+      left: "50%",
+      transform: "translateX(-50%)",
+    },
+    "top-right": {
+      bottom: `calc(100% + ${spacing}px)`,
+      right: "0",
+    },
 
-  // Calculate scaled values
-  const height = baseHeight * scale;
-  const paddingX = basePaddingX * scale;
-  const fontSize = baseFontSize * scale;
-  const borderRadius = baseBorderRadius * scale;
-  const gap = baseGap * scale;
+    // Bottom positions
+    "bottom-left": {
+      top: `calc(100% + ${spacing}px)`,
+      left: "0",
+    },
+    "bottom-center": {
+      top: `calc(100% + ${spacing}px)`,
+      left: "50%",
+      transform: "translateX(-50%)",
+    },
+    "bottom-right": {
+      top: `calc(100% + ${spacing}px)`,
+      right: "0",
+    },
 
-  return {
-    height: `${height}px`,
-    padding: `0 ${paddingX}px`,
-    fontSize: `${fontSize}px`,
-    borderRadius: `${borderRadius}px`,
-    gap: `${gap}px`,
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    border: "1px solid #d1d5db",
-    backgroundColor: "white",
-    outline: "none",
-    transition: "all 0.2s ease-in-out",
-    fontFamily: "inherit",
-    fontWeight: 500,
-    lineHeight: 1,
-    whiteSpace: "nowrap" as const,
-    opacity: disabled ? 0.6 : 1,
-    cursor: disabled ? "not-allowed" : "pointer",
-  };
-};
+    // Left positions
+    "left-top": {
+      right: `calc(100% + ${spacing}px)`,
+      top: "0",
+    },
+    "left-center": {
+      right: `calc(100% + ${spacing}px)`,
+      top: "50%",
+      transform: "translateY(-50%)",
+    },
+    "left-bottom": {
+      right: `calc(100% + ${spacing}px)`,
+      bottom: "0",
+    },
 
-/**
- * Get menu item styles
- */
-export const getMenuItemStyles = (size: number): CSSProperties => {
-  const scale = size / 100;
-  const basePadding = 12;
-  const baseFontSize = 14;
-
-  const padding = basePadding * scale;
-  const fontSize = baseFontSize * scale;
-
-  return {
-    padding: `${padding * 0.5}px ${padding}px`,
-    fontSize: `${fontSize}px`,
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    cursor: "pointer",
-    transition: "all 0.2s ease-in-out",
-  };
-};
-
-/**
- * Get icon size
- */
-export const getIconSize = (size: number, hasText: boolean): number => {
-  const scale = size / 100;
-  const baseSize = hasText ? 16 : 20;
-  return Math.max(Math.round(baseSize * scale), 12);
-};
-
-/**
- * Check if icon should be shown
- */
-export const shouldShowIcon = (icon: React.ReactNode | undefined): boolean => {
-  return !!icon;
-};
-
-/**
- * Get placement styles for dropdown menu
- */
-export const getPlacementStyles = (
-  placement: DropdownPlacement
-): CSSProperties => {
-  const styles: CSSProperties = {
-    position: "absolute",
-    zIndex: 50,
+    // Right positions
+    "right-top": {
+      left: `calc(100% + ${spacing}px)`,
+      top: "0",
+    },
+    "right-center": {
+      left: `calc(100% + ${spacing}px)`,
+      top: "50%",
+      transform: "translateY(-50%)",
+    },
+    "right-bottom": {
+      left: `calc(100% + ${spacing}px)`,
+      bottom: "0",
+    },
   };
 
-  switch (placement) {
-    case "top":
-      styles.bottom = "100%";
-      styles.left = "50%";
-      styles.transform = "translateX(-50%)";
-      styles.marginBottom = "4px";
-      break;
-    case "top-left":
-      styles.bottom = "100%";
-      styles.left = "0";
-      styles.marginBottom = "4px";
-      break;
-    case "top-right":
-      styles.bottom = "100%";
-      styles.right = "0";
-      styles.marginBottom = "4px";
-      break;
-    case "bottom-left":
-      styles.top = "100%";
-      styles.left = "0";
-      styles.marginTop = "4px";
-      break;
-    case "bottom-right":
-      styles.top = "100%";
-      styles.right = "0";
-      styles.marginTop = "4px";
-      break;
-    case "bottom":
-    default:
-      styles.top = "100%";
-      styles.left = "50%";
-      styles.transform = "translateX(-50%)";
-      styles.marginTop = "4px";
-  }
+  return positions[position];
+};
 
-  return styles;
+/**
+ * Get icon size based on dropdown size
+ */
+export const getIconSize = (size: DropdownSize): number => {
+  const sizeMap: Record<DropdownSize, number> = {
+    sm: 14,
+    md: 16,
+    lg: 18,
+  };
+
+  return sizeMap[size];
+};
+
+/**
+ * Check if position is on the top
+ */
+export const isTopPosition = (position: DropdownPosition): boolean => {
+  return position.startsWith("top-");
+};
+
+/**
+ * Check if position is on the bottom
+ */
+export const isBottomPosition = (position: DropdownPosition): boolean => {
+  return position.startsWith("bottom-");
+};
+
+/**
+ * Check if position is on the left
+ */
+export const isLeftPosition = (position: DropdownPosition): boolean => {
+  return position.startsWith("left-");
+};
+
+/**
+ * Check if position is on the right
+ */
+export const isRightPosition = (position: DropdownPosition): boolean => {
+  return position.startsWith("right-");
 };

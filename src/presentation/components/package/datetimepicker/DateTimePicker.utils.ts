@@ -11,57 +11,20 @@ import {
 export const getDateTimePickerSizeStyles = (size: DateTimePickerSize) => {
   const sizes = {
     sm: {
-      height: "32px",
-      padding: "0 12px",
-      fontSize: "14px",
+      className: "h-8 text-xs px-2 py-1",
       iconSize: 14,
     },
     md: {
-      height: "40px",
-      padding: "0 16px",
-      fontSize: "14px",
+      className: "h-10 text-sm px-3 py-2",
       iconSize: 16,
     },
     lg: {
-      height: "48px",
-      padding: "0 20px",
-      fontSize: "16px",
+      className: "h-12 text-base px-4 py-2.5",
       iconSize: 18,
     },
   };
 
   return sizes[size];
-};
-
-/**
- * Get date time picker variant styles
- */
-export const getDateTimePickerVariantStyles = (
-  variant: DateTimePickerVariant
-) => {
-  const variants = {
-    outline: {
-      background: "bg-input-background",
-      border: "border border-border-default",
-      focus: "focus:border-blue-500 focus:ring-2 focus:ring-blue-200",
-      hover: "hover:border-border-hover",
-    },
-    filled: {
-      background: "bg-input-filled",
-      border: "border border-transparent",
-      focus: "focus:bg-input-background focus:border-blue-500",
-      hover: "hover:bg-input-filledHover",
-    },
-    underline: {
-      background: "bg-transparent",
-      border:
-        "border-b border-border-default border-t-0 border-l-0 border-r-0 rounded-none",
-      focus: "focus:border-blue-500 focus:ring-0",
-      hover: "hover:border-border-hover",
-    },
-  };
-
-  return variants[variant];
 };
 
 /**
@@ -87,34 +50,6 @@ export const formatDate = (
     .replace("HH", hours)
     .replace("mm", minutes)
     .replace("ss", seconds);
-};
-
-/**
- * Parse date string to Date object
- */
-export const parseDate = (
-  dateString: string,
-  format: string = "MM/dd/yyyy"
-): Date | null => {
-  if (!dateString) return null;
-
-  try {
-    const formatParts = format.split(/[\/\-\.]/);
-    const dateParts = dateString.split(/[\/\-\.]/);
-
-    if (formatParts.length !== dateParts.length) return null;
-
-    const dateObj: any = {};
-    formatParts.forEach((part, index) => {
-      if (part.includes("MM")) dateObj.month = parseInt(dateParts[index]) - 1;
-      else if (part.includes("dd")) dateObj.day = parseInt(dateParts[index]);
-      else if (part.includes("yyyy")) dateObj.year = parseInt(dateParts[index]);
-    });
-
-    return new Date(dateObj.year, dateObj.month, dateObj.day);
-  } catch {
-    return null;
-  }
 };
 
 /**

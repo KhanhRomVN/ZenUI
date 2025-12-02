@@ -1,17 +1,16 @@
 import { ReactNode } from "react";
 import { LucideIcon } from "lucide-react";
 
+export type BadgeColor = string;
+
+export interface BadgeItem {
+  id: string | number;
+  label: string;
+  color?: string;
+}
+
 export type InputSize = "sm" | "md" | "lg" | "xl";
-export type InputType =
-  | "text"
-  | "password"
-  | "email"
-  | "number"
-  | "tel"
-  | "url"
-  | "search"
-  | "combobox"
-  | "calendar";
+export type InputType = "text" | "password" | "combobox" | "calendar";
 
 export type InputIcon = LucideIcon | ReactNode;
 
@@ -35,5 +34,12 @@ export interface InputProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   popoverContent?: ReactNode;
   onPopoverOpenChange?: (open: boolean) => void;
+  inlinePanel?: ReactNode;
+  // Multi-value props
+  multiValue?: boolean;
+  badges?: BadgeItem[];
+  onBadgeRemove?: (id: string | number) => void;
+  badgeColorMode?: "uniform" | "diverse";
+  badgeColors?: string[];
   [key: string]: any;
 }

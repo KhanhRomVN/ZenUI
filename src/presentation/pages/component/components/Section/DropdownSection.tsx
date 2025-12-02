@@ -1,21 +1,34 @@
 import { useState } from "react";
-import { Dropdown } from "../../../../components/package/dropdown";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+} from "../../../../components/package/dropdown";
 import { Button } from "../../../../components/package/button";
 import { CodeBlock } from "../../../../components/package/codeblock";
 import {
   FileCode,
+  ChevronDown,
   User,
   Settings,
   LogOut,
-  ChevronDown,
-  Plus,
+  Copy,
+  Trash,
   Edit,
-  Trash2,
+  Share,
+  Download,
+  Mail,
+  MessageSquare,
+  Phone,
+  Calendar,
+  File,
+  Folder,
 } from "lucide-react";
 import RightPanel from "../RightPanel";
 
 const DropdownSection = () => {
-  const [selectedItem, setSelectedItem] = useState<string>("No selection");
+  const [selectedOption, setSelectedOption] = useState("Option 1");
 
   // Navigation sections for right panel
   const navigationSections = [
@@ -27,230 +40,169 @@ const DropdownSection = () => {
   ];
 
   const npmInstallCode = `npm install @khanhromvn/zenui`;
-
   const yarnInstallCode = `yarn add @khanhromvn/zenui`;
 
-  const basicUsageCode = `import { Dropdown } from "@khanhromvn/zenui";
-import { ChevronDown } from "lucide-react";
+  const basicUsageCode = `import { 
+  Dropdown, 
+  DropdownTrigger, 
+  DropdownContent, 
+  DropdownItem 
+} from "@khanhromvn/zenui";
+import { Button } from "@khanhromvn/zenui";
+import { ChevronDown, User, Settings, LogOut } from "lucide-react";
 
 function MyComponent() {
-  const menuItems = [
-    {
-      label: "Profile",
-      onClick: () => console.log("Profile clicked"),
-    },
-    {
-      label: "Settings",
-      onClick: () => console.log("Settings clicked"),
-    },
-    {
-      type: "divider",
-    },
-    {
-      label: "Logout",
-      onClick: () => console.log("Logout clicked"),
-    },
-  ];
-
   return (
-    <Dropdown
-      items={menuItems}
-      onSelect={(item, index) => console.log("Selected:", item.label)}
-    >
-      <button className="dropdown-trigger">
-        <span>Menu</span>
-        <ChevronDown size={16} />
-      </button>
-    </Dropdown>
-  );
-}`;
-
-  const withIconsCode = `import { Dropdown } from "@khanhromvn/zenui";
-import { User, Settings, LogOut, ChevronDown } from "lucide-react";
-
-function IconExample() {
-  const menuItems = [
-    {
-      label: "Profile",
-      icon: <User size={16} />,
-      onClick: () => console.log("Profile clicked"),
-    },
-    {
-      label: "Settings",
-      icon: <Settings size={16} />,
-      onClick: () => console.log("Settings clicked"),
-    },
-    {
-      type: "divider",
-    },
-    {
-      label: "Logout",
-      icon: <LogOut size={16} />,
-      onClick: () => console.log("Logout clicked"),
-    },
-  ];
-
-  return (
-    <Dropdown items={menuItems}>
-      <button className="dropdown-trigger">
-        <span>User Menu</span>
-        <ChevronDown size={16} />
-      </button>
-    </Dropdown>
-  );
-}`;
-
-  const triggerCode = `import { Dropdown, Button } from "@khanhromvn/zenui";
-import { Plus, ChevronDown } from "lucide-react";
-
-function TriggerExample() {
-  const menuItems = [
-    {
-      label: "New Project",
-      onClick: () => console.log("New project"),
-    },
-    {
-      label: "Import",
-      onClick: () => console.log("Import"),
-    },
-    {
-      label: "Export",
-      onClick: () => console.log("Export"),
-    },
-  ];
-
-  return (
-    <div className="flex gap-4">
-      {/* Click Trigger */}
-      <Dropdown
-        items={menuItems}
-        trigger="click"
-      >
-        <Button
-          icon={<Plus size={16} />}
-          className="bg-blue-600 hover:bg-blue-700 text-white"
-        >
-          Create New
-        </Button>
-      </Dropdown>
-
-      {/* Hover Trigger */}
-      <Dropdown
-        items={menuItems}
-        trigger="hover"
-      >
-        <Button
+    <Dropdown>
+      <DropdownTrigger>
+        <Button 
           icon={<ChevronDown size={16} />}
           iconPosition="right"
-          className="bg-gray-600 hover:bg-gray-700 text-white"
+          className="bg-blue-600 hover:bg-blue-700 text-white border border-blue-700"
         >
-          Hover Me
+          Menu
         </Button>
-      </Dropdown>
-    </div>
+      </DropdownTrigger>
+      
+      <DropdownContent>
+        <DropdownItem leftIcon={<User size={16} />}
+>
+          Profile
+        </DropdownItem>
+        <DropdownItem leftIcon={<Settings size={16} />}
+>
+          Settings
+        </DropdownItem>
+        <DropdownItem leftIcon={<LogOut size={16} />}
+>
+          Logout
+        </DropdownItem>
+      </DropdownContent>
+    </Dropdown>
   );
 }`;
 
-  const placementCode = `import { Dropdown, Button } from "@khanhromvn/zenui";
+  const positionExampleCode = `import { 
+  Dropdown, 
+  DropdownTrigger, 
+  DropdownContent, 
+  DropdownItem 
+} from "@khanhromvn/zenui";
+import { Button } from "@khanhromvn/zenui";
 
-function PlacementExample() {
-  const menuItems = [
-    { label: "Option 1", onClick: () => {} },
-    { label: "Option 2", onClick: () => {} },
-  ];
-
+function PositionExample() {
   return (
-    <div className="flex gap-4 flex-wrap">
-      <Dropdown
-        items={menuItems}
-        placement="bottom"
-      >
-        <Button className="bg-button-bg">Bottom</Button>
+    <div className="grid grid-cols-3 gap-4">
+      {/* Top positions */}
+      <Dropdown position="top-left">
+        <DropdownTrigger>
+          <Button>Top Left</Button>
+        </DropdownTrigger>
+        <DropdownContent>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+        </DropdownContent>
       </Dropdown>
 
-      <Dropdown
-        items={menuItems}
-        placement="bottom-left"
-      >
-        <Button className="bg-button-bg">Bottom Left</Button>
+      <Dropdown position="top-center">
+        <DropdownTrigger>
+          <Button>Top Center</Button>
+        </DropdownTrigger>
+        <DropdownContent>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+        </DropdownContent>
       </Dropdown>
 
-      <Dropdown
-        items={menuItems}
-        placement="bottom-right"
-      >
-        <Button className="bg-button-bg">Bottom Right</Button>
+      <Dropdown position="top-right">
+        <DropdownTrigger>
+          <Button>Top Right</Button>
+        </DropdownTrigger>
+        <DropdownContent>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+        </DropdownContent>
       </Dropdown>
 
-      <Dropdown
-        items={menuItems}
-        placement="top"
-      >
-        <Button className="bg-button-bg">Top</Button>
+      {/* Bottom positions */}
+      <Dropdown position="bottom-left">
+        <DropdownTrigger>
+          <Button>Bottom Left</Button>
+        </DropdownTrigger>
+        <DropdownContent>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+        </DropdownContent>
+      </Dropdown>
+
+      <Dropdown position="bottom-center">
+        <DropdownTrigger>
+          <Button>Bottom Center</Button>
+        </DropdownTrigger>
+        <DropdownContent>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+        </DropdownContent>
+      </Dropdown>
+
+      <Dropdown position="bottom-right">
+        <DropdownTrigger>
+          <Button>Bottom Right</Button>
+        </DropdownTrigger>
+        <DropdownContent>
+          <DropdownItem>Item 1</DropdownItem>
+          <DropdownItem>Item 2</DropdownItem>
+        </DropdownContent>
       </Dropdown>
     </div>
   );
 }`;
 
-  const basicMenu = [
-    {
-      label: "Profile",
-      onClick: () => setSelectedItem("Profile"),
-    },
-    {
-      label: "Settings",
-      onClick: () => setSelectedItem("Settings"),
-    },
-    {
-      type: "divider",
-    },
-    {
-      label: "Logout",
-      onClick: () => setSelectedItem("Logout"),
-    },
-  ];
+  const customContentCode = `import { 
+  Dropdown, 
+  DropdownTrigger, 
+  DropdownContent, 
+  DropdownItem 
+} from "@khanhromvn/zenui";
+import { Button } from "@khanhromvn/zenui";
 
-  const iconMenu = [
-    {
-      label: "Profile",
-      icon: <User size={16} />,
-      onClick: () => setSelectedItem("Profile"),
-    },
-    {
-      label: "Settings",
-      icon: <Settings size={16} />,
-      onClick: () => setSelectedItem("Settings"),
-    },
-    {
-      type: "divider",
-    },
-    {
-      label: "Logout",
-      icon: <LogOut size={16} />,
-      onClick: () => setSelectedItem("Logout"),
-    },
-  ];
+function CustomContentExample() {
+  return (
+    <Dropdown>
+      <DropdownTrigger>
+        <Button>Custom Content</Button>
+      </DropdownTrigger>
+      
+      <DropdownContent>
+        {/* Custom header */}
+        <div className="px-3 py-2 border-b border-border-default">
+          <p className="font-semibold text-sm">Account</p>
+          <p className="text-xs text-text-secondary">user@example.com</p>
+        </div>
 
-  const actionMenu = [
-    {
-      label: "Create",
-      icon: <Plus size={16} />,
-      onClick: () => setSelectedItem("Create"),
-    },
-    {
-      label: "Edit",
-      icon: <Edit size={16} />,
-      onClick: () => setSelectedItem("Edit"),
-    },
-    {
-      type: "divider",
-    },
-    {
-      label: "Delete",
-      icon: <Trash2 size={16} />,
-      onClick: () => setSelectedItem("Delete"),
-    },
-  ];
+        {/* Regular items */}
+        <DropdownItem leftIcon={<User size={16} />}
+>
+          Profile
+        </DropdownItem>
+        <DropdownItem leftIcon={<Settings size={16} />}
+>
+          Settings
+        </DropdownItem>
+
+        {/* Divider */}
+        <div className="border-t border-border-default my-1"></div>
+
+        {/* Custom footer */}
+        <div className="px-3 py-2">
+          <Button width="full" size={90}>
+            Sign Out
+          </Button>
+        </div>
+      </DropdownContent>
+    </Dropdown>
+  );
+}`;
 
   return (
     <>
@@ -261,10 +213,10 @@ function PlacementExample() {
             Dropdown
           </h1>
           <p className="text-lg text-text-secondary leading-relaxed">
-            A flexible dropdown component that displays a menu of options when
-            triggered. Perfect for navigation menus, action menus, and context
-            menus with support for icons, dividers, disabled items, and various
-            trigger behaviors.
+            A flexible and customizable dropdown component with support for
+            multiple positioning options, custom content, icons, and extensive
+            styling. Perfect for menus, action lists, and contextual options
+            across your application.
           </p>
         </section>
 
@@ -312,21 +264,39 @@ function PlacementExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6 flex items-center gap-4">
-            <Dropdown
-              items={basicMenu}
-              onSelect={(item, index) =>
-                item.label && setSelectedItem(item.label)
-              }
-            >
-              <button className="dropdown-trigger flex items-center gap-2 px-4 py-2 border border-border-default rounded-lg hover:bg-gray-50">
-                <span>Basic Menu</span>
-                <ChevronDown size={16} />
-              </button>
+          <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 flex items-center justify-center">
+            <Dropdown>
+              <DropdownTrigger>
+                <Button
+                  icon={<ChevronDown size={16} />}
+                  iconPosition="right"
+                  className="bg-blue-600 hover:bg-blue-700 text-white border border-blue-700"
+                >
+                  Menu
+                </Button>
+              </DropdownTrigger>
+
+              <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                <DropdownItem
+                  leftIcon={<User size={16} />}
+                  className="hover:bg-dropdown-itemHover"
+                >
+                  Profile
+                </DropdownItem>
+                <DropdownItem
+                  leftIcon={<Settings size={16} />}
+                  className="hover:bg-dropdown-itemHover"
+                >
+                  Settings
+                </DropdownItem>
+                <DropdownItem
+                  leftIcon={<LogOut size={16} />}
+                  className="hover:bg-dropdown-itemHover"
+                >
+                  Logout
+                </DropdownItem>
+              </DropdownContent>
             </Dropdown>
-            <span className="text-text-secondary">
-              Selected: {selectedItem}
-            </span>
           </div>
 
           {/* Code Example */}
@@ -350,244 +320,437 @@ function PlacementExample() {
             Advanced Examples
           </h2>
 
+          {/* Position Examples */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Positioning Options
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Dropdown supports 12 positioning options: top-left, top-center,
+              top-right, bottom-left, bottom-center, bottom-right, left-top,
+              left-center, left-bottom, right-top, right-center, right-bottom.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <Dropdown position="top-left">
+                  <DropdownTrigger>
+                    <Button
+                      width="full"
+                      className="bg-purple-600 hover:bg-purple-700 text-white border border-purple-700"
+                    >
+                      Top Left
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                    <DropdownItem
+                      leftIcon={<Copy size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Copy
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Edit size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Edit
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Trash size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Delete
+                    </DropdownItem>
+                  </DropdownContent>
+                </Dropdown>
+
+                <Dropdown position="top-center">
+                  <DropdownTrigger>
+                    <Button
+                      width="full"
+                      className="bg-purple-600 hover:bg-purple-700 text-white border border-purple-700"
+                    >
+                      Top Center
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                    <DropdownItem
+                      leftIcon={<Copy size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Copy
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Edit size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Edit
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Trash size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Delete
+                    </DropdownItem>
+                  </DropdownContent>
+                </Dropdown>
+
+                <Dropdown position="top-right">
+                  <DropdownTrigger>
+                    <Button
+                      width="full"
+                      className="bg-purple-600 hover:bg-purple-700 text-white border border-purple-700"
+                    >
+                      Top Right
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                    <DropdownItem
+                      leftIcon={<Copy size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Copy
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Edit size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Edit
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Trash size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Delete
+                    </DropdownItem>
+                  </DropdownContent>
+                </Dropdown>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4">
+                <Dropdown position="bottom-left">
+                  <DropdownTrigger>
+                    <Button
+                      width="full"
+                      className="bg-green-600 hover:bg-green-700 text-white border border-green-700"
+                    >
+                      Bottom Left
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                    <DropdownItem
+                      leftIcon={<Copy size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Copy
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Edit size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Edit
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Trash size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Delete
+                    </DropdownItem>
+                  </DropdownContent>
+                </Dropdown>
+
+                <Dropdown position="bottom-center">
+                  <DropdownTrigger>
+                    <Button
+                      width="full"
+                      className="bg-green-600 hover:bg-green-700 text-white border border-green-700"
+                    >
+                      Bottom Center
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                    <DropdownItem
+                      leftIcon={<Copy size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Copy
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Edit size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Edit
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Trash size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Delete
+                    </DropdownItem>
+                  </DropdownContent>
+                </Dropdown>
+
+                <Dropdown position="bottom-right">
+                  <DropdownTrigger>
+                    <Button
+                      width="full"
+                      className="bg-green-600 hover:bg-green-700 text-white border border-green-700"
+                    >
+                      Bottom Right
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                    <DropdownItem
+                      leftIcon={<Copy size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Copy
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Edit size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Edit
+                    </DropdownItem>
+                    <DropdownItem
+                      leftIcon={<Trash size={16} />}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Delete
+                    </DropdownItem>
+                  </DropdownContent>
+                </Dropdown>
+              </div>
+            </div>
+
+            <CodeBlock
+              code={positionExampleCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/PositionExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
           {/* With Icons */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               With Icons
             </h3>
             <p className="text-text-secondary mb-4">
-              Enhance dropdown items with icons for better visual recognition.
+              Add icons to dropdown items for better visual hierarchy and
+              recognition.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
-              <Dropdown
-                items={iconMenu}
-                onSelect={(item, index) =>
-                  item.label && setSelectedItem(item.label)
-                }
-              >
-                <button className="dropdown-trigger flex items-center gap-2 px-4 py-2 border border-border-default rounded-lg hover:bg-gray-50">
-                  <User size={16} />
-                  <span>User Menu</span>
-                  <ChevronDown size={16} />
-                </button>
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button
+                    icon={<Share size={16} />}
+                    iconPosition="right"
+                    className="bg-blue-600 hover:bg-blue-700 text-white border border-blue-700"
+                  >
+                    Share
+                  </Button>
+                </DropdownTrigger>
+
+                <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                  <DropdownItem
+                    leftIcon={<Mail size={16} />}
+                    rightIcon={
+                      <span className="text-xs text-text-secondary">⌘E</span>
+                    }
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Email
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<MessageSquare size={16} />}
+                    rightIcon={
+                      <span className="text-xs text-text-secondary">⌘M</span>
+                    }
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Message
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<Copy size={16} />}
+                    rightIcon={
+                      <span className="text-xs text-text-secondary">⌘C</span>
+                    }
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Copy Link
+                  </DropdownItem>
+                </DropdownContent>
+              </Dropdown>
+
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button
+                    icon={<Download size={16} />}
+                    iconPosition="right"
+                    className="bg-green-600 hover:bg-green-700 text-white border border-green-700"
+                  >
+                    Export
+                  </Button>
+                </DropdownTrigger>
+
+                <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                  <DropdownItem
+                    leftIcon={<File size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Export as PDF
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<File size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Export as CSV
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<File size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Export as JSON
+                  </DropdownItem>
+                </DropdownContent>
               </Dropdown>
             </div>
-
-            <CodeBlock
-              code={withIconsCode}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/IconExample.tsx"
-              showLineNumbers={true}
-            />
           </div>
 
-          {/* Trigger Types */}
+          {/* Custom Content */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Trigger Types
+              Custom Content
             </h3>
             <p className="text-text-secondary mb-4">
-              Choose between click and hover triggers based on your use case.
+              Create complex dropdowns with custom headers, footers, dividers,
+              and any React content.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 flex-wrap">
-              <Dropdown
-                items={actionMenu}
-                trigger="click"
-                onSelect={(item, index) =>
-                  item.label && setSelectedItem(item.label)
-                }
-              >
-                <Button
-                  icon={<Plus size={16} />}
-                  className="bg-blue-600 hover:bg-blue-700 text-white border-blue-700"
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button
+                    icon={<User size={16} />}
+                    className="bg-gray-600 hover:bg-gray-700 text-white border border-gray-700"
+                  />
+                </DropdownTrigger>
+
+                <DropdownContent
+                  minWidth="250px"
+                  className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover"
                 >
-                  Click Trigger
-                </Button>
+                  {/* Custom header */}
+                  <div className="px-3 py-2 border-b border-border-default">
+                    <p className="font-semibold text-sm">John Doe</p>
+                    <p className="text-xs text-text-secondary">
+                      john@example.com
+                    </p>
+                  </div>
+
+                  {/* Regular items */}
+                  <DropdownItem
+                    leftIcon={<User size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Profile
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<Settings size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Settings
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<Calendar size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Schedule
+                  </DropdownItem>
+
+                  {/* Divider */}
+                  <div className="border-t border-border-default my-1"></div>
+
+                  {/* Custom footer */}
+                  <div className="px-3 py-2">
+                    <Button
+                      width="full"
+                      size={90}
+                      className="bg-red-600 hover:bg-red-700 text-white border border-red-700"
+                    >
+                      Sign Out
+                    </Button>
+                  </div>
+                </DropdownContent>
               </Dropdown>
 
-              <Dropdown
-                items={actionMenu}
-                trigger="hover"
-                onSelect={(item, index) =>
-                  item.label && setSelectedItem(item.label)
-                }
-              >
-                <Button
-                  icon={<ChevronDown size={16} />}
-                  iconPosition="right"
-                  className="bg-gray-600 hover:bg-gray-700 text-white border-gray-700"
-                >
-                  Hover Trigger
-                </Button>
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button
+                    icon={<Folder size={16} />}
+                    iconPosition="right"
+                    className="bg-orange-600 hover:bg-orange-700 text-white border border-orange-700"
+                  >
+                    Actions
+                  </Button>
+                </DropdownTrigger>
+
+                <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                  <div className="px-3 py-2">
+                    <p className="text-xs font-semibold text-text-secondary uppercase">
+                      File Actions
+                    </p>
+                  </div>
+                  <DropdownItem
+                    leftIcon={<Copy size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Duplicate
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<Edit size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Rename
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<Download size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Download
+                  </DropdownItem>
+
+                  <div className="border-t border-border-default my-1"></div>
+
+                  <div className="px-3 py-2">
+                    <p className="text-xs font-semibold text-text-secondary uppercase">
+                      Danger Zone
+                    </p>
+                  </div>
+                  <DropdownItem
+                    leftIcon={<Trash size={16} />}
+                    className="text-red-600 hover:bg-red-50"
+                  >
+                    Delete
+                  </DropdownItem>
+                </DropdownContent>
               </Dropdown>
             </div>
 
             <CodeBlock
-              code={triggerCode}
+              code={customContentCode}
               language="typescript"
               theme="vs-dark"
               readOnly={true}
               headerMode="path"
               headerIcon={<FileCode size={16} />}
-              filePath="src/components/TriggerExample.tsx"
-              showLineNumbers={true}
-            />
-          </div>
-
-          {/* Placement */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Menu Placement
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Control where the dropdown menu appears relative to the trigger.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 flex-wrap">
-              <Dropdown
-                items={basicMenu}
-                placement="bottom"
-                onSelect={(item, index) =>
-                  item.label && setSelectedItem(item.label)
-                }
-              >
-                <Button className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border">
-                  Bottom
-                </Button>
-              </Dropdown>
-
-              <Dropdown
-                items={basicMenu}
-                placement="bottom-left"
-                onSelect={(item, index) =>
-                  item.label && setSelectedItem(item.label)
-                }
-              >
-                <Button className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border">
-                  Bottom Left
-                </Button>
-              </Dropdown>
-
-              <Dropdown
-                items={basicMenu}
-                placement="bottom-right"
-                onSelect={(item, index) =>
-                  item.label && setSelectedItem(item.label)
-                }
-              >
-                <Button className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border">
-                  Bottom Right
-                </Button>
-              </Dropdown>
-
-              <Dropdown
-                items={basicMenu}
-                placement="top"
-                onSelect={(item, index) =>
-                  item.label && setSelectedItem(item.label)
-                }
-              >
-                <Button className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border">
-                  Top
-                </Button>
-              </Dropdown>
-            </div>
-
-            <CodeBlock
-              code={placementCode}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/PlacementExample.tsx"
-              showLineNumbers={true}
-            />
-          </div>
-
-          {/* Disabled Items */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Disabled Items
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Disable specific items in the dropdown menu.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
-              <Dropdown
-                items={[
-                  {
-                    label: "Enabled Item",
-                    onClick: () => setSelectedItem("Enabled Item"),
-                  },
-                  {
-                    label: "Disabled Item",
-                    disabled: true,
-                    onClick: () => setSelectedItem("This won't fire"),
-                  },
-                  {
-                    type: "divider",
-                  },
-                  {
-                    label: "Another Enabled",
-                    onClick: () => setSelectedItem("Another Enabled"),
-                  },
-                ]}
-                onSelect={(item, index) =>
-                  item.label && !item.disabled && setSelectedItem(item.label)
-                }
-              >
-                <button className="dropdown-trigger flex items-center gap-2 px-4 py-2 border border-border-default rounded-lg hover:bg-gray-50">
-                  <span>With Disabled Items</span>
-                  <ChevronDown size={16} />
-                </button>
-              </Dropdown>
-            </div>
-
-            <CodeBlock
-              code={`import { Dropdown } from "@khanhromvn/zenui";
-
-function DisabledExample() {
-  const menuItems = [
-    {
-      label: "Enabled Item",
-      onClick: () => console.log("Enabled clicked"),
-    },
-    {
-      label: "Disabled Item",
-      disabled: true,
-      onClick: () => console.log("This won't fire"),
-    },
-    {
-      type: "divider",
-    },
-    {
-      label: "Another Enabled",
-      onClick: () => console.log("Another enabled"),
-    },
-  ];
-
-  return (
-    <Dropdown items={menuItems}>
-      <button className="dropdown-trigger">
-        <span>With Disabled Items</span>
-      </button>
-    </Dropdown>
-  );
-}`}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/DisabledExample.tsx"
+              filePath="src/components/CustomContentExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -598,83 +761,205 @@ function DisabledExample() {
               Size Variants
             </h3>
             <p className="text-text-secondary mb-4">
-              Control dropdown size using percentage scale.
+              Control dropdown size with sm, md, and lg variants.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center flex-wrap">
-              <Dropdown
-                items={basicMenu}
-                size={80}
-                onSelect={(item, index) =>
-                  item.label && setSelectedItem(item.label)
-                }
-              >
-                <button className="dropdown-trigger flex items-center gap-2 px-3 py-1 border border-border-default rounded text-sm">
-                  <span>Small</span>
-                  <ChevronDown size={14} />
-                </button>
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
+              <Dropdown size="sm">
+                <DropdownTrigger>
+                  <Button
+                    size={80}
+                    className="bg-blue-600 hover:bg-blue-700 text-white border border-blue-700"
+                  >
+                    Small
+                  </Button>
+                </DropdownTrigger>
+                <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                  <DropdownItem
+                    leftIcon={<User size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Profile
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<Settings size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Settings
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<LogOut size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Logout
+                  </DropdownItem>
+                </DropdownContent>
               </Dropdown>
 
-              <Dropdown
-                items={basicMenu}
-                size={100}
-                onSelect={(item, index) =>
-                  item.label && setSelectedItem(item.label)
-                }
-              >
-                <button className="dropdown-trigger flex items-center gap-2 px-4 py-2 border border-border-default rounded">
-                  <span>Default</span>
-                  <ChevronDown size={16} />
-                </button>
+              <Dropdown size="md">
+                <DropdownTrigger>
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white border border-blue-700">
+                    Medium
+                  </Button>
+                </DropdownTrigger>
+                <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                  <DropdownItem
+                    leftIcon={<User size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Profile
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<Settings size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Settings
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<LogOut size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Logout
+                  </DropdownItem>
+                </DropdownContent>
               </Dropdown>
 
-              <Dropdown
-                items={basicMenu}
-                size={120}
-                onSelect={(item, index) =>
-                  item.label && setSelectedItem(item.label)
-                }
-              >
-                <button className="dropdown-trigger flex items-center gap-2 px-5 py-2 border border-border-default rounded text-lg">
-                  <span>Large</span>
-                  <ChevronDown size={18} />
-                </button>
+              <Dropdown size="lg">
+                <DropdownTrigger>
+                  <Button
+                    size={120}
+                    className="bg-blue-600 hover:bg-blue-700 text-white border border-blue-700"
+                  >
+                    Large
+                  </Button>
+                </DropdownTrigger>
+                <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                  <DropdownItem
+                    leftIcon={<User size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Profile
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<Settings size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Settings
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<LogOut size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Logout
+                  </DropdownItem>
+                </DropdownContent>
               </Dropdown>
             </div>
+          </div>
 
-            <CodeBlock
-              code={`import { Dropdown } from "@khanhromvn/zenui";
+          {/* Controlled Dropdown */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Controlled Dropdown
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Control dropdown open state externally with the open and
+              onOpenChange props.
+            </p>
 
-function SizeExample() {
-  const menuItems = [
-    { label: "Option 1", onClick: () => {} },
-    { label: "Option 2", onClick: () => {} },
-  ];
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+              <div className="flex gap-4 items-center">
+                <Dropdown
+                  open={selectedOption === "Option 1"}
+                  onOpenChange={(open) => {
+                    if (!open) setSelectedOption("");
+                  }}
+                >
+                  <DropdownTrigger>
+                    <Button
+                      onClick={() =>
+                        setSelectedOption(
+                          selectedOption === "Option 1" ? "" : "Option 1"
+                        )
+                      }
+                      className="bg-blue-600 hover:bg-blue-700 text-white border border-blue-700"
+                    >
+                      {selectedOption === "Option 1" ? "✓ " : ""}Option 1
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                    <DropdownItem
+                      onClick={() => setSelectedOption("Option 1")}
+                      className="hover:bg-dropdown-itemHover"
+                    >
+                      Select Option 1
+                    </DropdownItem>
+                  </DropdownContent>
+                </Dropdown>
 
-  return (
-    <div className="flex gap-4 items-center">
-      <Dropdown items={menuItems} size={80}>
-        <button className="dropdown-trigger">Small</button>
-      </Dropdown>
+                <p className="text-sm text-text-secondary">
+                  Selected: {selectedOption || "None"}
+                </p>
+              </div>
+            </div>
+          </div>
 
-      <Dropdown items={menuItems} size={100}>
-        <button className="dropdown-trigger">Default</button>
-      </Dropdown>
+          {/* Disabled State */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Disabled State
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Disable the entire dropdown or individual items.
+            </p>
 
-      <Dropdown items={menuItems} size={120}>
-        <button className="dropdown-trigger">Large</button>
-      </Dropdown>
-    </div>
-  );
-}`}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/SizeExample.tsx"
-              showLineNumbers={true}
-            />
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
+              <Dropdown disabled>
+                <DropdownTrigger>
+                  <Button className="bg-gray-400 text-gray-700 border border-gray-500">
+                    Disabled Dropdown
+                  </Button>
+                </DropdownTrigger>
+                <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                  <DropdownItem className="hover:bg-dropdown-itemHover">
+                    Item 1
+                  </DropdownItem>
+                  <DropdownItem className="hover:bg-dropdown-itemHover">
+                    Item 2
+                  </DropdownItem>
+                </DropdownContent>
+              </Dropdown>
+
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white border border-blue-700">
+                    Disabled Items
+                  </Button>
+                </DropdownTrigger>
+                <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                  <DropdownItem
+                    leftIcon={<Copy size={16} />}
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Copy (Enabled)
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<Edit size={16} />}
+                    disabled
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Edit (Disabled)
+                  </DropdownItem>
+                  <DropdownItem
+                    leftIcon={<Trash size={16} />}
+                    disabled
+                    className="hover:bg-dropdown-itemHover"
+                  >
+                    Delete (Disabled)
+                  </DropdownItem>
+                </DropdownContent>
+              </Dropdown>
+            </div>
           </div>
         </section>
 
@@ -684,235 +969,269 @@ function SizeExample() {
             Props
           </h2>
           <p className="text-text-secondary mb-6">
-            Complete list of props available for the Dropdown component.
+            Complete list of props available for Dropdown components.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      items
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      DropdownItem[]
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">[]</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Array of dropdown items
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      trigger
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "click" | "hover"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"click"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Dropdown trigger type
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      placement
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      DropdownPlacement
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"bottom"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Menu placement position
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      size
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">100</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Dropdown size (percentage scale)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      disabled
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Disable dropdown
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      children
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom trigger content
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onSelect
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (item: DropdownItem, index: number) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Item selection callback
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      className
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS classes
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      style
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      CSSProperties
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom styles
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          {/* Dropdown Props */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Dropdown Props
+            </h3>
+            <div className="bg-card-background border border-border-default rounded-md overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="bg-table-headerBg">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Prop
+                      </th>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Type
+                      </th>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Default
+                      </th>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Description
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border-default">
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        position
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        DropdownPosition
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        "bottom-left"
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Position of dropdown content
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        size
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        "sm" | "md" | "lg"
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">"md"</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Size variant
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        closeOnSelect
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        boolean
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">true</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Close when item selected
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        disabled
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        boolean
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">false</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Disabled state
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        open
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        boolean
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">-</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Controlled open state
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        onOpenChange
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        (open: boolean) =&gt; void
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">-</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Open state change callback
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        defaultOpen
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        boolean
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">false</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Default open state (uncontrolled)
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
-          <h3 className="text-lg font-semibold text-text-primary mt-8 mb-4">
-            DropdownItem
-          </h3>
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      type
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "item" | "divider"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"item"</td>
-                    <td className="px-6 py-4 text-text-secondary">Item type</td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      label
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Item label text
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      icon
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">Item icon</td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      disabled
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Disable the item
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onClick
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      () =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Click handler
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      data
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      any
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom data
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          {/* DropdownItem Props */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              DropdownItem Props
+            </h3>
+            <div className="bg-card-background border border-border-default rounded-md overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="bg-table-headerBg">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Prop
+                      </th>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Type
+                      </th>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Default
+                      </th>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Description
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border-default">
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        children
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        ReactNode
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">-</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Item content
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        leftIcon
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        ReactNode
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">-</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Icon on the left
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        rightIcon
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        ReactNode
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">-</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Icon on the right
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        disabled
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        boolean
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">false</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Disabled state
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        onClick
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        () =&gt; void
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">-</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Click handler
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          {/* DropdownContent Props */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              DropdownContent Props
+            </h3>
+            <div className="bg-card-background border border-border-default rounded-md overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="bg-table-headerBg">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Prop
+                      </th>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Type
+                      </th>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Default
+                      </th>
+                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                        Description
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border-default">
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        maxHeight
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        string
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">"320px"</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Maximum height
+                      </td>
+                    </tr>
+                    <tr className="hover:bg-table-rowHoverBg">
+                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                        minWidth
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                        string
+                      </td>
+                      <td className="px-6 py-4 text-text-secondary">"200px"</td>
+                      <td className="px-6 py-4 text-text-secondary">
+                        Minimum width
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </section>

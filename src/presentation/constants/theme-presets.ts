@@ -37,6 +37,13 @@ export interface PresetThemeType {
   cardShadow?: string;
   dialogShadow?: string;
   dropdownShadow?: string;
+  // Table variables
+  tableHeaderBg?: string;
+  tableRowBg?: string;
+  tableRowHoverBg?: string;
+  tableRowFocusBg?: string;
+  tableFooterBg?: string;
+  tableBorder?: string;
   icon?: ReactNode;
   description?: string;
 }
@@ -77,6 +84,16 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       drawerBackground: "#ffffff",
       clockGradientFrom: "#3686ff",
       clockGradientTo: "#1d4ed8",
+      cardShadow: "0 1px 3px 0 rgb(0 0 0 / 0.1)",
+      dialogShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+      dropdownShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
+      // Table variables for DefaultLight
+      tableHeaderBg: "#f8fafc",
+      tableRowBg: "#ffffff",
+      tableRowHoverBg: "#f3f4f6",
+      tableRowFocusBg: "#e0e7ff",
+      tableFooterBg: "#f8fafc",
+      tableBorder: "#e2e8f0",
     },
     {
       name: "IndigoLight",
@@ -112,6 +129,16 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       drawerBackground: "#ffffff",
       clockGradientFrom: "#4f46e5",
       clockGradientTo: "#4338ca",
+      cardShadow: "0 1px 3px 0 rgba(79, 70, 229, 0.1)",
+      dialogShadow: "0 25px 50px -12px rgba(79, 70, 229, 0.25)",
+      dropdownShadow: "0 10px 15px -3px rgba(79, 70, 229, 0.1)",
+      // Table variables for IndigoLight
+      tableHeaderBg: "#e0e7ff",
+      tableRowBg: "#ffffff",
+      tableRowHoverBg: "#ede9fe",
+      tableRowFocusBg: "#ddd6fe",
+      tableFooterBg: "#e0e7ff",
+      tableBorder: "#c7d2fe",
     },
   ],
   dark: [
@@ -149,6 +176,16 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       drawerBackground: "#1e1e1e",
       clockGradientFrom: "#3686ff",
       clockGradientTo: "#418dfe",
+      cardShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.3)",
+      dialogShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
+      dropdownShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)",
+      // Table variables for DefaultDark
+      tableHeaderBg: "#1a1a1a",
+      tableRowBg: "#242424",
+      tableRowHoverBg: "#2d2d2d",
+      tableRowFocusBg: "#333333",
+      tableFooterBg: "#1a1a1a",
+      tableBorder: "#353535",
     },
     {
       name: "MidnightDark",
@@ -184,6 +221,16 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       drawerBackground: "#0f172a",
       clockGradientFrom: "#6366f1",
       clockGradientTo: "#4f46e5",
+      cardShadow: "0 1px 3px 0 rgba(99, 102, 241, 0.1)",
+      dialogShadow: "0 25px 50px -12px rgba(99, 102, 241, 0.25)",
+      dropdownShadow: "0 10px 15px -3px rgba(99, 102, 241, 0.1)",
+      // Table variables for MidnightDark
+      tableHeaderBg: "#0f172a",
+      tableRowBg: "#1e293b",
+      tableRowHoverBg: "#334155",
+      tableRowFocusBg: "#475569",
+      tableFooterBg: "#0f172a",
+      tableBorder: "#1e293b",
     },
   ],
 };

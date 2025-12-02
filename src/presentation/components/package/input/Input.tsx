@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { LucideIcon, Loader2 } from "lucide-react";
+import { LucideIcon, Loader2, Eye, EyeOff, X } from "lucide-react";
 import { InputProps } from "./Input.types";
 import {
   getInputSizeClasses,
@@ -24,10 +24,24 @@ const Input: React.FC<InputProps> = ({
   onChange,
   popoverContent,
   onPopoverOpenChange,
+  inlinePanel,
+  multiValue = false,
+  badges = [],
+  onBadgeRemove,
+  badgeColorMode = "uniform",
+  badgeColors = [
+    "#3B82F6",
+    "#10B981",
+    "#F59E0B",
+    "#EF4444",
+    "#8B5CF6",
+    "#EC4899",
+  ],
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [internalPopoverOpen, setInternalPopoverOpen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const popoverOpen =
     controlledPopoverOpen !== undefined
       ? controlledPopoverOpen
@@ -38,8 +52,36 @@ const Input: React.FC<InputProps> = ({
 
   const isDisabled = disabled || loading;
   const showLeftIcon = shouldShowLeftIcon(leftIcon, loading);
-  const showRightIcons = shouldShowRightIcons(rightIcon);
-  const rightIcons = normalizeRightIcons(rightIcon);
+
+  // Handle password eye icon
+  const passwordEyeIcon =
+    type === "password" ? (
+      showPassword ? (
+        <EyeOff
+          size={getIconSize(size)}
+          onClick={() => !isDisabled && setShowPassword(false)}
+        />
+      ) : (
+        <Eye
+          size={getIconSize(size)}
+          onClick={() => !isDisabled && setShowPassword(true)}
+        />
+      )
+    ) : null;
+
+  const combinedRightIcons = passwordEyeIcon
+    ? [
+        passwordEyeIcon,
+        ...(Array.isArray(rightIcon)
+          ? rightIcon
+          : rightIcon
+          ? [rightIcon]
+          : []),
+      ]
+    : rightIcon;
+
+  const showRightIcons = shouldShowRightIcons(combinedRightIcons);
+  const rightIcons = normalizeRightIcons(combinedRightIcons);
   const sizeClasses = getInputSizeClasses(size);
   const iconSize = getIconSize(size);
 
@@ -113,6 +155,17 @@ const Input: React.FC<InputProps> = ({
 
   const renderRightIcons = () => {
     return rightIcons.map((icon, index) => {
+      if (React.isValidElement(icon)) {
+        return (
+          <div
+            key={index}
+            className="cursor-pointer flex items-center justify-center"
+          >
+            {icon}
+          </div>
+        );
+      }
+
       if (typeof icon === "function") {
         const IconComponent = icon as LucideIcon;
         return (
@@ -163,7 +216,7 @@ const Input: React.FC<InputProps> = ({
     return (
       <input
         ref={inputRef}
-        type={type}
+        type={type === "password" && showPassword ? "text" : type}
         value={value}
         placeholder={placeholder}
         disabled={isDisabled}
@@ -176,8 +229,48 @@ const Input: React.FC<InputProps> = ({
     );
   };
 
+  // Render badges
+  const renderBadges = () => {
+    if (!multiValue || badges.length === 0) return null;
+
+    return (
+      <div className="flex flex-wrap gap-2">
+        {badges.map((badge, index) => {
+          const bgColor =
+            badgeColorMode === "uniform"
+              ? badgeColors[0]
+              : badgeColors[index % badgeColors.length];
+
+          return (
+            <div
+              key={badge.id}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-sm font-medium text-white"
+              style={{ backgroundColor: badge.color || bgColor }}
+            >
+              <span>{badge.label}</span>
+              {onBadgeRemove && (
+                <X
+                  size={14}
+                  className="cursor-pointer hover:opacity-80"
+                  onClick={() => onBadgeRemove(badge.id)}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const badgesPosition = inlinePanel ? "top" : "bottom";
+
   return (
     <div className="w-full relative">
+      {/* Badges on top (if inlinePanel exists) */}
+      {badgesPosition === "top" && (
+        <div className="w-full mb-2">{renderBadges()}</div>
+      )}
+
       <div
         className={cn(
           "flex items-center w-full transition-all duration-200 rounded-md",
@@ -213,6 +306,11 @@ const Input: React.FC<InputProps> = ({
         )}
       </div>
 
+      {/* Badges on bottom (default) */}
+      {badgesPosition === "bottom" && (
+        <div className="w-full mt-2">{renderBadges()}</div>
+      )}
+
       {/* Popover for combobox/calendar */}
       {(type === "combobox" || type === "calendar") &&
         popoverOpen &&
@@ -225,6 +323,9 @@ const Input: React.FC<InputProps> = ({
             {popoverContent}
           </div>
         )}
+
+      {/* Inline Panel */}
+      {inlinePanel && <div className="w-full mt-2">{inlinePanel}</div>}
     </div>
   );
 };

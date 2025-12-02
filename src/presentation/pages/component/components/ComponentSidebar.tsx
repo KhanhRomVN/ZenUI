@@ -21,6 +21,7 @@ const ComponentSidebar = () => {
     { name: "Menu Tab", slug: "menutab" },
     { name: "Modal", slug: "modal" },
     { name: "Pagination", slug: "pagination" },
+    { name: "Table", slug: "table" },
   ].sort((a, b) => a.name.localeCompare(b.name));
 
   return (

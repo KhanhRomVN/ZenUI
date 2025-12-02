@@ -14,6 +14,14 @@ module.exports = {
     "bg-dropdown-background",
     "bg-sidebar-background",
     "bg-drawer-background",
+    // Table safelist
+    "bg-table-headerBg",
+    "bg-table-rowBg",
+    "bg-table-rowHoverBg",
+    "bg-table-rowFocusBg",
+    "bg-table-footerBg",
+    "border-table-border",
+    "hover:bg-table-rowHoverBg",
   ],
   theme: {
     extend: {
@@ -25,31 +33,33 @@ module.exports = {
           secondary: "var(--text-secondary)",
         },
         border: {
-            default: "var(--border)",
-            hover: "var(--border-hover)",
-            focus: "var(--border-focus)",
+          default: "var(--border)",
+          hover: "var(--border-hover)",
+          focus: "var(--border-focus)",
         },
         card: {
           background: "var(--card-background)",
         },
         input: {
           background: "var(--input-background)",
-          border: "var(--input-border-default)",
-          borderHover: "var(--input-border-hover)",
-          borderFocus: "var(--input-border-focus)",
+          border: {
+            default: "var(--input-border-default)",
+            hover: "var(--input-border-hover)",
+            focus: "var(--input-border-focus)",
+          },
         },
-        dialog: { 
+        dialog: {
           background: "var(--dialog-background)",
         },
         dropdown: {
           background: "var(--dropdown-background)",
           border: "var(--dropdown-border)",
           itemHover: "var(--dropdown-item-hover)",
-          borderHover: "var(--dropdown-border-hover)",  
+          borderHover: "var(--dropdown-border-hover)",
         },
         sidebar: {
           background: "var(--sidebar-background)",
-          itemHover: "var(--sidebar-item-hover)", 
+          itemHover: "var(--sidebar-item-hover)",
           itemFocus: "var(--sidebar-item-focus)",
         },
         button: {
@@ -63,6 +73,15 @@ module.exports = {
         },
         drawer: {
           background: "var(--drawer-background)",
+        },
+        // Table colors
+        table: {
+          headerBg: "var(--table-header-bg)",
+          rowBg: "var(--table-row-bg)",
+          rowHoverBg: "var(--table-row-hover-bg)",
+          rowFocusBg: "var(--table-row-focus-bg)",
+          footerBg: "var(--table-footer-bg)",
+          border: "var(--table-border)",
         },
       },
     },

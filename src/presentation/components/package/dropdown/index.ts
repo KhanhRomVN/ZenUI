@@ -1,15 +1,24 @@
-export { default as Dropdown } from "./Dropdown";
+export { default as Dropdown, DropdownContext } from "./Dropdown";
+export { default as DropdownTrigger } from "./DropdownTrigger";
+export { default as DropdownContent } from "./DropdownContent";
+export { default as DropdownItem } from "./DropdownItem";
+
 export type {
   DropdownProps,
-  DropdownItem,
-  DropdownTrigger,
-  DropdownPlacement,
-  DropdownItemType,
+  DropdownTriggerProps,
+  DropdownContentProps,
+  DropdownItemProps,
+  DropdownPosition,
+  DropdownSize,
+  DropdownContextValue,
 } from "./Dropdown.types";
+
 export {
-  getDropdownStyles,
-  getMenuItemStyles,
+  getDropdownSizeStyles,
+  getPositionStyles,
   getIconSize,
-  shouldShowIcon,
-  getPlacementStyles,
+  isTopPosition,
+  isBottomPosition,
+  isLeftPosition,
+  isRightPosition,
 } from "./Dropdown.utils";

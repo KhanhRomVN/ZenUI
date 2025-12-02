@@ -211,6 +211,17 @@ export function ThemeProvider({
       tableRowFocusBg: "--table-row-focus-bg",
       tableFooterBg: "--table-footer-bg",
       tableBorder: "--table-border",
+      // Tab variables
+      tabBackground: "--tab-background",
+      tabBorder: "--tab-border",
+      tabHoverBorder: "--tab-hover-border",
+      // TabItem variables
+      tabItemBackground: "--tab-item-background",
+      tabItemHoverBg: "--tab-item-hover-bg",
+      tabItemFocusBg: "--tab-item-focus-bg",
+      tabItemBorder: "--tab-item-border",
+      tabItemHoverBorder: "--tab-item-hover-border",
+      tabItemFocusBorder: "--tab-item-focus-border",
     };
     Object.entries(preset).forEach(([key, value]) => {
       const cssVar = cssVarMap[key];

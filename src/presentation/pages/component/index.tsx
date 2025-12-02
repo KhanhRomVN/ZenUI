@@ -17,6 +17,7 @@ import MenuTabSection from "./components/Section/MenuTabSection";
 import ModalSection from "./components/Section/ModalSection";
 import PaginationSection from "./components/Section/PaginationSection";
 import TableSection from "./components/Section/TableSection";
+import TabSection from "./components/Section/TabSection";
 
 const ComponentsPage = () => {
   const location = useLocation();
@@ -59,6 +60,8 @@ const ComponentsPage = () => {
         return <PaginationSection />;
       case "table":
         return <TableSection />;
+      case "tab":
+        return <TabSection />;
       default:
         return <DrawerSection />;
     }

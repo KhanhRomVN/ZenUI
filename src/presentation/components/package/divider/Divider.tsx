@@ -1,66 +1,44 @@
 import React from "react";
 import { DividerProps } from "./Divider.types";
 import {
-  getDividerStyles,
-  getDividerTextStyles,
-  shouldShowText,
+  getDividerStyleClass,
+  getDividerThickness,
+  getDividerAlignClass,
+  getDividerLengthStyle,
+  getDividerOrientationClass,
 } from "./Divider.utils";
+import { cn } from "../../../../shared/utils/cn";
 
 const Divider: React.FC<DividerProps> = ({
   orientation = "horizontal",
-  variant = "solid",
-  size = 1,
-  color = "border-default",
-  text,
-  textPosition = "center",
+  style = "solid",
+  thickness = "medium",
+  align = "center",
+  length = 100,
   className = "",
-  style,
   ...props
 }) => {
-  const showText = shouldShowText(text, orientation);
-
-  const dividerStyles = getDividerStyles(
-    orientation,
-    variant,
-    size,
-    color,
-    showText
-  );
-
-  const textStyles = getDividerTextStyles(orientation, textPosition);
-
-  if (orientation === "vertical") {
-    return (
-      <div
-        className={`divider-base ${className}`.trim()}
-        style={{
-          ...dividerStyles,
-          ...style,
-        }}
-        role="separator"
-        aria-orientation="vertical"
-        {...props}
-      />
-    );
-  }
+  const styleClass = getDividerStyleClass(style);
+  const thicknessClass = getDividerThickness(thickness, orientation);
+  const alignClass = getDividerAlignClass(align, orientation);
+  const orientationClass = getDividerOrientationClass(orientation);
+  const lengthStyle = getDividerLengthStyle(length, orientation);
 
   return (
     <div
-      className={`divider-base ${className}`.trim()}
-      style={{
-        ...dividerStyles,
-        ...style,
-      }}
-      role="separator"
-      aria-orientation="horizontal"
-      {...props}
-    >
-      {showText && (
-        <span className="divider-text" style={textStyles}>
-          {text}
-        </span>
+      className={cn(
+        orientationClass,
+        thicknessClass,
+        styleClass,
+        alignClass,
+        "border-gray-300",
+        className
       )}
-    </div>
+      style={lengthStyle}
+      role="separator"
+      aria-orientation={orientation}
+      {...props}
+    />
   );
 };
 

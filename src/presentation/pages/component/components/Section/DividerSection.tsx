@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Divider } from "../../../../components/package/divider";
 import { CodeBlock } from "../../../../components/package/codeblock";
 import { FileCode } from "lucide-react";
@@ -14,7 +15,6 @@ const DividerSection = () => {
   ];
 
   const npmInstallCode = `npm install @khanhromvn/zenui`;
-
   const yarnInstallCode = `yarn add @khanhromvn/zenui`;
 
   const basicUsageCode = `import { Divider } from "@khanhromvn/zenui";
@@ -29,26 +29,95 @@ function MyComponent() {
   );
 }`;
 
-  const withTextCode = `import { Divider } from "@khanhromvn/zenui";
+  const styleExampleCode = `import { Divider } from "@khanhromvn/zenui";
 
-function TextExample() {
+function StyleExample() {
   return (
-    <div>
-      <p>Content above</p>
-      <Divider text="Section Title" />
-      <p>Content below</p>
+    <div className="space-y-4">
+      {/* Solid divider (mặc định) */}
+      <Divider style="solid" />
+      
+      {/* Dashed divider */}
+      <Divider style="dashed" />
+      
+      {/* Dotted divider */}
+      <Divider style="dotted" />
     </div>
   );
 }`;
 
-  const verticalCode = `import { Divider } from "@khanhromvn/zenui";
+  const thicknessExampleCode = `import { Divider } from "@khanhromvn/zenui";
+
+function ThicknessExample() {
+  return (
+    <div className="space-y-4">
+      {/* Thin */}
+      <Divider thickness="thin" />
+      
+      {/* Medium (mặc định) */}
+      <Divider thickness="medium" />
+      
+      {/* Thick */}
+      <Divider thickness="thick" />
+      
+      {/* Custom thickness (pixels) */}
+      <Divider thickness={5} />
+    </div>
+  );
+}`;
+
+  const lengthAlignCode = `import { Divider } from "@khanhromvn/zenui";
+
+function LengthAlignExample() {
+  return (
+    <div className="space-y-6">
+      {/* 50% chiều dài, căn giữa */}
+      <Divider length={50} align="center" />
+      
+      {/* 70% chiều dài, căn trái */}
+      <Divider length={70} align="start" />
+      
+      {/* 60% chiều dài, căn phải */}
+      <Divider length={60} align="end" />
+    </div>
+  );
+}`;
+
+  const verticalExampleCode = `import { Divider } from "@khanhromvn/zenui";
 
 function VerticalExample() {
   return (
-    <div style={{ display: 'flex', height: '100px' }}>
+    <div className="flex items-center gap-4" style={{ height: "200px" }}>
       <p>Left content</p>
-      <Divider orientation="vertical" />
+      
+      {/* Divider dọc */}
+      <Divider 
+        orientation="vertical" 
+        length={80}
+        align="center"
+      />
+      
       <p>Right content</p>
+    </div>
+  );
+}`;
+
+  const customColorCode = `import { Divider } from "@khanhromvn/zenui";
+
+function CustomColorExample() {
+  return (
+    <div className="space-y-4">
+      {/* Màu đỏ */}
+      <Divider className="border-red-500" />
+      
+      {/* Màu xanh dương */}
+      <Divider className="border-blue-500" />
+      
+      {/* Màu xanh lá */}
+      <Divider className="border-green-500" />
+      
+      {/* Custom với opacity */}
+      <Divider className="border-purple-500 opacity-50" />
     </div>
   );
 }`;
@@ -60,17 +129,16 @@ function VerticalExample() {
         <section id="about" className="mb-12">
           <h1 className="text-4xl font-bold text-text-primary mb-3">Divider</h1>
           <p className="text-lg text-text-secondary leading-relaxed">
-            A flexible divider component to separate content with horizontal or
-            vertical lines. Perfect for creating visual separation between
-            sections, list items, or content groups with support for text,
-            different styles, and customizable appearance.
+            Component phân cách linh hoạt với hỗ trợ nhiều kiểu hiển thị (solid,
+            dashed, dotted), tùy chỉnh độ dày, chiều dài và căn chỉnh. Hoàn hảo
+            cho việc tách biệt nội dung trong giao diện của bạn.
           </p>
         </section>
 
         {/* INSTALL SECTION */}
         <section id="install" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
-            Installation
+            Cài đặt
           </h2>
           <CodeBlock
             code={npmInstallCode}
@@ -103,18 +171,17 @@ function VerticalExample() {
         {/* USAGE SECTION */}
         <section id="usage" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
-            Basic Usage
+            Cách sử dụng cơ bản
           </h2>
           <p className="text-text-secondary mb-6">
-            Here's a simple example to get you started with the Divider
-            component.
+            Ví dụ đơn giản để bắt đầu với component Divider.
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6">
-            <p>Content above the divider</p>
+          <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <p className="text-text-primary mb-4">Nội dung phía trên</p>
             <Divider />
-            <p>Content below the divider</p>
+            <p className="text-text-primary mt-4">Nội dung phía dưới</p>
           </div>
 
           {/* Code Example */}
@@ -135,64 +202,179 @@ function VerticalExample() {
         {/* EXAMPLES SECTION */}
         <section id="examples" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
-            Advanced Examples
+            Các ví dụ nâng cao
           </h2>
 
-          {/* With Text */}
+          {/* Style Variants */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
-              With Text
+              Kiểu hiển thị
             </h3>
             <p className="text-text-secondary mb-4">
-              Add text in the middle of the divider to create sections with
-              titles.
+              Divider hỗ trợ 3 kiểu hiển thị: solid (liền), dashed (gạch ngang),
+              và dotted (chấm).
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
-              <p>Content above</p>
-              <Divider text="Section Title" />
-              <p>Content below</p>
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
+              <div>
+                <p className="text-sm text-text-secondary mb-2">
+                  Solid (Mặc định)
+                </p>
+                <Divider style="solid" />
+              </div>
+
+              <div>
+                <p className="text-sm text-text-secondary mb-2">Dashed</p>
+                <Divider style="dashed" />
+              </div>
+
+              <div>
+                <p className="text-sm text-text-secondary mb-2">Dotted</p>
+                <Divider style="dotted" />
+              </div>
             </div>
 
             <CodeBlock
-              code={withTextCode}
+              code={styleExampleCode}
               language="typescript"
               theme="vs-dark"
               readOnly={true}
               headerMode="path"
               headerIcon={<FileCode size={16} />}
-              filePath="src/components/TextExample.tsx"
+              filePath="src/components/StyleExample.tsx"
               showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
+            />
+          </div>
+
+          {/* Thickness Variants */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Độ dày
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Tùy chỉnh độ dày của divider với các giá trị định sẵn hoặc số
+              pixel tùy chỉnh.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
+              <div>
+                <p className="text-sm text-text-secondary mb-2">Thin</p>
+                <Divider thickness="thin" />
+              </div>
+
+              <div>
+                <p className="text-sm text-text-secondary mb-2">
+                  Medium (Mặc định)
+                </p>
+                <Divider thickness="medium" />
+              </div>
+
+              <div>
+                <p className="text-sm text-text-secondary mb-2">Thick</p>
+                <Divider thickness="thick" />
+              </div>
+
+              <div>
+                <p className="text-sm text-text-secondary mb-2">Custom (5px)</p>
+                <Divider thickness={5} />
+              </div>
+            </div>
+
+            <CodeBlock
+              code={thicknessExampleCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/ThicknessExample.tsx"
+              showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
+            />
+          </div>
+
+          {/* Length and Align */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Chiều dài và căn chỉnh
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Điều chỉnh độ dài (theo phần trăm) và vị trí căn chỉnh của
+              divider.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
+              <div>
+                <p className="text-sm text-text-secondary mb-2">50% - Center</p>
+                <Divider length={50} align="center" />
+              </div>
+
+              <div>
+                <p className="text-sm text-text-secondary mb-2">70% - Start</p>
+                <Divider length={70} align="start" />
+              </div>
+
+              <div>
+                <p className="text-sm text-text-secondary mb-2">60% - End</p>
+                <Divider length={60} align="end" />
+              </div>
+            </div>
+
+            <CodeBlock
+              code={lengthAlignCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/LengthAlignExample.tsx"
+              showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
             />
           </div>
 
           {/* Vertical Divider */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Vertical Divider
+              Divider dọc
             </h3>
             <p className="text-text-secondary mb-4">
-              Use vertical dividers in flex containers to separate content
-              horizontally.
+              Sử dụng divider theo chiều dọc để phân cách nội dung ngang.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
               <div
-                style={{
-                  display: "flex",
-                  height: "100px",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+                className="flex items-center gap-4"
+                style={{ height: "200px" }}
               >
-                <p>Left content</p>
-                <Divider orientation="vertical" />
-                <p>Right content</p>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-text-primary mb-2">
+                    Nội dung bên trái
+                  </h4>
+                  <p className="text-sm text-text-secondary">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </p>
+                </div>
+
+                <Divider orientation="vertical" length={80} align="center" />
+
+                <div className="flex-1">
+                  <h4 className="font-semibold text-text-primary mb-2">
+                    Nội dung bên phải
+                  </h4>
+                  <p className="text-sm text-text-secondary">
+                    Sed do eiusmod tempor incididunt ut labore et dolore.
+                  </p>
+                </div>
               </div>
             </div>
 
             <CodeBlock
-              code={verticalCode}
+              code={verticalExampleCode}
               language="typescript"
               theme="vs-dark"
               readOnly={true}
@@ -200,127 +382,55 @@ function VerticalExample() {
               headerIcon={<FileCode size={16} />}
               filePath="src/components/VerticalExample.tsx"
               showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
             />
           </div>
 
-          {/* Variant Styles */}
+          {/* Custom Colors */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Line Variants
+              Tùy chỉnh màu sắc
             </h3>
             <p className="text-text-secondary mb-4">
-              Choose from different line styles: solid, dashed, or dotted.
+              Sử dụng className để thay đổi màu sắc của divider.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
-              <Divider variant="solid" text="Solid" />
-              <Divider variant="dashed" text="Dashed" />
-              <Divider variant="dotted" text="Dotted" />
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
+              <div>
+                <p className="text-sm text-text-secondary mb-2">Red</p>
+                <Divider className="border-red-500" />
+              </div>
+
+              <div>
+                <p className="text-sm text-text-secondary mb-2">Blue</p>
+                <Divider className="border-blue-500" />
+              </div>
+
+              <div>
+                <p className="text-sm text-text-secondary mb-2">Green</p>
+                <Divider className="border-green-500" />
+              </div>
+
+              <div>
+                <p className="text-sm text-text-secondary mb-2">
+                  Purple with Opacity
+                </p>
+                <Divider className="border-purple-500 opacity-50" />
+              </div>
             </div>
 
             <CodeBlock
-              code={`import { Divider } from "@khanhromvn/zenui";
-
-function VariantExample() {
-  return (
-    <div>
-      <Divider variant="solid" text="Solid" />
-      <Divider variant="dashed" text="Dashed" />
-      <Divider variant="dotted" text="Dotted" />
-    </div>
-  );
-}`}
+              code={customColorCode}
               language="typescript"
               theme="vs-dark"
               readOnly={true}
               headerMode="path"
               headerIcon={<FileCode size={16} />}
-              filePath="src/components/VariantExample.tsx"
+              filePath="src/components/CustomColorExample.tsx"
               showLineNumbers={true}
-            />
-          </div>
-
-          {/* Text Alignment */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Text Alignment
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Control the alignment of the text in horizontal dividers.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
-              <Divider text="Left Aligned" textPosition="left" />
-              <Divider text="Center Aligned" textPosition="center" />
-              <Divider text="Right Aligned" textPosition="right" />
-            </div>
-
-            <CodeBlock
-              code={`import { Divider } from "@khanhromvn/zenui";
-
-function AlignmentExample() {
-  return (
-    <div>
-      <Divider text="Left Aligned" textPosition="left" />
-      <Divider text="Center Aligned" textPosition="center" />
-      <Divider text="Right Aligned" textPosition="right" />
-    </div>
-  );
-}`}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/AlignmentExample.tsx"
-              showLineNumbers={true}
-            />
-          </div>
-
-          {/* Custom Styling */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Custom Styling
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Customize the divider with different colors, sizes, and styles.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
-              <Divider size={2} color="#3b82f6" text="Blue Thick" />
-              <Divider
-                size={1}
-                color="#ef4444"
-                variant="dashed"
-                text="Red Dashed"
-              />
-              <Divider
-                size={3}
-                color="#10b981"
-                variant="dotted"
-                text="Green Dotted"
-              />
-            </div>
-
-            <CodeBlock
-              code={`import { Divider } from "@khanhromvn/zenui";
-
-function CustomExample() {
-  return (
-    <div>
-      <Divider size={2} color="#3b82f6" text="Blue Thick" />
-      <Divider size={1} color="#ef4444" variant="dashed" text="Red Dashed" />
-      <Divider size={3} color="#10b981" variant="dotted" text="Green Dotted" />
-    </div>
-  );
-}`}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CustomExample.tsx"
-              showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
             />
           </div>
         </section>
@@ -328,135 +438,111 @@ function CustomExample() {
         {/* PROPS SECTION */}
         <section id="props" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
-            Props
+            Props API
           </h2>
-          <p className="text-text-secondary mb-6">
-            Complete list of props available for the Divider component.
-          </p>
-
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      orientation
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "horizontal" | "vertical"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      "horizontal"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Divider orientation
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      variant
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "solid" | "dashed" | "dotted"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"solid"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Line style variant
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      size
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">1</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Line thickness in pixels
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      color
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      "border-default"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Line color
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      text
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Text content (horizontal only)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      textPosition
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "left" | "center" | "right"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"center"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Text alignment (horizontal only)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      className
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS classes
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      style
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      CSSProperties
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom styles
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div className="bg-card-background border border-border-default rounded-md overflow-hidden">
+            <table className="w-full">
+              <thead className="bg-table-header">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
+                    Prop
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
+                    Type
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
+                    Default
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
+                    Mô tả
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-card-background divide-y divide-border-default">
+                <tr>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
+                    orientation
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    "horizontal" | "vertical"
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    "horizontal"
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    Hướng của divider
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
+                    style
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    "solid" | "dashed" | "dotted"
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    "solid"
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    Kiểu hiển thị của divider
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
+                    thickness
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    "thin" | "medium" | "thick" | number
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    "medium"
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    Độ dày của divider (có thể dùng px tùy chỉnh)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
+                    align
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    "start" | "center" | "end"
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    "center"
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    Căn chỉnh divider (trái/giữa/phải cho ngang, trên/giữa/dưới
+                    cho dọc)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
+                    length
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    number (0-100)
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">100</td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    Độ dài của divider theo % so với container cha
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
+                    className
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    string
+                  </td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">""</td>
+                  <td className="px-6 py-4 text-sm text-text-secondary">
+                    Class tùy chỉnh cho màu sắc và styling (ví dụ:
+                    "border-red-500")
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
       </div>

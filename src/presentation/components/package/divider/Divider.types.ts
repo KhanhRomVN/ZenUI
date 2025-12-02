@@ -1,48 +1,27 @@
-import { ReactNode } from "react";
-
-/**
- * Divider orientation
- */
 export type DividerOrientation = "horizontal" | "vertical";
+export type DividerStyle = "solid" | "dashed" | "dotted";
+export type DividerAlign = "start" | "center" | "end";
+export type DividerThickness = "thin" | "medium" | "thick";
 
-/**
- * Divider variant style
- */
-export type DividerVariant = "solid" | "dashed" | "dotted";
-
-/**
- * Divider text position (horizontal only)
- */
-export type DividerTextPosition = "left" | "center" | "right";
-
-/**
- * Props chính của Divider component
- */
 export interface DividerProps {
   /** Hướng của divider */
   orientation?: DividerOrientation;
 
-  /** Kiểu đường divider */
-  variant?: DividerVariant;
+  /** Kiểu hiển thị: solid, dashed, dotted */
+  style?: DividerStyle;
 
-  /** Độ dày của divider (px) */
-  size?: number;
+  /** Độ dày của divider */
+  thickness?: DividerThickness | number;
 
-  /** Màu sắc divider */
-  color?: string;
+  /** Căn chỉnh divider: start, center, end */
+  align?: DividerAlign;
 
-  /** Text hiển thị (chỉ horizontal) */
-  text?: ReactNode;
+  /** Độ dài của divider theo % so với container cha (0-100) */
+  length?: number;
 
-  /** Vị trí text (chỉ horizontal) */
-  textPosition?: DividerTextPosition;
-
-  /** Custom class name */
+  /** Class tùy chỉnh cho màu sắc và styling khác */
   className?: string;
 
-  /** Custom style */
-  style?: React.CSSProperties;
-
-  /** Các props HTML div khác */
+  /** Props khác */
   [key: string]: any;
 }

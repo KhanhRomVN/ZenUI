@@ -22,6 +22,17 @@ module.exports = {
     "bg-table-footerBg",
     "border-table-border",
     "hover:bg-table-rowHoverBg",
+    // Tab safelist
+    "bg-tab-background",
+    "border-tab-border",
+    "hover:border-tab-hoverBorder",
+    // TabItem safelist
+    "bg-tab-item-background",
+    "hover:bg-tab-item-hoverBg",
+    "focus:bg-tab-item-focusBg",
+    "border-tab-item-border",
+    "hover:border-tab-item-hoverBorder",
+    "focus:border-tab-item-focusBorder",
   ],
   theme: {
     extend: {
@@ -82,6 +93,21 @@ module.exports = {
           rowFocusBg: "var(--table-row-focus-bg)",
           footerBg: "var(--table-footer-bg)",
           border: "var(--table-border)",
+        },
+        // Tab colors
+        tab: {
+          background: "var(--tab-background)",
+          border: "var(--tab-border)",
+          hoverBorder: "var(--tab-hover-border)",
+        },
+        // TabItem colors
+        "tab-item": {
+          background: "var(--tab-item-background)",
+          hoverBg: "var(--tab-item-hover-bg)",
+          focusBg: "var(--tab-item-focus-bg)",
+          border: "var(--tab-item-border)",
+          hoverBorder: "var(--tab-item-hover-border)",
+          focusBorder: "var(--tab-item-focus-border)",
         },
       },
     },

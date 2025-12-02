@@ -13,8 +13,8 @@ export interface BreadcrumbProps {
   /** Children (BreadcrumbItem components) */
   children: ReactNode;
 
-  /** Icon ngăn cách giữa các item */
-  separator?: LucideIcon | ReactNode;
+  /** Icon ngăn cách giữa các item - chỉ LucideIcon */
+  separator?: LucideIcon;
 
   /** Kích thước breadcrumb */
   size?: BreadcrumbSize;
@@ -30,8 +30,8 @@ export interface BreadcrumbProps {
  * Props của BreadcrumbItem component
  */
 export interface BreadcrumbItemProps {
-  /** Icon của item */
-  icon?: LucideIcon | ReactNode;
+  /** Icon của item - chỉ LucideIcon */
+  icon?: LucideIcon;
 
   /** Text hiển thị */
   text: string;

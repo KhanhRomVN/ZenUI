@@ -1,133 +1,90 @@
-import { CSSProperties } from "react";
 import {
   DividerOrientation,
-  DividerVariant,
-  DividerTextPosition,
+  DividerStyle,
+  DividerAlign,
+  DividerThickness,
 } from "./Divider.types";
 
 /**
- * Get divider styles based on props
+ * Lấy class cho kiểu hiển thị divider
  */
-export const getDividerStyles = (
-  orientation: DividerOrientation,
-  variant: DividerVariant,
-  size: number,
-  color: string,
-  hasText: boolean
-): CSSProperties => {
-  const baseStyle: CSSProperties = {
-    border: "none",
-    backgroundColor: color,
+export const getDividerStyleClass = (style: DividerStyle = "solid"): string => {
+  const styleMap: Record<DividerStyle, string> = {
+    solid: "border-solid",
+    dashed: "border-dashed",
+    dotted: "border-dotted",
   };
+
+  return styleMap[style];
+};
+
+/**
+ * Lấy độ dày của divider dựa trên thickness prop
+ */
+export const getDividerThickness = (
+  thickness: DividerThickness | number = "medium",
+  orientation: DividerOrientation = "horizontal"
+): string => {
+  if (typeof thickness === "number") {
+    return orientation === "horizontal"
+      ? `border-t-[${thickness}px]`
+      : `border-l-[${thickness}px]`;
+  }
+
+  const thicknessMap: Record<DividerThickness, string> = {
+    thin: orientation === "horizontal" ? "border-t" : "border-l",
+    medium: orientation === "horizontal" ? "border-t-2" : "border-l-2",
+    thick: orientation === "horizontal" ? "border-t-4" : "border-l-4",
+  };
+
+  return thicknessMap[thickness];
+};
+
+/**
+ * Lấy class căn chỉnh divider
+ */
+export const getDividerAlignClass = (
+  align: DividerAlign = "center",
+  orientation: DividerOrientation = "horizontal"
+): string => {
+  if (orientation === "horizontal") {
+    const alignMap: Record<DividerAlign, string> = {
+      start: "mr-auto",
+      center: "mx-auto",
+      end: "ml-auto",
+    };
+    return alignMap[align];
+  } else {
+    const alignMap: Record<DividerAlign, string> = {
+      start: "mb-auto",
+      center: "my-auto",
+      end: "mt-auto",
+    };
+    return alignMap[align];
+  }
+};
+
+/**
+ * Lấy class cho độ dài divider
+ */
+export const getDividerLengthStyle = (
+  length: number = 100,
+  orientation: DividerOrientation = "horizontal"
+): React.CSSProperties => {
+  const clampedLength = Math.min(Math.max(length, 0), 100);
 
   if (orientation === "horizontal") {
-    baseStyle.width = "100%";
-    baseStyle.height = `${size}px`;
-    baseStyle.margin = hasText ? "16px 0" : "8px 0";
-    baseStyle.display = "flex";
-    baseStyle.alignItems = "center";
-
-    // Apply border style for horizontal
-    switch (variant) {
-      case "dashed":
-        baseStyle.borderBottom = `${size}px dashed ${color}`;
-        baseStyle.backgroundColor = "transparent";
-        break;
-      case "dotted":
-        baseStyle.borderBottom = `${size}px dotted ${color}`;
-        baseStyle.backgroundColor = "transparent";
-        break;
-      default:
-        baseStyle.borderBottom = `${size}px solid ${color}`;
-        baseStyle.backgroundColor = "transparent";
-    }
+    return { width: `${clampedLength}%` };
   } else {
-    // Vertical
-    baseStyle.width = `${size}px`;
-    baseStyle.height = "100%";
-    baseStyle.margin = "0 8px";
-    baseStyle.display = "inline-block";
-
-    // Apply border style for vertical
-    switch (variant) {
-      case "dashed":
-        baseStyle.borderRight = `${size}px dashed ${color}`;
-        baseStyle.backgroundColor = "transparent";
-        break;
-      case "dotted":
-        baseStyle.borderRight = `${size}px dotted ${color}`;
-        baseStyle.backgroundColor = "transparent";
-        break;
-      default:
-        baseStyle.borderRight = `${size}px solid ${color}`;
-        baseStyle.backgroundColor = "transparent";
-    }
-  }
-
-  return baseStyle;
-};
-
-/**
- * Get divider text styles
- */
-export const getDividerTextStyles = (
-  orientation: DividerOrientation,
-  textPosition: DividerTextPosition
-): CSSProperties => {
-  if (orientation === "vertical") {
-    return {};
-  }
-
-  const baseStyle: CSSProperties = {
-    padding: "0 16px",
-    fontSize: "14px",
-    color: "inherit",
-    whiteSpace: "nowrap" as const,
-  };
-
-  switch (textPosition) {
-    case "left":
-      return { ...baseStyle, marginRight: "auto" };
-    case "right":
-      return { ...baseStyle, marginLeft: "auto" };
-    case "center":
-    default:
-      return baseStyle;
+    return { height: `${clampedLength}%` };
   }
 };
 
 /**
- * Check if text should be shown
+ * Lấy class cơ bản cho orientation
  */
-export const shouldShowText = (
-  text: React.ReactNode | undefined,
-  orientation: DividerOrientation
-): boolean => {
-  return !!text && orientation === "horizontal";
-};
-
-/**
- * Validate divider props
- */
-export const validateDividerProps = (
-  props: any
-): { isValid: boolean; errors: string[] } => {
-  const errors: string[] = [];
-
-  if (props.text && props.orientation === "vertical") {
-    errors.push("Text is only supported for horizontal dividers");
-  }
-
-  if (props.size && (props.size < 1 || props.size > 10)) {
-    errors.push("Size should be between 1px and 10px");
-  }
-
-  if (props.textPosition && !props.text) {
-    errors.push("textPosition should only be used when text is provided");
-  }
-
-  return {
-    isValid: errors.length === 0,
-    errors,
-  };
+export const getDividerOrientationClass = (
+  orientation: DividerOrientation = "horizontal"
+): string => {
+  return orientation === "horizontal" ? "w-full" : "h-full";
 };

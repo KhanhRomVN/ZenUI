@@ -2,12 +2,14 @@ export { default as Divider } from "./Divider";
 export type {
   DividerProps,
   DividerOrientation,
-  DividerVariant,
-  DividerTextPosition,
+  DividerStyle,
+  DividerAlign,
+  DividerThickness,
 } from "./Divider.types";
 export {
-  getDividerStyles,
-  getDividerTextStyles,
-  shouldShowText,
-  validateDividerProps,
+  getDividerStyleClass,
+  getDividerThickness,
+  getDividerAlignClass,
+  getDividerLengthStyle,
+  getDividerOrientationClass,
 } from "./Divider.utils";

@@ -9,7 +9,7 @@ interface ExtendedBreadcrumbItemProps extends BreadcrumbItemProps {
 }
 
 const BreadcrumbItem: React.FC<ExtendedBreadcrumbItemProps> = ({
-  icon,
+  icon: IconComponent, // Đổi tên để sử dụng trực tiếp
   text,
   href,
   onClick,
@@ -28,29 +28,6 @@ const BreadcrumbItem: React.FC<ExtendedBreadcrumbItemProps> = ({
     }
   };
 
-  const renderIcon = () => {
-    if (!icon) return null;
-
-    try {
-      // Kiểm tra React element trước (cho trường hợp icon={<Home />})
-      if (React.isValidElement(icon)) {
-        return icon;
-      }
-
-      // Kiểm tra function component (cho trường hợp icon={Home})
-      if (typeof icon === "function") {
-        const IconComponent = icon as React.ComponentType<{ size?: number }>;
-        return <IconComponent size={iconSize} />;
-      }
-
-      // Fallback: render như ReactNode
-      return <span className="inline-flex">{icon}</span>;
-    } catch (error) {
-      console.warn("Error rendering breadcrumb icon:", error);
-      return null;
-    }
-  };
-
   const baseClasses = cn(
     "breadcrumb-item flex items-center",
     _isActive
@@ -59,15 +36,19 @@ const BreadcrumbItem: React.FC<ExtendedBreadcrumbItemProps> = ({
     className
   );
 
-  const iconElement = renderIcon();
+  const iconElement = IconComponent ? <IconComponent size={iconSize} /> : null;
+
+  const content = (
+    <span className="flex items-center gap-2">
+      {iconElement}
+      <span>{text}</span>
+    </span>
+  );
 
   if (_isActive) {
     return (
       <li className={baseClasses} style={sizeStyles} {...props}>
-        <span className="flex items-center gap-2">
-          {iconElement}
-          <span>{text}</span>
-        </span>
+        {content}
       </li>
     );
   }
@@ -80,8 +61,7 @@ const BreadcrumbItem: React.FC<ExtendedBreadcrumbItemProps> = ({
           onClick={handleClick}
           className="breadcrumb-link flex items-center gap-2"
         >
-          {iconElement}
-          <span>{text}</span>
+          {content}
         </a>
       </li>
     );
@@ -94,10 +74,7 @@ const BreadcrumbItem: React.FC<ExtendedBreadcrumbItemProps> = ({
       onClick={handleClick}
       {...props}
     >
-      <span className="flex items-center gap-2">
-        {iconElement}
-        <span>{text}</span>
-      </span>
+      {content}
     </li>
   );
 };

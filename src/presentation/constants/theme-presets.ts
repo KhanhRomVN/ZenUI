@@ -3,6 +3,17 @@ import { ReactNode } from "react";
 export interface PresetThemeType {
   name: string;
   primary: string;
+  // Tab variables
+  tabBackground?: string;
+  tabBorder?: string;
+  tabHoverBorder?: string;
+  // TabItem variables
+  tabItemBackground?: string;
+  tabItemHoverBg?: string;
+  tabItemFocusBg?: string;
+  tabItemBorder?: string;
+  tabItemHoverBorder?: string;
+  tabItemFocusBorder?: string;
   background: string;
   textPrimary?: string;
   textSecondary?: string;
@@ -94,6 +105,17 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       tableRowFocusBg: "#e0e7ff",
       tableFooterBg: "#f8fafc",
       tableBorder: "#e2e8f0",
+      // Tab variables for DefaultLight
+      tabBackground: "#ffffff",
+      tabBorder: "#e2e8f0",
+      tabHoverBorder: "#cbd5e1",
+      // TabItem variables for DefaultLight
+      tabItemBackground: "transparent",
+      tabItemHoverBg: "#f8fafc",
+      tabItemFocusBg: "#dbeafe",
+      tabItemBorder: "transparent",
+      tabItemHoverBorder: "#cbd5e1",
+      tabItemFocusBorder: "#3686ff",
     },
     {
       name: "IndigoLight",
@@ -139,6 +161,17 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       tableRowFocusBg: "#ddd6fe",
       tableFooterBg: "#e0e7ff",
       tableBorder: "#c7d2fe",
+      // Tab variables for IndigoLight
+      tabBackground: "#ffffff",
+      tabBorder: "#c7d2fe",
+      tabHoverBorder: "#a5b4fc",
+      // TabItem variables for IndigoLight
+      tabItemBackground: "transparent",
+      tabItemHoverBg: "#e0e7ff",
+      tabItemFocusBg: "#ddd6fe",
+      tabItemBorder: "transparent",
+      tabItemHoverBorder: "#a5b4fc",
+      tabItemFocusBorder: "#4f46e5",
     },
   ],
   dark: [
@@ -186,6 +219,17 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       tableRowFocusBg: "#333333",
       tableFooterBg: "#1a1a1a",
       tableBorder: "#353535",
+      // Tab variables for DefaultDark
+      tabBackground: "#1e1e1e",
+      tabBorder: "#353535",
+      tabHoverBorder: "#418dfe",
+      // TabItem variables for DefaultDark
+      tabItemBackground: "transparent",
+      tabItemHoverBg: "#2d2d2d",
+      tabItemFocusBg: "#1e3a5f",
+      tabItemBorder: "transparent",
+      tabItemHoverBorder: "#418dfe",
+      tabItemFocusBorder: "#3686ff",
     },
     {
       name: "MidnightDark",
@@ -231,6 +275,17 @@ export const PRESET_THEMES: Record<"light" | "dark", PresetThemeType[]> = {
       tableRowFocusBg: "#475569",
       tableFooterBg: "#0f172a",
       tableBorder: "#1e293b",
+      // Tab variables for MidnightDark
+      tabBackground: "#0f172a",
+      tabBorder: "#1e293b",
+      tabHoverBorder: "#6366f1",
+      // TabItem variables for MidnightDark
+      tabItemBackground: "transparent",
+      tabItemHoverBg: "#1e293b",
+      tabItemFocusBg: "#312e81",
+      tabItemBorder: "transparent",
+      tabItemHoverBorder: "#6366f1",
+      tabItemFocusBorder: "#6366f1",
     },
   ],
 };

@@ -12,7 +12,7 @@ import {
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({
   children,
-  separator = ChevronRight,
+  separator: SeparatorIcon = ChevronRight,
   size = 100,
   className = "",
   ...props
@@ -41,46 +41,10 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
     return () => window.removeEventListener("resize", checkOverflow);
   }, [children]);
 
-  const renderSeparator = () => {
-    if (typeof separator === "function") {
-      const SeparatorIcon = separator as React.ComponentType<{ size?: number }>;
-      return <SeparatorIcon size={iconSize} />;
-    }
-
-    if (React.isValidElement(separator)) {
-      return separator;
-    }
-
-    return <span>{separator}</span>;
-  };
-
   const renderCollapsedBreadcrumb = () => {
     const firstItem = childrenArray[0];
     const lastItem = childrenArray[totalItems - 1];
     const hiddenItems = childrenArray.slice(1, totalItems - 1);
-
-    const renderDropdownIcon = (icon: any) => {
-      if (!icon) return null;
-
-      try {
-        // Kiểm tra React element trước
-        if (React.isValidElement(icon)) {
-          return icon;
-        }
-
-        // Kiểm tra function component
-        if (typeof icon === "function") {
-          const IconComponent = icon as React.ComponentType<{ size?: number }>;
-          return <IconComponent size={iconSize} />;
-        }
-
-        // Fallback: render như ReactNode
-        return <span className="inline-flex">{icon}</span>;
-      } catch (error) {
-        console.warn("Error rendering dropdown icon:", error);
-        return null;
-      }
-    };
 
     return (
       <>
@@ -93,7 +57,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
           className="breadcrumb-separator flex items-center"
           style={sizeStyles}
         >
-          {renderSeparator()}
+          <SeparatorIcon size={iconSize} />
         </span>
 
         <Dropdown size="sm">
@@ -108,9 +72,11 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
           <DropdownContent className="bg-dropdown-background border border-dropdown-border">
             {hiddenItems.map((item, index) => {
               const itemProps = (item as React.ReactElement).props;
-              const iconElement = itemProps.icon
-                ? renderDropdownIcon(itemProps.icon)
-                : null;
+              const IconComponent = itemProps.icon;
+              const iconElement = IconComponent ? (
+                <IconComponent size={iconSize} />
+              ) : null;
+
               return (
                 <DropdownItem
                   key={index}
@@ -135,7 +101,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
           className="breadcrumb-separator flex items-center"
           style={sizeStyles}
         >
-          {renderSeparator()}
+          <SeparatorIcon size={iconSize} />
         </span>
 
         {React.cloneElement(lastItem as React.ReactElement, {
@@ -160,7 +126,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
               className="breadcrumb-separator flex items-center"
               style={sizeStyles}
             >
-              {renderSeparator()}
+              <SeparatorIcon size={iconSize} />
             </span>
           )}
         </React.Fragment>

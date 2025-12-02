@@ -38,19 +38,27 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
   const renderIcon = (icon: React.ReactNode, iconSize: number) => {
     if (!icon) return null;
 
-    // If icon is a function (Lucide icon)
+    // Nếu icon là LucideIcon (function component)
     if (typeof icon === "function") {
       const IconComponent = icon as React.ComponentType<{ size?: number }>;
       return <IconComponent size={iconSize} />;
     }
 
-    // If icon is a React element
-    if (React.isValidElement(icon)) {
-      return icon;
-    }
-
-    // Otherwise render as is
-    return <span className="flex items-center justify-center">{icon}</span>;
+    // Nếu icon là ReactNode (emoji, SVG, text, React element, etc.)
+    return (
+      <span
+        className="dropdown-icon-content"
+        style={{
+          fontSize: `${iconSize}px`,
+          lineHeight: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {icon}
+      </span>
+    );
   };
 
   return (

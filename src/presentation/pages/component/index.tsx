@@ -12,12 +12,12 @@ import DrawerSection from "./components/Section/DrawerSection";
 import DropdownSection from "./components/Section/DropdownSection";
 import InputSection from "./components/Section/InputSection";
 import InputOTPSection from "./components/Section/InputOTPSection";
-import MenuBarSection from "./components/Section/MenuBarSection";
-import MenuTabSection from "./components/Section/MenuTabSection";
 import ModalSection from "./components/Section/ModalSection";
 import PaginationSection from "./components/Section/PaginationSection";
 import TableSection from "./components/Section/TableSection";
 import TabSection from "./components/Section/TabSection";
+import AccordionSection from "./components/Section/AccordionSection";
+import CarouselSection from "./components/Section/CarouselSection";
 
 const ComponentsPage = () => {
   const location = useLocation();
@@ -28,6 +28,8 @@ const ComponentsPage = () => {
     switch (section) {
       case "avatar":
         return <AvatarSection />;
+      case "accordion":
+        return <AccordionSection />;
       case "badge":
         return <BadgeSection />;
       case "breadcrumb":
@@ -36,6 +38,8 @@ const ComponentsPage = () => {
         return <ButtonSection />;
       case "card":
         return <CardSection />;
+      case "carousel":
+        return <CarouselSection />;
       case "checkbox":
         return <CheckboxSection />;
       case "codeblock":
@@ -50,10 +54,6 @@ const ComponentsPage = () => {
         return <InputSection />;
       case "input-otp":
         return <InputOTPSection />;
-      case "menubar":
-        return <MenuBarSection />;
-      case "menutab":
-        return <MenuTabSection />;
       case "modal":
         return <ModalSection />;
       case "pagination":

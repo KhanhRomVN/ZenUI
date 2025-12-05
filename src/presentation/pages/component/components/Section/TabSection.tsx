@@ -156,7 +156,7 @@ function CustomStylesExample() {
                 icon={<Home size={16} />}
                 className="border-b-2 border-tab-item-border"
                 hoverClassName="hover:bg-tab-item-hoverBg hover:border-tab-item-hoverBorder"
-                activeClassName="bg-tab-item-focusBg border-tab-item-focusBorder text-primary"
+                activeClassName="border-tab-item-focusBorder text-primary"
               >
                 Home
               </TabItem>
@@ -165,7 +165,7 @@ function CustomStylesExample() {
                 icon={<User size={16} />}
                 className="border-b-2 border-tab-item-border"
                 hoverClassName="hover:bg-tab-item-hoverBg hover:border-tab-item-hoverBorder"
-                activeClassName="bg-tab-item-focusBg border-tab-item-focusBorder text-primary"
+                activeClassName="border-tab-item-focusBorder text-primary"
               >
                 Profile
               </TabItem>
@@ -174,7 +174,7 @@ function CustomStylesExample() {
                 icon={<Settings size={16} />}
                 className="border-b-2 border-tab-item-border"
                 hoverClassName="hover:bg-tab-item-hoverBg hover:border-tab-item-hoverBorder"
-                activeClassName="bg-tab-item-focusBg border-tab-item-focusBorder text-primary"
+                activeClassName="border-tab-item-focusBorder text-primary"
               >
                 Settings
               </TabItem>
@@ -183,7 +183,7 @@ function CustomStylesExample() {
                 icon={<Bell size={16} />}
                 className="border-b-2 border-tab-item-border"
                 hoverClassName="hover:bg-tab-item-hoverBg hover:border-tab-item-hoverBorder"
-                activeClassName="bg-tab-item-focusBg border-tab-item-focusBorder text-primary"
+                activeClassName="border-tab-item-focusBorder text-primary"
               >
                 Notifications
               </TabItem>
@@ -211,32 +211,68 @@ function CustomStylesExample() {
             Advanced Examples
           </h2>
 
-          {/* Controlled Example */}
-          <div className="mb-8">
+          {/* Controlled Tab Example */}
+          <div className="mb-10">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Controlled Tabs
+              Controlled Tab
             </h3>
             <p className="text-text-secondary mb-4">
-              Control the active tab externally with controlled props.
+              You can control the active tab externally using the{" "}
+              <code className="px-2 py-1 bg-card-background border border-border-default rounded text-sm">
+                active
+              </code>{" "}
+              and{" "}
+              <code className="px-2 py-1 bg-card-background border border-border-default rounded text-sm">
+                onActiveChange
+              </code>{" "}
+              props.
             </p>
 
+            {/* Live Demo */}
             <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
-              <div className="mb-4">
-                <Tab
-                  active={controlledTab}
-                  onActiveChange={setControlledTab}
-                  width="full"
-                >
-                  <TabItem id="profile">Profile</TabItem>
-                  <TabItem id="messages">Messages</TabItem>
-                  <TabItem id="account">Account</TabItem>
-                </Tab>
+              <div className="mb-4 text-text-secondary text-sm">
+                Active Tab:{" "}
+                <span className="font-semibold text-primary">
+                  {controlledTab}
+                </span>
               </div>
-              <p className="text-sm text-text-secondary">
-                Active tab: {controlledTab}
-              </p>
+              <Tab
+                active={controlledTab}
+                onActiveChange={setControlledTab}
+                width="full"
+                className="bg-tab-background border-b border-tab-border"
+              >
+                <TabItem
+                  id="profile"
+                  icon={<User size={16} />}
+                  className="border-b-2 border-tab-item-border"
+                  hoverClassName="hover:bg-tab-item-hoverBg hover:border-tab-item-hoverBorder"
+                  activeClassName="border-tab-item-focusBorder text-primary"
+                >
+                  Profile
+                </TabItem>
+                <TabItem
+                  id="settings"
+                  icon={<Settings size={16} />}
+                  className="border-b-2 border-tab-item-border"
+                  hoverClassName="hover:bg-tab-item-hoverBg hover:border-tab-item-hoverBorder"
+                  activeClassName="border-tab-item-focusBorder text-primary"
+                >
+                  Settings
+                </TabItem>
+                <TabItem
+                  id="notifications"
+                  icon={<Bell size={16} />}
+                  className="border-b-2 border-tab-item-border"
+                  hoverClassName="hover:bg-tab-item-hoverBg hover:border-tab-item-hoverBorder"
+                  activeClassName="border-tab-item-focusBorder text-primary"
+                >
+                  Notifications
+                </TabItem>
+              </Tab>
             </div>
 
+            {/* Code Example */}
             <CodeBlock
               code={controlledExampleCode}
               language="typescript"
@@ -246,48 +282,67 @@ function CustomStylesExample() {
               headerIcon={<FileCode size={16} />}
               filePath="src/components/ControlledExample.tsx"
               showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
             />
           </div>
 
-          {/* Custom Styles */}
-          <div className="mb-8">
+          {/* Pill Style Example */}
+          <div className="mb-10">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Custom Styling
+              Pill Style Tabs
             </h3>
             <p className="text-text-secondary mb-4">
-              Customize the appearance of each state (default, hover, active)
-              with className props.
+              Create modern pill-style tabs with rounded corners and background
+              colors.
             </p>
 
+            {/* Live Demo */}
             <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
-              <Tab width="full" className="bg-gray-50 p-1 rounded-lg">
+              <Tab
+                width="full"
+                className="bg-gray-100 dark:bg-gray-800 p-1 rounded-lg"
+              >
                 <TabItem
-                  id="dashboard"
-                  className="rounded-md"
-                  hoverClassName="hover:bg-white hover:shadow-sm"
-                  activeClassName="bg-white shadow-sm text-purple-600 border-purple-600"
+                  id="home"
+                  icon={<Home size={16} />}
+                  className="rounded-md border-0"
+                  hoverClassName="hover:bg-white/50 dark:hover:bg-gray-700/50"
+                  activeClassName="bg-white dark:bg-gray-900 shadow-sm text-primary"
                 >
-                  Dashboard
+                  Home
                 </TabItem>
                 <TabItem
-                  id="analytics"
-                  className="rounded-md"
-                  hoverClassName="hover:bg-white hover:shadow-sm"
-                  activeClassName="bg-white shadow-sm text-purple-600 border-purple-600"
+                  id="profile"
+                  icon={<User size={16} />}
+                  className="rounded-md border-0"
+                  hoverClassName="hover:bg-white/50 dark:hover:bg-gray-700/50"
+                  activeClassName="bg-white dark:bg-gray-900 shadow-sm text-primary"
                 >
-                  Analytics
+                  Profile
                 </TabItem>
                 <TabItem
-                  id="reports"
-                  className="rounded-md"
-                  hoverClassName="hover:bg-white hover:shadow-sm"
-                  activeClassName="bg-white shadow-sm text-purple-600 border-purple-600"
+                  id="settings"
+                  icon={<Settings size={16} />}
+                  className="rounded-md border-0"
+                  hoverClassName="hover:bg-white/50 dark:hover:bg-gray-700/50"
+                  activeClassName="bg-white dark:bg-gray-900 shadow-sm text-primary"
                 >
-                  Reports
+                  Settings
+                </TabItem>
+                <TabItem
+                  id="mail"
+                  icon={<Mail size={16} />}
+                  className="rounded-md border-0"
+                  hoverClassName="hover:bg-white/50 dark:hover:bg-gray-700/50"
+                  activeClassName="bg-white dark:bg-gray-900 shadow-sm text-primary"
+                >
+                  Mail
                 </TabItem>
               </Tab>
             </div>
 
+            {/* Code Example */}
             <CodeBlock
               code={customStylesCode}
               language="typescript"
@@ -295,248 +350,545 @@ function CustomStylesExample() {
               readOnly={true}
               headerMode="path"
               headerIcon={<FileCode size={16} />}
-              filePath="src/components/CustomStylesExample.tsx"
+              filePath="src/components/PillStyleExample.tsx"
               showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
             />
           </div>
 
-          {/* Width Modes */}
-          <div className="mb-8">
+          {/* Vertical Border Style Example */}
+          <div className="mb-10">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Width Modes
+              Vertical Border Style
             </h3>
             <p className="text-text-secondary mb-4">
-              Choose between full-width (fills parent) or fit-width
-              (content-based) tabs.
+              Create tabs with left border indicator instead of bottom border.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
-              <div>
-                <p className="text-sm font-medium text-text-primary mb-2">
-                  Full Width
-                </p>
-                <Tab width="full">
-                  <TabItem id="tab1" icon={<Mail size={16} />}>
-                    Inbox
-                  </TabItem>
-                  <TabItem id="tab2" icon={<Bell size={16} />}>
-                    Alerts
-                  </TabItem>
-                  <TabItem id="tab3" icon={<Settings size={16} />}>
-                    Config
-                  </TabItem>
-                </Tab>
-              </div>
-
-              <div>
-                <p className="text-sm font-medium text-text-primary mb-2">
-                  Fit Width
-                </p>
-                <Tab width="fit">
-                  <TabItem id="tab4">Short Tab</TabItem>
-                  <TabItem id="tab5">Medium Tab</TabItem>
-                  <TabItem id="tab6">Longer Tab Name</TabItem>
-                </Tab>
-              </div>
-            </div>
-          </div>
-
-          {/* Alignment Options */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Alignment Options
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Align tabs to left, center, right, or distribute with
-              space-between.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
-              <div>
-                <p className="text-sm font-medium text-text-primary mb-2">
-                  Left Aligned
-                </p>
-                <Tab align="left" width="full">
-                  <TabItem id="left1">Tab 1</TabItem>
-                  <TabItem id="left2">Tab 2</TabItem>
-                </Tab>
-              </div>
-
-              <div>
-                <p className="text-sm font-medium text-text-primary mb-2">
-                  Center Aligned
-                </p>
-                <Tab align="center" width="full">
-                  <TabItem id="center1">Tab 1</TabItem>
-                  <TabItem id="center2">Tab 2</TabItem>
-                </Tab>
-              </div>
-
-              <div>
-                <p className="text-sm font-medium text-text-primary mb-2">
-                  Right Aligned
-                </p>
-                <Tab align="right" width="full">
-                  <TabItem id="right1">Tab 1</TabItem>
-                  <TabItem id="right2">Tab 2</TabItem>
-                </Tab>
-              </div>
-
-              <div>
-                <p className="text-sm font-medium text-text-primary mb-2">
-                  Space Between
-                </p>
-                <Tab align="space-between" width="full">
-                  <TabItem id="space1">First</TabItem>
-                  <TabItem id="space2">Middle</TabItem>
-                  <TabItem id="space3">Last</TabItem>
-                </Tab>
-              </div>
-            </div>
-          </div>
-
-          {/* Disabled State */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Disabled State
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Disable individual tab items to prevent user interaction.
-            </p>
-
+            {/* Live Demo */}
             <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
-              <Tab width="full">
-                <TabItem id="enabled" icon={<Home size={16} />}>
-                  Enabled Tab
+              <Tab width="full" className="border-l-0">
+                <TabItem
+                  id="home"
+                  icon={<Home size={16} />}
+                  className="border-l-4 border-transparent"
+                  hoverClassName="hover:bg-tab-item-hoverBg hover:border-l-gray-300"
+                  activeClassName="border-l-primary bg-tab-item-focusBg text-primary"
+                >
+                  Home
                 </TabItem>
-                <TabItem id="disabled" disabled icon={<User size={16} />}>
-                  Disabled Tab
+                <TabItem
+                  id="profile"
+                  icon={<User size={16} />}
+                  className="border-l-4 border-transparent"
+                  hoverClassName="hover:bg-tab-item-hoverBg hover:border-l-gray-300"
+                  activeClassName="border-l-primary bg-tab-item-focusBg text-primary"
+                >
+                  Profile
                 </TabItem>
-                <TabItem id="another" icon={<Settings size={16} />}>
-                  Another Tab
+                <TabItem
+                  id="settings"
+                  icon={<Settings size={16} />}
+                  className="border-l-4 border-transparent"
+                  hoverClassName="hover:bg-tab-item-hoverBg hover:border-l-gray-300"
+                  activeClassName="border-l-primary bg-tab-item-focusBg text-primary"
+                >
+                  Settings
                 </TabItem>
               </Tab>
             </div>
+
+            {/* Code Example */}
+            <CodeBlock
+              code={`import { Tab, TabItem } from "@khanhromvn/zenui";
+import { Home, User, Settings } from "lucide-react";
+
+function VerticalBorderExample() {
+  return (
+    <Tab width="full" className="border-l-0">
+      <TabItem
+        id="home"
+        icon={<Home size={16} />}
+        className="border-l-4 border-transparent"
+        hoverClassName="hover:bg-tab-item-hoverBg hover:border-l-gray-300"
+        activeClassName="border-l-primary bg-tab-item-focusBg text-primary"
+      >
+        Home
+      </TabItem>
+      <TabItem
+        id="profile"
+        icon={<User size={16} />}
+        className="border-l-4 border-transparent"
+        hoverClassName="hover:bg-tab-item-hoverBg hover:border-l-gray-300"
+        activeClassName="border-l-primary bg-tab-item-focusBg text-primary"
+      >
+        Profile
+      </TabItem>
+      <TabItem
+        id="settings"
+        icon={<Settings size={16} />}
+        className="border-l-4 border-transparent"
+        hoverClassName="hover:bg-tab-item-hoverBg hover:border-l-gray-300"
+        activeClassName="border-l-primary bg-tab-item-focusBg text-primary"
+      >
+        Settings
+      </TabItem>
+    </Tab>
+  );
+}`}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/VerticalBorderExample.tsx"
+              showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
+            />
           </div>
 
-          {/* Style Variants */}
-          <div className="mb-8">
+          {/* Minimal Style Example */}
+          <div className="mb-10">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Style Variants
+              Minimal Style Tabs
             </h3>
             <p className="text-text-secondary mb-4">
-              Different styling approaches for tabs to match your design system.
+              Clean, minimal tabs with subtle hover effects and no borders.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-8">
-              {/* Border Top & Bottom */}
-              <div>
-                <p className="text-sm font-medium text-text-primary mb-3">
-                  Border Top & Bottom
-                </p>
-                <Tab width="full">
+            {/* Live Demo */}
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+              <Tab width="full" className="gap-2">
+                <TabItem
+                  id="home"
+                  className="border-0 rounded-md"
+                  hoverClassName="hover:bg-gray-100 dark:hover:bg-gray-800"
+                  activeClassName="bg-primary/10 text-primary"
+                >
+                  Home
+                </TabItem>
+                <TabItem
+                  id="profile"
+                  className="border-0 rounded-md"
+                  hoverClassName="hover:bg-gray-100 dark:hover:bg-gray-800"
+                  activeClassName="bg-primary/10 text-primary"
+                >
+                  Profile
+                </TabItem>
+                <TabItem
+                  id="settings"
+                  className="border-0 rounded-md"
+                  hoverClassName="hover:bg-gray-100 dark:hover:bg-gray-800"
+                  activeClassName="bg-primary/10 text-primary"
+                >
+                  Settings
+                </TabItem>
+                <TabItem
+                  id="notifications"
+                  className="border-0 rounded-md"
+                  hoverClassName="hover:bg-gray-100 dark:hover:bg-gray-800"
+                  activeClassName="bg-primary/10 text-primary"
+                >
+                  Notifications
+                </TabItem>
+              </Tab>
+            </div>
+
+            {/* Code Example */}
+            <CodeBlock
+              code={`import { Tab, TabItem } from "@khanhromvn/zenui";
+
+function MinimalStyleExample() {
+  return (
+    <Tab width="full" className="gap-2">
+      <TabItem
+        id="home"
+        className="border-0 rounded-md"
+        hoverClassName="hover:bg-gray-100 dark:hover:bg-gray-800"
+        activeClassName="bg-primary/10 text-primary"
+      >
+        Home
+      </TabItem>
+      <TabItem
+        id="profile"
+        className="border-0 rounded-md"
+        hoverClassName="hover:bg-gray-100 dark:hover:bg-gray-800"
+        activeClassName="bg-primary/10 text-primary"
+      >
+        Profile
+      </TabItem>
+      <TabItem
+        id="settings"
+        className="border-0 rounded-md"
+        hoverClassName="hover:bg-gray-100 dark:hover:bg-gray-800"
+        activeClassName="bg-primary/10 text-primary"
+      >
+        Settings
+      </TabItem>
+      <TabItem
+        id="notifications"
+        className="border-0 rounded-md"
+        hoverClassName="hover:bg-gray-100 dark:hover:bg-gray-800"
+        activeClassName="bg-primary/10 text-primary"
+      >
+        Notifications
+      </TabItem>
+    </Tab>
+  );
+}`}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/MinimalStyleExample.tsx"
+              showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
+            />
+          </div>
+
+          {/* Alignment Examples */}
+          <div className="mb-10">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Tab Alignment
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Control the alignment of tabs using the{" "}
+              <code className="px-2 py-1 bg-card-background border border-border-default rounded text-sm">
+                align
+              </code>{" "}
+              prop.
+            </p>
+
+            {/* Left Align Demo */}
+            <div className="mb-6">
+              <p className="text-sm text-text-secondary mb-2">
+                Left Aligned (default)
+              </p>
+              <div className="bg-card-background border border-border-default rounded-md p-8">
+                <Tab
+                  width="full"
+                  align="left"
+                  className="bg-tab-background border-b border-tab-border"
+                >
                   <TabItem
-                    id="border1"
-                    icon={<Home size={16} />}
-                    className="border-t-2 border-b-2 border-transparent"
-                    hoverClassName="hover:border-t-gray-300 hover:border-b-gray-300"
-                    activeClassName="border-t-blue-600 border-b-blue-600 text-blue-600"
+                    id="home"
+                    className="border-b-2 border-tab-item-border"
+                    hoverClassName="hover:bg-tab-item-hoverBg"
+                    activeClassName="border-tab-item-focusBorder text-primary"
                   >
                     Home
                   </TabItem>
                   <TabItem
-                    id="border2"
-                    icon={<User size={16} />}
-                    className="border-t-2 border-b-2 border-transparent"
-                    hoverClassName="hover:border-t-gray-300 hover:border-b-gray-300"
-                    activeClassName="border-t-blue-600 border-b-blue-600 text-blue-600"
+                    id="profile"
+                    className="border-b-2 border-tab-item-border"
+                    hoverClassName="hover:bg-tab-item-hoverBg"
+                    activeClassName="border-tab-item-focusBorder text-primary"
                   >
                     Profile
-                  </TabItem>
-                  <TabItem
-                    id="border3"
-                    icon={<Settings size={16} />}
-                    className="border-t-2 border-b-2 border-transparent"
-                    hoverClassName="hover:border-t-gray-300 hover:border-b-gray-300"
-                    activeClassName="border-t-blue-600 border-b-blue-600 text-blue-600"
-                  >
-                    Settings
-                  </TabItem>
-                </Tab>
-              </div>
-
-              {/* Card Style (Background Only) */}
-              <div>
-                <p className="text-sm font-medium text-text-primary mb-3">
-                  Card Style (Background)
-                </p>
-                <Tab width="full" className="bg-gray-100 p-1 rounded-lg">
-                  <TabItem
-                    id="card1"
-                    icon={<Mail size={16} />}
-                    className="rounded-md border-0"
-                    hoverClassName="hover:bg-gray-200"
-                    activeClassName="bg-white shadow-md text-blue-600 border-0"
-                  >
-                    Inbox
-                  </TabItem>
-                  <TabItem
-                    id="card2"
-                    icon={<Bell size={16} />}
-                    className="rounded-md border-0"
-                    hoverClassName="hover:bg-gray-200"
-                    activeClassName="bg-white shadow-md text-blue-600 border-0"
-                  >
-                    Notifications
-                  </TabItem>
-                  <TabItem
-                    id="card3"
-                    icon={<Settings size={16} />}
-                    className="rounded-md border-0"
-                    hoverClassName="hover:bg-gray-200"
-                    activeClassName="bg-white shadow-md text-blue-600 border-0"
-                  >
-                    Settings
-                  </TabItem>
-                </Tab>
-              </div>
-
-              {/* Border Style (Border Only) */}
-              <div>
-                <p className="text-sm font-medium text-text-primary mb-3">
-                  Border Style
-                </p>
-                <Tab width="full">
-                  <TabItem
-                    id="outline1"
-                    icon={<Home size={16} />}
-                    className="rounded-md border border-transparent"
-                    hoverClassName="hover:border-gray-300"
-                    activeClassName="border-blue-600 text-blue-600"
-                  >
-                    Dashboard
-                  </TabItem>
-                  <TabItem
-                    id="outline2"
-                    icon={<User size={16} />}
-                    className="rounded-md border border-transparent"
-                    hoverClassName="hover:border-gray-300"
-                    activeClassName="border-blue-600 text-blue-600"
-                  >
-                    Team
-                  </TabItem>
-                  <TabItem
-                    id="outline3"
-                    icon={<Settings size={16} />}
-                    className="rounded-md border border-transparent"
-                    hoverClassName="hover:border-gray-300"
-                    activeClassName="border-blue-600 text-blue-600"
-                  >
-                    Settings
                   </TabItem>
                 </Tab>
               </div>
             </div>
+
+            {/* Center Align Demo */}
+            <div className="mb-6">
+              <p className="text-sm text-text-secondary mb-2">Center Aligned</p>
+              <div className="bg-card-background border border-border-default rounded-md p-8">
+                <Tab
+                  width="full"
+                  align="center"
+                  className="bg-tab-background border-b border-tab-border"
+                >
+                  <TabItem
+                    id="home"
+                    className="border-b-2 border-tab-item-border"
+                    hoverClassName="hover:bg-tab-item-hoverBg"
+                    activeClassName="border-tab-item-focusBorder text-primary"
+                  >
+                    Home
+                  </TabItem>
+                  <TabItem
+                    id="profile"
+                    className="border-b-2 border-tab-item-border"
+                    hoverClassName="hover:bg-tab-item-hoverBg"
+                    activeClassName="border-tab-item-focusBorder text-primary"
+                  >
+                    Profile
+                  </TabItem>
+                </Tab>
+              </div>
+            </div>
+
+            {/* Right Align Demo */}
+            <div className="mb-6">
+              <p className="text-sm text-text-secondary mb-2">Right Aligned</p>
+              <div className="bg-card-background border border-border-default rounded-md p-8">
+                <Tab
+                  width="full"
+                  align="right"
+                  className="bg-tab-background border-b border-tab-border"
+                >
+                  <TabItem
+                    id="home"
+                    className="border-b-2 border-tab-item-border"
+                    hoverClassName="hover:bg-tab-item-hoverBg"
+                    activeClassName="border-tab-item-focusBorder text-primary"
+                  >
+                    Home
+                  </TabItem>
+                  <TabItem
+                    id="profile"
+                    className="border-b-2 border-tab-item-border"
+                    hoverClassName="hover:bg-tab-item-hoverBg"
+                    activeClassName="border-tab-item-focusBorder text-primary"
+                  >
+                    Profile
+                  </TabItem>
+                </Tab>
+              </div>
+            </div>
+
+            {/* Space Between Demo */}
+            <div className="mb-6">
+              <p className="text-sm text-text-secondary mb-2">Space Between</p>
+              <div className="bg-card-background border border-border-default rounded-md p-8">
+                <Tab
+                  width="full"
+                  align="space-between"
+                  className="bg-tab-background border-b border-tab-border"
+                >
+                  <TabItem
+                    id="home"
+                    className="border-b-2 border-tab-item-border"
+                    hoverClassName="hover:bg-tab-item-hoverBg"
+                    activeClassName="border-tab-item-focusBorder text-primary"
+                  >
+                    Home
+                  </TabItem>
+                  <TabItem
+                    id="profile"
+                    className="border-b-2 border-tab-item-border"
+                    hoverClassName="hover:bg-tab-item-hoverBg"
+                    activeClassName="border-tab-item-focusBorder text-primary"
+                  >
+                    Profile
+                  </TabItem>
+                </Tab>
+              </div>
+            </div>
+
+            {/* Code Example */}
+            <CodeBlock
+              code={`import { Tab, TabItem } from "@khanhromvn/zenui";
+
+function AlignmentExamples() {
+  return (
+    <>
+      {/* Left Aligned (default) */}
+      <Tab width="full" align="left">
+        <TabItem id="home">Home</TabItem>
+        <TabItem id="profile">Profile</TabItem>
+      </Tab>
+
+      {/* Center Aligned */}
+      <Tab width="full" align="center">
+        <TabItem id="home">Home</TabItem>
+        <TabItem id="profile">Profile</TabItem>
+      </Tab>
+
+      {/* Right Aligned */}
+      <Tab width="full" align="right">
+        <TabItem id="home">Home</TabItem>
+        <TabItem id="profile">Profile</TabItem>
+      </Tab>
+
+      {/* Space Between */}
+      <Tab width="full" align="space-between">
+        <TabItem id="home">Home</TabItem>
+        <TabItem id="profile">Profile</TabItem>
+      </Tab>
+    </>
+  );
+}`}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/AlignmentExamples.tsx"
+              showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
+            />
+          </div>
+
+          {/* Icon Position Example */}
+          <div className="mb-10">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Icon Position
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Control icon position using the{" "}
+              <code className="px-2 py-1 bg-card-background border border-border-default rounded text-sm">
+                iconPosition
+              </code>{" "}
+              prop.
+            </p>
+
+            {/* Live Demo */}
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+              <Tab
+                width="full"
+                className="bg-tab-background border-b border-tab-border mb-4"
+              >
+                <TabItem
+                  id="home"
+                  icon={<Home size={16} />}
+                  iconPosition="left"
+                  className="border-b-2 border-tab-item-border"
+                  hoverClassName="hover:bg-tab-item-hoverBg"
+                  activeClassName="border-tab-item-focusBorder text-primary"
+                >
+                  Icon Left
+                </TabItem>
+                <TabItem
+                  id="profile"
+                  icon={<User size={16} />}
+                  iconPosition="right"
+                  className="border-b-2 border-tab-item-border"
+                  hoverClassName="hover:bg-tab-item-hoverBg"
+                  activeClassName="border-tab-item-focusBorder text-primary"
+                >
+                  Icon Right
+                </TabItem>
+              </Tab>
+            </div>
+
+            {/* Code Example */}
+            <CodeBlock
+              code={`import { Tab, TabItem } from "@khanhromvn/zenui";
+import { Home, User } from "lucide-react";
+
+function IconPositionExample() {
+  return (
+    <Tab width="full">
+      <TabItem 
+        id="home" 
+        icon={<Home size={16} />} 
+        iconPosition="left"
+      >
+        Icon Left
+      </TabItem>
+      <TabItem 
+        id="profile" 
+        icon={<User size={16} />} 
+        iconPosition="right"
+      >
+        Icon Right
+      </TabItem>
+    </Tab>
+  );
+}`}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/IconPositionExample.tsx"
+              showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
+            />
+          </div>
+
+          {/* Disabled State Example */}
+          <div className="mb-10">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Disabled State
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Disable specific tabs using the{" "}
+              <code className="px-2 py-1 bg-card-background border border-border-default rounded text-sm">
+                disabled
+              </code>{" "}
+              prop.
+            </p>
+
+            {/* Live Demo */}
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+              <Tab
+                width="full"
+                className="bg-tab-background border-b border-tab-border"
+              >
+                <TabItem
+                  id="home"
+                  icon={<Home size={16} />}
+                  className="border-b-2 border-tab-item-border"
+                  hoverClassName="hover:bg-tab-item-hoverBg"
+                  activeClassName="border-tab-item-focusBorder text-primary"
+                >
+                  Home
+                </TabItem>
+                <TabItem
+                  id="profile"
+                  icon={<User size={16} />}
+                  disabled={true}
+                  className="border-b-2 border-tab-item-border"
+                  hoverClassName="hover:bg-tab-item-hoverBg"
+                  activeClassName="border-tab-item-focusBorder text-primary"
+                >
+                  Profile (Disabled)
+                </TabItem>
+                <TabItem
+                  id="settings"
+                  icon={<Settings size={16} />}
+                  className="border-b-2 border-tab-item-border"
+                  hoverClassName="hover:bg-tab-item-hoverBg"
+                  activeClassName="border-tab-item-focusBorder text-primary"
+                >
+                  Settings
+                </TabItem>
+              </Tab>
+            </div>
+
+            {/* Code Example */}
+            <CodeBlock
+              code={`import { Tab, TabItem } from "@khanhromvn/zenui";
+import { Home, User, Settings } from "lucide-react";
+
+function DisabledExample() {
+  return (
+    <Tab width="full">
+      <TabItem id="home" icon={<Home size={16} />}>
+        Home
+      </TabItem>
+      <TabItem 
+        id="profile" 
+        icon={<User size={16} />}
+        disabled={true}
+      >
+        Profile (Disabled)
+      </TabItem>
+      <TabItem id="settings" icon={<Settings size={16} />}>
+        Settings
+      </TabItem>
+    </Tab>
+  );
+}`}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/DisabledExample.tsx"
+              showLineNumbers={true}
+              showGutter={true}
+              showLineHighlight={false}
+            />
           </div>
         </section>
 

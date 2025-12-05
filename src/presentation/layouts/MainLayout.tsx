@@ -31,6 +31,12 @@ const Navbar = () => {
           >
             Components
           </Link>
+          <Link
+            to="/layouts"
+            className="text-text-secondary hover:text-text-primary transition-colors"
+          >
+            Layouts
+          </Link>
         </div>
       </div>
 

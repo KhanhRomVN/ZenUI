@@ -9,9 +9,7 @@ export type CardSize = number;
  * Căn chỉnh card trong container cha
  */
 export interface CardAlign {
-  /** Căn ngang: left, center, right */
   horizontal?: "left" | "center" | "right";
-  /** Căn dọc: top, center, bottom */
   vertical?: "top" | "center" | "bottom";
 }
 
@@ -19,51 +17,6 @@ export interface CardAlign {
  * Chiều rộng card (percentage của container cha)
  */
 export type CardWidth = number;
-
-/**
- * Appear animation variants cho card
- */
-export type AppearAnimationVariant =
-  | "fade"
-  | "slide-up"
-  | "slide-down"
-  | "slide-left"
-  | "slide-right"
-  | "scale"
-  | "rotate"
-  | "flip"
-  | "none";
-
-/**
- * Hover effect variants cho card
- */
-export type HoverEffectVariant =
-  | "lift"
-  | "glow"
-  | "border-glow"
-  | "glass"
-  | "tilt"
-  | "scale"
-  | "shadow"
-  | "none";
-
-/**
- * Custom hover effect configuration
- */
-export interface HoverEffectConfig {
-  /** Transform style khi hover */
-  transform?: string;
-  /** Box shadow khi hover */
-  boxShadow?: string;
-  /** Border style khi hover */
-  border?: string;
-  /** Background style khi hover */
-  background?: string;
-  /** Transition duration */
-  transitionDuration?: string;
-  /** Other CSS properties */
-  [key: string]: any;
-}
 
 /**
  * Props chính của Card component
@@ -90,18 +43,6 @@ export interface CardProps {
   /** Click handler */
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 
-  /** Hiển thị hover effect */
-  hoverable?: boolean;
-
-  /** Appear animation variant */
-  appearAnimationVariant?: AppearAnimationVariant;
-
-  /** Hover effect variant (nếu set thì sẽ override hoverEffect) */
-  hoverEffectVariant?: HoverEffectVariant;
-
-  /** Custom hover effect (chỉ hoạt động khi hoverEffectVariant không được set) */
-  hoverEffect?: HoverEffectConfig;
-
   /** Các props HTML div khác */
   [key: string]: any;
 }
@@ -115,4 +56,46 @@ export interface CardSizeConfig {
 
   /** Border radius */
   borderRadius: string;
+}
+
+/**
+ * Props cho CardHeader component
+ */
+export interface CardHeaderProps {
+  /** Nội dung header */
+  children?: ReactNode;
+
+  /** Custom class name */
+  className?: string;
+
+  /** Các props HTML div khác */
+  [key: string]: any;
+}
+
+/**
+ * Props cho CardBody component
+ */
+export interface CardBodyProps {
+  /** Nội dung body */
+  children?: ReactNode;
+
+  /** Custom class name */
+  className?: string;
+
+  /** Các props HTML div khác */
+  [key: string]: any;
+}
+
+/**
+ * Props cho CardFooter component
+ */
+export interface CardFooterProps {
+  /** Nội dung footer */
+  children?: ReactNode;
+
+  /** Custom class name */
+  className?: string;
+
+  /** Các props HTML div khác */
+  [key: string]: any;
 }

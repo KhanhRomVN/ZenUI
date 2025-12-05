@@ -1,19 +1,19 @@
 export { default as Card } from "./Card";
+export { default as CardHeader } from "./CardHeader";
+export { default as CardBody } from "./CardBody";
+export { default as CardFooter } from "./CardFooter";
 export type {
   CardProps,
   CardSize,
   CardWidth,
   CardAlign,
   CardSizeConfig,
-  AppearAnimationVariant,
-  HoverEffectVariant,
-  HoverEffectConfig,
+  CardHeaderProps,
+  CardBodyProps,
+  CardFooterProps,
 } from "./Card.types";
 export {
   getCardSizeConfig,
   getCardAlignmentStyles,
-  getHoverStyles,
   validateCardProps,
-  getAppearAnimationVariants,
-  getHoverEffectStyles,
 } from "./Card.utils";

@@ -1,0 +1,30 @@
+import { useLocation } from "react-router-dom";
+import LayoutSidebar from "./components/LayoutSidebar";
+import KanbanLayoutSection from "./components/Section/KanbanLayoutSection";
+import MasonryLayoutSection from "./components/Section/MasonryLayoutSection";
+
+const LayoutPage = () => {
+  const location = useLocation();
+  const section = new URLSearchParams(location.search).get("section") || "grid";
+
+  const renderSection = () => {
+    switch (section) {
+      case "kanban":
+        return <KanbanLayoutSection />;
+      case "masonry":
+        return <MasonryLayoutSection />;
+      default:
+    }
+  };
+
+  return (
+    <div className="flex h-full relative">
+      <LayoutSidebar />
+      <main className="flex-1 overflow-y-auto p-8 pr-64" id="main-content">
+        {renderSection()}
+      </main>
+    </div>
+  );
+};
+
+export default LayoutPage;

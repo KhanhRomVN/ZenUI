@@ -5,11 +5,13 @@ const ComponentSidebar = () => {
     new URLSearchParams(location.search).get("section") || "drawer";
 
   const components = [
+    { name: "Accordion", slug: "accordion" },
     { name: "Avatar", slug: "avatar" },
     { name: "Badge", slug: "badge" },
     { name: "Breadcrumb", slug: "breadcrumb" },
     { name: "Button", slug: "button" },
     { name: "Card", slug: "card" },
+    { name: "Carousel", slug: "carousel" },
     { name: "Checkbox", slug: "checkbox" },
     { name: "Code Block", slug: "codeblock" },
     { name: "Divider", slug: "divider" },
@@ -17,8 +19,6 @@ const ComponentSidebar = () => {
     { name: "Dropdown", slug: "dropdown" },
     { name: "Input", slug: "input" },
     { name: "Input OTP", slug: "input-otp" },
-    { name: "Menu Bar", slug: "menubar" },
-    { name: "Menu Tab", slug: "menutab" },
     { name: "Modal", slug: "modal" },
     { name: "Pagination", slug: "pagination" },
     { name: "Table", slug: "table" },

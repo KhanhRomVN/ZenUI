@@ -9,16 +9,23 @@ interface RouteConfig {
 
 // Lazy load pages
 const ComponentsPage = lazy(() => import("../pages/component"));
+const HomePage = lazy(() => import("../pages/home"));
+const LayoutPage = lazy(() => import("../pages/layout"));
 
 const publicRoutes: RouteConfig[] = [
   {
     path: "/",
-    element: ComponentsPage,
+    element: HomePage,
     layout: MainLayout,
   },
   {
     path: "/components",
     element: ComponentsPage,
+    layout: MainLayout,
+  },
+  {
+    path: "/layout",
+    element: LayoutPage,
     layout: MainLayout,
   },
 ];

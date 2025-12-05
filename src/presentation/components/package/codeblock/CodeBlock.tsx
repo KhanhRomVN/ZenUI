@@ -12,7 +12,6 @@ import {
   countLines,
   getBuiltInThemes,
 } from "./CodeBlock.utils";
-import { useTheme } from "../../../providers/theme-provider";
 
 const CodeBlock: React.FC<CodeBlockProps> = ({
   code,

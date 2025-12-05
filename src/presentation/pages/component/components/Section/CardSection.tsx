@@ -1,4 +1,9 @@
-import { Card } from "../../../../components/package/card";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+} from "../../../../components/package/card";
 import { CodeBlock } from "../../../../components/package/codeblock";
 import { FileCode, Star, User, Check, X, RefreshCw } from "lucide-react";
 import RightPanel from "../RightPanel";
@@ -24,16 +29,16 @@ const CardSection = () => {
 
   const yarnInstallCode = `yarn add @khanhromvn/zenui`;
 
-  const basicUsageCode = `import { Card } from "@khanhromvn/zenui";
+  const basicUsageCode = `import { Card, CardHeader, CardBody, CardFooter } from "@khanhromvn/zenui";
 
 function MyComponent() {
   return (
     <Card
-      className="bg-card-background border-border-default rounded-md"
+      className="rounded-md"
       cardAlign={{ horizontal: "center", vertical: "center" }}
       width={50}
     >
-      <div className="space-y-4">
+      <CardHeader>
         <div>
           <h3 className="text-xl font-semibold text-text-primary">
             Basic Card
@@ -42,16 +47,18 @@ function MyComponent() {
             Card with full header and footer
           </p>
         </div>
-        
-        <div className="border-t border-border-default pt-4">
-          <p className="text-text-secondary">
-            Footer section contains action buttons. Footer section
-            contains action buttons. Footer section contains action
-            buttons. Footer section contains action buttons.
-          </p>
-        </div>
-        
-        <div className="flex gap-3 border-t border-border-default pt-4">
+      </CardHeader>
+      
+      <CardBody>
+        <p className="text-text-secondary">
+          Footer section contains action buttons. Footer section
+          contains action buttons. Footer section contains action
+          buttons. Footer section contains action buttons.
+        </p>
+      </CardBody>
+      
+      <CardFooter>
+        <div className="flex gap-3">
           <button className="px-4 py-2 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors">
             Action
           </button>
@@ -59,12 +66,12 @@ function MyComponent() {
             Cancel
           </button>
         </div>
-      </div>
+      </CardFooter>
     </Card>
   );
 }`;
 
-  const alignmentExampleCode = `import { Card } from "@khanhromvn/zenui";
+  const alignmentExampleCode = `import { Card, CardHeader, CardBody } from "@khanhromvn/zenui";
 
 function AlignmentExample() {
   return (
@@ -74,199 +81,179 @@ function AlignmentExample() {
         <Card
           cardAlign={{ horizontal: "center", vertical: "center" }}
           width={50}
-          className="bg-card-background border-border-default rounded-md"
+          className="rounded-md"
         >
-          <div className="text-center">
-            <h3 className="text-xl font-semibold text-text-primary mb-2">
-              Centered Card
-            </h3>
-            <p className="text-sm text-text-secondary">
-              This card is centered both horizontally and vertically in container.
-            </p>
-          </div>
+          <CardBody>
+            <div className="text-center">
+              <h3 className="text-xl font-semibold text-text-primary mb-2">
+                Centered Card
+              </h3>
+              <p className="text-sm text-text-secondary">
+                This card is centered both horizontally and vertically in container.
+              </p>
+            </div>
+          </CardBody>
         </Card>
       </div>
     </div>
   );
 }`;
 
-  const sizeOptionCode = `import { Card } from "@khanhromvn/zenui";
+  const sizeOptionCode = `import { Card, CardHeader, CardBody } from "@khanhromvn/zenui";
 
 function SizeOptionExample() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <Card
         size={80}
-        className="bg-card-background border-border-default rounded-md"
+        className="rounded-md"
       >
-        <h3 className="text-lg font-semibold text-text-primary mb-1">
-          Small Card
-        </h3>
-        <p className="text-sm text-text-secondary mb-3">Size 80%</p>
-        <p className="text-text-secondary">
-          Compact card for dense layouts.
-        </p>
+        <CardBody>
+          <h3 className="text-lg font-semibold text-text-primary mb-1">
+            Small Card
+          </h3>
+          <p className="text-sm text-text-secondary mb-3">Size 80%</p>
+          <p className="text-text-secondary">
+            Compact card for dense layouts.
+          </p>
+        </CardBody>
       </Card>
       
       <Card
         size={100}
-        className="bg-card-background border-border-default rounded-md"
+        className="rounded-md"
       >
-        <h3 className="text-lg font-semibold text-text-primary mb-1">
-          Default Card
-        </h3>
-        <p className="text-sm text-text-secondary mb-3">Size 100%</p>
-        <p className="text-text-secondary">
-          Standard size for most use cases.
-        </p>
+        <CardBody>
+          <h3 className="text-lg font-semibold text-text-primary mb-1">
+            Default Card
+          </h3>
+          <p className="text-sm text-text-secondary mb-3">Size 100%</p>
+          <p className="text-text-secondary">
+            Standard size for most use cases.
+          </p>
+        </CardBody>
       </Card>
       
       <Card
         size={120}
-        className="bg-card-background border-border-default rounded-md"
+        className="rounded-md"
       >
-        <h3 className="text-lg font-semibold text-text-primary mb-1">
-          Large Card
-        </h3>
-        <p className="text-sm text-text-secondary mb-3">Size 120%</p>
-        <p className="text-text-secondary">
-          Emphasized card for important content.
-        </p>
-      </Card>
-    </div>
-  );
-}`;
-
-  const animationExampleCode = `import React from "react";
-import { Card } from "@khanhromvn/zenui";
-import { RefreshCw } from "lucide-react";
-
-function AnimationExample() {
-  const [animationKey, setAnimationKey] = React.useState(0);
-
-  const handleReloadAnimation = () => {
-    setAnimationKey((prev) => prev + 1);
-  };
-
-  return (
-    <div className="relative h-96 border-2 border-dashed border-border-default rounded-lg p-4 flex items-center justify-center">
-      <Card
-        key={animationKey}
-        appearAnimationVariant="slide-up"
-        className="bg-card-background border-border-default rounded-md"
-        width={40}
-      >
-        <div className="space-y-3">
-          <h3 className="text-xl font-semibold text-text-primary">
-            Animated Card
+        <CardBody>
+          <h3 className="text-lg font-semibold text-text-primary mb-1">
+            Large Card
           </h3>
+          <p className="text-sm text-text-secondary mb-3">Size 120%</p>
           <p className="text-text-secondary">
-            This card appears with a slide-up animation. Click the reload button to see it again.
+            Emphasized card for important content.
           </p>
-        </div>
+        </CardBody>
       </Card>
-      
-      <button
-        onClick={handleReloadAnimation}
-        className="absolute bottom-4 right-4 p-2 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors"
-        title="Reload animation"
-      >
-        <RefreshCw size={20} />
-      </button>
     </div>
   );
 }`;
 
-  const hoverEffectExampleCode = `import { Card } from "@khanhromvn/zenui";
+  const hoverEffectExampleCode = `import { Card, CardBody } from "@khanhromvn/zenui";
 
 function HoverEffectExample() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <Card
         hoverEffectVariant="lift"
-        className="bg-card-background border-border-default rounded-md"
+        className="rounded-md"
       >
-        <h3 className="text-lg font-semibold text-text-primary mb-2">
-          Lift Effect
-        </h3>
-        <p className="text-text-secondary">
-          Hover to see lift effect with shadow
-        </p>
+        <CardBody>
+          <h3 className="text-lg font-semibold text-text-primary mb-2">
+            Lift Effect
+          </h3>
+          <p className="text-text-secondary">
+            Hover to see lift effect with shadow
+          </p>
+        </CardBody>
       </Card>
       
       <Card
         hoverEffectVariant="glow"
-        className="bg-card-background border-border-default rounded-md"
+        className="rounded-md"
       >
-        <h3 className="text-lg font-semibold text-text-primary mb-2">
-          Glow Effect
-        </h3>
-        <p className="text-text-secondary">
-          Hover to see glowing effect
-        </p>
+        <CardBody>
+          <h3 className="text-lg font-semibold text-text-primary mb-2">
+            Glow Effect
+          </h3>
+          <p className="text-text-secondary">
+            Hover to see glowing effect
+          </p>
+        </CardBody>
       </Card>
       
       <Card
         hoverEffectVariant="glass"
-        className="bg-card-background border-border-default rounded-md"
+        className="rounded-md"
       >
-        <h3 className="text-lg font-semibold text-text-primary mb-2">
-          Glass Effect
-        </h3>
-        <p className="text-text-secondary">
-          Hover to see glass morphism effect
-        </p>
+        <CardBody>
+          <h3 className="text-lg font-semibold text-text-primary mb-2">
+            Glass Effect
+          </h3>
+          <p className="text-text-secondary">
+            Hover to see glass morphism effect
+          </p>
+        </CardBody>
       </Card>
       
       <Card
         hoverEffectVariant="tilt"
-        className="bg-card-background border-border-default rounded-md"
+        className="rounded-md"
       >
-        <h3 className="text-lg font-semibold text-text-primary mb-2">
-          Tilt Effect
-        </h3>
-        <p className="text-text-secondary">
-          Hover to see 3D tilt effect
-        </p>
+        <CardBody>
+          <h3 className="text-lg font-semibold text-text-primary mb-2">
+            Tilt Effect
+          </h3>
+          <p className="text-text-secondary">
+            Hover to see 3D tilt effect
+          </p>
+        </CardBody>
       </Card>
       
       <Card
         hoverEffectVariant="scale"
-        className="bg-card-background border-border-default rounded-md"
+        className="rounded-md"
       >
-        <h3 className="text-lg font-semibold text-text-primary mb-2">
-          Scale Effect
-        </h3>
-        <p className="text-text-secondary">
-          Hover to see scale up effect
-        </p>
+        <CardBody>
+          <h3 className="text-lg font-semibold text-text-primary mb-2">
+            Scale Effect
+          </h3>
+          <p className="text-text-secondary">
+            Hover to see scale up effect
+          </p>
+        </CardBody>
       </Card>
       
       <Card
         hoverEffectVariant="border-glow"
-        className="bg-card-background border-border-default rounded-md"
+        className="rounded-md"
       >
-        <h3 className="text-lg font-semibold text-text-primary mb-2">
-          Border Glow
-        </h3>
-        <p className="text-text-secondary">
-          Hover to see border glowing
-        </p>
+        <CardBody>
+          <h3 className="text-lg font-semibold text-text-primary mb-2">
+            Border Glow
+          </h3>
+          <p className="text-text-secondary">
+            Hover to see border glowing
+          </p>
+        </CardBody>
       </Card>
     </div>
   );
 }`;
 
-  const loginFormCode = `import { Card } from "@khanhromvn/zenui";
+  const loginFormCode = `import { Card, CardHeader, CardBody, CardFooter } from "@khanhromvn/zenui";
 
 function LoginFormExample() {
   return (
     <Card
-      className="bg-card-background border-border-default rounded-md"
+      className="rounded-md"
       width={40}
       cardAlign={{ horizontal: "center", vertical: "center" }}
     >
-      <div className="space-y-6">
+      <CardHeader>
         <div>
           <h3 className="text-2xl font-semibold text-text-primary">
             Welcome Back
@@ -275,7 +262,9 @@ function LoginFormExample() {
             Login to your account
           </p>
         </div>
-        
+      </CardHeader>
+      
+      <CardBody>
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-text-primary mb-1">
@@ -298,7 +287,9 @@ function LoginFormExample() {
             />
           </div>
         </div>
-        
+      </CardBody>
+      
+      <CardFooter>
         <div className="space-y-3">
           <button className="px-4 py-2 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors w-full">
             Login
@@ -313,17 +304,17 @@ function LoginFormExample() {
             Login with Google
           </button>
         </div>
-      </div>
+      </CardFooter>
     </Card>
   );
 }`;
 
-  const productCardCode = `import { Card } from "@khanhromvn/zenui";
+  const productCardCode = `import { Card, CardBody, CardFooter } from "@khanhromvn/zenui";
 
 function ProductCardExample() {
   return (
     <Card
-      className="bg-card-background border-border-default rounded-md overflow-hidden"
+      className="rounded-md overflow-hidden"
       width={35}
       style={{ padding: 0 }}
     >
@@ -332,18 +323,22 @@ function ProductCardExample() {
         alt="Product"
         className="w-full h-48 object-cover"
       />
-      <div className="p-5 space-y-4">
-        <div>
-          <h3 className="text-xl font-semibold text-text-primary">
-            Premium Headphones
-          </h3>
-          <p className="text-sm text-text-secondary mt-1">
-            High-quality wireless headphones with noise cancellation
+      <CardBody>
+        <div className="space-y-4">
+          <div>
+            <h3 className="text-xl font-semibold text-text-primary">
+              Premium Headphones
+            </h3>
+            <p className="text-sm text-text-secondary mt-1">
+              High-quality wireless headphones with noise cancellation
+            </p>
+          </div>
+          <p className="text-text-secondary">
+            Experience crystal-clear audio with our premium wireless headphones featuring active noise cancellation technology.
           </p>
         </div>
-        <p className="text-text-secondary">
-          Experience crystal-clear audio with our premium wireless headphones featuring active noise cancellation technology.
-        </p>
+      </CardBody>
+      <CardFooter>
         <div className="flex justify-end gap-3 pt-2">
           <button className="px-4 py-2 bg-button-secondBg hover:bg-button-secondBgHover text-text-primary rounded-lg transition-colors">
             View Details
@@ -352,67 +347,72 @@ function ProductCardExample() {
             Add to Cart
           </button>
         </div>
-      </div>
+      </CardFooter>
     </Card>
   );
 }`;
 
-  const featureCardCode = `import { Card } from "@khanhromvn/zenui";
+  const featureCardCode = `import { Card, CardBody } from "@khanhromvn/zenui";
 import { Zap } from "lucide-react";
 
 function FeatureCardExample() {
   return (
     <Card
-      className="bg-card-background border-border-default rounded-md hover:border-button-bg transition-colors"
+      className="rounded-md hover:border-button-bg transition-colors"
       width={30}
     >
-      <div className="space-y-3">
-        <div className="w-12 h-12 bg-button-bg/10 rounded-lg flex items-center justify-center">
-          <Zap className="text-button-bg" size={24} />
+      <CardBody>
+        <div className="space-y-3">
+          <div className="w-12 h-12 bg-button-bg/10 rounded-lg flex items-center justify-center">
+            <Zap className="text-button-bg" size={24} />
+          </div>
+          <h3 className="text-xl font-semibold text-text-primary">
+            Lightning Fast
+          </h3>
+          <p className="text-text-secondary">
+            Optimized for performance with instant loading and smooth interactions.
+          </p>
         </div>
-        <h3 className="text-xl font-semibold text-text-primary">
-          Lightning Fast
-        </h3>
-        <p className="text-text-secondary">
-          Optimized for performance with instant loading and smooth interactions.
-        </p>
-      </div>
+      </CardBody>
     </Card>
   );
 }`;
 
-  const statsCardCode = `import { Card } from "@khanhromvn/zenui";
+  const statsCardCode = `import { Card, CardBody, CardFooter } from "@khanhromvn/zenui";
 import { TrendingUp } from "lucide-react";
 
 function StatsCardExample() {
   return (
     <Card
-      className="bg-card-background border-border-default rounded-md"
+      className="rounded-md"
       width={30}
     >
-      <div className="space-y-4">
-        <div className="flex items-start justify-between">
-          <div className="space-y-1">
-            <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center">
-              <TrendingUp className="text-green-500" size={20} />
+      <CardBody>
+        <div className="space-y-4">
+          <div className="flex items-start justify-between">
+            <div className="space-y-1">
+              <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center">
+                <TrendingUp className="text-green-500" size={20} />
+              </div>
+              <h3 className="text-lg font-semibold text-text-primary pt-2">
+                Total Revenue
+              </h3>
+              <p className="text-sm text-text-secondary">
+                Monthly earnings overview
+              </p>
             </div>
-            <h3 className="text-lg font-semibold text-text-primary pt-2">
-              Total Revenue
-            </h3>
-            <p className="text-sm text-text-secondary">
-              Monthly earnings overview
-            </p>
+            <button className="p-2 hover:bg-input-background rounded-lg transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-text-secondary">
+                <circle cx="12" cy="12" r="1"/>
+                <circle cx="12" cy="5" r="1"/>
+                <circle cx="12" cy="19" r="1"/>
+              </svg>
+            </button>
           </div>
-          <button className="p-2 hover:bg-input-background rounded-lg transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-text-secondary">
-              <circle cx="12" cy="12" r="1"/>
-              <circle cx="12" cy="5" r="1"/>
-              <circle cx="12" cy="19" r="1"/>
-            </svg>
-          </button>
         </div>
-        
-        <div className="flex items-center justify-between border-t border-border-default pt-4">
+      </CardBody>
+      <CardFooter>
+        <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-text-primary">
             $12,458
           </span>
@@ -420,7 +420,7 @@ function StatsCardExample() {
             View Report
           </button>
         </div>
-      </div>
+      </CardFooter>
     </Card>
   );
 }`;
@@ -485,11 +485,11 @@ function StatsCardExample() {
           <div className="mb-6">
             <div className="border-2 border-dashed border-border-default rounded-lg p-6">
               <Card
-                className="bg-card-background border-border-default rounded-md"
+                className="rounded-md"
                 cardAlign={{ horizontal: "center", vertical: "center" }}
                 width={50}
               >
-                <div className="space-y-4">
+                <CardHeader>
                   <div>
                     <h3 className="text-xl font-semibold text-text-primary">
                       Basic Card
@@ -498,16 +498,18 @@ function StatsCardExample() {
                       Card with full header and footer
                     </p>
                   </div>
+                </CardHeader>
 
-                  <div className="border-t border-border-default pt-4">
-                    <p className="text-text-secondary">
-                      Footer section contains action buttons. Footer section
-                      contains action buttons. Footer section contains action
-                      buttons. Footer section contains action buttons.
-                    </p>
-                  </div>
+                <CardBody>
+                  <p className="text-text-secondary">
+                    Footer section contains action buttons. Footer section
+                    contains action buttons. Footer section contains action
+                    buttons. Footer section contains action buttons.
+                  </p>
+                </CardBody>
 
-                  <div className="flex gap-3 border-t border-border-default pt-4">
+                <CardFooter>
+                  <div className="flex gap-3">
                     <button className="px-4 py-2 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors">
                       Action
                     </button>
@@ -515,7 +517,7 @@ function StatsCardExample() {
                       Cancel
                     </button>
                   </div>
-                </div>
+                </CardFooter>
               </Card>
             </div>
           </div>
@@ -556,17 +558,19 @@ function StatsCardExample() {
                   <Card
                     cardAlign={{ horizontal: "center", vertical: "center" }}
                     width={50}
-                    className="bg-card-background border-border-default rounded-md"
+                    className="rounded-md"
                   >
-                    <div className="text-center">
-                      <h3 className="text-xl font-semibold text-text-primary mb-2">
-                        Centered Card
-                      </h3>
-                      <p className="text-sm text-text-secondary">
-                        This card is centered both horizontally and vertically
-                        in container.
-                      </p>
-                    </div>
+                    <CardBody>
+                      <div className="text-center">
+                        <h3 className="text-xl font-semibold text-text-primary mb-2">
+                          Centered Card
+                        </h3>
+                        <p className="text-sm text-text-secondary">
+                          This card is centered both horizontally and vertically
+                          in container.
+                        </p>
+                      </div>
+                    </CardBody>
                   </Card>
                 </div>
               </div>
@@ -596,47 +600,46 @@ function StatsCardExample() {
             <div className="mb-4">
               <div className="border-2 border-dashed border-border-default rounded-lg p-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card
-                    size={80}
-                    className="bg-card-background border-border-default rounded-md"
-                  >
-                    <h3 className="text-lg font-semibold text-text-primary mb-1">
-                      Small Card
-                    </h3>
-                    <p className="text-sm text-text-secondary mb-3">Size 80%</p>
-                    <p className="text-text-secondary">
-                      Compact card for dense layouts.
-                    </p>
+                  <Card size={80} className="rounded-md">
+                    <CardBody>
+                      <h3 className="text-lg font-semibold text-text-primary mb-1">
+                        Small Card
+                      </h3>
+                      <p className="text-sm text-text-secondary mb-3">
+                        Size 80%
+                      </p>
+                      <p className="text-text-secondary">
+                        Compact card for dense layouts.
+                      </p>
+                    </CardBody>
                   </Card>
 
-                  <Card
-                    size={100}
-                    className="bg-card-background border-border-default rounded-md"
-                  >
-                    <h3 className="text-lg font-semibold text-text-primary mb-1">
-                      Default Card
-                    </h3>
-                    <p className="text-sm text-text-secondary mb-3">
-                      Size 100%
-                    </p>
-                    <p className="text-text-secondary">
-                      Standard size for most use cases.
-                    </p>
+                  <Card size={100} className="rounded-md">
+                    <CardBody>
+                      <h3 className="text-lg font-semibold text-text-primary mb-1">
+                        Default Card
+                      </h3>
+                      <p className="text-sm text-text-secondary mb-3">
+                        Size 100%
+                      </p>
+                      <p className="text-text-secondary">
+                        Standard size for most use cases.
+                      </p>
+                    </CardBody>
                   </Card>
 
-                  <Card
-                    size={120}
-                    className="bg-card-background border-border-default rounded-md"
-                  >
-                    <h3 className="text-lg font-semibold text-text-primary mb-1">
-                      Large Card
-                    </h3>
-                    <p className="text-sm text-text-secondary mb-3">
-                      Size 120%
-                    </p>
-                    <p className="text-text-secondary">
-                      Emphasized card for important content.
-                    </p>
+                  <Card size={120} className="rounded-md">
+                    <CardBody>
+                      <h3 className="text-lg font-semibold text-text-primary mb-1">
+                        Large Card
+                      </h3>
+                      <p className="text-sm text-text-secondary mb-3">
+                        Size 120%
+                      </p>
+                      <p className="text-text-secondary">
+                        Emphasized card for important content.
+                      </p>
+                    </CardBody>
                   </Card>
                 </div>
               </div>
@@ -649,58 +652,6 @@ function StatsCardExample() {
                 headerMode="path"
                 headerIcon={<FileCode size={16} />}
                 filePath="src/components/SizeOptionExample.tsx"
-                showLineNumbers={true}
-              />
-            </div>
-          </div>
-
-          {/* Animation Variants */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Animation Variants
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Cards can appear with different animation effects using
-              appearAnimationVariant prop. Click the reload button to see the
-              animation again.
-            </p>
-
-            <div className="mb-4">
-              <div className="relative h-96 border-2 border-dashed border-border-default rounded-lg p-4 flex items-center justify-center">
-                <Card
-                  key={animationKey}
-                  appearAnimationVariant="slide-up"
-                  className="bg-card-background border-border-default rounded-md"
-                  width={40}
-                >
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-semibold text-text-primary">
-                      Animated Card
-                    </h3>
-                    <p className="text-text-secondary">
-                      This card appears with a slide-up animation. Click the
-                      reload button to see it again.
-                    </p>
-                  </div>
-                </Card>
-
-                <button
-                  onClick={handleReloadAnimation}
-                  className="absolute bottom-4 right-4 p-2 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors shadow-lg"
-                  title="Reload animation"
-                >
-                  <RefreshCw size={20} />
-                </button>
-              </div>
-
-              <CodeBlock
-                code={animationExampleCode}
-                language="typescript"
-                theme="vs-dark"
-                readOnly={true}
-                headerMode="path"
-                headerIcon={<FileCode size={16} />}
-                filePath="src/components/AnimationExample.tsx"
                 showLineNumbers={true}
               />
             </div>
@@ -719,76 +670,70 @@ function StatsCardExample() {
             <div className="mb-4">
               <div className="border-2 border-dashed border-border-default rounded-lg p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <Card
-                    hoverEffectVariant="lift"
-                    className="bg-card-background border-border-default rounded-md"
-                  >
-                    <h3 className="text-lg font-semibold text-text-primary mb-2">
-                      Lift Effect
-                    </h3>
-                    <p className="text-text-secondary">
-                      Hover to see lift effect with shadow
-                    </p>
+                  <Card hoverEffectVariant="lift" className="rounded-md">
+                    <CardBody>
+                      <h3 className="text-lg font-semibold text-text-primary mb-2">
+                        Lift Effect
+                      </h3>
+                      <p className="text-text-secondary">
+                        Hover to see lift effect with shadow
+                      </p>
+                    </CardBody>
                   </Card>
 
-                  <Card
-                    hoverEffectVariant="glow"
-                    className="bg-card-background border-border-default rounded-md"
-                  >
-                    <h3 className="text-lg font-semibold text-text-primary mb-2">
-                      Glow Effect
-                    </h3>
-                    <p className="text-text-secondary">
-                      Hover to see glowing effect
-                    </p>
+                  <Card hoverEffectVariant="glow" className="rounded-md">
+                    <CardBody>
+                      <h3 className="text-lg font-semibold text-text-primary mb-2">
+                        Glow Effect
+                      </h3>
+                      <p className="text-text-secondary">
+                        Hover to see glowing effect
+                      </p>
+                    </CardBody>
                   </Card>
 
-                  <Card
-                    hoverEffectVariant="glass"
-                    className="bg-card-background border-border-default rounded-md"
-                  >
-                    <h3 className="text-lg font-semibold text-text-primary mb-2">
-                      Glass Effect
-                    </h3>
-                    <p className="text-text-secondary">
-                      Hover to see glass morphism effect
-                    </p>
+                  <Card hoverEffectVariant="glass" className="rounded-md">
+                    <CardBody>
+                      <h3 className="text-lg font-semibold text-text-primary mb-2">
+                        Glass Effect
+                      </h3>
+                      <p className="text-text-secondary">
+                        Hover to see glass morphism effect
+                      </p>
+                    </CardBody>
                   </Card>
 
-                  <Card
-                    hoverEffectVariant="tilt"
-                    className="bg-card-background border-border-default rounded-md"
-                  >
-                    <h3 className="text-lg font-semibold text-text-primary mb-2">
-                      Tilt Effect
-                    </h3>
-                    <p className="text-text-secondary">
-                      Hover to see 3D tilt effect
-                    </p>
+                  <Card hoverEffectVariant="tilt" className="rounded-md">
+                    <CardBody>
+                      <h3 className="text-lg font-semibold text-text-primary mb-2">
+                        Tilt Effect
+                      </h3>
+                      <p className="text-text-secondary">
+                        Hover to see 3D tilt effect
+                      </p>
+                    </CardBody>
                   </Card>
 
-                  <Card
-                    hoverEffectVariant="scale"
-                    className="bg-card-background border-border-default rounded-md"
-                  >
-                    <h3 className="text-lg font-semibold text-text-primary mb-2">
-                      Scale Effect
-                    </h3>
-                    <p className="text-text-secondary">
-                      Hover to see scale up effect
-                    </p>
+                  <Card hoverEffectVariant="scale" className="rounded-md">
+                    <CardBody>
+                      <h3 className="text-lg font-semibold text-text-primary mb-2">
+                        Scale Effect
+                      </h3>
+                      <p className="text-text-secondary">
+                        Hover to see scale up effect
+                      </p>
+                    </CardBody>
                   </Card>
 
-                  <Card
-                    hoverEffectVariant="border-glow"
-                    className="bg-card-background border-border-default rounded-md"
-                  >
-                    <h3 className="text-lg font-semibold text-text-primary mb-2">
-                      Border Glow
-                    </h3>
-                    <p className="text-text-secondary">
-                      Hover to see border glowing
-                    </p>
+                  <Card hoverEffectVariant="border-glow" className="rounded-md">
+                    <CardBody>
+                      <h3 className="text-lg font-semibold text-text-primary mb-2">
+                        Border Glow
+                      </h3>
+                      <p className="text-text-secondary">
+                        Hover to see border glowing
+                      </p>
+                    </CardBody>
                   </Card>
                 </div>
               </div>
@@ -822,11 +767,11 @@ function StatsCardExample() {
               </h4>
               <div className="border-2 border-dashed border-border-default rounded-lg p-6 flex justify-center">
                 <Card
-                  className="bg-card-background border-border-default rounded-md"
+                  className="rounded-md"
                   width={45}
                   cardAlign={{ horizontal: "center", vertical: "center" }}
                 >
-                  <div className="space-y-6">
+                  <CardHeader>
                     <div>
                       <h3 className="text-xl font-semibold text-text-primary">
                         Login to your account
@@ -835,7 +780,9 @@ function StatsCardExample() {
                         Enter your email below to login to your account
                       </p>
                     </div>
+                  </CardHeader>
 
+                  <CardBody>
                     <div className="space-y-4">
                       <div>
                         <label className="block text-sm font-medium text-text-primary mb-1">
@@ -858,7 +805,9 @@ function StatsCardExample() {
                         />
                       </div>
                     </div>
+                  </CardBody>
 
+                  <CardFooter>
                     <div className="space-y-3">
                       <button className="px-4 py-2 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors w-full">
                         Login
@@ -885,7 +834,7 @@ function StatsCardExample() {
                         Login with Google
                       </button>
                     </div>
-                  </div>
+                  </CardFooter>
                 </Card>
               </div>
 
@@ -908,7 +857,7 @@ function StatsCardExample() {
               </h4>
               <div className="border-2 border-dashed border-border-default rounded-lg p-6 flex justify-center">
                 <Card
-                  className="bg-card-background border-border-default rounded-md overflow-hidden"
+                  className="rounded-md overflow-hidden"
                   width={35}
                   style={{ padding: 0 }}
                   cardAlign={{ horizontal: "center", vertical: "center" }}
@@ -918,19 +867,25 @@ function StatsCardExample() {
                     alt="Product"
                     className="w-full h-48 object-cover"
                   />
-                  <div className="p-5 space-y-4">
-                    <div>
-                      <h3 className="text-xl font-semibold text-text-primary">
-                        Premium Headphones
-                      </h3>
-                      <p className="text-sm text-text-secondary mt-1">
-                        High-quality wireless headphones with noise cancellation
+                  <CardBody>
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="text-xl font-semibold text-text-primary">
+                          Premium Headphones
+                        </h3>
+                        <p className="text-sm text-text-secondary mt-1">
+                          High-quality wireless headphones with noise
+                          cancellation
+                        </p>
+                      </div>
+                      <p className="text-text-secondary">
+                        Experience crystal-clear audio with our premium wireless
+                        headphones featuring active noise cancellation
+                        technology.
                       </p>
                     </div>
-                    <p className="text-text-secondary">
-                      Experience crystal-clear audio with our premium wireless
-                      headphones featuring active noise cancellation technology.
-                    </p>
+                  </CardBody>
+                  <CardFooter>
                     <div className="flex justify-end gap-3 pt-2">
                       <button className="px-4 py-2 bg-button-secondBg hover:bg-button-secondBgHover text-text-primary rounded-lg transition-colors">
                         View Details
@@ -939,7 +894,7 @@ function StatsCardExample() {
                         Add to Cart
                       </button>
                     </div>
-                  </div>
+                  </CardFooter>
                 </Card>
               </div>
 
@@ -962,22 +917,24 @@ function StatsCardExample() {
               </h4>
               <div className="border-2 border-dashed border-border-default rounded-lg p-6 flex justify-center">
                 <Card
-                  className="bg-card-background border-border-default rounded-md hover:border-button-bg transition-colors"
+                  className="rounded-md hover:border-button-bg transition-colors"
                   width={40}
                   cardAlign={{ horizontal: "center", vertical: "center" }}
                 >
-                  <div className="space-y-3">
-                    <div className="w-12 h-12 bg-button-bg/10 rounded-lg flex items-center justify-center">
-                      <Star className="text-button-bg" size={24} />
+                  <CardBody>
+                    <div className="space-y-3">
+                      <div className="w-12 h-12 bg-button-bg/10 rounded-lg flex items-center justify-center">
+                        <Star className="text-button-bg" size={24} />
+                      </div>
+                      <h3 className="text-xl font-semibold text-text-primary">
+                        Lightning Fast
+                      </h3>
+                      <p className="text-text-secondary">
+                        Optimized for performance with instant loading and
+                        smooth interactions.
+                      </p>
                     </div>
-                    <h3 className="text-xl font-semibold text-text-primary">
-                      Lightning Fast
-                    </h3>
-                    <p className="text-text-secondary">
-                      Optimized for performance with instant loading and smooth
-                      interactions.
-                    </p>
-                  </div>
+                  </CardBody>
                 </Card>
               </div>
 
@@ -1000,40 +957,43 @@ function StatsCardExample() {
               </h4>
               <div className="border-2 border-dashed border-border-default rounded-lg p-6 flex justify-center">
                 <Card
-                  className="bg-card-background border-border-default rounded-md"
+                  className="rounded-md"
                   width={40}
                   cardAlign={{ horizontal: "center", vertical: "center" }}
                 >
-                  <div className="space-y-4">
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-1">
-                        <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center">
-                          <User className="text-green-500" size={20} />
+                  <CardBody>
+                    <div className="space-y-4">
+                      <div className="flex items-start justify-between">
+                        <div className="space-y-1">
+                          <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center">
+                            <User className="text-green-500" size={20} />
+                          </div>
+                          <h3 className="text-lg font-semibold text-text-primary pt-2">
+                            Total Revenue
+                          </h3>
+                          <p className="text-sm text-text-secondary">
+                            Monthly earnings overview
+                          </p>
                         </div>
-                        <h3 className="text-lg font-semibold text-text-primary pt-2">
-                          Total Revenue
-                        </h3>
-                        <p className="text-sm text-text-secondary">
-                          Monthly earnings overview
-                        </p>
+                        <button className="p-2 hover:bg-input-background rounded-lg transition-colors">
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            className="text-text-secondary"
+                          >
+                            <circle cx="12" cy="12" r="1" />
+                            <circle cx="12" cy="5" r="1" />
+                            <circle cx="12" cy="19" r="1" />
+                          </svg>
+                        </button>
                       </div>
-                      <button className="p-2 hover:bg-input-background rounded-lg transition-colors">
-                        <svg
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          className="text-text-secondary"
-                        >
-                          <circle cx="12" cy="12" r="1" />
-                          <circle cx="12" cy="5" r="1" />
-                          <circle cx="12" cy="19" r="1" />
-                        </svg>
-                      </button>
                     </div>
-
-                    <div className="flex items-center justify-between border-t border-border-default pt-4">
+                  </CardBody>
+                  <CardFooter>
+                    <div className="flex items-center justify-between">
                       <span className="text-2xl font-bold text-text-primary">
                         $12,458
                       </span>
@@ -1041,7 +1001,7 @@ function StatsCardExample() {
                         View Report
                       </button>
                     </div>
-                  </div>
+                  </CardFooter>
                 </Card>
               </div>
 
@@ -1126,42 +1086,6 @@ function StatsCardExample() {
                   </tr>
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      contentAlign
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      {`{ horizontal?: "left" | "center" | "right", vertical?: "top" | "center" | "bottom" }`}
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Content alignment inside card
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      title
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Card title
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      subtitle
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Card subtitle
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       children
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
@@ -1174,58 +1098,6 @@ function StatsCardExample() {
                   </tr>
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      footer
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Card footer content (buttons, actions)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      headerBg
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      var(--card-bg)
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Header background color
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      footerBg
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      var(--card-bg)
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Footer background color
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showDivider
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show divider between header and content
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       hoverable
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
@@ -1234,19 +1106,6 @@ function StatsCardExample() {
                     <td className="px-6 py-4 text-text-secondary">false</td>
                     <td className="px-6 py-4 text-text-secondary">
                       Enable hover effects
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      appearAnimationVariant
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "fade" | "slide-up" | "slide-down" | "slide-left" |
-                      "slide-right" | "scale" | "rotate" | "flip" | "none"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"none"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Animation variant when card appears
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">

@@ -113,15 +113,27 @@ export const getCubeTransform = (
   currentIndex: number
 ): string => {
   const diff = itemIndex - currentIndex;
+  
+  // Cube face distance from center
+  const cubeSize = 400; // Size of the cube in pixels
+  const halfSize = cubeSize / 2;
 
   if (diff === 0) {
-    return `translate3d(0, 0, 0) rotateY(0deg)`;
+    // Current slide - front face
+    return `translateZ(${halfSize}px) rotateY(0deg)`;
+  } else if (diff === 1 || (diff < 0 && Math.abs(diff) > 1)) {
+    // Next slide - right face
+    return `rotateY(90deg) translateZ(${halfSize}px)`;
+  } else if (diff === -1 || (diff > 0 && Math.abs(diff) > 1)) {
+    // Previous slide - left face
+    return `rotateY(-90deg) translateZ(${halfSize}px)`;
+  } else if (Math.abs(diff) === 2) {
+    // Back face
+    return `rotateY(180deg) translateZ(${halfSize}px)`;
   }
 
-  const rotateY = diff * 90;
-  const translateZ = diff > 0 ? -100 : 100;
-
-  return `translate3d(0, 0, ${translateZ}%) rotateY(${rotateY}deg)`;
+  // Hidden faces
+  return `rotateY(${diff * 90}deg) translateZ(${halfSize}px)`;
 };
 
 /**
@@ -137,7 +149,8 @@ export const getFlipTransform = (
     return `rotateY(0deg)`;
   }
 
-  const rotateY = diff * 180;
+  // Only flip 180deg for immediate next/prev, hide others
+  const rotateY = diff > 0 ? 180 : -180;
   return `rotateY(${rotateY}deg)`;
 };
 

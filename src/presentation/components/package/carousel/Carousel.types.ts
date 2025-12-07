@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 export type CarouselEffect =
   | "slide"
+  | "fade"
   | "cube"
   | "coverflow"
   | "flip"

@@ -31,6 +31,14 @@ const CarouselItem: React.FC<CarouselItemProps> = ({
     slidesPerView
   );
 
+  // Hide non-current slides for flip effect, but show adjacent slides for cube
+  const visibility =
+    effect === "flip" && index !== currentIndex
+      ? "hidden"
+      : effect === "cube" && Math.abs(index - currentIndex) > 2
+      ? "hidden"
+      : "visible";
+
   return (
     <div
       className={cn(
@@ -47,6 +55,7 @@ const CarouselItem: React.FC<CarouselItemProps> = ({
         transform,
         transformStyle: "preserve-3d",
         backfaceVisibility: "hidden",
+        visibility,
       }}
       {...props}
     >

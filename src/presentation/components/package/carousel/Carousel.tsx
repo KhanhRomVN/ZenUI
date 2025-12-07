@@ -220,11 +220,13 @@ const Carousel: React.FC<CarouselProps> = ({
           className={cn(
             "relative w-full h-full",
             effect === "coverflow" && "perspective-1000",
-            effect === "cube" && "perspective-1000",
-            effect === "flip" && "perspective-1000"
+            effect === "cube" && "perspective-1000 min-h-64",
+            effect === "flip" && "perspective-1000 min-h-64"
           )}
           style={{
-            perspective: ["coverflow", "cube", "flip"].includes(effect)
+            perspective: effect === "cube" 
+              ? "1200px"
+              : ["coverflow", "flip"].includes(effect)
               ? "1000px"
               : undefined,
           }}
@@ -241,7 +243,7 @@ const Carousel: React.FC<CarouselProps> = ({
               effect === "parallax" && "will-change-transform"
             )}
             style={{
-              transform: effect === "slide" ? transform : undefined,
+              transform: effect === "slide" ? transform : effect === "cube" ? `rotateY(${-currentIndex * 90}deg)` : undefined,
               transitionDuration: isDragging ? "0ms" : `${speed}ms`,
               gap: effect === "slide" ? `${spaceBetween}px` : undefined,
               transformStyle:

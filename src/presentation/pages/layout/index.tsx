@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import LayoutSidebar from "./components/LayoutSidebar";
+import GridLayoutSection from "./components/Section/GridLayoutSection";
 import KanbanLayoutSection from "./components/Section/KanbanLayoutSection";
 import MasonryLayoutSection from "./components/Section/MasonryLayoutSection";
 
@@ -9,11 +10,14 @@ const LayoutPage = () => {
 
   const renderSection = () => {
     switch (section) {
+      case "grid":
+        return <GridLayoutSection />;
       case "kanban":
         return <KanbanLayoutSection />;
       case "masonry":
         return <MasonryLayoutSection />;
       default:
+        return <GridLayoutSection />;
     }
   };
 

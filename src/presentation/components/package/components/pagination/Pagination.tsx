@@ -100,11 +100,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           key={i + 1}
           onClick={() => handlePageChange(i + 1)}
-          className={`w-2 h-2 rounded-full transition-colors ${
-            currentPage === i + 1
-              ? "bg-blue-600"
-              : "bg-gray-300 hover:bg-gray-400"
-          }`}
+          className={`w-2 h-2 rounded-full transition-colors `}
           aria-label={`Go to page ${i + 1}`}
         />
       ));
@@ -135,13 +131,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <button
           key={item.page}
           onClick={() => handlePageChange(item.page)}
-          className={`flex items-center justify-center rounded-md transition-colors ${
-            sizeStyles.pageNumber
-          } ${
-            item.isCurrent
-              ? "bg-blue-600 text-white"
-              : "bg-transparent  hover:bg-gray-100"
-          }`}
+          className={`flex items-center justify-center rounded-md transition-colors ${sizeStyles.pageNumber} `}
           aria-current={item.isCurrent ? "page" : undefined}
           aria-label={`Go to page ${item.page}`}
         >
@@ -152,7 +142,7 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className={`pagination-container ${className}`.trim()}>
+    <div className={` ${className}`.trim()}>
       {/* Main pagination */}
       <div
         className={`flex items-center ${alignmentStyles} ${sizeStyles.gap} flex-wrap`}
@@ -163,7 +153,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={!paginationInfo.hasPrevious}
-              className={`flex items-center justify-center rounded-md border border-gray-200 dark:border-gray-700 bg-transparent  transition-colors hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed ${sizeStyles.button}`}
+              className={`flex items-center justify-center rounded-md border transition-colors disabled:cursor-not-allowed ${sizeStyles.button}`}
               aria-label="Previous page"
             >
               {previousButton || <ChevronLeft size={16} />}
@@ -177,71 +167,13 @@ const Pagination: React.FC<PaginationProps> = ({
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={!paginationInfo.hasNext}
-              className={`flex items-center justify-center rounded-md border border-gray-200 dark:border-gray-700 bg-transparent  transition-colors hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed ${sizeStyles.button}`}
+              className={`flex items-center justify-center rounded-md border disabled:cursor-not-allowed ${sizeStyles.button}`}
               aria-label="Next page"
             >
               {nextButton || <ChevronRight size={16} />}
             </button>
           </>
         )}
-      </div>
-
-      {/* Additional information and controls */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
-        {/* Total pages info */}
-        {showTotalPages && (
-          <div className="text-sm ">
-            Showing {paginationInfo.startItem} to {paginationInfo.endItem} of{" "}
-            {totalItems} entries
-          </div>
-        )}
-
-        <div className="flex items-center gap-4">
-          {/* Page jumper */}
-          {showJumper && (
-            <form
-              onSubmit={handleJumperSubmit}
-              className="flex items-center gap-2"
-            >
-              <span className="text-sm ">Go to:</span>
-              <input
-                type="number"
-                value={jumperPage}
-                onChange={(e) => setJumperPage(e.target.value)}
-                min="1"
-                max={paginationInfo.totalPages}
-                className="w-16 px-2 py-1 text-sm border border-gray-200 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Page"
-              />
-              <button
-                type="submit"
-                className="px-3 py-1 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Go
-              </button>
-            </form>
-          )}
-
-          {/* Items per page selector */}
-          {showItemsPerPage && (
-            <div className="flex items-center gap-2">
-              <span className="text-sm ">Show:</span>
-              <select
-                value={selectedItemsPerPage}
-                onChange={(e) =>
-                  handleItemsPerPageChange(Number(e.target.value))
-                }
-                className="px-2 py-1 text-sm border border-gray-200 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                {itemsPerPageOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ export { default as TableBody } from "./TableBody";
 export { default as TableFooter } from "./TableFooter";
 export { default as TableRow } from "./TableRow";
 export { default as TableCell } from "./TableCell";
+export { default as HeaderCell } from "./HeaderCell";
 export type {
   TableProps,
   TableColumn,
@@ -15,6 +16,7 @@ export type {
   TableFooterProps,
   TableRowProps,
   TableCellProps,
+  HeaderCellProps,
 } from "./Table.types";
 export {
   getTableSizeClasses,

@@ -6,7 +6,7 @@ const TableFooter: React.FC<TableFooterProps> = ({
   children,
   className = "",
 }) => {
-  return <tfoot className={cn("", className)}>{children}</tfoot>;
+  return <tfoot className={cn(className)}>{children}</tfoot>;
 };
 
 export default TableFooter;

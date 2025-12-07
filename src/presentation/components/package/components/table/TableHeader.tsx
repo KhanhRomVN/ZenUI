@@ -6,7 +6,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   children,
   className = "",
 }) => {
-  return <thead className={cn("", className)}>{children}</thead>;
+  return <thead className={cn(className)}>{children}</thead>;
 };
 
 export default TableHeader;

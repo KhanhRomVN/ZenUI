@@ -29,21 +29,29 @@ export type TableSize = "sm" | "md" | "lg";
 export interface TableProps {
   children?: ReactNode;
   className?: string;
+  showVerticalDivider?: boolean;
+  showHorizontalDivider?: boolean;
 }
 
 export interface TableHeaderProps {
   children?: ReactNode;
   className?: string;
+  showVerticalDivider?: boolean;
+  showHorizontalDivider?: boolean;
 }
 
 export interface TableBodyProps {
   children?: ReactNode;
   className?: string;
+  showVerticalDivider?: boolean;
+  showHorizontalDivider?: boolean;
 }
 
 export interface TableFooterProps {
   children?: ReactNode;
   className?: string;
+  showVerticalDivider?: boolean;
+  showHorizontalDivider?: boolean;
 }
 
 export interface TableRowProps {
@@ -55,6 +63,8 @@ export interface TableRowProps {
   onMouseLeave?: () => void;
   onFocus?: () => void;
   onBlur?: () => void;
+  showVerticalDivider?: boolean;
+  showHorizontalDivider?: boolean;
 }
 
 export interface TableCellProps {
@@ -64,4 +74,20 @@ export interface TableCellProps {
   colSpan?: number;
   style?: React.CSSProperties;
   onClick?: () => void;
+  showVerticalDivider?: boolean;
+  showHorizontalDivider?: boolean;
+}
+
+export interface HeaderCellProps {
+  children?: ReactNode;
+  className?: string;
+  align?: "left" | "center" | "right";
+  colSpan?: number;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+  showVerticalDivider?: boolean;
+  showHorizontalDivider?: boolean;
+  sortable?: boolean;
+  sortDirection?: "asc" | "desc" | null;
+  onSort?: () => void;
 }

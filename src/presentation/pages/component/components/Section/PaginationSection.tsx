@@ -328,28 +328,6 @@ function CustomExample() {
               onPageChange={setCurrentPage}
               showTotalPages={true}
             />
-
-            {/* Display current items */}
-            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-              <h4 className="font-semibold text-text-primary mb-3">
-                Current Page Items ({currentPage})
-              </h4>
-              <div className="space-y-2">
-                {currentItems.map((item) => (
-                  <div
-                    key={item.id}
-                    className="p-3 border border-border-default rounded-lg bg-white"
-                  >
-                    <div className="font-medium text-text-primary">
-                      {item.name}
-                    </div>
-                    <div className="text-sm text-text-secondary">
-                      {item.description}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Code Example */}
@@ -529,54 +507,6 @@ function CustomExample() {
             />
           </div>
 
-          {/* Advanced Features */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Advanced Features
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Enhanced pagination with page jumper, items per page selector, and
-              more.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
-              <Pagination
-                totalItems={250}
-                itemsPerPage={10}
-                currentPage={advancedPage}
-                onPageChange={setAdvancedPage}
-                variant="numbers"
-                size="md"
-                showNavigation={true}
-                showPageNumbers={true}
-                showTotalPages={true}
-                showJumper={true}
-                showItemsPerPage={true}
-                itemsPerPageOptions={[5, 10, 25, 50]}
-                maxVisiblePages={5}
-              />
-
-              <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-blue-800 text-sm">
-                  <strong>Features included:</strong> Page numbers, navigation
-                  buttons, total pages info, page jumper, and items per page
-                  selector.
-                </p>
-              </div>
-            </div>
-
-            <CodeBlock
-              code={advancedExampleCode}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/AdvancedExample.tsx"
-              showLineNumbers={true}
-            />
-          </div>
-
           {/* Customization Examples */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
@@ -688,116 +618,6 @@ function CustomExample() {
               headerMode="path"
               headerIcon={<FileCode size={16} />}
               filePath="src/components/CustomExample.tsx"
-              showLineNumbers={true}
-            />
-          </div>
-
-          {/* Real-world Example */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Real-world Example
-            </h3>
-            <p className="text-text-secondary mb-4">
-              A complete example showing pagination with a data table.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-6 mb-4">
-              <div className="mb-4">
-                <h4 className="text-lg font-semibold text-text-primary mb-2">
-                  User List
-                </h4>
-                <Pagination
-                  totalItems={sampleData.length}
-                  itemsPerPage={itemsPerPage}
-                  currentPage={currentPage}
-                  onPageChange={setCurrentPage}
-                  showTotalPages={true}
-                  showJumper={true}
-                  showItemsPerPage={true}
-                  itemsPerPageOptions={[5, 10, 20, 50]}
-                />
-              </div>
-
-              <div className="border border-border-default rounded-lg overflow-hidden">
-                <table className="w-full text-sm">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-4 py-3 text-left text-text-primary font-semibold">
-                        ID
-                      </th>
-                      <th className="px-4 py-3 text-left text-text-primary font-semibold">
-                        Name
-                      </th>
-                      <th className="px-4 py-3 text-left text-text-primary font-semibold">
-                        Description
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border-default">
-                    {currentItems.map((item) => (
-                      <tr key={item.id} className="hover:bg-gray-50">
-                        <td className="px-4 py-3 text-text-primary">
-                          {item.id}
-                        </td>
-                        <td className="px-4 py-3 text-text-primary font-medium">
-                          {item.name}
-                        </td>
-                        <td className="px-4 py-3 text-text-secondary">
-                          {item.description}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <CodeBlock
-              code={`import { Pagination } from "@khanhromvn/zenui";
-
-function DataTableExample() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-  
-  const data = [/* your data array */];
-  const currentItems = data.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  return (
-    <div>
-      <Pagination
-        totalItems={data.length}
-        itemsPerPage={itemsPerPage}
-        currentPage={currentPage}
-        onPageChange={setCurrentPage}
-        showTotalPages={true}
-        showJumper={true}
-        showItemsPerPage={true}
-        itemsPerPageOptions={[5, 10, 20, 50]}
-      />
-      
-      {/* Your table component */}
-      <table>
-        {/* table headers */}
-        <tbody>
-          {currentItems.map(item => (
-            <tr key={item.id}>
-              {/* table cells */}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}`}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/DataTableExample.tsx"
               showLineNumbers={true}
             />
           </div>

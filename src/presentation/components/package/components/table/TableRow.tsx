@@ -11,12 +11,13 @@ const TableRow: React.FC<TableRowProps> = ({
   onMouseLeave,
   onFocus,
   onBlur,
+  showHorizontalDivider = false,
 }) => {
   return (
     <tr
       className={cn(
-        "transition-colors duration-200",
         onClick && "cursor-pointer",
+        showHorizontalDivider && "border-b border-table-border last:border-b-0",
         className
       )}
       onClick={onClick}

@@ -1,69 +1,26 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
 import { DrawerProps } from "./Drawer.types";
 import {
   getDrawerVariants,
-  getDrawerStyle,
+  getDrawerPosition,
   overlayVariants,
-  headerVariants,
 } from "./Drawer.utils";
+import { cn } from "../../../../shared/utils/cn";
 
 const Drawer: React.FC<DrawerProps> = ({
   isOpen,
   onClose,
-  title,
-  subtitle,
   direction = "right",
   children,
-  headerActions,
-  footerActions,
   className = "",
-  overlayOpacity = 0.5,
-  hideHeader = false,
+  overlayClassName = "",
   animationType = "slide",
-  enableBlur = false,
   closeOnOverlayClick = true,
-  showCloseButton = true,
   width,
   height,
-  marginLeft = 0,
-  marginRight = 0,
-  marginTop = 0,
-  marginBottom = 0,
-
-  // New props
-  padding,
-  margin,
-  border,
-  shadow,
-  opacity,
-  backdropBlur,
-  backgroundColor,
-
-  // Section-specific styling
-  headerBackgroundColor,
-  bodyBackgroundColor,
-  footerBackgroundColor,
-  headerBorder,
-  footerBorder,
 }) => {
   const drawerVariants = getDrawerVariants(direction, animationType);
-  const drawerStyle = getDrawerStyle(
-    direction,
-    width,
-    height,
-    marginLeft,
-    marginRight,
-    marginTop,
-    marginBottom,
-    padding,
-    margin,
-    border,
-    shadow,
-    opacity,
-    backdropBlur,
-    backgroundColor
-  );
+  const drawerPosition = getDrawerPosition(direction, width, height);
 
   return (
     <AnimatePresence>
@@ -77,19 +34,10 @@ const Drawer: React.FC<DrawerProps> = ({
             variants={overlayVariants}
             transition={{ duration: 0.3 }}
             onClick={closeOnOverlayClick ? onClose : undefined}
-            style={
-              {
-                position: "fixed",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: `rgba(0, 0, 0, ${overlayOpacity})`,
-                backdropFilter: enableBlur ? "blur(4px)" : "none",
-                WebkitBackdropFilter: enableBlur ? "blur(4px)" : "none",
-                zIndex: 999,
-              } as React.CSSProperties
-            }
+            className={cn(
+              "fixed inset-0 bg-black/50 z-[999]",
+              overlayClassName
+            )}
           />
 
           {/* Drawer */}
@@ -99,146 +47,10 @@ const Drawer: React.FC<DrawerProps> = ({
             exit="hidden"
             variants={drawerVariants}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            style={drawerStyle}
+            style={drawerPosition}
             className={className}
           >
-            {/* Header */}
-            {!hideHeader && (
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={headerVariants}
-                style={
-                  {
-                    padding: "1.5rem",
-                    borderBottom: headerBorder?.width
-                      ? `${
-                          typeof headerBorder.width === "number"
-                            ? `${headerBorder.width}px`
-                            : headerBorder.width
-                        } ${headerBorder.style || "solid"} ${
-                          headerBorder.color || "#e5e7eb"
-                        }`
-                      : "1px solid #e5e7eb",
-                    boxShadow: headerBorder?.shadow
-                      ? `${headerBorder.shadow.offsetX || 0} ${
-                          headerBorder.shadow.offsetY || 0
-                        } ${headerBorder.shadow.blur || 0} ${
-                          headerBorder.shadow.spread || 0
-                        } ${headerBorder.shadow.color || "rgba(0,0,0,0.1)"}`
-                      : "none",
-                    backgroundColor: headerBackgroundColor || "transparent",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    flexShrink: 0,
-                  } as React.CSSProperties
-                }
-              >
-                <div style={{ flex: 1 }}>
-                  {title && (
-                    <h2
-                      style={{
-                        margin: 0,
-                        fontSize: "1.25rem",
-                        fontWeight: 600,
-                        color: "#111827",
-                      }}
-                    >
-                      {title}
-                    </h2>
-                  )}
-                  {subtitle && (
-                    <p
-                      style={{
-                        margin: "0.25rem 0 0 0",
-                        fontSize: "0.875rem",
-                        color: "#6b7280",
-                      }}
-                    >
-                      {subtitle}
-                    </p>
-                  )}
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                  }}
-                >
-                  {headerActions}
-                  {showCloseButton && (
-                    <button
-                      onClick={onClose}
-                      style={{
-                        padding: "0.5rem",
-                        border: "none",
-                        background: "transparent",
-                        cursor: "pointer",
-                        borderRadius: "0.375rem",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        transition: "background-color 0.2s",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = "#f3f4f6";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "transparent";
-                      }}
-                    >
-                      <X size={20} color="#6b7280" />
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            )}
-
-            {/* Content */}
-            <div
-              style={{
-                flex: 1,
-                overflowY: "auto",
-                backgroundColor: bodyBackgroundColor || "transparent",
-              }}
-            >
-              {children}
-            </div>
-
-            {/* Footer */}
-            {footerActions && (
-              <div
-                style={{
-                  padding: "1rem 1.5rem",
-                  borderTop: footerBorder?.width
-                    ? `${
-                        typeof footerBorder.width === "number"
-                          ? `${footerBorder.width}px`
-                          : footerBorder.width
-                      } ${footerBorder.style || "solid"} ${
-                        footerBorder.color || "#e5e7eb"
-                      }`
-                    : "1px solid #e5e7eb",
-                  boxShadow: footerBorder?.shadow
-                    ? `${footerBorder.shadow.offsetX || 0} ${
-                        footerBorder.shadow.offsetY || 0
-                      } ${footerBorder.shadow.blur || 0} ${
-                        footerBorder.shadow.spread || 0
-                      } ${footerBorder.shadow.color || "rgba(0,0,0,0.1)"}`
-                    : "none",
-                  backgroundColor: footerBackgroundColor || "transparent",
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  gap: "0.75rem",
-                  flexShrink: 0,
-                }}
-              >
-                {footerActions}
-              </div>
-            )}
+            {children}
           </motion.div>
         </>
       )}

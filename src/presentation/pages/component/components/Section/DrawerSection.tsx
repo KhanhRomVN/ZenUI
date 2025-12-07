@@ -1,17 +1,24 @@
 import { useState } from "react";
 import { Drawer } from "../../../../components/package/drawer";
+import { Card, CardHeader, CardBody, CardFooter } from "../../../../components/package/card";
 import { CodeBlock } from "../../../../components/package/codeblock";
-import { FileCode } from "lucide-react";
+import { Input } from "../../../../components/package/input";
+import { Dropdown, DropdownTrigger, DropdownContent, DropdownItem } from "../../../../components/package/dropdown";
+import { FileCode, X, Settings, User, Bell, Mail, Lock, Globe, ChevronDown } from "lucide-react";
 import RightPanel from "../RightPanel";
 
 const DrawerSection = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isBasicOpen, setIsBasicOpen] = useState(false);
+  const [isCardOpen, setIsCardOpen] = useState(false);
+  const [isLeftOpen, setIsLeftOpen] = useState(false);
+  const [isTopOpen, setIsTopOpen] = useState(false);
 
   // Navigation sections for right panel
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
     { id: "usage", label: "Usage" },
+    { id: "examples", label: "Examples" },
     { id: "props", label: "Props" },
   ];
 
@@ -34,16 +41,109 @@ function MyComponent() {
       <Drawer
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        title="My Drawer"
         direction="right"
       >
-        <div style={{ padding: "1.5rem" }}>
-          <p>Your content goes here</p>
+        <div className="p-6">
+          <h2>Your Content Here</h2>
+          <p>This is a simple drawer wrapper.</p>
         </div>
       </Drawer>
     </div>
   );
 }`;
+
+  const cardExampleCode = `import { useState } from "react";
+import { Drawer, Card, CardHeader, CardBody, Input, Dropdown, DropdownTrigger, DropdownContent, DropdownItem } from "@khanhromvn/zenui";
+import { X, User, Mail, Lock, ChevronDown } from "lucide-react";
+
+function SettingsDrawerExample() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>
+        Open Settings
+      </button>
+
+      <Drawer
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        direction="right"
+        width={480}
+        className="p-6 bg-drawer-background"
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-text-primary">Settings</h2>
+          <button 
+            onClick={() => setIsOpen(false)}
+            className="p-2 hover:bg-card-background rounded-lg"
+          >
+            <X size={20} className="text-text-primary" />
+          </button>
+        </div>
+
+        {/* Content with Cards, Inputs, and Dropdowns */}
+        <div className="space-y-4">
+          <Card>
+            <CardHeader title="Profile Settings" />
+            <CardBody>
+              <div className="space-y-4">
+                <Input
+                  placeholder="Enter your name"
+                  defaultValue="John Doe"
+                  leftIcon={<User size={18} />}
+                  size="md"
+                />
+                <Input
+                  placeholder="your.email@example.com"
+                  leftIcon={<Mail size={18} />}
+                  size="md"
+                />
+              </div>
+            </CardBody>
+          </Card>
+
+          <Card>
+            <CardHeader title="Preferences" />
+            <CardBody>
+              <Dropdown>
+                <DropdownTrigger>
+                  <button className="w-full px-4 py-2 bg-input-background border rounded-lg flex items-center justify-between">
+                    <span>English</span>
+                    <ChevronDown size={16} />
+                  </button>
+                </DropdownTrigger>
+                <DropdownContent>
+                  <DropdownItem>English</DropdownItem>
+                  <DropdownItem>Tiếng Việt</DropdownItem>
+                </DropdownContent>
+              </Dropdown>
+            </CardBody>
+          </Card>
+        </div>
+      </Drawer>
+    </>
+  );
+}`;
+
+  const customStyleCode = `<Drawer
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  direction="left"
+  width="500px"
+  className="bg-gradient-to-br from-purple-50 to-blue-50 p-8 shadow-2xl"
+  overlayClassName="bg-black/70 backdrop-blur-sm"
+>
+  <div className="space-y-6">
+    <h1 className="text-3xl font-bold text-purple-900">
+      Custom Styled Drawer
+    </h1>
+    <p className="text-gray-700">
+      Use className to apply any Tailwind classes!
+    </p>
+  </div>
+</Drawer>`;
 
   return (
     <>
@@ -52,10 +152,9 @@ function MyComponent() {
         <section id="about" className="mb-12">
           <h1 className="text-4xl font-bold text-text-primary mb-3">Drawer</h1>
           <p className="text-lg text-text-secondary leading-relaxed">
-            A flexible and customizable drawer/sidebar component with multiple
-            animation types, positioning options, and extensive styling
-            capabilities. Perfect for navigation menus, filters, forms, and side
-            panels.
+            A minimal and flexible drawer component that acts as a simple wrapper.
+            The Drawer provides positioning, animation, and overlay functionality
+            while giving you complete control over the content inside.
           </p>
         </section>
 
@@ -98,17 +197,16 @@ function MyComponent() {
             Basic Usage
           </h2>
           <p className="text-text-secondary mb-6">
-            Here's a simple example to get you started with the Drawer
-            component.
+            The Drawer is a simple wrapper - you control all the content inside.
           </p>
 
           {/* Live Demo */}
           <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6 flex items-center justify-center">
             <button
-              onClick={() => setIsOpen(true)}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
+              onClick={() => setIsBasicOpen(true)}
+              className="px-6 py-3 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors font-medium"
             >
-              Open Drawer
+              Open Basic Drawer
             </button>
           </div>
 
@@ -124,41 +222,293 @@ function MyComponent() {
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
-            debug={true}
           />
 
-          {/* Drawer Component */}
+          {/* Basic Drawer */}
           <Drawer
-            isOpen={isOpen}
-            onClose={() => setIsOpen(false)}
-            title="Example Drawer"
-            subtitle="This is a basic drawer example"
+            isOpen={isBasicOpen}
+            onClose={() => setIsBasicOpen(false)}
             direction="right"
+            width={400}
+            className="bg-drawer-background"
           >
             <div className="p-6">
-              <h3 className="text-lg font-semibold text-text-primary mb-3">
-                Welcome to Drawer Component
-              </h3>
-              <p className="text-text-secondary mb-4">
-                This is the content area where you can place any React
-                components, forms, lists, or custom content.
-              </p>
-              <div className="space-y-2">
-                <p className="text-sm text-text-secondary">
-                  • Fully customizable appearance
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-text-primary">
+                  Basic Drawer
+                </h2>
+                <button
+                  onClick={() => setIsBasicOpen(false)}
+                  className="p-2 hover:bg-card-background rounded-lg transition-colors"
+                >
+                  <X size={20} className="text-text-primary" />
+                </button>
+              </div>
+              <div className="space-y-4">
+                <p className="text-text-secondary">
+                  This is a simple drawer with custom content. You have full
+                  control over what goes inside!
                 </p>
-                <p className="text-sm text-text-secondary">
-                  • Multiple animation options
-                </p>
-                <p className="text-sm text-text-secondary">
-                  • Position from any edge
-                </p>
-                <p className="text-sm text-text-secondary">
-                  • Responsive design
-                </p>
+                <div className="space-y-2">
+                  <p className="text-sm text-text-secondary">✓ Minimal wrapper design</p>
+                  <p className="text-sm text-text-secondary">✓ Full content control</p>
+                  <p className="text-sm text-text-secondary">✓ Smooth animations</p>
+                  <p className="text-sm text-text-secondary">✓ Customizable styling</p>
+                </div>
               </div>
             </div>
           </Drawer>
+        </section>
+
+        {/* EXAMPLES SECTION */}
+        <section id="examples" className="mb-12">
+          <h2 className="text-2xl font-semibold text-text-primary mb-4">
+            Examples
+          </h2>
+
+          {/* Example 1: With Card Components */}
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold text-text-primary mb-3">
+              Using Card Components
+            </h3>
+            <p className="text-text-secondary mb-4">
+              You can use any components inside the Drawer, including Card components.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex items-center justify-center">
+              <button
+                onClick={() => setIsCardOpen(true)}
+                className="px-6 py-3 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors font-medium flex items-center gap-2"
+              >
+                <Settings size={20} />
+                Open Settings
+              </button>
+            </div>
+
+            <CodeBlock
+              code={cardExampleCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/CardDrawerExample.tsx"
+              showLineNumbers={true}
+              showGutter={true}
+            />
+
+            <Drawer
+              isOpen={isCardOpen}
+              onClose={() => setIsCardOpen(false)}
+              direction="right"
+              width={480}
+              className="p-6 bg-drawer-background"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-text-primary">Settings</h2>
+                <button
+                  onClick={() => setIsCardOpen(false)}
+                  className="p-2 hover:bg-card-background rounded-lg transition-colors"
+                >
+                  <X size={20} className="text-text-primary" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {/* Profile Card with Input */}
+                <Card>
+                  <CardHeader title="Profile Settings" />
+                  <CardBody>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-text-primary mb-1">Full Name</label>
+                        <Input
+                          placeholder="Enter your name"
+                          defaultValue="John Doe"
+                          leftIcon={<User size={18} />}
+                          size="md"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-text-primary mb-1">Email</label>
+                        <Input
+                          type="text"
+                          placeholder="your.email@example.com"
+                          defaultValue="john@example.com"
+                          leftIcon={<Mail size={18} />}
+                          size="md"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-text-primary mb-1">Password</label>
+                        <Input
+                          type="password"
+                          placeholder="••••••••"
+                          leftIcon={<Lock size={18} />}
+                          size="md"
+                        />
+                      </div>
+                    </div>
+                  </CardBody>
+                </Card>
+
+                {/* Preferences Card with Dropdown */}
+                <Card>
+                  <CardHeader title="Preferences" />
+                  <CardBody>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-text-primary mb-2">Language</label>
+                        <Dropdown >
+                          <DropdownTrigger>
+                            <button className="w-full px-4 py-2 bg-input-background border border-input-border-default hover:border-input-border-hover rounded-lg flex items-center justify-between text-text-primary">
+                              <span>English</span>
+                              <ChevronDown size={16} className="text-text-secondary" />
+                            </button>
+                          </DropdownTrigger>
+                          <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
+                            <DropdownItem className="hover:bg-dropdown-itemHover">English</DropdownItem>
+                            <DropdownItem className="hover:bg-dropdown-itemHover">Tiếng Việt</DropdownItem>
+                            <DropdownItem className="hover:bg-dropdown-itemHover">日本語</DropdownItem>
+                            <DropdownItem className="hover:bg-dropdown-itemHover">한국어</DropdownItem>
+                          </DropdownContent>
+                        </Dropdown>
+                      </div>
+                    </div>
+                  </CardBody>
+                </Card>
+
+                {/* Notifications Card */}
+                <Card>
+                  <CardHeader title="Notifications" />
+                  <CardBody>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Bell size={18} className="text-text-secondary" />
+                          <span className="text-text-primary">Email notifications</span>
+                        </div>
+                        <input type="checkbox" defaultChecked className="w-4 h-4" />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Bell size={18} className="text-text-secondary" />
+                          <span className="text-text-primary">Push notifications</span>
+                        </div>
+                        <input type="checkbox" className="w-4 h-4" />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Mail size={18} className="text-text-secondary" />
+                          <span className="text-text-primary">Newsletter</span>
+                        </div>
+                        <input type="checkbox" defaultChecked className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </CardBody>
+                </Card>
+
+                {/* Actions */}
+                <div className="flex gap-3 pt-2">
+                  <button className="flex-1 px-4 py-2 bg-button-bg text-button-bgText rounded-lg hover:bg-button-bgHover transition-colors">
+                    Save Changes
+                  </button>
+                  <button 
+                    onClick={() => setIsCardOpen(false)}
+                    className="flex-1 px-4 py-2 bg-button-secondBg text-text-primary rounded-lg hover:bg-button-secondBgHover transition-colors"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </Drawer>
+          </div>
+
+          {/* Example 2: Different Directions */}
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold text-text-primary mb-3">
+              Different Directions
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Drawers can slide from any edge: left, right, top, or bottom.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex items-center justify-center gap-4">
+              <button
+                onClick={() => setIsLeftOpen(true)}
+                className="px-6 py-3 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors font-medium"
+              >
+                Open Left
+              </button>
+              <button
+                onClick={() => setIsTopOpen(true)}
+                className="px-6 py-3 bg-button-secondBg hover:bg-button-secondBgHover text-text-primary rounded-lg transition-colors font-medium"
+              >
+                Open Top
+              </button>
+            </div>
+
+            <Drawer
+              isOpen={isLeftOpen}
+              onClose={() => setIsLeftOpen(false)}
+              direction="left"
+              width={350}
+              className="p-6 bg-drawer-background"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-text-primary">Left Drawer</h2>
+                <button
+                  onClick={() => setIsLeftOpen(false)}
+                  className="p-2 hover:bg-card-background rounded-lg transition-colors"
+                >
+                  <X size={20} className="text-text-primary" />
+                </button>
+              </div>
+              <p className="text-text-secondary">
+                This drawer slides in from the left side!
+              </p>
+            </Drawer>
+
+            <Drawer
+              isOpen={isTopOpen}
+              onClose={() => setIsTopOpen(false)}
+              direction="top"
+              height={300}
+              className="p-6 bg-drawer-background"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-text-primary">Top Drawer</h2>
+                <button
+                  onClick={() => setIsTopOpen(false)}
+                  className="p-2 hover:bg-card-background rounded-lg transition-colors"
+                >
+                  <X size={20} className="text-text-primary" />
+                </button>
+              </div>
+              <p className="text-text-secondary">
+                This drawer slides in from the top!
+              </p>
+            </Drawer>
+          </div>
+
+          {/* Example 3: Custom Styling */}
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold text-text-primary mb-3">
+              Custom Styling
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Use the className prop to apply any Tailwind classes for custom styling.
+            </p>
+
+            <CodeBlock
+              code={customStyleCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              showLineNumbers={true}
+              showGutter={true}
+            />
+          </div>
         </section>
 
         {/* PROPS SECTION */}
@@ -167,7 +517,7 @@ function MyComponent() {
             Props
           </h2>
           <p className="text-text-secondary mb-6">
-            Complete list of props available for the Drawer component.
+            Complete list of props available for the simplified Drawer component.
           </p>
 
           <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
@@ -228,30 +578,6 @@ function MyComponent() {
                   </tr>
                   <tr className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      title
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Title in the header
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      subtitle
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Subtitle below the title
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       direction
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
@@ -259,7 +585,31 @@ function MyComponent() {
                     </td>
                     <td className="px-6 py-4 text-text-secondary">"right"</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Slide direction
+                      Direction from which drawer slides in
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      className
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      string
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">""</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Custom classes for drawer wrapper
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
+                      overlayClassName
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                      string
+                    </td>
+                    <td className="px-6 py-4 text-text-secondary">""</td>
+                    <td className="px-6 py-4 text-text-secondary">
+                      Custom classes for overlay
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -269,9 +619,9 @@ function MyComponent() {
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
                       string | number
                     </td>
-                    <td className="px-6 py-4 text-text-secondary">"25%"</td>
+                    <td className="px-6 py-4 text-text-secondary">"400px"</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Width (left/right drawers)
+                      Width for left/right drawers
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -281,9 +631,9 @@ function MyComponent() {
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
                       string | number
                     </td>
-                    <td className="px-6 py-4 text-text-secondary">"25%"</td>
+                    <td className="px-6 py-4 text-text-secondary">"400px"</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Height (top/bottom drawers)
+                      Height for top/bottom drawers
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -295,55 +645,7 @@ function MyComponent() {
                     </td>
                     <td className="px-6 py-4 text-text-secondary">"slide"</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Animation type
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      overlayOpacity
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">0.5</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Backdrop opacity (0-1)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      enableBlur
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Enable backdrop blur effect
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      hideHeader
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Hide the header section
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showCloseButton
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show close button in header
+                      Animation type for drawer entrance/exit
                     </td>
                   </tr>
                   <tr className="hover:bg-gray-50">
@@ -355,31 +657,7 @@ function MyComponent() {
                     </td>
                     <td className="px-6 py-4 text-text-secondary">true</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Close when clicking overlay
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      headerActions
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom actions in header
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      footerActions
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom actions in footer
+                      Close drawer when clicking overlay
                     </td>
                   </tr>
                 </tbody>

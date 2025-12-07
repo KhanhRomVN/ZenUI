@@ -3,7 +3,15 @@ import { ReactNode } from "react";
 /**
  * Pagination variant
  */
-export type PaginationVariant = "numbers" | "dots" | "simple";
+export type PaginationVariant =
+  | "classic" // Classic Outlined - kiểu cổ điển với border
+  | "minimal-dots" // Minimal Dots - chỉ hiện dots, minimal design
+  | "pill" // Pill Group - dạng viên thuốc, group liền nhau
+  | "card" // Card Style - dạng thẻ với shadow
+  | "compact" // Compact with Ellipsis - hiển thị rút gọn với dấu ...
+  | "dropdown" // Dropdown Style - có dropdown chọn trang
+  | "progress" // Progress Bar Style - dạng thanh tiến trình
+  | "slider"; // Slider Style - dạng thanh trượt
 
 /**
  * Pagination size
@@ -31,7 +39,7 @@ export interface PaginationProps {
   /** Callback khi trang thay đổi */
   onPageChange: (page: number) => void;
 
-  /** Variant của pagination */
+  /** Variant của pagination (default: "classic") */
   variant?: PaginationVariant;
 
   /** Kích thước */

@@ -654,11 +654,12 @@ function CustomTable() {
                           itemsPerPage={itemsPerPage}
                           currentPage={currentPage}
                           onPageChange={handlePageChange}
-                          variant="numbers"
-                          align="right"
+                          variant="classic"
+                          align="left"
                           showNavigation={true}
                           showPageNumbers={true}
                           maxVisiblePages={5}
+                          size="sm"
                         />
                       </TableCell>
                     </TableRow>

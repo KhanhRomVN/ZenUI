@@ -1,34 +1,30 @@
 import { useState } from "react";
 import { Pagination } from "../../../../components/package/components/pagination";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
-import {
-  FileCode,
-  ChevronLeft,
-  ChevronRight,
-  ArrowLeft,
-  ArrowRight,
-} from "lucide-react";
+import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
 
 const PaginationSection = () => {
   // State for pagination examples
-  const [currentPage, setCurrentPage] = useState(1);
-  const [variantPage, setVariantPage] = useState(1);
-  const [sizePage, setSizePage] = useState(1);
-  const [advancedPage, setAdvancedPage] = useState(1);
-  const [customPage, setCustomPage] = useState(1);
+  const [classicPage, setClassicPage] = useState(5);
+  const [minimalDotsPage, setMinimalDotsPage] = useState(5);
+  const [pillPage, setPillPage] = useState(5);
+  const [cardPage, setCardPage] = useState(5);
+  const [compactPage, setCompactPage] = useState(5);
+  const [dropdownPage, setDropdownPage] = useState(5);
+  const [progressPage, setProgressPage] = useState(5);
+  const [sliderPage, setSliderPage] = useState(5);
 
   // Navigation sections for right panel
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
     { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    { id: "variants", label: "Variants" },
     { id: "props", label: "Props" },
   ];
 
   const npmInstallCode = `npm install @khanhromvn/zenui`;
-
   const yarnInstallCode = `yarn add @khanhromvn/zenui`;
 
   const basicUsageCode = `import { Pagination } from "@khanhromvn/zenui";
@@ -36,229 +32,155 @@ import { useState } from "react";
 
 function BasicPaginationExample() {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalItems = 150;
+  const totalItems = 100;
   const itemsPerPage = 10;
 
   return (
-    <div>
-      <Pagination
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        currentPage={currentPage}
-        onPageChange={setCurrentPage}
-        showTotalPages={true}
-      />
-      
-      <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-        <p className="text-sm text-text-secondary">
-          Showing page {currentPage} of {Math.ceil(totalItems / itemsPerPage)}
-        </p>
-      </div>
-    </div>
-  );
-}`;
-
-  const variantExampleCode = `import { Pagination } from "@khanhromvn/zenui";
-
-function VariantExamples() {
-  const [numbersPage, setNumbersPage] = useState(1);
-  const [dotsPage, setDotsPage] = useState(1);
-  const [simplePage, setSimplePage] = useState(1);
-
-  return (
-    <div className="space-y-6">
-      {/* Numbers Variant */}
-      <div>
-        <h4 className="font-semibold mb-2">Numbers Variant</h4>
-        <Pagination
-          totalItems={150}
-          itemsPerPage={10}
-          currentPage={numbersPage}
-          onPageChange={setNumbersPage}
-          variant="numbers"
-          showTotalPages={true}
-        />
-      </div>
-
-      {/* Dots Variant */}
-      <div>
-        <h4 className="font-semibold mb-2">Dots Variant</h4>
-        <Pagination
-          totalItems={150}
-          itemsPerPage={10}
-          currentPage={dotsPage}
-          onPageChange={setDotsPage}
-          variant="dots"
-          showTotalPages={true}
-        />
-      </div>
-
-      {/* Simple Variant */}
-      <div>
-        <h4 className="font-semibold mb-2">Simple Variant</h4>
-        <Pagination
-          totalItems={150}
-          itemsPerPage={10}
-          currentPage={simplePage}
-          onPageChange={setSimplePage}
-          variant="simple"
-          showNavigation={true}
-        />
-      </div>
-    </div>
-  );
-}`;
-
-  const sizeExampleCode = `import { Pagination } from "@khanhromvn/zenui";
-
-function SizeExamples() {
-  const [smPage, setSmPage] = useState(1);
-  const [mdPage, setMdPage] = useState(1);
-  const [lgPage, setLgPage] = useState(1);
-
-  return (
-    <div className="space-y-6">
-      {/* Small Size */}
-      <div>
-        <h4 className="font-semibold mb-2">Small Size</h4>
-        <Pagination
-          totalItems={150}
-          itemsPerPage={10}
-          currentPage={smPage}
-          onPageChange={setSmPage}
-          size="sm"
-          showTotalPages={true}
-        />
-      </div>
-
-      {/* Medium Size */}
-      <div>
-        <h4 className="font-semibold mb-2">Medium Size</h4>
-        <Pagination
-          totalItems={150}
-          itemsPerPage={10}
-          currentPage={mdPage}
-          onPageChange={setMdPage}
-          size="md"
-          showTotalPages={true}
-        />
-      </div>
-
-      {/* Large Size */}
-      <div>
-        <h4 className="font-semibold mb-2">Large Size</h4>
-        <Pagination
-          totalItems={150}
-          itemsPerPage={10}
-          currentPage={lgPage}
-          onPageChange={setLgPage}
-          size="lg"
-          showTotalPages={true}
-        />
-      </div>
-    </div>
-  );
-}`;
-
-  const advancedExampleCode = `import { Pagination } from "@khanhromvn/zenui";
-
-function AdvancedExample() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-
-  return (
     <Pagination
-      totalItems={250}
+      totalItems={totalItems}
       itemsPerPage={itemsPerPage}
       currentPage={currentPage}
       onPageChange={setCurrentPage}
-      variant="numbers"
-      size="md"
-      showNavigation={true}
-      showPageNumbers={true}
-      showTotalPages={true}
-      showJumper={true}
-      showItemsPerPage={true}
-      itemsPerPageOptions={[5, 10, 25, 50]}
-      maxVisiblePages={5}
+      variant="classic"
     />
   );
 }`;
 
-  const customExampleCode = `import { Pagination } from "@khanhromvn/zenui";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+  const classicCode = `import { Pagination } from "@khanhromvn/zenui";
+import { useState } from "react";
 
-function CustomExample() {
-  const [currentPage, setCurrentPage] = useState(1);
+function ClassicExample() {
+  const [currentPage, setCurrentPage] = useState(5);
 
   return (
-    <div className="space-y-6">
-      {/* Custom Navigation Buttons */}
-      <div>
-        <h4 className="font-semibold mb-2">Custom Navigation Buttons</h4>
-        <Pagination
-          totalItems={150}
-          itemsPerPage={10}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-          previousButton={<ArrowLeft size={16} />}
-          nextButton={<ArrowRight size={16} />}
-          showTotalPages={true}
-        />
-      </div>
-
-      {/* Different Alignment */}
-      <div>
-        <h4 className="font-semibold mb-2">Left Alignment</h4>
-        <Pagination
-          totalItems={150}
-          itemsPerPage={10}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-          align="left"
-          showTotalPages={true}
-        />
-      </div>
-
-      <div>
-        <h4 className="font-semibold mb-2">Center Alignment</h4>
-        <Pagination
-          totalItems={150}
-          itemsPerPage={10}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-          align="center"
-          showTotalPages={true}
-        />
-      </div>
-
-      <div>
-        <h4 className="font-semibold mb-2">Right Alignment</h4>
-        <Pagination
-          totalItems={150}
-          itemsPerPage={10}
-          currentPage={currentPage}
-          onPageChange={setCurrentPage}
-          align="right"
-          showTotalPages={true}
-        />
-      </div>
-    </div>
+    <Pagination
+      totalItems={100}
+      itemsPerPage={10}
+      currentPage={currentPage}
+      onPageChange={setCurrentPage}
+      variant="classic"
+    />
   );
 }`;
 
-  // Sample data for demonstration
-  const sampleData = Array.from({ length: 150 }, (_, i) => ({
-    id: i + 1,
-    name: `Item ${i + 1}`,
-    description: `This is item number ${i + 1} in the list.`,
-  }));
+  const minimalDotsCode = `import { Pagination } from "@khanhromvn/zenui";
+import { useState } from "react";
 
-  const itemsPerPage = 10;
-  const currentItems = sampleData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+function MinimalDotsExample() {
+  const [currentPage, setCurrentPage] = useState(5);
+
+  return (
+    <Pagination
+      totalItems={100}
+      itemsPerPage={10}
+      currentPage={currentPage}
+      onPageChange={setCurrentPage}
+      variant="minimal-dots"
+    />
   );
+}`;
+
+  const pillCode = `import { Pagination } from "@khanhromvn/zenui";
+import { useState } from "react";
+
+function PillExample() {
+  const [currentPage, setCurrentPage] = useState(5);
+
+  return (
+    <Pagination
+      totalItems={100}
+      itemsPerPage={10}
+      currentPage={currentPage}
+      onPageChange={setCurrentPage}
+      variant="pill"
+    />
+  );
+}`;
+
+  const cardCode = `import { Pagination } from "@khanhromvn/zenui";
+import { useState } from "react";
+
+function CardExample() {
+  const [currentPage, setCurrentPage] = useState(5);
+
+  return (
+    <Pagination
+      totalItems={100}
+      itemsPerPage={10}
+      currentPage={currentPage}
+      onPageChange={setCurrentPage}
+      variant="card"
+    />
+  );
+}`;
+
+  const compactCode = `import { Pagination } from "@khanhromvn/zenui";
+import { useState } from "react";
+
+function CompactExample() {
+  const [currentPage, setCurrentPage] = useState(5);
+
+  return (
+    <Pagination
+      totalItems={100}
+      itemsPerPage={10}
+      currentPage={currentPage}
+      onPageChange={setCurrentPage}
+      variant="compact"
+    />
+  );
+}`;
+
+  const dropdownCode = `import { Pagination } from "@khanhromvn/zenui";
+import { useState } from "react";
+
+function DropdownExample() {
+  const [currentPage, setCurrentPage] = useState(5);
+
+  return (
+    <Pagination
+      totalItems={100}
+      itemsPerPage={10}
+      currentPage={currentPage}
+      onPageChange={setCurrentPage}
+      variant="dropdown"
+    />
+  );
+}`;
+
+  const progressCode = `import { Pagination } from "@khanhromvn/zenui";
+import { useState } from "react";
+
+function ProgressExample() {
+  const [currentPage, setCurrentPage] = useState(5);
+
+  return (
+    <Pagination
+      totalItems={100}
+      itemsPerPage={10}
+      currentPage={currentPage}
+      onPageChange={setCurrentPage}
+      variant="progress"
+    />
+  );
+}`;
+
+  const sliderCode = `import { Pagination } from "@khanhromvn/zenui";
+import { useState } from "react";
+
+function SliderExample() {
+  const [currentPage, setCurrentPage] = useState(5);
+
+  return (
+    <Pagination
+      totalItems={100}
+      itemsPerPage={10}
+      currentPage={currentPage}
+      onPageChange={setCurrentPage}
+      variant="slider"
+    />
+  );
+}`;
 
   return (
     <>
@@ -269,10 +191,11 @@ function CustomExample() {
             Pagination
           </h1>
           <p className="text-lg text-text-secondary leading-relaxed">
-            A flexible and customizable pagination component with support for
-            multiple variants, sizes, and advanced features. Perfect for
-            navigating through large datasets, tables, lists, and search results
-            with intuitive controls and comprehensive customization options.
+            A comprehensive pagination component with 8 distinct UI variants to
+            match any design style. From classic outlined buttons to modern
+            progress bars and interactive sliders, choose the perfect pagination
+            style for your application. Each variant is fully responsive and
+            theme-aware.
           </p>
         </section>
 
@@ -322,11 +245,11 @@ function CustomExample() {
           {/* Live Demo */}
           <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6">
             <Pagination
-              totalItems={150}
-              itemsPerPage={itemsPerPage}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
-              showTotalPages={true}
+              totalItems={100}
+              itemsPerPage={10}
+              currentPage={classicPage}
+              onPageChange={setClassicPage}
+              variant="classic"
             />
           </div>
 
@@ -345,279 +268,261 @@ function CustomExample() {
           />
         </section>
 
-        {/* EXAMPLES SECTION */}
-        <section id="examples" className="mb-12">
+        {/* VARIANTS SECTION */}
+        <section id="variants" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
-            Advanced Examples
+            Pagination Variants
           </h2>
+          <p className="text-text-secondary mb-8">
+            8 kiểu thiết kế Pagination khác nhau về cấu trúc UI. Mỗi variant có
+            phong cách riêng phù hợp với các ngữ cảnh thiết kế khác nhau.
+          </p>
 
-          {/* Variant Examples */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Variant Types
+          {/* Variant 1: Classic */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold text-text-primary mb-2">
+              1. Classic Outlined
             </h3>
-            <p className="text-text-secondary mb-4">
-              Choose from different pagination variants to match your design
-              needs.
+            <p className="text-sm text-text-secondary mb-6">
+              Kiểu cổ điển với border, mỗi số là một button riêng biệt
             </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 space-y-6">
-              {/* Numbers Variant */}
-              <div>
-                <h4 className="font-semibold text-text-primary mb-2">
-                  Numbers Variant
-                </h4>
-                <p className="text-sm text-text-secondary mb-3">
-                  Traditional pagination with page numbers and navigation
-                  buttons.
-                </p>
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 overflow-x-auto">
+              <div className="flex justify-center">
                 <Pagination
-                  totalItems={150}
+                  totalItems={100}
                   itemsPerPage={10}
-                  currentPage={variantPage}
-                  onPageChange={setVariantPage}
-                  variant="numbers"
-                  showTotalPages={true}
-                />
-              </div>
-
-              {/* Dots Variant */}
-              <div>
-                <h4 className="font-semibold text-text-primary mb-2">
-                  Dots Variant
-                </h4>
-                <p className="text-sm text-text-secondary mb-3">
-                  Minimal dot indicators for mobile-friendly pagination.
-                </p>
-                <Pagination
-                  totalItems={150}
-                  itemsPerPage={10}
-                  currentPage={variantPage}
-                  onPageChange={setVariantPage}
-                  variant="dots"
-                  showTotalPages={true}
-                />
-              </div>
-
-              {/* Simple Variant */}
-              <div>
-                <h4 className="font-semibold text-text-primary mb-2">
-                  Simple Variant
-                </h4>
-                <p className="text-sm text-text-secondary mb-3">
-                  Clean and simple with just page info and navigation.
-                </p>
-                <Pagination
-                  totalItems={150}
-                  itemsPerPage={10}
-                  currentPage={variantPage}
-                  onPageChange={setVariantPage}
-                  variant="simple"
-                  showNavigation={true}
+                  currentPage={classicPage}
+                  onPageChange={setClassicPage}
+                  variant="classic"
                 />
               </div>
             </div>
-
             <CodeBlock
-              code={variantExampleCode}
+              code={classicCode}
               language="typescript"
               theme="vs-dark"
               readOnly={true}
               headerMode="path"
               headerIcon={<FileCode size={16} />}
-              filePath="src/components/VariantExamples.tsx"
+              filePath="src/components/ClassicExample.tsx"
               showLineNumbers={true}
             />
           </div>
 
-          {/* Size Examples */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Size Variants
+          {/* Variant 2: Minimal Dots */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold text-text-primary mb-2">
+              2. Minimal Dots
             </h3>
-            <p className="text-text-secondary mb-4">
-              Different sizes for various contexts and design requirements.
+            <p className="text-sm text-text-secondary mb-6">
+              Thiết kế tối giản với dots, trang active mở rộng thành circle lớn
             </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 space-y-6">
-              {/* Small Size */}
-              <div>
-                <h4 className="font-semibold text-text-primary mb-2">
-                  Small Size
-                </h4>
-                <p className="text-sm text-text-secondary mb-3">
-                  Compact pagination for tight spaces and dense interfaces.
-                </p>
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+              <div className="flex justify-center">
                 <Pagination
-                  totalItems={150}
+                  totalItems={100}
                   itemsPerPage={10}
-                  currentPage={sizePage}
-                  onPageChange={setSizePage}
-                  size="sm"
-                  showTotalPages={true}
-                />
-              </div>
-
-              {/* Medium Size */}
-              <div>
-                <h4 className="font-semibold text-text-primary mb-2">
-                  Medium Size
-                </h4>
-                <p className="text-sm text-text-secondary mb-3">
-                  Standard size suitable for most applications.
-                </p>
-                <Pagination
-                  totalItems={150}
-                  itemsPerPage={10}
-                  currentPage={sizePage}
-                  onPageChange={setSizePage}
-                  size="md"
-                  showTotalPages={true}
-                />
-              </div>
-
-              {/* Large Size */}
-              <div>
-                <h4 className="font-semibold text-text-primary mb-2">
-                  Large Size
-                </h4>
-                <p className="text-sm text-text-secondary mb-3">
-                  Larger buttons for better accessibility and touch targets.
-                </p>
-                <Pagination
-                  totalItems={150}
-                  itemsPerPage={10}
-                  currentPage={sizePage}
-                  onPageChange={setSizePage}
-                  size="lg"
-                  showTotalPages={true}
+                  currentPage={minimalDotsPage}
+                  onPageChange={setMinimalDotsPage}
+                  variant="minimal-dots"
                 />
               </div>
             </div>
-
             <CodeBlock
-              code={sizeExampleCode}
+              code={minimalDotsCode}
               language="typescript"
               theme="vs-dark"
               readOnly={true}
               headerMode="path"
               headerIcon={<FileCode size={16} />}
-              filePath="src/components/SizeExamples.tsx"
+              filePath="src/components/MinimalDotsExample.tsx"
               showLineNumbers={true}
             />
           </div>
 
-          {/* Customization Examples */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Customization
+          {/* Variant 3: Pill Group */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold text-text-primary mb-2">
+              3. Pill Group
             </h3>
-            <p className="text-text-secondary mb-4">
-              Customize the pagination with different alignments and custom
-              buttons.
+            <p className="text-sm text-text-secondary mb-6">
+              Các button được nhóm trong một container hình viên thuốc
             </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 space-y-6">
-              {/* Custom Navigation Buttons */}
-              <div>
-                <h4 className="font-semibold text-text-primary mb-2">
-                  Custom Navigation Buttons
-                </h4>
-                <p className="text-sm text-text-secondary mb-3">
-                  Use custom icons or text for previous/next buttons.
-                </p>
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 overflow-x-auto">
+              <div className="flex justify-center">
                 <Pagination
-                  totalItems={150}
+                  totalItems={100}
                   itemsPerPage={10}
-                  currentPage={customPage}
-                  onPageChange={setCustomPage}
-                  previousButton={<ArrowLeft size={16} />}
-                  nextButton={<ArrowRight size={16} />}
-                  showTotalPages={true}
-                />
-              </div>
-
-              {/* Different Alignments */}
-              <div>
-                <h4 className="font-semibold text-text-primary mb-2">
-                  Alignments
-                </h4>
-                <p className="text-sm text-text-secondary mb-3">
-                  Control the horizontal alignment of the pagination.
-                </p>
-
-                <div className="space-y-4">
-                  <div>
-                    <h5 className="font-medium text-text-primary mb-2">
-                      Left Alignment
-                    </h5>
-                    <Pagination
-                      totalItems={85}
-                      itemsPerPage={10}
-                      currentPage={customPage}
-                      onPageChange={setCustomPage}
-                      align="left"
-                      showTotalPages={true}
-                    />
-                  </div>
-
-                  <div>
-                    <h5 className="font-medium text-text-primary mb-2">
-                      Center Alignment
-                    </h5>
-                    <Pagination
-                      totalItems={85}
-                      itemsPerPage={10}
-                      currentPage={customPage}
-                      onPageChange={setCustomPage}
-                      align="center"
-                      showTotalPages={true}
-                    />
-                  </div>
-
-                  <div>
-                    <h5 className="font-medium text-text-primary mb-2">
-                      Right Alignment
-                    </h5>
-                    <Pagination
-                      totalItems={85}
-                      itemsPerPage={10}
-                      currentPage={customPage}
-                      onPageChange={setCustomPage}
-                      align="right"
-                      showTotalPages={true}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Limited Visible Pages */}
-              <div>
-                <h4 className="font-semibold text-text-primary mb-2">
-                  Limited Visible Pages
-                </h4>
-                <p className="text-sm text-text-secondary mb-3">
-                  Control how many page numbers are visible at once.
-                </p>
-                <Pagination
-                  totalItems={250}
-                  itemsPerPage={10}
-                  currentPage={customPage}
-                  onPageChange={setCustomPage}
-                  maxVisiblePages={5}
-                  showTotalPages={true}
+                  currentPage={pillPage}
+                  onPageChange={setPillPage}
+                  variant="pill"
                 />
               </div>
             </div>
-
             <CodeBlock
-              code={customExampleCode}
+              code={pillCode}
               language="typescript"
               theme="vs-dark"
               readOnly={true}
               headerMode="path"
               headerIcon={<FileCode size={16} />}
-              filePath="src/components/CustomExample.tsx"
+              filePath="src/components/PillExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
+          {/* Variant 4: Card Style */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold text-text-primary mb-2">
+              4. Card Style
+            </h3>
+            <p className="text-sm text-text-secondary mb-6">
+              Dạng thẻ với shadow, mỗi số như một card nhỏ
+            </p>
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 overflow-x-auto">
+              <div className="flex justify-center">
+                <Pagination
+                  totalItems={100}
+                  itemsPerPage={10}
+                  currentPage={cardPage}
+                  onPageChange={setCardPage}
+                  variant="card"
+                />
+              </div>
+            </div>
+            <CodeBlock
+              code={cardCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/CardExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
+          {/* Variant 5: Compact Ellipsis */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold text-text-primary mb-2">
+              5. Compact with Ellipsis
+            </h3>
+            <p className="text-sm text-text-secondary mb-6">
+              Hiển thị rút gọn với dấu "..." khi có nhiều trang, tất cả trong
+              một border container
+            </p>
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+              <div className="flex justify-center">
+                <Pagination
+                  totalItems={100}
+                  itemsPerPage={10}
+                  currentPage={compactPage}
+                  onPageChange={setCompactPage}
+                  variant="compact"
+                />
+              </div>
+            </div>
+            <CodeBlock
+              code={compactCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/CompactExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
+          {/* Variant 6: Dropdown */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold text-text-primary mb-2">
+              6. Dropdown Style
+            </h3>
+            <p className="text-sm text-text-secondary mb-6">
+              Sử dụng dropdown select để chọn trang, kết hợp với nút Trước/Sau
+            </p>
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+              <div className="flex justify-center">
+                <Pagination
+                  totalItems={100}
+                  itemsPerPage={10}
+                  currentPage={dropdownPage}
+                  onPageChange={setDropdownPage}
+                  variant="dropdown"
+                />
+              </div>
+            </div>
+            <CodeBlock
+              code={dropdownCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/DropdownExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
+          {/* Variant 7: Progress Bar */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold text-text-primary mb-2">
+              7. Progress Bar Style
+            </h3>
+            <p className="text-sm text-text-secondary mb-6">
+              Dạng thanh tiến trình hiển thị vị trí hiện tại
+            </p>
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+              <div className="flex justify-center">
+                <Pagination
+                  totalItems={100}
+                  itemsPerPage={10}
+                  currentPage={progressPage}
+                  onPageChange={setProgressPage}
+                  variant="progress"
+                />
+              </div>
+            </div>
+            <CodeBlock
+              code={progressCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/ProgressExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
+          {/* Variant 8: Slider */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold text-text-primary mb-2">
+              8. Slider Style
+            </h3>
+            <p className="text-sm text-text-secondary mb-6">
+              Sử dụng range slider để di chuyển giữa các trang
+            </p>
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+              <div className="flex justify-center">
+                <Pagination
+                  totalItems={100}
+                  itemsPerPage={10}
+                  currentPage={sliderPage}
+                  onPageChange={setSliderPage}
+                  variant="slider"
+                />
+              </div>
+            </div>
+            <CodeBlock
+              code={sliderCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/SliderExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -652,7 +557,7 @@ function CustomExample() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
+                  <tr className="hover:bg-input-background/50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       totalItems*
                     </td>
@@ -664,7 +569,7 @@ function CustomExample() {
                       Total number of items to paginate
                     </td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
+                  <tr className="hover:bg-input-background/50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       itemsPerPage*
                     </td>
@@ -676,7 +581,7 @@ function CustomExample() {
                       Number of items per page
                     </td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
+                  <tr className="hover:bg-input-background/50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       currentPage*
                     </td>
@@ -688,7 +593,7 @@ function CustomExample() {
                       Current active page
                     </td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
+                  <tr className="hover:bg-input-background/50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       onPageChange*
                     </td>
@@ -700,19 +605,20 @@ function CustomExample() {
                       Callback when page changes
                     </td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
+                  <tr className="hover:bg-input-background/50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       variant
                     </td>
                     <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "numbers" | "dots" | "simple"
+                      "classic" | "minimal-dots" | "pill" | "card" | "compact" |
+                      "dropdown" | "progress" | "slider"
                     </td>
-                    <td className="px-6 py-4 text-text-secondary">"numbers"</td>
+                    <td className="px-6 py-4 text-text-secondary">"classic"</td>
                     <td className="px-6 py-4 text-text-secondary">
                       Pagination variant style
                     </td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
+                  <tr className="hover:bg-input-background/50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       size
                     </td>
@@ -721,10 +627,11 @@ function CustomExample() {
                     </td>
                     <td className="px-6 py-4 text-text-secondary">"md"</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Size of pagination elements
+                      Size of pagination elements (not applicable to all
+                      variants)
                     </td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
+                  <tr className="hover:bg-input-background/50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       align
                     </td>
@@ -736,7 +643,7 @@ function CustomExample() {
                       Horizontal alignment
                     </td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
+                  <tr className="hover:bg-input-background/50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       showNavigation
                     </td>
@@ -745,22 +652,11 @@ function CustomExample() {
                     </td>
                     <td className="px-6 py-4 text-text-secondary">true</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Show previous/next buttons
+                      Show previous/next buttons (not applicable to all
+                      variants)
                     </td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showPageNumbers
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show page number buttons
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
+                  <tr className="hover:bg-input-background/50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       maxVisiblePages
                     </td>
@@ -769,84 +665,10 @@ function CustomExample() {
                     </td>
                     <td className="px-6 py-4 text-text-secondary">7</td>
                     <td className="px-6 py-4 text-text-secondary">
-                      Maximum visible page numbers
+                      Maximum visible page numbers (only for compact variant)
                     </td>
                   </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showTotalPages
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show total pages information
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showJumper
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show page jumper input
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showItemsPerPage
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show items per page selector
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      itemsPerPageOptions
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number[]
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      [10,20,50,100]
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Options for items per page selector
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      previousButton
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom previous button content
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      nextButton
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom next button content
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
+                  <tr className="hover:bg-input-background/50">
                     <td className="px-6 py-4 text-text-primary font-mono text-xs">
                       className
                     </td>

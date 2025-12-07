@@ -35,7 +35,7 @@ const ThemePage: React.FC = () => {
         className={cn(
           "relative flex flex-col p-4 rounded-xl transition-all duration-300 overflow-hidden",
           "bg-card-background hover:bg-card-background/80",
-          "border-2 transition-all",
+          " transition-all",
           isActive
             ? "border-primary shadow-lg scale-[1.02]"
             : "border-border hover:border-border-hover",

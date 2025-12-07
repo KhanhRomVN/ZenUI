@@ -21,7 +21,7 @@ import {
   Mail,
   Bell,
 } from "lucide-react";
-import { PRESET_THEMES, PresetThemeType } from "../../constants/theme-presets";
+import { PRESET_THEMES, PresetThemeType } from "../../constants/theme-loader";
 import { useTheme } from "../../providers/theme-provider";
 
 const HomePage = () => {

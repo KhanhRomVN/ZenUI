@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { PRESET_THEMES } from "../constants/theme-presets";
+import { PRESET_THEMES } from "../constants/theme-loader";
 
 type Theme = "dark" | "light" | "system";
 
@@ -46,51 +46,7 @@ export function ThemeProvider({
       }
     } else {
       // Apply Default Dark theme on first load
-      const defaultDarkPreset = {
-        name: "DefaultDark",
-        primary: "#3686ff",
-        background: "#0a0a0a",
-        textPrimary: "#ececec",
-        textSecondary: "#a8a8a8",
-        border: "#353535",
-        borderHover: "#418dfe",
-        borderFocus: "#418dfe",
-        cardBackground: "#242424",
-        inputBackground: "#1e1e1e",
-        inputBorderDefault: "#353535",
-        inputBorderHover: "#418dfe",
-        inputBorderFocus: "#418dfe",
-        dialogBackground: "#1e1e1e",
-        dropdownBackground: "#1e1e1e",
-        dropdownItemHover: "#2d2d2d",
-        dropdownBorder: "#3f3f3f",
-        dropdownBorderHover: "#418dfe",
-        sidebarBackground: "#131313",
-        sidebarItemHover: "#1e1e1e",
-        sidebarItemFocus: "#333333",
-        buttonBg: "#3686ff",
-        buttonBgHover: "#418dfe",
-        buttonText: "#ffffff",
-        buttonBorder: "#418dfe",
-        buttonBorderHover: "#5aa3ff",
-        buttonSecondBg: "#1e1e1e",
-        buttonSecondBgHover: "#343434",
-        bookmarkItemBg: "#1e293b",
-        bookmarkItemText: "#e2e8f0",
-        drawerBackground: "#1e1e1e",
-        clockGradientFrom: "#3686ff",
-        clockGradientTo: "#418dfe",
-        cardShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.3)",
-        dialogShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
-        dropdownShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.3)",
-        // Table variables for DefaultDark
-        tableHeaderBg: "#1a1a1a",
-        tableRowBg: "#242424",
-        tableRowHoverBg: "#2d2d2d",
-        tableRowFocusBg: "#333333",
-        tableFooterBg: "#1a1a1a",
-        tableBorder: "#353535",
-      };
+      const defaultDarkPreset = PRESET_THEMES.dark[0];
       applyCSSVariables(defaultDarkPreset);
       localStorage.setItem(
         `${storageKey}-preset`,
@@ -223,7 +179,9 @@ export function ThemeProvider({
       tabItemHoverBorder: "--tab-item-hover-border",
       tabItemFocusBorder: "--tab-item-focus-border",
     };
-    Object.entries(preset).forEach(([key, value]) => {
+    // Use tailwind property from new theme structure
+    const themeData = preset.tailwind || preset;
+    Object.entries(themeData).forEach(([key, value]) => {
       const cssVar = cssVarMap[key];
       if (cssVar && value) {
         root.style.setProperty(cssVar, value as string);

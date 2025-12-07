@@ -1,6 +1,6 @@
 import React from "react";
 import { useTheme } from "../../providers/theme-provider";
-import { PRESET_THEMES } from "../../constants/theme-presets";
+import { PRESET_THEMES } from "../../constants/theme-loader";
 import { Drawer } from "../package/drawer";
 
 interface ThemeDrawerProps {
@@ -99,39 +99,40 @@ const ThemeDrawer: React.FC<ThemeDrawerProps> = ({ isOpen, onClose }) => {
               <div className="w-full h-20 rounded-lg overflow-hidden mb-2 relative">
                 <div
                   className="h-3 w-full"
-                  style={{ backgroundColor: preset.primary }}
+                  style={{ backgroundColor: preset.tailwind.primary }}
                 />
                 <div className="flex h-17">
                   <div
                     className="w-1/4 h-full"
                     style={{
                       backgroundColor:
-                        preset.sidebarBackground || preset.cardBackground,
+                        preset.tailwind.sidebarBackground ||
+                        preset.tailwind.cardBackground,
                     }}
                   />
                   <div
                     className="w-3/4 h-full p-2"
-                    style={{ backgroundColor: preset.background }}
+                    style={{ backgroundColor: preset.tailwind.background }}
                   >
                     <div
                       className="w-full h-3 rounded mb-1"
-                      style={{ backgroundColor: preset.cardBackground }}
+                      style={{
+                        backgroundColor: preset.tailwind.cardBackground,
+                      }}
                     />
                     <div
                       className="w-3/4 h-3 rounded"
-                      style={{ backgroundColor: preset.cardBackground }}
+                      style={{
+                        backgroundColor: preset.tailwind.cardBackground,
+                      }}
                     />
                   </div>
                 </div>
                 <div className="absolute top-1 right-1 bg-white/90 dark:bg-black/90 p-1 rounded-full">
-                  {preset.icon ? (
-                    <div className="text-sm">{preset.icon}</div>
-                  ) : (
-                    <div
-                      className="w-4 h-4 rounded-full"
-                      style={{ backgroundColor: preset.primary }}
-                    />
-                  )}
+                  <div
+                    className="w-4 h-4 rounded-full"
+                    style={{ backgroundColor: preset.tailwind.primary }}
+                  />
                 </div>
               </div>
               <div className="flex justify-between items-center w-full">
@@ -140,7 +141,7 @@ const ThemeDrawer: React.FC<ThemeDrawerProps> = ({ isOpen, onClose }) => {
                     {preset.name}
                   </span>
                   <span className="text-xs text-text-secondary">
-                    {preset.description || "Modern theme"}
+                    Modern theme
                   </span>
                 </div>
               </div>
@@ -150,7 +151,9 @@ const ThemeDrawer: React.FC<ThemeDrawerProps> = ({ isOpen, onClose }) => {
                     <div
                       key={k}
                       className="h-1 flex-1 rounded-full"
-                      style={{ backgroundColor: (preset as any)[k] || "#000" }}
+                      style={{
+                        backgroundColor: (preset.tailwind as any)[k] || "#000",
+                      }}
                     />
                   )
                 )}

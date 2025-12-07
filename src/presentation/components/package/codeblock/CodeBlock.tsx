@@ -224,9 +224,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
           }
         }
 
-        monaco.editor.defineTheme(themeName, themeData.default as any);
+        monaco.editor.defineTheme(themeName, themeData.default.monaco as any);
         setCustomTheme(themeName);
-        setThemeColors(themeData.default.colors);
+        setThemeColors(themeData.default.monaco.colors);
 
         // Force apply theme to existing editor instance
         if (editorRef.current) {

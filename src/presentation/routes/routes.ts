@@ -11,6 +11,7 @@ interface RouteConfig {
 const ComponentsPage = lazy(() => import("../pages/component"));
 const HomePage = lazy(() => import("../pages/home"));
 const LayoutPage = lazy(() => import("../pages/layout"));
+const ThemePage = lazy(() => import("../pages/theme"));
 
 const publicRoutes: RouteConfig[] = [
   {
@@ -26,6 +27,11 @@ const publicRoutes: RouteConfig[] = [
   {
     path: "/layout",
     element: LayoutPage,
+    layout: MainLayout,
+  },
+  {
+    path: "/theme",
+    element: ThemePage,
     layout: MainLayout,
   },
 ];

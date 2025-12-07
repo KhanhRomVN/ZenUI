@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Carousel } from "../../../../components/package/carousel";
 import { CodeBlock } from "../../../../components/package/codeblock";
 import { FileCode, Star, Heart, Zap } from "lucide-react";
@@ -137,6 +136,45 @@ function EffectsExample() {
   );
 }`;
 
+  const cubeEffectCode = `import { Carousel } from "@khanhromvn/zenui";
+
+function CubeEffectExample() {
+  return (
+    <Carousel
+      items={slides}
+      renderItem={(item) => <SlideContent item={item} />}
+      effect="cube"
+      speed={800}
+    />
+  );
+}`;
+
+  const flipEffectCode = `import { Carousel } from "@khanhromvn/zenui";
+
+function FlipEffectExample() {
+  return (
+    <Carousel
+      items={slides}
+      renderItem={(item) => <SlideContent item={item} />}
+      effect="flip"
+      speed={700}
+    />
+  );
+}`;
+
+  const parallaxEffectCode = `import { Carousel } from "@khanhromvn/zenui";
+
+function ParallaxEffectExample() {
+  return (
+    <Carousel
+      items={slides}
+      renderItem={(item) => <SlideContent item={item} />}
+      effect="parallax"
+      parallax={true}
+    />
+  );
+}`;
+
   const multipleSlidesCode = `import { Carousel } from "@khanhromvn/zenui";
 
 function MultipleSlidesExample() {
@@ -251,61 +289,8 @@ function MultipleSlidesExample() {
         {/* EXAMPLES SECTION */}
         <section id="examples" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
-            Advanced Examples
+            Effect Examples
           </h2>
-
-          {/* Autoplay */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Autoplay
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Enable automatic slide transitions with customizable delay and
-              pause on hover.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
-              <Carousel
-                items={images}
-                renderItem={(item) => (
-                  <div className="w-full h-64 relative rounded-lg overflow-hidden">
-                    <img
-                      src={item.url}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm">
-                      Autoplay
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                      <h3 className="text-white text-lg font-semibold">
-                        {item.title}
-                      </h3>
-                      <p className="text-white/80 text-sm">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                )}
-                autoplay={true}
-                autoplayDelay={3000}
-                pauseOnHover={true}
-                loop={true}
-                className="bg-card-background"
-              />
-            </div>
-
-            <CodeBlock
-              code={autoplayCode}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/AutoplayExample.tsx"
-              showLineNumbers={true}
-            />
-          </div>
 
           {/* Coverflow Effect */}
           <div className="mb-8">
@@ -331,6 +316,112 @@ function MultipleSlidesExample() {
                 effect="coverflow"
                 centered={true}
                 className="bg-card-background py-8"
+              />
+            </div>
+
+            <CodeBlock
+              code={effectsCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/EffectsExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
+          {/* Cube Effect */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Cube Effect
+            </h3>
+            <p className="text-text-secondary mb-4">
+              3D cube rotation effect for dramatic transitions.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+              <Carousel
+                items={images}
+                renderItem={(item) => (
+                  <div className="w-full h-64 relative rounded-lg overflow-hidden shadow-xl">
+                    <img
+                      src={item.url}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm">
+                      Cube
+                    </div>
+                  </div>
+                )}
+                effect="cube"
+                speed={800}
+                className="bg-card-background"
+              />
+            </div>
+          </div>
+
+          {/* Flip Effect */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Flip Effect
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Card flip animation effect for elegant transitions.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+              <Carousel
+                items={features}
+                renderItem={(item) => (
+                  <div className="w-full h-64 relative rounded-lg overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600 p-8 flex flex-col items-center justify-center text-center shadow-xl">
+                    <div className="text-white mb-4">{item.icon}</div>
+                    <h3 className="text-white text-2xl font-bold mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-white/90">{item.description}</p>
+                  </div>
+                )}
+                effect="flip"
+                speed={700}
+                className="bg-card-background"
+              />
+            </div>
+          </div>
+
+          {/* Parallax Effect */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Parallax Effect
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Smooth parallax scrolling effect with depth perception.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+              <Carousel
+                items={images}
+                renderItem={(item) => (
+                  <div className="w-full h-64 relative rounded-lg overflow-hidden">
+                    <img
+                      src={item.url}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm">
+                      Parallax
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                      <h3 className="text-white text-lg font-semibold">
+                        {item.title}
+                      </h3>
+                    </div>
+                  </div>
+                )}
+                effect="parallax"
+                parallax={true}
+                className="bg-card-background"
               />
             </div>
           </div>
@@ -370,56 +461,6 @@ function MultipleSlidesExample() {
               headerMode="path"
               headerIcon={<FileCode size={16} />}
               filePath="src/components/MultipleSlidesExample.tsx"
-              showLineNumbers={true}
-            />
-          </div>
-
-          {/* Features Carousel */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Features Showcase
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Highlight product features or key benefits.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
-              <Carousel
-                items={features}
-                renderItem={(item) => (
-                  <div className="w-full h-64 flex flex-col items-center justify-center text-center px-8">
-                    <div className="text-blue-600 mb-4">{item.icon}</div>
-                    <h3 className="text-text-primary text-xl font-bold mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-text-secondary">{item.description}</p>
-                  </div>
-                )}
-                slidesPerView={1}
-                centered={true}
-                showArrows={false}
-                className="bg-card-background"
-              />
-            </div>
-          </div>
-
-          {/* Effects Showcase */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              All Transition Effects
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Explore all available transition effects.
-            </p>
-
-            <CodeBlock
-              code={effectsCode}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/EffectsExample.tsx"
               showLineNumbers={true}
             />
           </div>

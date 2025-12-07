@@ -82,12 +82,14 @@ const Carousel: React.FC<CarouselProps> = ({
   );
 
   const nextSlide = useCallback(() => {
-    const nextIndex = getNextIndex(currentIndex, totalItems, loop);
+    if (!loop && currentIndex >= totalItems - 1) return;
+    const nextIndex = (currentIndex + 1) % totalItems;
     goToSlide(nextIndex);
   }, [currentIndex, totalItems, loop, goToSlide]);
 
   const prevSlide = useCallback(() => {
-    const prevIndex = getPrevIndex(currentIndex, totalItems, loop);
+    if (!loop && currentIndex <= 0) return;
+    const prevIndex = currentIndex === 0 ? totalItems - 1 : currentIndex - 1;
     goToSlide(prevIndex);
   }, [currentIndex, totalItems, loop, goToSlide]);
 

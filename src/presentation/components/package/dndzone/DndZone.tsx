@@ -7,6 +7,7 @@ import {
   getFileIcon,
 } from "./DndZone.utils";
 import { Upload, X } from "lucide-react";
+import { cn } from "../../../../shared/utils/cn";
 
 const DndZone: React.FC<DndZoneProps> = ({
   onFilesChange,
@@ -138,7 +139,12 @@ const DndZone: React.FC<DndZoneProps> = ({
     <div className={`dndzone-container ${className}`.trim()}>
       {/* Drop Zone */}
       <div
-        className="dndzone-droparea"
+        className={cn(
+          "dndzone-droparea rounded-lg flex flex-col items-center justify-center transition-all duration-200 p-5",
+          disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer",
+          isDragging && "bg-gray-50",
+          !isDragging && "bg-gray-100"
+        )}
         style={{
           height,
           border: `2px dashed ${
@@ -148,18 +154,6 @@ const DndZone: React.FC<DndZoneProps> = ({
               ? "#ef4444"
               : "#d1d5db"
           }`,
-          borderRadius: "8px",
-          backgroundColor: isDragging
-            ? "#f9fafb"
-            : "#f3f4f6",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: disabled ? "not-allowed" : "pointer",
-          opacity: disabled ? 0.6 : 1,
-          transition: "all 0.2s ease",
-          padding: "20px",
         }}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
@@ -170,40 +164,26 @@ const DndZone: React.FC<DndZoneProps> = ({
         <Upload
           size={48}
           color={isDragging ? "#3b82f6" : "#9ca3af"}
-          style={{ marginBottom: "12px" }}
+          className="mb-3"
         />
 
         <p
+          className="text-base font-medium mb-1 text-center"
           style={{
             color: isDragging ? "#3b82f6" : "#111827",
-            fontSize: "16px",
-            fontWeight: 500,
-            marginBottom: "4px",
-            textAlign: "center",
           }}
         >
           {placeholder}
         </p>
 
         {accept && (
-          <p
-            style={{
-              color: "#6b7280",
-              fontSize: "12px",
-              marginTop: "4px",
-            }}
-          >
+          <p className="text-gray-500 text-xs mt-1">
             Accepted: {accept}
           </p>
         )}
 
         {maxSize && (
-          <p
-            style={{
-              color: "#6b7280",
-              fontSize: "12px",
-            }}
-          >
+          <p className="text-gray-500 text-xs">
             Max size: {formatFileSize(maxSize)}
           </p>
         )}
@@ -215,99 +195,45 @@ const DndZone: React.FC<DndZoneProps> = ({
           multiple={multiple}
           onChange={handleInputChange}
           disabled={disabled}
-          style={{ display: "none" }}
+          className="hidden"
         />
       </div>
 
       {/* Error Message */}
       {error && (
-        <div
-          style={{
-            marginTop: "8px",
-            padding: "8px 12px",
-            backgroundColor: "#fef2f2",
-            border: "1px solid #fecaca",
-            borderRadius: "6px",
-            color: "#dc2626",
-            fontSize: "14px",
-          }}
-        >
+        <div className="mt-2 px-3 py-2 bg-red-50 border border-red-200 rounded-md text-red-600 text-sm">
           {error}
         </div>
       )}
 
       {/* File List */}
       {files.length > 0 && (
-        <div
-          className="dndzone-files"
-          style={{
-            marginTop: "16px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "8px",
-          }}
-        >
+        <div className="dndzone-files mt-4 flex flex-col gap-2">
           {files.map((file, index) => (
             <div
               key={`${file.name}-${index}`}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                padding: "12px",
-                borderRadius: "6px",
-                transition: "all 0.2s ease",
-              }}
+              className="flex items-center gap-3 p-3 rounded-md transition-all duration-200"
             >
               {/* Preview or Icon */}
               {file.preview ? (
                 <img
                   src={file.preview}
                   alt={file.name}
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                    objectFit: "cover",
-                    borderRadius: "4px",
-                    flexShrink: 0,
-                  }}
+                  className="w-12 h-12 object-cover rounded flex-shrink-0"
                 />
               ) : (
-                <div
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "32px",
-                    flexShrink: 0,
-                  }}
-                >
+                <div className="w-12 h-12 flex items-center justify-center text-3xl flex-shrink-0">
                   {getFileIcon(file)}
                 </div>
               )}
 
               {/* File Info */}
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <p
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: 500,
-                    marginBottom: "2px",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}
-                >
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium mb-0.5 overflow-hidden text-ellipsis whitespace-nowrap">
                   {file.name}
                 </p>
                 {showFileSize && (
-                  <p
-                    style={{
-                      fontSize: "12px",
-                    }}
-                  >
+                  <p className="text-xs">
                     {formatFileSize(file.size)}
                   </p>
                 )}
@@ -320,19 +246,7 @@ const DndZone: React.FC<DndZoneProps> = ({
                     e.stopPropagation();
                     removeFile(index);
                   }}
-                  style={{
-                    padding: "6px",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transition: "background-color 0.2s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                  }}
+                  className="p-1.5 bg-transparent border-none rounded cursor-pointer flex items-center justify-center transition-colors duration-200 hover:bg-gray-100"
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor = "transparent";
                   }}

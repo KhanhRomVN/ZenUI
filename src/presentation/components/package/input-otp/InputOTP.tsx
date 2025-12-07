@@ -5,6 +5,7 @@ import {
   getInputOTPVariantStyles,
   validateInputOTPProps,
 } from "./InputOTP.utils";
+import { cn } from "../../../../shared/utils/cn";
 
 const InputOTP: React.FC<InputOTPProps> = ({
   length = 6,
@@ -117,13 +118,7 @@ const InputOTP: React.FC<InputOTPProps> = ({
 
   return (
     <div
-      className={`input-otp-container ${className}`.trim()}
-      style={{
-        display: "flex",
-        gap: "8px",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      className={cn("input-otp-container flex gap-2 items-center justify-center", className)}
     >
       {Array.from({ length }, (_, index) => (
         <input
@@ -136,15 +131,11 @@ const InputOTP: React.FC<InputOTPProps> = ({
           onChange={(e) => handleChange(index, e.target.value)}
           onKeyDown={(e) => handleKeyDown(index, e)}
           onPaste={handlePaste}
+          className="text-center outline-none font-inherit font-bold transition-all duration-200"
           style={{
             ...sizeStyles,
             ...variantStyles,
-            width: sizeStyles.height, // Make it square
-            textAlign: "center",
-            outline: "none",
-            fontFamily: "inherit",
-            fontWeight: "bold",
-            transition: "all 0.2s ease-in-out",
+            width: sizeStyles.height,
             opacity: isDisabled ? 0.6 : 1,
             cursor: isDisabled ? "not-allowed" : "text",
           }}

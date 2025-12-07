@@ -57,12 +57,9 @@ const Avatar: React.FC<AvatarProps> = ({
       const initials = getInitials(name);
       return (
         <span
-          className="avatar-initials"
+          className="avatar-initials font-semibold text-white uppercase"
           style={{
             fontSize: `${Math.max(size * 0.4, 12)}px`,
-            fontWeight: 600,
-            color: "#ffffff",
-            textTransform: "uppercase",
           }}
         >
           {initials}
@@ -74,10 +71,7 @@ const Avatar: React.FC<AvatarProps> = ({
     return (
       <User
         size={size * 0.5}
-        style={{
-          color: "#ffffff",
-          opacity: 0.8,
-        }}
+        className="text-white opacity-80"
       />
     );
   };

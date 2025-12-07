@@ -6,6 +6,7 @@ import {
   getHoverStyles,
   getCountColor,
 } from "./Textarea.utils";
+import { cn } from "../../../../shared/utils/cn";
 
 const Textarea: React.FC<TextareaProps> = ({
   value = "",
@@ -99,17 +100,10 @@ const Textarea: React.FC<TextareaProps> = ({
     <div className={`textarea-container ${className}`.trim()}>
       {/* Label */}
       {label && (
-        <label
-          style={{
-            display: "block",
-            marginBottom: "6px",
-            fontSize: "14px",
-            fontWeight: 500,
-          }}
-        >
+        <label className="block mb-1.5 text-sm font-medium">
           {label}
           {required && (
-            <span style={{ color: "#ef4444", marginLeft: "4px" }}>*</span>
+            <span className="text-red-500 ml-1">*</span>
           )}
         </label>
       )}
@@ -134,34 +128,16 @@ const Textarea: React.FC<TextareaProps> = ({
 
       {/* Footer: Helper text and character count */}
       {(helperText || error || showCharCount) && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: "6px",
-            gap: "8px",
-          }}
-        >
+        <div className="flex justify-between items-center mt-1.5 gap-2">
+
           {/* Helper text or error */}
-          <div style={{ flex: 1 }}>
+          <div className="flex-1">
             {error ? (
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: "12px",
-                  color: "#ef4444",
-                }}
-              >
+              <p className="m-0 text-xs text-red-500">
                 {error}
               </p>
             ) : helperText ? (
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: "12px",
-                }}
-              >
+              <p className="m-0 text-xs">
                 {helperText}
               </p>
             ) : null}
@@ -170,12 +146,9 @@ const Textarea: React.FC<TextareaProps> = ({
           {/* Character count */}
           {showCharCount && (
             <p
+              className="m-0 text-xs font-medium whitespace-nowrap"
               style={{
-                margin: 0,
-                fontSize: "12px",
                 color: getCountColor(characterCount, maxLength),
-                fontWeight: 500,
-                whiteSpace: "nowrap",
               }}
             >
               {characterCount}

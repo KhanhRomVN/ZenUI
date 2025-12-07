@@ -6,6 +6,7 @@ import {
   getResponsiveColumns,
   debounce,
 } from "./Masonry.utils";
+import { cn } from "../../../../shared/utils/cn";
 
 const Masonry: React.FC<MasonryProps> = ({
   items,
@@ -96,10 +97,9 @@ const Masonry: React.FC<MasonryProps> = ({
     <div ref={containerRef} className={`masonry-container ${className}`}>
       {columns.length > 0 ? (
         <div
-          className="flex"
+          className="flex w-full"
           style={{
             gap: `${gap}px`,
-            width: "100%",
           }}
         >
           {columns.map((column) => (

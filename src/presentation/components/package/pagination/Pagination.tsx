@@ -8,6 +8,7 @@ import {
   getPaginationAlignmentStyles,
   validatePaginationProps,
 } from "./Pagination.utils";
+import { cn } from "../../../../shared/utils/cn";
 
 const Pagination: React.FC<PaginationProps> = ({
   totalItems,

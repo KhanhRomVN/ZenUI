@@ -18,6 +18,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { KanbanProps, KanbanColumn, KanbanItem } from "./Kanban.types";
 import { MoreVertical, Plus } from "lucide-react";
+import { cn } from "../../../../shared/utils/cn";
 
 // Sortable Item Component
 const SortableItem: React.FC<{

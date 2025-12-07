@@ -7,6 +7,7 @@ import {
   isLightColor,
 } from "./ColorPicker.utils";
 import { Check } from "lucide-react";
+import { cn } from "../../../../shared/utils/cn";
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
   value,
@@ -72,12 +73,9 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
       {/* Color Label */}
       {showLabel && value && (
         <div
-          className="colorpicker-label"
+          className="colorpicker-label text-sm font-mono text-center"
           style={{
             marginTop: `${gap * 2}px`,
-            fontSize: "14px",
-            fontFamily: "monospace",
-            textAlign: "center",
           }}
         >
           Selected: <span>{value}</span>

@@ -146,12 +146,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
         {...props}
       >
         <ol
-          className="breadcrumb-list flex items-center gap-2"
-          style={{
-            listStyle: "none",
-            margin: 0,
-            padding: 0,
-          }}
+          className="breadcrumb-list flex items-center gap-2 list-none m-0 p-0"
         >
           {isOverflowing && totalItems > 2
             ? renderCollapsedBreadcrumb()

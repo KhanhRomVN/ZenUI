@@ -7,6 +7,7 @@ import {
   getTreeNodeStyles,
 } from "./Tree.utils";
 import { ChevronRight, ChevronDown } from "lucide-react";
+import { cn } from "../../../../shared/utils/cn";
 
 const Tree: React.FC<TreeProps> = ({
   data,
@@ -74,15 +75,9 @@ const Tree: React.FC<TreeProps> = ({
       <div key={node.id} className={`tree-node ${node.className || ""}`.trim()}>
         {/* Node Content */}
         <div
-          className="tree-node-content"
+          className="tree-node-content flex items-center p-1.5 px-2 transition-all duration-200 rounded relative"
           style={{
             ...getTreeNodeStyles(level, indentSize, isSelected, !!node.disabled),
-            display: "flex",
-            alignItems: "center",
-            padding: "6px 8px",
-            transition: "all 0.2s ease",
-            borderRadius: "4px",
-            position: "relative",
           }}
           onClick={(e) => handleNodeClick(node, e)}
           onMouseEnter={(e) => {
@@ -100,18 +95,7 @@ const Tree: React.FC<TreeProps> = ({
                 e.stopPropagation();
                 toggleNode(node.id);
               }}
-              style={{
-                background: "none",
-                border: "none",
-                padding: "0",
-                marginRight: "4px",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "16px",
-                height: "16px",
-              }}
+              className="bg-transparent border-none p-0 mr-1 cursor-pointer flex items-center justify-center w-4 h-4"
             >
               {isExpanded ? (
                 <ChevronDown size={16} />
@@ -120,31 +104,18 @@ const Tree: React.FC<TreeProps> = ({
               )}
             </button>
           ) : (
-            <div style={{ width: "20px" }} />
+            <div className="w-5" />
           )}
 
           {/* Node Icon */}
           {showIcons && (
-            <span
-              style={{
-                marginRight: "8px",
-                fontSize: "16px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
+            <span className="mr-2 text-base flex items-center">
               {node.icon || getDefaultIcon(node, isExpanded)}
             </span>
           )}
 
           {/* Node Label */}
-          <span
-            style={{
-              flex: 1,
-              fontSize: "14px",
-              userSelect: "none",
-            }}
-          >
+          <span className="flex-1 text-sm select-none">
             {node.label}
           </span>
         </div>
@@ -161,11 +132,7 @@ const Tree: React.FC<TreeProps> = ({
 
   return (
     <div
-      className={`tree-container ${className}`.trim()}
-      style={{
-        fontFamily: "inherit",
-        position: "relative",
-      }}
+      className={cn("tree-container font-inherit relative", className)}
     >
       {data.map((node) => renderNode(node, 0))}
     </div>

@@ -8,6 +8,7 @@ import {
   validateModalProps,
   mergeModalStyles,
 } from "./Modal.utils";
+import { cn } from "../../../../shared/utils/cn";
 
 const Modal: React.FC<ModalProps> = ({
   open,
@@ -74,22 +75,10 @@ const Modal: React.FC<ModalProps> = ({
   const animationClasses = getModalAnimationClasses(animation, open);
 
   const baseOverlayStyles: CSSProperties = {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    zIndex: 1000,
     ...positionStyles,
   };
 
   const baseContentStyles: CSSProperties = {
-    backgroundColor: "white",
-    borderRadius: "8px",
-    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
-    overflow: "hidden",
-    maxHeight: "90vh",
     ...sizeStyles,
   };
 
@@ -98,14 +87,22 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className={`modal-overlay ${overlayClassName} ${animationClasses}`.trim()}
+      className={cn(
+        "modal-overlay fixed inset-0 bg-black/50 z-[1000]",
+        overlayClassName,
+        animationClasses
+      )}
       style={finalOverlayStyles}
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
     >
       <div
-        className={`modal-content ${contentClassName} ${className}`.trim()}
+        className={cn(
+          "modal-content bg-white rounded-lg shadow-2xl overflow-hidden max-h-[90vh]",
+          contentClassName,
+          className
+        )}
         style={{ ...finalContentStyles, ...style }}
       >
         {/* Header */}

@@ -6,6 +6,7 @@ import {
   getLabelPosition,
   getCheckmarkIcon,
 } from "./Checkbox.utils";
+import { cn } from "../../../../shared/utils/cn";
 
 const Checkbox: React.FC<CheckboxProps> = ({
   size = 100,
@@ -42,7 +43,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     }
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement | HTMLLabelElement>) => {
     e.stopPropagation();
     if (!isDisabled && onChange) {
       onChange(!checked);
@@ -51,12 +52,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   return (
     <div
-      className={`checkbox-container ${className}`.trim()}
+      className={cn("checkbox-container inline-flex items-center", className)}
       style={{
         ...sizeStyles.container,
         ...positionStyles,
-        display: "inline-flex",
-        alignItems: "center",
       }}
     >
       {/* Hidden input for form submission */}
@@ -65,27 +64,24 @@ const Checkbox: React.FC<CheckboxProps> = ({
         checked={checked}
         onChange={handleChange}
         disabled={isDisabled}
-        style={{ display: "none" }}
+        className="hidden"
         {...props}
       />
 
       {/* Custom checkbox */}
       <div
-        className="checkbox-custom"
+        className="checkbox-custom relative"
         style={{
           ...sizeStyles.checkbox,
           ...stateStyles,
-          position: "relative",
         }}
         onClick={handleClick}
       >
         {checkmark && (
           <span
+            className="leading-none font-bold select-none"
             style={{
               fontSize: `calc(${sizeStyles.checkbox.width} * 0.7)`,
-              lineHeight: 1,
-              fontWeight: "bold",
-              userSelect: "none",
             }}
           >
             {checkmark}
@@ -95,17 +91,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
         {/* Loading spinner */}
         {loading && (
           <div
+            className="absolute top-1/2 left-1/2 border-2 border-transparent border-t-current rounded-full animate-spin -translate-x-1/2 -translate-y-1/2"
             style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
               width: `calc(${sizeStyles.checkbox.width} * 0.6)`,
               height: `calc(${sizeStyles.checkbox.width} * 0.6)`,
-              border: `2px solid transparent`,
-              borderTop: `2px solid currentColor`,
-              borderRadius: "50%",
-              animation: "spin 1s linear infinite",
-              transform: "translate(-50%, -50%)",
             }}
           />
         )}
@@ -114,13 +103,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
       {/* Label */}
       {label && (
         <label
-          className="checkbox-label"
+          className={cn(
+            "checkbox-label select-none m-0",
+            isDisabled ? "cursor-not-allowed" : "cursor-pointer"
+          )}
           style={{
             ...sizeStyles.label,
-            color: isDisabled ? "" : "",
-            cursor: isDisabled ? "not-allowed" : "pointer",
-            userSelect: "none",
-            margin: 0,
           }}
           onClick={handleClick}
         >

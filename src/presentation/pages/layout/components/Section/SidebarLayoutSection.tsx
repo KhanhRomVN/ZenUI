@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { SidebarLayout } from "../../../../components/package/sidebar";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { SidebarLayout } from "../../../../components/package/layouts/sidebar";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import {
   FileCode,
   Home,

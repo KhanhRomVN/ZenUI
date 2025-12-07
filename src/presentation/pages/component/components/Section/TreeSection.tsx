@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Tree, TreeNode } from "../../../../components/package/tree";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Tree, TreeNode } from "../../../../components/package/components/tree";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Folder, File, Settings, User, Database } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -240,9 +240,9 @@ function CustomStyledTree() {
           <h1 className="text-4xl font-bold text-text-primary mb-3">Tree</h1>
           <p className="text-lg text-text-secondary leading-relaxed">
             A hierarchical tree view component for displaying nested data
-            structures. Perfect for file systems, organizational charts, navigation
-            menus, and any hierarchical data visualization with expand/collapse
-            functionality.
+            structures. Perfect for file systems, organizational charts,
+            navigation menus, and any hierarchical data visualization with
+            expand/collapse functionality.
           </p>
         </section>
 
@@ -297,7 +297,10 @@ function CustomStyledTree() {
             {selectedNode && (
               <div className="mt-4 p-3 bg-input-background rounded-md">
                 <p className="text-sm text-text-secondary">
-                  Selected: <span className="text-text-primary font-medium">{selectedNode.label}</span>
+                  Selected:{" "}
+                  <span className="text-text-primary font-medium">
+                    {selectedNode.label}
+                  </span>
                 </p>
               </div>
             )}

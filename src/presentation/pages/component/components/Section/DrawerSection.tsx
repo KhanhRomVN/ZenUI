@@ -1,10 +1,30 @@
 import { useState } from "react";
-import { Drawer } from "../../../../components/package/drawer";
-import { Card, CardHeader, CardBody, CardFooter } from "../../../../components/package/card";
-import { CodeBlock } from "../../../../components/package/codeblock";
-import { Input } from "../../../../components/package/input";
-import { Dropdown, DropdownTrigger, DropdownContent, DropdownItem } from "../../../../components/package/dropdown";
-import { FileCode, X, Settings, User, Bell, Mail, Lock, Globe, ChevronDown } from "lucide-react";
+import { Drawer } from "../../../../components/package/components/drawer";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+} from "../../../../components/package/components/card";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
+import { Input } from "../../../../components/package/components/input";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+} from "../../../../components/package/components/dropdown";
+import {
+  FileCode,
+  X,
+  Settings,
+  User,
+  Bell,
+  Mail,
+  Lock,
+  Globe,
+  ChevronDown,
+} from "lucide-react";
 import RightPanel from "../RightPanel";
 
 const DrawerSection = () => {
@@ -152,9 +172,10 @@ function SettingsDrawerExample() {
         <section id="about" className="mb-12">
           <h1 className="text-4xl font-bold text-text-primary mb-3">Drawer</h1>
           <p className="text-lg text-text-secondary leading-relaxed">
-            A minimal and flexible drawer component that acts as a simple wrapper.
-            The Drawer provides positioning, animation, and overlay functionality
-            while giving you complete control over the content inside.
+            A minimal and flexible drawer component that acts as a simple
+            wrapper. The Drawer provides positioning, animation, and overlay
+            functionality while giving you complete control over the content
+            inside.
           </p>
         </section>
 
@@ -250,10 +271,18 @@ function SettingsDrawerExample() {
                   control over what goes inside!
                 </p>
                 <div className="space-y-2">
-                  <p className="text-sm text-text-secondary">✓ Minimal wrapper design</p>
-                  <p className="text-sm text-text-secondary">✓ Full content control</p>
-                  <p className="text-sm text-text-secondary">✓ Smooth animations</p>
-                  <p className="text-sm text-text-secondary">✓ Customizable styling</p>
+                  <p className="text-sm text-text-secondary">
+                    ✓ Minimal wrapper design
+                  </p>
+                  <p className="text-sm text-text-secondary">
+                    ✓ Full content control
+                  </p>
+                  <p className="text-sm text-text-secondary">
+                    ✓ Smooth animations
+                  </p>
+                  <p className="text-sm text-text-secondary">
+                    ✓ Customizable styling
+                  </p>
                 </div>
               </div>
             </div>
@@ -272,7 +301,8 @@ function SettingsDrawerExample() {
               Using Card Components
             </h3>
             <p className="text-text-secondary mb-4">
-              You can use any components inside the Drawer, including Card components.
+              You can use any components inside the Drawer, including Card
+              components.
             </p>
 
             <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex items-center justify-center">
@@ -305,7 +335,9 @@ function SettingsDrawerExample() {
               className="p-6 bg-drawer-background"
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-text-primary">Settings</h2>
+                <h2 className="text-2xl font-bold text-text-primary">
+                  Settings
+                </h2>
                 <button
                   onClick={() => setIsCardOpen(false)}
                   className="p-2 hover:bg-card-background rounded-lg transition-colors"
@@ -321,7 +353,9 @@ function SettingsDrawerExample() {
                   <CardBody>
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium text-text-primary mb-1">Full Name</label>
+                        <label className="block text-sm font-medium text-text-primary mb-1">
+                          Full Name
+                        </label>
                         <Input
                           placeholder="Enter your name"
                           defaultValue="John Doe"
@@ -330,7 +364,9 @@ function SettingsDrawerExample() {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-text-primary mb-1">Email</label>
+                        <label className="block text-sm font-medium text-text-primary mb-1">
+                          Email
+                        </label>
                         <Input
                           type="text"
                           placeholder="your.email@example.com"
@@ -340,7 +376,9 @@ function SettingsDrawerExample() {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-text-primary mb-1">Password</label>
+                        <label className="block text-sm font-medium text-text-primary mb-1">
+                          Password
+                        </label>
                         <Input
                           type="password"
                           placeholder="••••••••"
@@ -358,19 +396,32 @@ function SettingsDrawerExample() {
                   <CardBody>
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium text-text-primary mb-2">Language</label>
-                        <Dropdown >
+                        <label className="block text-sm font-medium text-text-primary mb-2">
+                          Language
+                        </label>
+                        <Dropdown>
                           <DropdownTrigger>
                             <button className="w-full px-4 py-2 bg-input-background border border-input-border-default hover:border-input-border-hover rounded-lg flex items-center justify-between text-text-primary">
                               <span>English</span>
-                              <ChevronDown size={16} className="text-text-secondary" />
+                              <ChevronDown
+                                size={16}
+                                className="text-text-secondary"
+                              />
                             </button>
                           </DropdownTrigger>
                           <DropdownContent className="bg-dropdown-background border border-dropdown-border hover:border-dropdown-borderHover">
-                            <DropdownItem className="hover:bg-dropdown-itemHover">English</DropdownItem>
-                            <DropdownItem className="hover:bg-dropdown-itemHover">Tiếng Việt</DropdownItem>
-                            <DropdownItem className="hover:bg-dropdown-itemHover">日本語</DropdownItem>
-                            <DropdownItem className="hover:bg-dropdown-itemHover">한국어</DropdownItem>
+                            <DropdownItem className="hover:bg-dropdown-itemHover">
+                              English
+                            </DropdownItem>
+                            <DropdownItem className="hover:bg-dropdown-itemHover">
+                              Tiếng Việt
+                            </DropdownItem>
+                            <DropdownItem className="hover:bg-dropdown-itemHover">
+                              日本語
+                            </DropdownItem>
+                            <DropdownItem className="hover:bg-dropdown-itemHover">
+                              한국어
+                            </DropdownItem>
                           </DropdownContent>
                         </Dropdown>
                       </div>
@@ -386,14 +437,22 @@ function SettingsDrawerExample() {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <Bell size={18} className="text-text-secondary" />
-                          <span className="text-text-primary">Email notifications</span>
+                          <span className="text-text-primary">
+                            Email notifications
+                          </span>
                         </div>
-                        <input type="checkbox" defaultChecked className="w-4 h-4" />
+                        <input
+                          type="checkbox"
+                          defaultChecked
+                          className="w-4 h-4"
+                        />
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <Bell size={18} className="text-text-secondary" />
-                          <span className="text-text-primary">Push notifications</span>
+                          <span className="text-text-primary">
+                            Push notifications
+                          </span>
                         </div>
                         <input type="checkbox" className="w-4 h-4" />
                       </div>
@@ -402,7 +461,11 @@ function SettingsDrawerExample() {
                           <Mail size={18} className="text-text-secondary" />
                           <span className="text-text-primary">Newsletter</span>
                         </div>
-                        <input type="checkbox" defaultChecked className="w-4 h-4" />
+                        <input
+                          type="checkbox"
+                          defaultChecked
+                          className="w-4 h-4"
+                        />
                       </div>
                     </div>
                   </CardBody>
@@ -413,7 +476,7 @@ function SettingsDrawerExample() {
                   <button className="flex-1 px-4 py-2 bg-button-bg text-button-bgText rounded-lg hover:bg-button-bgHover transition-colors">
                     Save Changes
                   </button>
-                  <button 
+                  <button
                     onClick={() => setIsCardOpen(false)}
                     className="flex-1 px-4 py-2 bg-button-secondBg text-text-primary rounded-lg hover:bg-button-secondBgHover transition-colors"
                   >
@@ -456,7 +519,9 @@ function SettingsDrawerExample() {
               className="p-6 bg-drawer-background"
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-text-primary">Left Drawer</h2>
+                <h2 className="text-2xl font-bold text-text-primary">
+                  Left Drawer
+                </h2>
                 <button
                   onClick={() => setIsLeftOpen(false)}
                   className="p-2 hover:bg-card-background rounded-lg transition-colors"
@@ -477,7 +542,9 @@ function SettingsDrawerExample() {
               className="p-6 bg-drawer-background"
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-text-primary">Top Drawer</h2>
+                <h2 className="text-2xl font-bold text-text-primary">
+                  Top Drawer
+                </h2>
                 <button
                   onClick={() => setIsTopOpen(false)}
                   className="p-2 hover:bg-card-background rounded-lg transition-colors"
@@ -497,7 +564,8 @@ function SettingsDrawerExample() {
               Custom Styling
             </h3>
             <p className="text-text-secondary mb-4">
-              Use the className prop to apply any Tailwind classes for custom styling.
+              Use the className prop to apply any Tailwind classes for custom
+              styling.
             </p>
 
             <CodeBlock
@@ -517,7 +585,8 @@ function SettingsDrawerExample() {
             Props
           </h2>
           <p className="text-text-secondary mb-6">
-            Complete list of props available for the simplified Drawer component.
+            Complete list of props available for the simplified Drawer
+            component.
           </p>
 
           <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">

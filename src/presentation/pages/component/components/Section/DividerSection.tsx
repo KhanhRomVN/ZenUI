@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Divider } from "../../../../components/package/divider";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Divider } from "../../../../components/package/components/divider";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
 

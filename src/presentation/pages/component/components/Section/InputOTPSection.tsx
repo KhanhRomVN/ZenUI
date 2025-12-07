@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { InputOTP } from "../../../../components/package/input-otp";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { InputOTP } from "../../../../components/package/components/input-otp";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Shield } from "lucide-react";
 import RightPanel from "../RightPanel";
 

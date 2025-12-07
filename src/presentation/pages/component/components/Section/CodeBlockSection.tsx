@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Play, Download } from "lucide-react";
 import RightPanel from "../RightPanel";
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Checkbox } from "../../../../components/package/checkbox";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Checkbox } from "../../../../components/package/components/checkbox";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
 

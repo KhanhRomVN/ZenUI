@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Grid, GridItem } from "../../../../components/package/grid";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Grid, GridItem } from "../../../../components/package/layouts/grid";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import {
   FileCode,
   LayoutGrid,

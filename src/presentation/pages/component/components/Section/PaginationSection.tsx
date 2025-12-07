@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Pagination } from "../../../../components/package/pagination";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Pagination } from "../../../../components/package/components/pagination";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import {
   FileCode,
   ChevronLeft,

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { DndZone } from "../../../../components/package/dndzone";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { DndZone } from "../../../../components/package/components/dndzone";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -98,8 +98,8 @@ function CustomConfigExample() {
             Drag & Drop Zone
           </h1>
           <p className="text-lg text-text-secondary leading-relaxed">
-            A versatile drag-and-drop file upload component with support for file
-            validation, preview generation, size limits, and multiple file
+            A versatile drag-and-drop file upload component with support for
+            file validation, preview generation, size limits, and multiple file
             handling. Perfect for file uploads, image galleries, and document
             management systems.
           </p>
@@ -144,7 +144,8 @@ function CustomConfigExample() {
             Basic Usage
           </h2>
           <p className="text-text-secondary mb-6">
-            Here's a simple example to get you started with the DndZone component.
+            Here's a simple example to get you started with the DndZone
+            component.
           </p>
 
           {/* Live Demo */}
@@ -183,7 +184,8 @@ function CustomConfigExample() {
               Image Upload Only
             </h3>
             <p className="text-text-secondary mb-4">
-              Restrict file types to images only with size validation and preview.
+              Restrict file types to images only with size validation and
+              preview.
             </p>
 
             <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">

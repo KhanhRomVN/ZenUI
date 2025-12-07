@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/package/button";
-import { CodeBlock } from "../../components/package/codeblock";
-import { Card } from "../../components/package/card";
-import { Badge } from "../../components/package/badge";
-import { Avatar } from "../../components/package/avatar";
-import { Input } from "../../components/package/input";
-import { Checkbox } from "../../components/package/checkbox";
-import { Tab, TabItem } from "../../components/package/tab";
+import { Button } from "../../components/package/components/button";
+import { CodeBlock } from "../../components/package/components/codeblock";
+import { Card } from "../../components/package/components/card";
+import { Badge } from "../../components/package/components/badge";
+import { Avatar } from "../../components/package/components/avatar";
+import { Input } from "../../components/package/components/input";
+import { Checkbox } from "../../components/package/components/checkbox";
+import { Tab, TabItem } from "../../components/package/components/tab";
 import {
   ArrowRight,
   Code2,

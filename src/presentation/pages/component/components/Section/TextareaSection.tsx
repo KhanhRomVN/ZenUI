@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Textarea } from "../../../../components/package/textarea";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Textarea } from "../../../../components/package/components/textarea";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
 

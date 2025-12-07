@@ -1,7 +1,7 @@
 import React from "react";
 import { useTheme } from "../../providers/theme-provider";
 import { PRESET_THEMES } from "../../constants/theme-loader";
-import Grid from "../../components/package/grid/Grid";
+import Grid from "../../components/package/layouts/grid/Grid";
 import { cn } from "../../../shared/utils/cn";
 
 const ThemePage: React.FC = () => {

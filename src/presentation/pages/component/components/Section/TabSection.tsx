@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Tab, TabItem } from "../../../../components/package/tab";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Tab, TabItem } from "../../../../components/package/components/tab";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Home, User, Settings, Bell, Mail } from "lucide-react";
 import RightPanel from "../RightPanel";
 

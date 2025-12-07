@@ -2,8 +2,8 @@ import { useState } from "react";
 import {
   SplitLayout,
   SplitLayoutItem,
-} from "../../../../components/package/split";
-import { CodeBlock } from "../../../../components/package/codeblock";
+} from "../../../../components/package/layouts/split";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import {
   FileCode,
   Layout,

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Modal } from "../../../../components/package/modal";
-import { Button } from "../../../../components/package/button";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Modal } from "../../../../components/package/components/modal";
+import { Button } from "../../../../components/package/components/button";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Plus, Settings, AlertTriangle } from "lucide-react";
 import RightPanel from "../RightPanel";
 

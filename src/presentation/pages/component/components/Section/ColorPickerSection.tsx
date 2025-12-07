@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ColorPicker } from "../../../../components/package/colorpicker";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { ColorPicker } from "../../../../components/package/components/colorpicker";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -11,8 +11,14 @@ const ColorPickerSection = () => {
 
   // Custom color palette
   const customColors = [
-    "#ff6b6b", "#4ecdc4", "#45b7d1", "#f9ca24",
-    "#6c5ce7", "#a29bfe", "#fd79a8", "#fdcb6e",
+    "#ff6b6b",
+    "#4ecdc4",
+    "#45b7d1",
+    "#f9ca24",
+    "#6c5ce7",
+    "#a29bfe",
+    "#fd79a8",
+    "#fdcb6e",
   ];
 
   // Navigation sections for right panel
@@ -142,10 +148,10 @@ function ConfigurationExample() {
             ColorPicker
           </h1>
           <p className="text-lg text-text-secondary leading-relaxed">
-            A beautiful and intuitive color picker component that displays a grid
-            of colors for easy selection. Perfect for theme customization, design
-            tools, and any application that needs color selection with a clean,
-            accessible interface.
+            A beautiful and intuitive color picker component that displays a
+            grid of colors for easy selection. Perfect for theme customization,
+            design tools, and any application that needs color selection with a
+            clean, accessible interface.
           </p>
         </section>
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Avatar } from "../../../../components/package/avatar";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Avatar } from "../../../../components/package/components/avatar";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import {
   FileCode,
   User,
@@ -252,7 +252,7 @@ function InteractiveExample() {
           {/* Live Demo */}
           <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6 flex gap-6 items-center justify-center flex-wrap">
             <Avatar
-              src="src/presentation/components/package/avatar/avatar.jpeg"
+              src="src/presentation/components/package/components/avatar/avatar.jpeg"
               size={40}
             />
             <Avatar

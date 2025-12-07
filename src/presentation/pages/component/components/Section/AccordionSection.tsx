@@ -5,12 +5,12 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "../../../../components/package/accordion";
-import { CodeBlock } from "../../../../components/package/codeblock";
-import { Button } from "../../../../components/package/button";
-import { Badge } from "../../../../components/package/badge";
-import { Input } from "../../../../components/package/input";
-import { Tab, TabItem } from "../../../../components/package/tab";
+} from "../../../../components/package/components/accordion";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
+import { Button } from "../../../../components/package/components/button";
+import { Badge } from "../../../../components/package/components/badge";
+import { Input } from "../../../../components/package/components/input";
+import { Tab, TabItem } from "../../../../components/package/components/tab";
 import {
   FileCode,
   Plus,

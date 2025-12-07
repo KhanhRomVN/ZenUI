@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Table } from "../../../../components/package/table";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Table } from "../../../../components/package/components/table";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Edit, Trash2, ChevronUp, ChevronDown } from "lucide-react";
 import RightPanel from "../RightPanel";
-import { Button } from "../../../../components/package/button";
+import { Button } from "../../../../components/package/components/button";
 
 const TableSection = () => {
   // Navigation sections for right panel

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Badge } from "../../../../components/package/badge";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Badge } from "../../../../components/package/components/badge";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Bell, CheckCircle, AlertTriangle } from "lucide-react";
 import RightPanel from "../RightPanel";
 

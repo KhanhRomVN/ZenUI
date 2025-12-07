@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Masonry } from "../../../../components/package/masonry";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Masonry } from "../../../../components/package/layouts/masonry";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Image, Camera, Heart, Share2, Bookmark } from "lucide-react";
 import RightPanel from "../RightPanel";
 

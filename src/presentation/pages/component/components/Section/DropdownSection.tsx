@@ -4,9 +4,9 @@ import {
   DropdownTrigger,
   DropdownContent,
   DropdownItem,
-} from "../../../../components/package/dropdown";
-import { Button } from "../../../../components/package/button";
-import { CodeBlock } from "../../../../components/package/codeblock";
+} from "../../../../components/package/components/dropdown";
+import { Button } from "../../../../components/package/components/button";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import {
   FileCode,
   ChevronDown,

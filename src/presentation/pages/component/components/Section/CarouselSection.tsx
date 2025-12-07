@@ -1,5 +1,5 @@
-import { Carousel } from "../../../../components/package/carousel";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Carousel } from "../../../../components/package/components/carousel";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Star, Heart, Zap } from "lucide-react";
 import RightPanel from "../RightPanel";
 

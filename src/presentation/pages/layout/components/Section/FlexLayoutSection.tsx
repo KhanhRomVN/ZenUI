@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Flex, FlexItem } from "../../../../components/package/flex";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Flex, FlexItem } from "../../../../components/package/layouts/flex";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import {
   FileCode,
   Box,

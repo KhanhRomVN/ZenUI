@@ -3,8 +3,8 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-} from "../../../../components/package/card";
-import { CodeBlock } from "../../../../components/package/codeblock";
+} from "../../../../components/package/components/card";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Star, User, Check, X, RefreshCw } from "lucide-react";
 import RightPanel from "../RightPanel";
 import React from "react";

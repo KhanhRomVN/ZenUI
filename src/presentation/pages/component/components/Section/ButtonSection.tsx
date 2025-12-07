@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "../../../../components/package/button";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Button } from "../../../../components/package/components/button";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Play, Download, Heart, Settings } from "lucide-react";
 import RightPanel from "../RightPanel";
 

@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { Input } from "../../../../components/package/input";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Input } from "../../../../components/package/components/input";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Search, X, ChevronDown } from "lucide-react";
 import RightPanel from "../RightPanel";
 import {
   Combobox,
   ComboboxItem,
-} from "../../../../components/package/combobox";
+} from "../../../../components/package/components/combobox";
 import {
   DateTimePicker,
   formatDate,
-} from "../../../../components/package/datetimepicker";
+} from "../../../../components/package/components/datetimepicker";
 
 const InputSection = () => {
   const [searchValue, setSearchValue] = useState("");

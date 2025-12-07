@@ -1,7 +1,7 @@
 import React from "react";
 import { useTheme } from "../../providers/theme-provider";
 import { PRESET_THEMES } from "../../constants/theme-loader";
-import { Drawer } from "../package/drawer";
+import { Drawer } from "../package/components/drawer";
 
 interface ThemeDrawerProps {
   isOpen: boolean;

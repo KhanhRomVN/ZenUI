@@ -2,8 +2,8 @@ import { useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
-} from "../../../../components/package/breadcumb";
-import { CodeBlock } from "../../../../components/package/codeblock";
+} from "../../../../components/package/components/breadcumb";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Folder, FileText, Settings, Home } from "lucide-react";
 import RightPanel from "../RightPanel";
 

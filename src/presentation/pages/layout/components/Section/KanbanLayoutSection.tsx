@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Kanban } from "../../../../components/package/kanban";
-import { CodeBlock } from "../../../../components/package/codeblock";
+import { Kanban } from "../../../../components/package/layouts/kanban";
+import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, MoreVertical, Clock, User, CheckCircle } from "lucide-react";
 import RightPanel from "../RightPanel";
 

@@ -11,6 +11,7 @@ import { Button } from "../../../../components/package/components/button";
 import { Badge } from "../../../../components/package/components/badge";
 import { Input } from "../../../../components/package/components/input";
 import { Tab, TabItem } from "../../../../components/package/components/tab";
+import { Table } from "../../../../components/package/components/table";
 import {
   FileCode,
   Plus,
@@ -1341,68 +1342,68 @@ function MyComponent() {
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Accordion Props
             </h3>
-            <div className="bg-card-background border border-border-default rounded-md overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead className="bg-table-headerBg">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Prop
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Type
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Default
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Description
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border-default">
-                    <tr className="hover:bg-table-rowHoverBg">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        type
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        "single" | "multiple"
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        "single"
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Allow single or multiple items open
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-table-rowHoverBg">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        collapsible
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        boolean
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">true</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Allow items to be closed
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-table-rowHoverBg">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        className
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Custom CSS classes
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <Table
+              data={[
+                {
+                  prop: "type",
+                  type: '"single" | "multiple"',
+                  default: '"single"',
+                  description: "Allow single or multiple items open",
+                },
+                {
+                  prop: "collapsible",
+                  type: "boolean",
+                  default: "true",
+                  description: "Allow items to be closed",
+                },
+                {
+                  prop: "className",
+                  type: "string",
+                  default: "-",
+                  description: "Custom CSS classes",
+                },
+              ]}
+              columns={[
+                {
+                  key: "prop",
+                  title: "Prop",
+                  width: "20%",
+                  render: (value) => (
+                    <span className="font-mono text-xs text-text-primary">
+                      {value}
+                    </span>
+                  ),
+                },
+                {
+                  key: "type",
+                  title: "Type",
+                  width: "30%",
+                  render: (value) => (
+                    <span className="font-mono text-xs text-text-secondary">
+                      {value}
+                    </span>
+                  ),
+                },
+                {
+                  key: "default",
+                  title: "Default",
+                  width: "15%",
+                  render: (value) => (
+                    <span className="text-text-secondary">{value}</span>
+                  ),
+                },
+                {
+                  key: "description",
+                  title: "Description",
+                  width: "35%",
+                  render: (value) => (
+                    <span className="text-text-secondary">{value}</span>
+                  ),
+                },
+              ]}
+              size="md"
+              className="rounded-lg"
+            />
           </div>
 
           {/* AccordionItem Props */}
@@ -1410,54 +1411,62 @@ function MyComponent() {
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               AccordionItem Props
             </h3>
-            <div className="bg-card-background border border-border-default rounded-md overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead className="bg-table-headerBg">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Prop
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Type
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Default
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Description
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border-default">
-                    <tr className="hover:bg-table-rowHoverBg">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        value
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Unique identifier for the item
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-table-rowHoverBg">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        className
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Custom CSS classes
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <Table
+              data={[
+                {
+                  prop: "value",
+                  type: "string",
+                  default: "-",
+                  description: "Unique identifier for the item",
+                },
+                {
+                  prop: "className",
+                  type: "string",
+                  default: "-",
+                  description: "Custom CSS classes",
+                },
+              ]}
+              columns={[
+                {
+                  key: "prop",
+                  title: "Prop",
+                  width: "20%",
+                  render: (value) => (
+                    <span className="font-mono text-xs text-text-primary">
+                      {value}
+                    </span>
+                  ),
+                },
+                {
+                  key: "type",
+                  title: "Type",
+                  width: "30%",
+                  render: (value) => (
+                    <span className="font-mono text-xs text-text-secondary">
+                      {value}
+                    </span>
+                  ),
+                },
+                {
+                  key: "default",
+                  title: "Default",
+                  width: "15%",
+                  render: (value) => (
+                    <span className="text-text-secondary">{value}</span>
+                  ),
+                },
+                {
+                  key: "description",
+                  title: "Description",
+                  width: "35%",
+                  render: (value) => (
+                    <span className="text-text-secondary">{value}</span>
+                  ),
+                },
+              ]}
+              size="md"
+              className="rounded-lg"
+            />
           </div>
 
           {/* AccordionTrigger Props */}
@@ -1465,68 +1474,68 @@ function MyComponent() {
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               AccordionTrigger Props
             </h3>
-            <div className="bg-card-background border border-border-default rounded-md overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead className="bg-table-headerBg">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Prop
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Type
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Default
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Description
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border-default">
-                    <tr className="hover:bg-table-rowHoverBg">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        icon
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        ReactNode
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        ChevronDown
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Custom icon component
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-table-rowHoverBg">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        iconPosition
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        "left" | "right"
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">"right"</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Position of the icon
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-table-rowHoverBg">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        className
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Custom CSS classes
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <Table
+              data={[
+                {
+                  prop: "icon",
+                  type: "ReactNode",
+                  default: "ChevronDown",
+                  description: "Custom icon component",
+                },
+                {
+                  prop: "iconPosition",
+                  type: '"left" | "right"',
+                  default: '"right"',
+                  description: "Position of the icon",
+                },
+                {
+                  prop: "className",
+                  type: "string",
+                  default: "-",
+                  description: "Custom CSS classes",
+                },
+              ]}
+              columns={[
+                {
+                  key: "prop",
+                  title: "Prop",
+                  width: "20%",
+                  render: (value) => (
+                    <span className="font-mono text-xs text-text-primary">
+                      {value}
+                    </span>
+                  ),
+                },
+                {
+                  key: "type",
+                  title: "Type",
+                  width: "30%",
+                  render: (value) => (
+                    <span className="font-mono text-xs text-text-secondary">
+                      {value}
+                    </span>
+                  ),
+                },
+                {
+                  key: "default",
+                  title: "Default",
+                  width: "15%",
+                  render: (value) => (
+                    <span className="text-text-secondary">{value}</span>
+                  ),
+                },
+                {
+                  key: "description",
+                  title: "Description",
+                  width: "35%",
+                  render: (value) => (
+                    <span className="text-text-secondary">{value}</span>
+                  ),
+                },
+              ]}
+              size="md"
+              className="rounded-lg"
+            />
           </div>
 
           {/* AccordionContent Props */}
@@ -1534,42 +1543,56 @@ function MyComponent() {
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               AccordionContent Props
             </h3>
-            <div className="bg-card-background border border-border-default rounded-md overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead className="bg-table-headerBg">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Prop
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Type
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Default
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Description
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border-default">
-                    <tr className="hover:bg-table-rowHoverBg">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        className
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Custom CSS classes
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <Table
+              data={[
+                {
+                  prop: "className",
+                  type: "string",
+                  default: "-",
+                  description: "Custom CSS classes",
+                },
+              ]}
+              columns={[
+                {
+                  key: "prop",
+                  title: "Prop",
+                  width: "20%",
+                  render: (value) => (
+                    <span className="font-mono text-xs text-text-primary">
+                      {value}
+                    </span>
+                  ),
+                },
+                {
+                  key: "type",
+                  title: "Type",
+                  width: "30%",
+                  render: (value) => (
+                    <span className="font-mono text-xs text-text-secondary">
+                      {value}
+                    </span>
+                  ),
+                },
+                {
+                  key: "default",
+                  title: "Default",
+                  width: "15%",
+                  render: (value) => (
+                    <span className="text-text-secondary">{value}</span>
+                  ),
+                },
+                {
+                  key: "description",
+                  title: "Description",
+                  width: "35%",
+                  render: (value) => (
+                    <span className="text-text-secondary">{value}</span>
+                  ),
+                },
+              ]}
+              size="md"
+              className="rounded-lg"
+            />
           </div>
         </section>
       </div>

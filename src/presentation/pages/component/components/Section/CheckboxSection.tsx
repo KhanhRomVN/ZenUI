@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Checkbox } from "../../../../components/package/components/checkbox";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
+import { Table } from "../../../../components/package/components/table";
 import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -439,138 +440,104 @@ function CheckboxGroupExample() {
             Complete list of props available for the Checkbox component.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      size
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">100</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Checkbox size (percentage scale: 50-200)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      checked
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Checked state
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      indeterminate
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Indeterminate state
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      label
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string | ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Checkbox label
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      labelPosition
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "left" | "right"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"right"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Label position
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      disabled
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Disabled state
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      loading
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Loading state
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      className
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS classes
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onChange
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (checked: boolean) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Change event handler
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <Table
+            data={[
+              {
+                prop: "size",
+                type: "number",
+                default: "100",
+                description: "Checkbox size (percentage scale: 50-200)",
+              },
+              {
+                prop: "checked",
+                type: "boolean",
+                default: "false",
+                description: "Checked state",
+              },
+              {
+                prop: "indeterminate",
+                type: "boolean",
+                default: "false",
+                description: "Indeterminate state",
+              },
+              {
+                prop: "label",
+                type: "string | ReactNode",
+                default: "-",
+                description: "Checkbox label",
+              },
+              {
+                prop: "labelPosition",
+                type: '"left" | "right"',
+                default: '"right"',
+                description: "Label position",
+              },
+              {
+                prop: "disabled",
+                type: "boolean",
+                default: "false",
+                description: "Disabled state",
+              },
+              {
+                prop: "loading",
+                type: "boolean",
+                default: "false",
+                description: "Loading state",
+              },
+              {
+                prop: "className",
+                type: "string",
+                default: '""',
+                description: "Custom CSS classes",
+              },
+              {
+                prop: "onChange",
+                type: "(checked: boolean) => void",
+                default: "-",
+                description: "Change event handler",
+              },
+            ]}
+            columns={[
+              {
+                key: "prop",
+                title: "Prop",
+                width: "20%",
+                render: (value) => (
+                  <span className="font-mono text-xs text-text-primary">
+                    {value}
+                  </span>
+                ),
+              },
+              {
+                key: "type",
+                title: "Type",
+                width: "30%",
+                render: (value) => (
+                  <span className="font-mono text-xs text-text-secondary">
+                    {value}
+                  </span>
+                ),
+              },
+              {
+                key: "default",
+                title: "Default",
+                width: "15%",
+                render: (value) => (
+                  <span className="text-text-secondary">{value}</span>
+                ),
+              },
+              {
+                key: "description",
+                title: "Description",
+                width: "35%",
+                render: (value) => (
+                  <span className="text-text-secondary">{value}</span>
+                ),
+              },
+            ]}
+            size="md"
+            className="rounded-lg"
+          />
         </section>
       </div>
 

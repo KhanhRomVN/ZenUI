@@ -28,11 +28,16 @@ const Badge: React.FC<BadgeProps> = ({
     <span
       className={cn(
         "inline-flex items-center gap-1 whitespace-nowrap",
+        variant === "kbd" && "font-mono",
         className
       )}
       style={{
         ...sizeStyles,
         ...variantStyles,
+        ...(variant === "kbd" && {
+          boxShadow:
+            "0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 0 0 rgba(0, 0, 0, 0.1)",
+        }),
       }}
       {...props}
     >

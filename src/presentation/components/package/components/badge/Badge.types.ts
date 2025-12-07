@@ -15,7 +15,8 @@ export type BadgeVariant =
   | "success"
   | "warning"
   | "error"
-  | "outline";
+  | "outline"
+  | "kbd";
 
 /**
  * Props chính của Badge component

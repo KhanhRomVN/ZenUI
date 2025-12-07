@@ -66,6 +66,12 @@ export const getBadgeVariantStyles = (
       borderColor: "#d1d5db",
       borderWidth: "1px",
     },
+    kbd: {
+      backgroundColor: "#f9fafb",
+      color: "#1f2937",
+      borderColor: "#d1d5db",
+      borderWidth: "1px",
+    },
   };
 
   return styles[variant];

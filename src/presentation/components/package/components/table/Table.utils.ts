@@ -1,6 +1,5 @@
 import {
   TableSize,
-  TableVariant,
   TableSort,
   TableColumn,
   TablePagination,
@@ -18,20 +17,6 @@ export const getTableSizeClasses = (size: TableSize = "md"): string => {
   };
 
   return sizeMap[size];
-};
-
-/**
- * Get table variant classes
- */
-export const getTableVariantClasses = (
-  variant: TableVariant = "default"
-): string => {
-  const variantMap: Record<TableVariant, string> = {
-    default: "",
-    bordered: "border border-table-border",
-  };
-
-  return variantMap[variant];
 };
 
 /**

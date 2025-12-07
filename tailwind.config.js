@@ -16,12 +16,13 @@ module.exports = {
     "bg-drawer-background",
     // Table safelist
     "bg-table-headerBg",
-    "bg-table-rowBg",
-    "bg-table-rowHoverBg",
-    "bg-table-rowFocusBg",
+    "hover:bg-table-hoverHeaderBg",
+    "bg-table-bodyBg",
+    "hover:bg-table-hoverItemBodyBg",
+    "focus:bg-table-focusItemBodyBg",
     "bg-table-footerBg",
+    "hover:bg-table-hoverFooterBg",
     "border-table-border",
-    "hover:bg-table-rowHoverBg",
     // Tab safelist
     "bg-tab-background",
     "border-tab-border",
@@ -88,10 +89,12 @@ module.exports = {
         // Table colors
         table: {
           headerBg: "var(--table-header-bg)",
-          rowBg: "var(--table-row-bg)",
-          rowHoverBg: "var(--table-row-hover-bg)",
-          rowFocusBg: "var(--table-row-focus-bg)",
+          hoverHeaderBg: "var(--table-hover-header-bg)",
+          bodyBg: "var(--table-body-bg)",
+          hoverItemBodyBg: "var(--table-hover-item-body-bg)",
+          focusItemBodyBg: "var(--table-focus-item-body-bg)",
           footerBg: "var(--table-footer-bg)",
+          hoverFooterBg: "var(--table-hover-footer-bg)",
           border: "var(--table-border)",
         },
         // Tab colors

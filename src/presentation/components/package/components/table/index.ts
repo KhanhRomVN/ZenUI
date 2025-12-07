@@ -10,7 +10,6 @@ export type {
   TableSort,
   TablePagination,
   TableSize,
-  TableVariant,
   TableHeaderProps,
   TableBodyProps,
   TableFooterProps,
@@ -19,7 +18,6 @@ export type {
 } from "./Table.types";
 export {
   getTableSizeClasses,
-  getTableVariantClasses,
   sortData,
   paginateData,
   generatePageNumbers,

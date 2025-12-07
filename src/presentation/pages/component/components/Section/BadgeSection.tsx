@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Badge } from "../../../../components/package/components/badge";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
+import { Table } from "../../../../components/package/components/table";
 import { FileCode, Bell, CheckCircle, AlertTriangle } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -30,6 +31,7 @@ function MyComponent() {
       <Badge variant="warning">Warning</Badge>
       <Badge variant="error">Error</Badge>
       <Badge variant="outline">Outline</Badge>
+      <Badge variant="kbd">Kbd</Badge>
     </div>
   );
 }`;
@@ -145,6 +147,7 @@ function SizeExample() {
             <Badge variant="warning">Warning</Badge>
             <Badge variant="error">Error</Badge>
             <Badge variant="outline">Outline</Badge>
+            <Badge variant="kbd">Kbd</Badge>
           </div>
 
           {/* Code Example */}
@@ -240,6 +243,140 @@ function SizeExample() {
               headerMode="path"
               headerIcon={<FileCode size={16} />}
               filePath="src/components/SizeExample.tsx"
+              showLineNumbers={true}
+            />
+          </div>
+
+          {/* Keyboard Input (kbd) Variant */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Keyboard Input (kbd) Variant
+            </h3>
+            <p className="text-text-secondary mb-4">
+              Use the kbd variant to display keyboard shortcuts and user input
+              from keyboard.
+            </p>
+
+            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-6">
+              {/* Single Keys */}
+              <div className="flex gap-3 items-center flex-wrap">
+                <Badge variant="kbd">Ctrl</Badge>
+                <Badge variant="kbd">Alt</Badge>
+                <Badge variant="kbd">Shift</Badge>
+                <Badge variant="kbd">Enter</Badge>
+                <Badge variant="kbd">Esc</Badge>
+                <Badge variant="kbd">Tab</Badge>
+              </div>
+
+              {/* Key Combinations */}
+              <div className="flex flex-col gap-3">
+                <div className="flex gap-2 items-center">
+                  <span className="text-text-secondary">Copy:</span>
+                  <Badge variant="kbd">Ctrl</Badge>
+                  <span className="text-text-secondary">+</span>
+                  <Badge variant="kbd">C</Badge>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <span className="text-text-secondary">Paste:</span>
+                  <Badge variant="kbd">Ctrl</Badge>
+                  <span className="text-text-secondary">+</span>
+                  <Badge variant="kbd">V</Badge>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <span className="text-text-secondary">Save:</span>
+                  <Badge variant="kbd">Ctrl</Badge>
+                  <span className="text-text-secondary">+</span>
+                  <Badge variant="kbd">S</Badge>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <span className="text-text-secondary">Search:</span>
+                  <Badge variant="kbd">Ctrl</Badge>
+                  <span className="text-text-secondary">+</span>
+                  <Badge variant="kbd">K</Badge>
+                </div>
+              </div>
+
+              {/* Arrow Keys */}
+              <div className="flex gap-3 items-center flex-wrap">
+                <Badge variant="kbd">↑</Badge>
+                <Badge variant="kbd">↓</Badge>
+                <Badge variant="kbd">←</Badge>
+                <Badge variant="kbd">→</Badge>
+              </div>
+
+              {/* Function Keys */}
+              <div className="flex gap-2 items-center flex-wrap">
+                <Badge variant="kbd">F1</Badge>
+                <Badge variant="kbd">F2</Badge>
+                <Badge variant="kbd">F3</Badge>
+                <Badge variant="kbd">F4</Badge>
+                <Badge variant="kbd">F5</Badge>
+                <Badge variant="kbd">F12</Badge>
+              </div>
+            </div>
+
+            <CodeBlock
+              code={`import { Badge } from "@khanhromvn/zenui";
+
+function KbdExample() {
+  return (
+    <div className="flex flex-col gap-6">
+      {/* Single Keys */}
+      <div className="flex gap-3 items-center flex-wrap">
+        <Badge variant="kbd">Ctrl</Badge>
+        <Badge variant="kbd">Alt</Badge>
+        <Badge variant="kbd">Shift</Badge>
+        <Badge variant="kbd">Enter</Badge>
+        <Badge variant="kbd">Esc</Badge>
+        <Badge variant="kbd">Tab</Badge>
+      </div>
+
+      {/* Key Combinations */}
+      <div className="flex flex-col gap-3">
+        <div className="flex gap-2 items-center">
+          <span>Copy:</span>
+          <Badge variant="kbd">Ctrl</Badge>
+          <span>+</span>
+          <Badge variant="kbd">C</Badge>
+        </div>
+        <div className="flex gap-2 items-center">
+          <span>Paste:</span>
+          <Badge variant="kbd">Ctrl</Badge>
+          <span>+</span>
+          <Badge variant="kbd">V</Badge>
+        </div>
+        <div className="flex gap-2 items-center">
+          <span>Save:</span>
+          <Badge variant="kbd">Ctrl</Badge>
+          <span>+</span>
+          <Badge variant="kbd">S</Badge>
+        </div>
+      </div>
+
+      {/* Arrow Keys */}
+      <div className="flex gap-3 items-center flex-wrap">
+        <Badge variant="kbd">↑</Badge>
+        <Badge variant="kbd">↓</Badge>
+        <Badge variant="kbd">←</Badge>
+        <Badge variant="kbd">→</Badge>
+      </div>
+
+      {/* Function Keys */}
+      <div className="flex gap-2 items-center flex-wrap">
+        <Badge variant="kbd">F1</Badge>
+        <Badge variant="kbd">F2</Badge>
+        <Badge variant="kbd">F5</Badge>
+        <Badge variant="kbd">F12</Badge>
+      </div>
+    </div>
+  );
+}`}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/KbdExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -344,103 +481,86 @@ function RealWorldExample() {
             Complete list of props available for the Badge component.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      children
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Badge content
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      variant
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "default" | "primary" | "secondary" | "success" |
-                      "warning" | "error" | "outline"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"default"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Badge variant style
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      size
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">100</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Badge size (percentage scale: 50-200)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      dot
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show dot indicator
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      dotColor
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom dot color
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      className
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS classes
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <Table
+            data={[
+              {
+                prop: "children",
+                type: "ReactNode",
+                default: "-",
+                description: "Badge content",
+              },
+              {
+                prop: "variant",
+                type: '"default" | "primary" | "secondary" | "success" | "warning" | "error" | "outline" | "kbd"',
+                default: '"default"',
+                description: "Badge variant style",
+              },
+              {
+                prop: "size",
+                type: "number",
+                default: "100",
+                description: "Badge size (percentage scale: 50-200)",
+              },
+              {
+                prop: "dot",
+                type: "boolean",
+                default: "false",
+                description: "Show dot indicator",
+              },
+              {
+                prop: "dotColor",
+                type: "string",
+                default: "-",
+                description: "Custom dot color",
+              },
+              {
+                prop: "className",
+                type: "string",
+                default: '""',
+                description: "Custom CSS classes",
+              },
+            ]}
+            columns={[
+              {
+                key: "prop",
+                title: "Prop",
+                width: "20%",
+                render: (value) => (
+                  <span className="font-mono text-xs text-text-primary">
+                    {value}
+                  </span>
+                ),
+              },
+              {
+                key: "type",
+                title: "Type",
+                width: "30%",
+                render: (value) => (
+                  <span className="font-mono text-xs text-text-secondary">
+                    {value}
+                  </span>
+                ),
+              },
+              {
+                key: "default",
+                title: "Default",
+                width: "15%",
+                render: (value) => (
+                  <span className="text-text-secondary">{value}</span>
+                ),
+              },
+              {
+                key: "description",
+                title: "Description",
+                width: "35%",
+                render: (value) => (
+                  <span className="text-text-secondary">{value}</span>
+                ),
+              },
+            ]}
+            size="md"
+            className="rounded-lg"
+          />
         </section>
       </div>
 

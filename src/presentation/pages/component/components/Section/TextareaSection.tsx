@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Textarea } from "../../../../components/package/components/textarea";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
+import { Table } from "../../../../components/package/components/table";
 import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -384,236 +385,153 @@ function StatesExample() {
             Complete list of props available for the Textarea component.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      value
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Current value of the textarea
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onChange
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (value: string) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Callback when value changes
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      label
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Label for the textarea
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      placeholder
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Placeholder text
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      error
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Error message to display
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      helperText
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Helper text below textarea
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      maxLength
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Maximum character length
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showCount
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show character count
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      autoResize
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Auto resize based on content
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      minHeight
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"80px"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Min height for auto-resize
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      maxHeight
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"300px"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Max height for auto-resize
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      rows
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">4</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Number of rows
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      disabled
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Disabled state
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      readOnly
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Read-only state
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      required
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Required field
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      resize
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "none" | "both" | "horizontal" | "vertical"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      "vertical"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Resize behavior
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      className
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS class
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <Table
+            data={[
+              {
+                prop: "value",
+                type: "string",
+                default: '""',
+                description: "Current value of the textarea",
+              },
+              {
+                prop: "onChange",
+                type: "(value: string) => void",
+                default: "-",
+                description: "Callback when value changes",
+              },
+              {
+                prop: "label",
+                type: "string",
+                default: "-",
+                description: "Label for the textarea",
+              },
+              {
+                prop: "placeholder",
+                type: "string",
+                default: "-",
+                description: "Placeholder text",
+              },
+              {
+                prop: "error",
+                type: "string",
+                default: "-",
+                description: "Error message to display",
+              },
+              {
+                prop: "helperText",
+                type: "string",
+                default: "-",
+                description: "Helper text below textarea",
+              },
+              {
+                prop: "maxLength",
+                type: "number",
+                default: "-",
+                description: "Maximum character length",
+              },
+              {
+                prop: "showCount",
+                type: "boolean",
+                default: "false",
+                description: "Show character count",
+              },
+              {
+                prop: "autoResize",
+                type: "boolean",
+                default: "false",
+                description: "Auto resize based on content",
+              },
+              {
+                prop: "minHeight",
+                type: "string",
+                default: '"80px"',
+                description: "Min height for auto-resize",
+              },
+              {
+                prop: "maxHeight",
+                type: "string",
+                default: '"300px"',
+                description: "Max height for auto-resize",
+              },
+              {
+                prop: "rows",
+                type: "number",
+                default: "4",
+                description: "Number of rows",
+              },
+              {
+                prop: "disabled",
+                type: "boolean",
+                default: "false",
+                description: "Disabled state",
+              },
+              {
+                prop: "readOnly",
+                type: "boolean",
+                default: "false",
+                description: "Read-only state",
+              },
+              {
+                prop: "required",
+                type: "boolean",
+                default: "false",
+                description: "Required field",
+              },
+              {
+                prop: "resize",
+                type: '"none" | "both" | "horizontal" | "vertical"',
+                default: '"vertical"',
+                description: "Resize behavior",
+              },
+              {
+                prop: "className",
+                type: "string",
+                default: '""',
+                description: "Custom CSS class",
+              },
+            ]}
+            columns={[
+              {
+                key: "prop",
+                title: "Prop",
+                width: "20%",
+                render: (value) => (
+                  <span className="font-mono text-xs text-text-primary">
+                    {value}
+                  </span>
+                ),
+              },
+              {
+                key: "type",
+                title: "Type",
+                width: "30%",
+                render: (value) => (
+                  <span className="font-mono text-xs text-text-secondary">
+                    {value}
+                  </span>
+                ),
+              },
+              {
+                key: "default",
+                title: "Default",
+                width: "15%",
+                render: (value) => (
+                  <span className="text-text-secondary">{value}</span>
+                ),
+              },
+              {
+                key: "description",
+                title: "Description",
+                width: "35%",
+                render: (value) => (
+                  <span className="text-text-secondary">{value}</span>
+                ),
+              },
+            ]}
+            variant="bordered"
+            size="md"
+            className="rounded-lg"
+          />
         </section>
       </div>
 

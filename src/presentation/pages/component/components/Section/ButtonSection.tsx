@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "../../../../components/package/components/button";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
+import { Table } from "../../../../components/package/components/table";
 import { FileCode, Play, Download, Heart, Settings } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -544,162 +545,117 @@ function AlignmentExample() {
             Complete list of props available for the Button component.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      size
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">100</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Button size (percentage scale: 50-200)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      width
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "fit" | "full"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"fit"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Button width behavior
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      children
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Button content/text
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      loading
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Loading state
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      disabled
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Disabled state
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      icon
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      LucideIcon | ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Icon (Lucide icon, emoji, SVG, text)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      iconPosition
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "left" | "right"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"left"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Icon position (when icon and text present)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      align
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "left" | "center" | "right"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"right"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Content alignment
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      loadingText
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Text to display when loading
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      className
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS classes
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onClick
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (e: MouseEvent) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Click event handler
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <Table
+            data={[
+              {
+                prop: "size",
+                type: "number",
+                default: "100",
+                description: "Button size (percentage scale: 50-200)",
+              },
+              {
+                prop: "width",
+                type: '"fit" | "full"',
+                default: '"fit"',
+                description: "Button width behavior",
+              },
+              {
+                prop: "children",
+                type: "ReactNode",
+                default: "-",
+                description: "Button content/text",
+              },
+              {
+                prop: "loading",
+                type: "boolean",
+                default: "false",
+                description: "Loading state",
+              },
+              {
+                prop: "disabled",
+                type: "boolean",
+                default: "false",
+                description: "Disabled state",
+              },
+              {
+                prop: "icon",
+                type: "LucideIcon | ReactNode",
+                default: "-",
+                description: "Icon (Lucide icon, emoji, SVG, text)",
+              },
+              {
+                prop: "iconPosition",
+                type: '"left" | "right"',
+                default: '"left"',
+                description: "Icon position (when icon and text present)",
+              },
+              {
+                prop: "align",
+                type: '"left" | "center" | "right"',
+                default: '"right"',
+                description: "Content alignment",
+              },
+              {
+                prop: "loadingText",
+                type: "string",
+                default: "-",
+                description: "Text to display when loading",
+              },
+              {
+                prop: "className",
+                type: "string",
+                default: '""',
+                description: "Custom CSS classes",
+              },
+              {
+                prop: "onClick",
+                type: "(e: MouseEvent) => void",
+                default: "-",
+                description: "Click event handler",
+              },
+            ]}
+            columns={[
+              {
+                key: "prop",
+                title: "Prop",
+                width: "20%",
+                render: (value) => (
+                  <span className="font-mono text-xs text-text-primary">
+                    {value}
+                  </span>
+                ),
+              },
+              {
+                key: "type",
+                title: "Type",
+                width: "30%",
+                render: (value) => (
+                  <span className="font-mono text-xs text-text-secondary">
+                    {value}
+                  </span>
+                ),
+              },
+              {
+                key: "default",
+                title: "Default",
+                width: "15%",
+                render: (value) => (
+                  <span className="text-text-secondary">{value}</span>
+                ),
+              },
+              {
+                key: "description",
+                title: "Description",
+                width: "35%",
+                render: (value) => (
+                  <span className="text-text-secondary">{value}</span>
+                ),
+              },
+            ]}
+            variant="bordered"
+            size="md"
+            className="rounded-lg"
+          />
         </section>
       </div>
 

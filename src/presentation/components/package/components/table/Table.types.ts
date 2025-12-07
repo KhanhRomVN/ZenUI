@@ -25,25 +25,10 @@ export interface TablePagination {
 }
 
 export type TableSize = "sm" | "md" | "lg";
-export type TableVariant = "default" | "bordered";
 
-export interface TableProps<T = any> {
-  data?: T[];
-  columns?: TableColumn<T>[];
-  size?: TableSize;
-  variant?: TableVariant;
-  pagination?: TablePagination;
-  loading?: boolean;
-  emptyMessage?: string;
-  className?: string;
-  onRowClick?: (record: T, index: number) => void;
-  onSort?: (sort: TableSort | null) => void;
-  onPageChange?: (page: number, pageSize: number) => void;
-  rowKey?: string | ((record: T) => string);
-  showHeader?: boolean;
-  showFooter?: boolean;
-  stickyHeader?: boolean;
+export interface TableProps {
   children?: ReactNode;
+  className?: string;
 }
 
 export interface TableHeaderProps {

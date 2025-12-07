@@ -11,8 +11,8 @@ const AccordionList: React.FC<AccordionListProps> = ({
     <div
       className={cn(
         "flex flex-col",
-        "divide-y divide-gray-200",
-        "border border-gray-200 rounded-lg overflow-hidden",
+        "divide-y",
+        "border rounded-lg overflow-hidden",
         className
       )}
       {...props}

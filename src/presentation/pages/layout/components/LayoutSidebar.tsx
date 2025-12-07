@@ -24,7 +24,7 @@ const LayoutSidebar = () => {
             className={`block px-4 py-2 rounded-lg transition-colors ${
               currentSection === layout.slug
                 ? "bg-sidebar-item-focus text-text-primary font-medium"
-                : "text-text-secondary hover:bg-sidebar-item-hover hover:text-text-primary"
+                : " hover:bg-sidebar-item-hover hover:text-text-primary"
             }`}
           >
             {layout.name}

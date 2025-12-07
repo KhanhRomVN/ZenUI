@@ -31,8 +31,8 @@ const BreadcrumbItem: React.FC<ExtendedBreadcrumbItemProps> = ({
   const baseClasses = cn(
     "breadcrumb-item flex items-center",
     _isActive
-      ? "text-text-primary font-medium cursor-default"
-      : "text-text-secondary hover:text-text-primary transition-colors cursor-pointer",
+      ? "font-medium cursor-default"
+      : "transition-colors cursor-pointer",
     className
   );
 

@@ -117,7 +117,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
           className="checkbox-label"
           style={{
             ...sizeStyles.label,
-            color: isDisabled ? "var(--text-disabled)" : "var(--text-primary)",
+            color: isDisabled ? "" : "",
             cursor: isDisabled ? "not-allowed" : "pointer",
             userSelect: "none",
             margin: 0,

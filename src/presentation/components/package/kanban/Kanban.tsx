@@ -87,17 +87,17 @@ const DroppableColumn: React.FC<{
     <div className="flex items-center justify-between p-3">
       <div className="flex items-center gap-2">
         <div className="w-3 h-3 rounded-full bg-primary opacity-60"></div>
-        <h3 className="font-semibold text-text-primary">{column.title}</h3>
-        <span className="px-2 py-0.5 text-xs bg-input-background rounded-full text-text-secondary">
+        <h3 className="font-semibold">{column.title}</h3>
+        <span className="px-2 py-0.5 text-xs bg-gray-100 dark:bg-gray-700 rounded-full ">
           {column.items.length}
         </span>
       </div>
       <div className="flex items-center gap-1">
-        <button className="p-1 hover:bg-input-background rounded transition-colors">
-          <Plus size={16} className="text-text-secondary" />
+        <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
+          <Plus size={16} className="" />
         </button>
-        <button className="p-1 hover:bg-input-background rounded transition-colors">
-          <MoreVertical size={16} className="text-text-secondary" />
+        <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
+          <MoreVertical size={16} className="" />
         </button>
       </div>
     </div>
@@ -106,7 +106,7 @@ const DroppableColumn: React.FC<{
   return (
     <div
       ref={setNodeRef}
-      className={`flex-shrink-0 w-80 bg-card-background border-border-default ${columnClassName} rounded-lg border transition-all ${
+      className={`flex-shrink-0 w-80 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 ${columnClassName} rounded-lg border transition-all ${
         isOver ? "ring-2 ring-primary/20 bg-primary/5" : ""
       }`}
     >

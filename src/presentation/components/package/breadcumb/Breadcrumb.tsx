@@ -63,13 +63,13 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
         <Dropdown size="sm">
           <DropdownTrigger>
             <button
-              className="breadcrumb-item breadcrumb-link flex items-center hover:text-text-primary transition-colors"
+              className="breadcrumb-item breadcrumb-link flex items-center transition-colors"
               style={sizeStyles}
             >
               <MoreHorizontal size={iconSize} />
             </button>
           </DropdownTrigger>
-          <DropdownContent className="bg-dropdown-background border border-dropdown-border">
+          <DropdownContent className="bg-white dark:bg-gray-800 border">
             {hiddenItems.map((item, index) => {
               const itemProps = (item as React.ReactElement).props;
               const IconComponent = itemProps.icon;
@@ -82,7 +82,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
                   key={index}
                   leftIcon={iconElement}
                   onClick={itemProps.onClick}
-                  className="hover:bg-dropdown-itemHover"
+                  className="hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   {itemProps.href ? (
                     <a href={itemProps.href} className="block w-full">

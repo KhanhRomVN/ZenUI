@@ -188,7 +188,6 @@ const HomePage = () => {
                     <Input
                       leftIcon={<Mail size={16} />}
                       placeholder="your@email.com"
-                      type="email"
                       className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
                     />
                   </div>

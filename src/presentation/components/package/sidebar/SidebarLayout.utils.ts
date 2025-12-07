@@ -65,7 +65,7 @@ export const getSidebarClasses = (params: {
       );
       break;
     default:
-      classes.push("border-r", "border-border-default");
+      classes.push("border-r");
   }
 
   // Size classes
@@ -143,9 +143,7 @@ export const getCollapseButtonClasses = (params: {
     "absolute",
     "p-2",
     "rounded-full",
-    "bg-card-background",
     "border",
-    "border-border-default",
     "shadow-md",
     "hover:shadow-lg",
     "transition-all",
@@ -153,7 +151,6 @@ export const getCollapseButtonClasses = (params: {
     "z-10",
     "focus:outline-none",
     "focus:ring-2",
-    "focus:ring-primary/20",
   ];
 
   // Position classes
@@ -215,7 +212,6 @@ export const generateItemClasses = (params: {
     "duration-150",
     "focus:outline-none",
     "focus:ring-2",
-    "focus:ring-primary/20",
   ];
 
   // Size based padding
@@ -230,20 +226,11 @@ export const generateItemClasses = (params: {
   // Active state
   if (params.active) {
     classes.push(
-      "bg-primary/10",
-      "text-primary",
       "border-l-2",
-      "border-l-primary"
     );
     if (params.variant === "glass") {
       classes.push("bg-white/20");
     }
-  } else {
-    classes.push(
-      "text-text-secondary",
-      "hover:bg-sidebar-itemHover",
-      "hover:text-text-primary"
-    );
   }
 
   // Rounded corners

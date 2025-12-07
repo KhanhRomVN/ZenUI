@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, CSSProperties } from "react";
 import { X } from "lucide-react";
 import { ModalProps } from "./Modal.types";
 import {
@@ -114,7 +114,7 @@ const Modal: React.FC<ModalProps> = ({
             {title && (
               <div className="modal-title">
                 {typeof title === "string" ? (
-                  <h2 className="text-lg font-semibold text-text-primary">
+                  <h2 className="text-lg font-semibold">
                     {title}
                   </h2>
                 ) : (

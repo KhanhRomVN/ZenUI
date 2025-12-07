@@ -7,7 +7,9 @@ import ButtonSection from "./components/Section/ButtonSection";
 import CardSection from "./components/Section/CardSection";
 import CheckboxSection from "./components/Section/CheckboxSection";
 import CodeBlockSection from "./components/Section/CodeBlockSection";
+import ColorPickerSection from "./components/Section/ColorPickerSection";
 import DividerSection from "./components/Section/DividerSection";
+import DndZoneSection from "./components/Section/DndZoneSection";
 import DrawerSection from "./components/Section/DrawerSection";
 import DropdownSection from "./components/Section/DropdownSection";
 import InputSection from "./components/Section/InputSection";
@@ -18,6 +20,8 @@ import TableSection from "./components/Section/TableSection";
 import TabSection from "./components/Section/TabSection";
 import AccordionSection from "./components/Section/AccordionSection";
 import CarouselSection from "./components/Section/CarouselSection";
+import TreeSection from "./components/Section/TreeSection";
+import TextareaSection from "./components/Section/TextareaSection";
 
 const ComponentsPage = () => {
   const location = useLocation();
@@ -44,8 +48,12 @@ const ComponentsPage = () => {
         return <CheckboxSection />;
       case "codeblock":
         return <CodeBlockSection />;
+      case "colorpicker":
+        return <ColorPickerSection />;
       case "divider":
         return <DividerSection />;
+      case "dndzone":
+        return <DndZoneSection />;
       case "drawer":
         return <DrawerSection />;
       case "dropdown":
@@ -62,6 +70,10 @@ const ComponentsPage = () => {
         return <TableSection />;
       case "tab":
         return <TabSection />;
+      case "textarea":
+        return <TextareaSection />;
+      case "tree":
+        return <TreeSection />;
       default:
         return <DrawerSection />;
     }

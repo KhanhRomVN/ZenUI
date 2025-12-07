@@ -14,7 +14,9 @@ const ComponentSidebar = () => {
     { name: "Carousel", slug: "carousel" },
     { name: "Checkbox", slug: "checkbox" },
     { name: "Code Block", slug: "codeblock" },
+    { name: "Color Picker", slug: "colorpicker" },
     { name: "Divider", slug: "divider" },
+    { name: "Drag & Drop Zone", slug: "dndzone" },
     { name: "Drawer", slug: "drawer" },
     { name: "Dropdown", slug: "dropdown" },
     { name: "Input", slug: "input" },
@@ -23,6 +25,8 @@ const ComponentSidebar = () => {
     { name: "Pagination", slug: "pagination" },
     { name: "Table", slug: "table" },
     { name: "Tab", slug: "tab" },
+    { name: "Textarea", slug: "textarea" },
+    { name: "Tree", slug: "tree" },
   ].sort((a, b) => a.name.localeCompare(b.name));
 
   return (

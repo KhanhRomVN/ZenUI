@@ -117,7 +117,7 @@ const Masonry: React.FC<MasonryProps> = ({
           ))}
         </div>
       ) : (
-        <div className="text-center py-8 text-text-secondary">
+        <div className="text-center py-8 ">
           No items to display
         </div>
       )}

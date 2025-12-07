@@ -88,7 +88,7 @@ const Avatar: React.FC<AvatarProps> = ({
 
     return (
       <div
-        className="absolute rounded-full border-2 border-white flex items-center justify-center"
+        className="absolute rounded-full border flex items-center justify-center"
         style={{
           width: `${dotSize}px`,
           height: `${dotSize}px`,

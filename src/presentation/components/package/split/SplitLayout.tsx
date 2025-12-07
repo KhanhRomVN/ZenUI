@@ -199,7 +199,7 @@ const SplitLayout: React.FC<SplitLayoutProps> = ({
     let maxSize = containerSize;
 
     if (config.minSize) {
-      minSize = typeof config.minSize === "number' ? config.minSize : parseFloat(config.minSize);
+      minSize = typeof config.minSize === "number" ? config.minSize : parseFloat(config.minSize);
     }
     
     if (config.maxSize) {
@@ -319,9 +319,6 @@ const SplitLayout: React.FC<SplitLayoutProps> = ({
     const handleStyle: React.CSSProperties = {
       position: "absolute",
       zIndex,
-      backgroundColor: isDragging && draggingItemId === itemId 
-        ? "var(--primary)" 
-        : "var(--border-default)",
       transition: "background-color 0.2s ease",
       cursor: direction === "horizontal" ? "col-resize" : "row-resize",
     };
@@ -363,7 +360,7 @@ const SplitLayout: React.FC<SplitLayoutProps> = ({
           <div className="flex items-center justify-center h-full w-full">
             <GripIcon 
               size={Math.max(12, dragHandleSize - 4)} 
-              className="text-text-secondary opacity-60"
+              className=" opacity-60"
             />
           </div>
         )}
@@ -399,7 +396,7 @@ const SplitLayout: React.FC<SplitLayoutProps> = ({
         title={isCollapsed ? "Expand" : "Collapse"}
       >
         {config.customCollapseButton || (
-          <CollapseIcon size={16} className="text-text-secondary" />
+          <CollapseIcon size={16} className="" />
         )}
       </button>
     );

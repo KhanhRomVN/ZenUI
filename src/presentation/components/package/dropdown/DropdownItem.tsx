@@ -70,7 +70,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
         "px-3 py-2 rounded-md",
         disabled
           ? "opacity-50 cursor-not-allowed"
-          : "hover:bg-gray-100 active:bg-gray-200",
+          : "",
         className
       )}
       onClick={handleClick}

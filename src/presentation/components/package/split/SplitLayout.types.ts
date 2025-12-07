@@ -22,6 +22,7 @@ export interface SplitLayoutDragEvent {
 }
 
 export interface SplitLayoutItemConfig {
+  customCollapseButton: any;
   id?: string;
   size?: number | string;
   minSize?: number | string;

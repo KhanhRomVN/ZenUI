@@ -33,7 +33,6 @@ const Card: React.FC<CardProps> = ({
   return (
     <div
       className={cn(
-        "bg-card-background border border-border-default",
         className
       )}
       style={baseStyles}

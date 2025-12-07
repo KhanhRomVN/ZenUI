@@ -35,7 +35,7 @@ const Drawer: React.FC<DrawerProps> = ({
             transition={{ duration: 0.3 }}
             onClick={closeOnOverlayClick ? onClose : undefined}
             className={cn(
-              "fixed inset-0 bg-black/50 z-[999]",
+              "fixed inset-0 z-[999]",
               overlayClassName
             )}
           />

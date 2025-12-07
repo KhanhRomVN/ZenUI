@@ -158,17 +158,17 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
             <div className="flex items-center justify-between mb-4">
               <button
                 onClick={prevMonth}
-                className="p-1 hover:bg-sidebar-item-hover rounded"
+                className="p-1 rounded"
               >
                 <ChevronLeft size={16} />
               </button>
-              <div className="font-semibold text-text-primary">
+              <div className="font-semibold">
                 {currentMonth.toLocaleString("default", { month: "long" })}{" "}
                 {currentMonth.getFullYear()}
               </div>
               <button
                 onClick={nextMonth}
-                className="p-1 hover:bg-sidebar-item-hover rounded"
+                className="p-1 rounded"
               >
                 <ChevronRight size={16} />
               </button>
@@ -178,7 +178,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
               {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
                 <div
                   key={day}
-                  className="text-center text-xs text-text-secondary font-medium py-1"
+                  className="text-center text-xs  font-medium py-1"
                 >
                   {day}
                 </div>
@@ -192,11 +192,6 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
                   disabled={day.isDisabled}
                   className={`
                     h-8 rounded text-sm transition-colors
-                    ${
-                      day.isCurrentMonth
-                        ? "text-text-primary"
-                        : "text-text-secondary"
-                    }
                     ${day.isToday ? "border border-dashed " : ""}
                     ${day.isSelected ? "bg-blue-600 text-white" : ""}
                     ${
@@ -214,13 +209,13 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           </div>
           {/* Time Section - Dual Scroll */}
           <div className="p-4 flex-shrink-0 relative flex flex-col">
-            <div className="font-semibold text-text-primary mb-3 text-center">
+            <div className="font-semibold mb-3 text-center">
               Select Time
             </div>
             <div className="flex gap-2 items-start relative flex-1">
               {/* Hour Selector */}
               <div className="flex flex-col items-center relative">
-                <div className="text-xs text-text-secondary mb-2 font-medium">
+                <div className="text-xs  mb-2 font-medium">
                   Hour
                 </div>
                 <div
@@ -249,15 +244,15 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
               </div>
               {/* Separator ":" */}
               <div className="flex items-center" style={{ marginTop: "94px" }}>
-                <span className="text-2xl font-bold text-text-primary">:</span>
+                <span className="text-2xl font-bold ">:</span>
               </div>
               {/* Minute Selector */}
               <div className="flex flex-col items-center relative">
-                <div className="text-xs text-text-secondary mb-2 font-medium">
+                <div className="text-xs  mb-2 font-medium">
                   Minute
                 </div>
                 <div
-                  className="h-[192px] w-16 overflow-y-auto border border-border-default rounded-md relative scroll-smooth"
+                  className="h-[192px] w-16 overflow-y-auto border rounded-md relative scroll-smooth"
                   onScroll={(e) => handleScrollToSelect(e, "minute")}
                 >
                   <div className="absolute top-[64px] left-0 right-0 h-8 bg-gray-700/30 pointer-events-none z-0"></div>
@@ -285,7 +280,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
             <div className="flex gap-2 justify-end mt-4 pt-3 border-t border-border-default">
               <button
                 onClick={handleCancel}
-                className="px-4 py-2 text-sm rounded bg-gray-700 hover:bg-gray-600 text-text-primary transition-colors"
+                className="px-4 py-2 text-sm rounded bg-gray-700 hover:bg-gray-600  transition-colors"
               >
                 Cancel
               </button>
@@ -304,17 +299,17 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={prevMonth}
-              className="p-1 hover:bg-sidebar-item-hover rounded"
+              className="p-1  rounded"
             >
               <ChevronLeft size={16} />
             </button>
-            <div className="font-semibold text-text-primary">
+            <div className="font-semibold ">
               {currentMonth.toLocaleString("default", { month: "long" })}{" "}
               {currentMonth.getFullYear()}
             </div>
             <button
               onClick={nextMonth}
-              className="p-1 hover:bg-sidebar-item-hover rounded"
+              className="p-1 rounded"
             >
               <ChevronRight size={16} />
             </button>
@@ -324,7 +319,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
             {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
               <div
                 key={day}
-                className="text-center text-xs text-text-secondary font-medium py-1"
+                className="text-center text-xs  font-medium py-1"
               >
                 {day}
               </div>
@@ -340,8 +335,8 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
                   h-8 rounded text-sm transition-colors
                   ${
                     day.isCurrentMonth
-                      ? "text-text-primary"
-                      : "text-text-secondary"
+                      ? ""
+                      : ""
                   }
                   ${day.isToday ? " border border-dashed" : ""}
                   ${day.isSelected ? "bg-blue-600 text-white" : ""}
@@ -361,7 +356,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           <div className="flex gap-2 justify-end mt-4 pt-3 border-t border-border-default">
             <button
               onClick={handleCancel}
-              className="px-4 py-2 text-sm rounded bg-gray-700 hover:bg-gray-600 text-text-primary transition-colors"
+              className="px-4 py-2 text-sm rounded bg-gray-700 hover:bg-gray-600  transition-colors"
             >
               Cancel
             </button>
@@ -375,13 +370,13 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         </div>
       ) : (
         <div className="p-4">
-          <div className="font-semibold text-text-primary mb-3 text-center">
+          <div className="font-semibold  mb-3 text-center">
             Select Time
           </div>
           <div className="flex gap-2 justify-center items-start relative">
             {/* Hour Selector */}
             <div className="flex flex-col items-center relative">
-              <div className="text-xs text-text-secondary mb-2 font-medium">
+              <div className="text-xs  mb-2 font-medium">
                 Hour
               </div>
               <div
@@ -410,11 +405,11 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
             </div>
             {/* Separator ":" */}
             <div className="flex items-center pt-[30px]">
-              <span className="text-2xl font-bold text-text-primary">:</span>
+              <span className="text-2xl font-bold ">:</span>
             </div>
             {/* Minute Selector */}
             <div className="flex flex-col items-center relative">
-              <div className="text-xs text-text-secondary mb-2 font-medium">
+              <div className="text-xs  mb-2 font-medium">
                 Minute
               </div>
               <div
@@ -446,7 +441,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
           <div className="flex gap-2 justify-end mt-4 pt-3 border-t border-border-default">
             <button
               onClick={handleCancel}
-              className="px-4 py-2 text-sm rounded bg-gray-700 hover:bg-gray-600 text-text-primary transition-colors"
+              className="px-4 py-2 text-sm rounded bg-gray-700 hover:bg-gray-600  transition-colors"
             >
               Cancel
             </button>

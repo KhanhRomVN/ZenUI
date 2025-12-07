@@ -111,7 +111,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
     if (variant === "simple") {
       return (
-        <span className="text-text-secondary text-sm">
+        <span className=" text-sm">
           Page {currentPage} of {paginationInfo.totalPages}
         </span>
       );
@@ -123,7 +123,7 @@ const Pagination: React.FC<PaginationProps> = ({
         return (
           <span
             key={`ellipsis-${index}`}
-            className="flex items-center justify-center text-text-secondary"
+            className="flex items-center justify-center "
           >
             <MoreHorizontal size={16} />
           </span>
@@ -139,7 +139,7 @@ const Pagination: React.FC<PaginationProps> = ({
           } ${
             item.isCurrent
               ? "bg-blue-600 text-white"
-              : "bg-transparent text-text-secondary hover:bg-gray-100"
+              : "bg-transparent  hover:bg-gray-100"
           }`}
           aria-current={item.isCurrent ? "page" : undefined}
           aria-label={`Go to page ${item.page}`}
@@ -162,7 +162,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={!paginationInfo.hasPrevious}
-              className={`flex items-center justify-center rounded-md border border-border-default bg-transparent text-text-secondary transition-colors hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed ${sizeStyles.button}`}
+              className={`flex items-center justify-center rounded-md border border-gray-200 dark:border-gray-700 bg-transparent  transition-colors hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed ${sizeStyles.button}`}
               aria-label="Previous page"
             >
               {previousButton || <ChevronLeft size={16} />}
@@ -176,7 +176,7 @@ const Pagination: React.FC<PaginationProps> = ({
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={!paginationInfo.hasNext}
-              className={`flex items-center justify-center rounded-md border border-border-default bg-transparent text-text-secondary transition-colors hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed ${sizeStyles.button}`}
+              className={`flex items-center justify-center rounded-md border border-gray-200 dark:border-gray-700 bg-transparent  transition-colors hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed ${sizeStyles.button}`}
               aria-label="Next page"
             >
               {nextButton || <ChevronRight size={16} />}
@@ -189,7 +189,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
         {/* Total pages info */}
         {showTotalPages && (
-          <div className="text-sm text-text-secondary">
+          <div className="text-sm ">
             Showing {paginationInfo.startItem} to {paginationInfo.endItem} of{" "}
             {totalItems} entries
           </div>
@@ -202,14 +202,14 @@ const Pagination: React.FC<PaginationProps> = ({
               onSubmit={handleJumperSubmit}
               className="flex items-center gap-2"
             >
-              <span className="text-sm text-text-secondary">Go to:</span>
+              <span className="text-sm ">Go to:</span>
               <input
                 type="number"
                 value={jumperPage}
                 onChange={(e) => setJumperPage(e.target.value)}
                 min="1"
                 max={paginationInfo.totalPages}
-                className="w-16 px-2 py-1 text-sm border border-border-default rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-16 px-2 py-1 text-sm border border-gray-200 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Page"
               />
               <button
@@ -224,13 +224,13 @@ const Pagination: React.FC<PaginationProps> = ({
           {/* Items per page selector */}
           {showItemsPerPage && (
             <div className="flex items-center gap-2">
-              <span className="text-sm text-text-secondary">Show:</span>
+              <span className="text-sm ">Show:</span>
               <select
                 value={selectedItemsPerPage}
                 onChange={(e) =>
                   handleItemsPerPageChange(Number(e.target.value))
                 }
-                className="px-2 py-1 text-sm border border-border-default rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-2 py-1 text-sm border border-gray-200 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {itemsPerPageOptions.map((option) => (
                   <option key={option} value={option}>

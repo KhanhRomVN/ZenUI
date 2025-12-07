@@ -63,7 +63,7 @@ const DropdownContent: React.FC<DropdownContentProps> = ({
       role="menu"
       className={cn(
         "absolute z-50",
-        "bg-white border border-gray-200 rounded-lg shadow-lg",
+        "rounded-lg shadow-lg",
         "overflow-auto",
         "animate-in fade-in-0 zoom-in-95",
         className

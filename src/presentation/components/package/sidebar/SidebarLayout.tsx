@@ -299,7 +299,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
                   {collapsed && logoCollapsed ? logoCollapsed : logo}
                 </div>
                 {!collapsed && (
-                  <span className="text-xl font-bold text-text-primary">
+                  <span className="text-xl font-bold">
                     ZenUI
                   </span>
                 )}
@@ -310,7 +310,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
                   <span className="text-white font-bold">Z</span>
                 </div>
                 {!collapsed && (
-                  <span className="text-xl font-bold text-text-primary">
+                  <span className="text-xl font-bold">
                     ZenUI
                   </span>
                 )}
@@ -330,7 +330,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
               placeholder={searchPlaceholder}
               value={searchQuery}
               onChange={handleSearch}
-              className="w-full pl-10 pr-4 py-2 bg-input-background border border-border-default rounded-lg text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+              className="w-full pl-10 pr-4 py-2  border border-border-default rounded-lg text-sm  focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
             />
           </div>
         )}
@@ -338,7 +338,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
         {isMobile && !hideOnMobile && (
           <button
             onClick={handleMobileToggle}
-            className="absolute right-4 top-4 p-2 rounded-lg hover:bg-input-background"
+            className="absolute right-4 top-4 p-2 rounded-lg "
           >
             <X size={20} />
           </button>
@@ -371,7 +371,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
               )}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-text-primary truncate">
+              <p className="text-sm font-medium  truncate">
                 {user.name}
               </p>
               <p className="text-xs text-text-secondary truncate">
@@ -380,7 +380,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             </div>
             <button
               onClick={() => onUserClick?.(user)}
-              className="p-1 hover:bg-input-background rounded"
+              className="p-1  rounded"
             >
               <LogOut size={16} />
             </button>
@@ -389,7 +389,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
           <div className="flex justify-center">
             <button
               onClick={() => onUserClick?.(user)}
-              className="p-2 hover:bg-input-background rounded-full"
+              className="p-2  rounded-full"
               title={user.name}
             >
               {user.avatar ? (
@@ -412,7 +412,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             {showThemeToggle && (
               <button
                 onClick={onThemeToggle}
-                className="p-2 rounded-lg hover:bg-input-background"
+                className="p-2 rounded-lg "
               >
                 {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
               </button>
@@ -420,7 +420,7 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({
             {showNotifications && (
               <button
                 onClick={onNotificationsClick}
-                className="p-2 rounded-lg hover:bg-input-background relative"
+                className="p-2 rounded-lg  relative"
               >
                 <Bell size={18} />
                 {notificationCount > 0 && (

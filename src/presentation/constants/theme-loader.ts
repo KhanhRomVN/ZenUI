@@ -80,9 +80,9 @@ export interface ThemeConfig {
     dialogShadow: string;
     dropdownShadow: string;
     tableHeaderBg: string;
-    tableRowBg: string;
-    tableRowHoverBg: string;
-    tableRowFocusBg: string;
+    tableBodyBg: string;
+    tableHoverItemBodyBg: string;
+    tableFocusItemBodyBg: string;
     tableFooterBg: string;
     tableBorder: string;
     tabBackground: string;

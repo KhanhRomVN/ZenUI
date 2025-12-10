@@ -1,4 +1,3 @@
-```typescript
 import {
   FlexResponsiveProps,
   FlexProps,
@@ -11,7 +10,7 @@ import {
   AlignItems,
   AlignContent,
   FlexGrow,
-  FlexShrink
+  FlexShrink,
 } from "./Flex.types";
 
 /**
@@ -151,7 +150,9 @@ export const generateFlexItemClasses = (props: FlexItemProps): string => {
 /**
  * Generate inline styles for flex container
  */
-export const generateFlexStyles = (props: FlexProps): React.CSSProperties => {
+export const generateFlexStyles = (
+  props: Partial<FlexProps>
+): React.CSSProperties => {
   const styles: React.CSSProperties = {};
 
   // Gap - handle responsive values
@@ -348,11 +349,20 @@ const generateLegacyResponsiveClasses = (
 
       if (type === "container") {
         // Container responsive classes
-        if (breakpointProps.direction) {
-          classes.push(`${prefix}flex-${breakpointProps.direction}`);
+        const containerProps = breakpointProps as Partial<{
+          direction: FlexDirection;
+          justify: JustifyContent;
+          align: AlignItems;
+          alignContent: AlignContent;
+          wrap: FlexWrap;
+          gap: number | string;
+        }>;
+
+        if (containerProps.direction) {
+          classes.push(`${prefix}flex-${containerProps.direction}`);
         }
 
-        if (breakpointProps.justify) {
+        if (containerProps.justify) {
           const justifyMap: Record<string, string> = {
             "flex-start": "justify-start",
             "flex-end": "justify-end",
@@ -361,10 +371,10 @@ const generateLegacyResponsiveClasses = (
             "space-around": "justify-around",
             "space-evenly": "justify-evenly",
           };
-          classes.push(`${prefix}${justifyMap[breakpointProps.justify]}`);
+          classes.push(`${prefix}${justifyMap[containerProps.justify]}`);
         }
 
-        if (breakpointProps.align) {
+        if (containerProps.align) {
           const alignMap: Record<string, string> = {
             stretch: "items-stretch",
             "flex-start": "items-start",
@@ -372,16 +382,24 @@ const generateLegacyResponsiveClasses = (
             center: "items-center",
             baseline: "items-baseline",
           };
-          classes.push(`${prefix}${alignMap[breakpointProps.align]}`);
+          classes.push(`${prefix}${alignMap[containerProps.align]}`);
         }
       } else {
         // Item responsive classes
-        if (typeof breakpointProps.grow === "number") {
-          classes.push(`${prefix}grow-${breakpointProps.grow}`);
+        const itemProps = breakpointProps as Partial<{
+          grow: FlexGrow;
+          shrink: FlexShrink;
+          basis: number | string;
+          order: number;
+          alignSelf: string;
+        }>;
+
+        if (typeof itemProps.grow === "number") {
+          classes.push(`${prefix}grow-${itemProps.grow}`);
         }
 
-        if (typeof breakpointProps.order === "number") {
-          classes.push(`${prefix}order-${breakpointProps.order}`);
+        if (typeof itemProps.order === "number") {
+          classes.push(`${prefix}order-${itemProps.order}`);
         }
       }
     });

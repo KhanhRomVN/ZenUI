@@ -912,14 +912,14 @@ function ResponsiveSplit() {
                     lg: { direction: "horizontal" },
                     xl: { direction: "horizontal" },
                   }}
-                  gutter={{ xs: "sm", md: "md", lg: "lg" }}
+                  gutter="md"
                   collapsible={true}
                   className="h-full"
                 >
                   <SplitLayoutItem
-                    size={{ xs: 60, md: 200 }}
-                    minSize={{ xs: 50, md: 150 }}
-                    maxSize={{ xs: 100, md: 300 }}
+                    size={200}
+                    minSize={150}
+                    maxSize={300}
                     collapsible={true}
                     className="bg-card-background"
                   >
@@ -968,8 +968,8 @@ function ResponsiveSplit() {
                   </SplitLayoutItem>
 
                   <SplitLayoutItem
-                    size={{ xs: 80, md: 250 }}
-                    minSize={{ xs: 60, md: 150 }}
+                    size={250}
+                    minSize={150}
                     collapsible={true}
                     className="bg-card-background"
                   >

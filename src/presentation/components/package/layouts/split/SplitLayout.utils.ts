@@ -285,7 +285,7 @@ export const validateSplitConfig = (
 };
 
 export const generateResponsiveSplitClasses = (
-  responsive: Record<SplitLayoutBreakpoint, any> | undefined,
+  responsive: Partial<Record<SplitLayoutBreakpoint, any>> | undefined,
   currentBreakpoint: SplitLayoutBreakpoint
 ): string => {
   const classes: string[] = [];

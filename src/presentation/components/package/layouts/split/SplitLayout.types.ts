@@ -22,7 +22,7 @@ export interface SplitLayoutDragEvent {
 }
 
 export interface SplitLayoutItemConfig {
-  customCollapseButton: any;
+  customCollapseButton?: any;
   id?: string;
   size?: number | string;
   minSize?: number | string;
@@ -84,9 +84,9 @@ export interface SplitLayoutProps {
   style?: CSSProperties;
 
   /** Responsive configuration */
-  responsive?: {
-    [key in SplitLayoutBreakpoint]?: SplitLayoutResponsiveConfig;
-  };
+  responsive?: Partial<
+    Record<SplitLayoutBreakpoint, SplitLayoutResponsiveConfig>
+  >;
 
   /** Whether layout is resizable */
   resizable?: boolean;

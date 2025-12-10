@@ -1,6 +1,6 @@
 {
   "name": "@khanhromvn/zenui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Modern, flexible and customizable UI component library for React + Vite + Tailwind CSS",
   "type": "module",
   "main": "./dist/index.cjs",

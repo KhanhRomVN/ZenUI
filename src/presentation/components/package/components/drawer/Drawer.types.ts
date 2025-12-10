@@ -44,6 +44,20 @@ export interface DrawerProps {
   animationType?: DrawerAnimationType;
   /** Cho phép đóng khi click vào overlay */
   closeOnOverlayClick?: boolean;
+  /** Tiêu đề drawer */
+  title?: string;
+  /** Phụ đề drawer */
+  subtitle?: string;
+  /** Nội dung header actions */
+  headerActions?: ReactNode;
+  /** Nội dung footer actions */
+  footerActions?: ReactNode;
+  /** Bật hiệu ứng blur cho overlay */
+  enableBlur?: boolean;
+  /** Hiển thị nút đóng */
+  showCloseButton?: boolean;
+  /** Độ mờ của overlay (0-1) */
+  overlayOpacity?: number;
 }
 
 /**

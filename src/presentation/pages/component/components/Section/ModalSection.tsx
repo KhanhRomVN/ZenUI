@@ -633,114 +633,315 @@ function FullScreenModalExample() {
           <Table>
             <TableHeader>
               <TableRow className="bg-table-headerBg">
-                <HeaderCell showVerticalDivider showHorizontalDivider>Prop</HeaderCell>
-                <HeaderCell showVerticalDivider showHorizontalDivider>Type</HeaderCell>
-                <HeaderCell showVerticalDivider showHorizontalDivider>Default</HeaderCell>
-                <HeaderCell showVerticalDivider showHorizontalDivider>Description</HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Prop
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Type
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Default
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Description
+                </HeaderCell>
               </TableRow>
             </TableHeader>
             <TableBody className="bg-table-bodyBg">
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">open*</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">boolean</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Hiển thị modal</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">open*</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Hiển thị modal
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">onClose*</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">() => void</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Callback khi đóng modal</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">onClose*</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">() = void</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Callback khi đóng modal
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">title</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">ReactNode</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Tiêu đề modal</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">title</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">ReactNode</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Tiêu đề modal
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">children*</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">ReactNode</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Nội dung modal</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">children*</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">ReactNode</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Nội dung modal
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">footer</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">ReactNode</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Footer content</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">footer</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">ReactNode</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Footer content
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">size</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">"sm" | "md" | "lg" | "xl" | "full"</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Kích thước modal</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">size</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
+                    "sm" | "md" | "lg" | "xl" | "full"
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Kích thước modal
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">position</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">"center" | "top" | "bottom"</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Vị trí modal</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">position</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
+                    "center" | "top" | "bottom"
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Vị trí modal
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">className</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">string</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom class name</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">className</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">string</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom class name
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">overlayClassName</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">string</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom overlay class</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">overlayClassName</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">string</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom overlay class
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">contentClassName</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">string</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom content class</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">contentClassName</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">string</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom content class
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">closeOnOverlayClick</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">boolean</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Đóng modal khi click overlay</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">closeOnOverlayClick</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Đóng modal khi click overlay
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">showCloseButton</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">boolean</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Hiện nút close</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">showCloseButton</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Hiện nút close
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">closeOnEsc</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">boolean</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Đóng modal bằng ESC</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">closeOnEsc</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Đóng modal bằng ESC
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">animation</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">"fade" | "slide" | "scale" | "none"</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Animation type</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">animation</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
+                    "fade" | "slide" | "scale" | "none"
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Animation type
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">style</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">CSSProperties</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom styles</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">style</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">CSSProperties</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom styles
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">overlayStyle</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">CSSProperties</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom overlay styles</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">overlayStyle</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">CSSProperties</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom overlay styles
+                </TableCell>
               </TableRow>
-              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">contentStyle</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">CSSProperties</span></TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
-                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom content styles</TableCell>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">contentStyle</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">CSSProperties</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom content styles
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>

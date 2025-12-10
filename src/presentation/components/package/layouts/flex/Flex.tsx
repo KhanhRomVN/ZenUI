@@ -43,7 +43,7 @@ const Flex: React.FC<FlexProps> = ({
 
   // Generate inline styles
   const inlineStyles = {
-    ...generateFlexStyles({ gap, grow, shrink, basis } as FlexProps),
+    ...generateFlexStyles({ gap, grow, shrink, basis }),
     ...style,
   };
 

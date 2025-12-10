@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { Badge } from "../../../../components/package/components/badge";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
-import { Table } from "../../../../components/package/components/table";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+  HeaderCell,
+} from "../../../../components/package/components/table";
 import { FileCode, Bell, CheckCircle, AlertTriangle } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -481,86 +488,131 @@ function RealWorldExample() {
             Complete list of props available for the Badge component.
           </p>
 
-          <Table
-            data={[
-              {
-                prop: "children",
-                type: "ReactNode",
-                default: "-",
-                description: "Badge content",
-              },
-              {
-                prop: "variant",
-                type: '"default" | "primary" | "secondary" | "success" | "warning" | "error" | "outline" | "kbd"',
-                default: '"default"',
-                description: "Badge variant style",
-              },
-              {
-                prop: "size",
-                type: "number",
-                default: "100",
-                description: "Badge size (percentage scale: 50-200)",
-              },
-              {
-                prop: "dot",
-                type: "boolean",
-                default: "false",
-                description: "Show dot indicator",
-              },
-              {
-                prop: "dotColor",
-                type: "string",
-                default: "-",
-                description: "Custom dot color",
-              },
-              {
-                prop: "className",
-                type: "string",
-                default: '""',
-                description: "Custom CSS classes",
-              },
-            ]}
-            columns={[
-              {
-                key: "prop",
-                title: "Prop",
-                width: "20%",
-                render: (value) => (
-                  <span className="font-mono text-xs text-text-primary">
-                    {value}
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-table-headerBg">
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Prop
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Type
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Default
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Description
+                </HeaderCell>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="bg-table-bodyBg">
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">children</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">ReactNode</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Badge content
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">variant</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
+                    "default" | "primary" | "secondary" | "success" | "warning"
+                    | "error" | "outline" | "kbd"
                   </span>
-                ),
-              },
-              {
-                key: "type",
-                title: "Type",
-                width: "30%",
-                render: (value) => (
-                  <span className="font-mono text-xs text-text-secondary">
-                    {value}
-                  </span>
-                ),
-              },
-              {
-                key: "default",
-                title: "Default",
-                width: "15%",
-                render: (value) => (
-                  <span className="text-text-secondary">{value}</span>
-                ),
-              },
-              {
-                key: "description",
-                title: "Description",
-                width: "35%",
-                render: (value) => (
-                  <span className="text-text-secondary">{value}</span>
-                ),
-              },
-            ]}
-            size="md"
-            className="rounded-lg"
-          />
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  "default"
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Badge variant style
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">size</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">number</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  100
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Badge size (percentage scale: 50-200)
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">dot</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  false
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Show dot indicator
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">dotColor</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">string</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom dot color
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">className</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">string</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  ""
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom CSS classes
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </section>
       </div>
 

@@ -4,8 +4,16 @@ import {
   CardBody,
   CardFooter,
 } from "../../../../components/package/components/card";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+  HeaderCell,
+} from "../../../../components/package/components/table";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
-import { FileCode, Star, User, Check, X, RefreshCw } from "lucide-react";
+import { FileCode, Star, User } from "lucide-react";
 import RightPanel from "../RightPanel";
 import React from "react";
 
@@ -1025,141 +1033,467 @@ function StatsCardExample() {
             Props
           </h2>
           <p className="text-text-secondary mb-6">
-            Complete list of props available for the Card component.
+            Complete list of props available for Card components.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
+          {/* Card Props */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              Card Props
+            </h3>
+            <div className="border border-table-border rounded-lg overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-table-headerBg">
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
                       Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
                       Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
                       Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
                       Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      size
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">100</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Card size (percentage scale: 50-200)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      width
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Card width (percentage of parent container: 1-100)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      cardAlign
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      {`{ horizontal?: "left" | "center" | "right", vertical?: "top" | "center" | "bottom" }`}
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Card alignment in parent container
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      children
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Card body content
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      hoverable
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Enable hover effects
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      hoverEffectVariant
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "lift" | "glow" | "border-glow" | "glass" | "tilt" |
-                      "scale" | "shadow" | "none"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Hover effect variant (overrides hoverEffect if set)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      hoverEffect
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      HoverEffectConfig
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom hover effect configuration (only works when
-                      hoverEffectVariant is not set)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      className
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS classes
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onClick
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (e: MouseEvent) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Click event handler
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    </HeaderCell>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="bg-table-bodyBg">
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        size
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        number
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">100</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Card size (percentage scale: 50-200)
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        width
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        number
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Card width (percentage of parent container: 1-100)
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        cardAlign
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        {`{ horizontal?: "left" | "center" | "right", vertical?: "top" | "center" | "bottom" }`}
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Card alignment in parent container
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        children
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        ReactNode
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Card body content
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        hoverable
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        boolean
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">false</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Enable hover effects
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        hoverEffectVariant
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        "lift" | "glow" | "border-glow" | "glass" | "tilt" |
+                        "scale" | "shadow" | "none"
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Hover effect variant (overrides hoverEffect if set)
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        hoverEffect
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        HoverEffectConfig
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Custom hover effect configuration (only works when
+                        hoverEffectVariant is not set)
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        className
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        string
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">""</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Custom CSS classes
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        onClick
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        (e: MouseEvent) =&gt; void
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Click event handler
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+
+          {/* CardHeader Props */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              CardHeader Props
+            </h3>
+            <div className="border border-table-border rounded-lg overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-table-headerBg">
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Prop
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Type
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Default
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Description
+                    </HeaderCell>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="bg-table-bodyBg">
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        children
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        ReactNode
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Header content
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        className
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        string
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">""</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Custom CSS classes
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+
+          {/* CardBody Props */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              CardBody Props
+            </h3>
+            <div className="border border-table-border rounded-lg overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-table-headerBg">
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Prop
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Type
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Default
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Description
+                    </HeaderCell>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="bg-table-bodyBg">
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        children
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        ReactNode
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">Body content</span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        className
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        string
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">""</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Custom CSS classes
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+
+          {/* CardFooter Props */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-text-primary mb-3">
+              CardFooter Props
+            </h3>
+            <div className="border border-table-border rounded-lg overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-table-headerBg">
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Prop
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Type
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Default
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Description
+                    </HeaderCell>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="bg-table-bodyBg">
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        children
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        ReactNode
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Footer content
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        className
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        string
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">""</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Custom CSS classes
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             </div>
           </div>
         </section>

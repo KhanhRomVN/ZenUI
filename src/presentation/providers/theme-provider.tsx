@@ -162,10 +162,12 @@ export function ThemeProvider({
       dropdownShadow: "--dropdown-shadow",
       // Table variables
       tableHeaderBg: "--table-header-bg",
-      tableRowBg: "--table-row-bg",
-      tableRowHoverBg: "--table-row-hover-bg",
-      tableRowFocusBg: "--table-row-focus-bg",
+      tableHoverHeaderBg: "--table-hover-header-bg",
+      tableBodyBg: "--table-body-bg",
+      tableHoverItemBodyBg: "--table-hover-item-body-bg",
+      tableFocusItemBodyBg: "--table-focus-item-body-bg",
       tableFooterBg: "--table-footer-bg",
+      tableHoverFooterBg: "--table-hover-footer-bg",
       tableBorder: "--table-border",
       // Tab variables
       tabBackground: "--tab-background",

@@ -4,6 +4,14 @@ import {
   BreadcrumbItem,
 } from "../../../../components/package/components/breadcumb";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+  HeaderCell,
+} from "../../../../components/package/components/table";
 import { FileCode, Folder, FileText, Settings, Home } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -562,170 +570,205 @@ function RealWorldExample() {
             Complete list of props available for the Breadcrumb component.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      children
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      BreadcrumbItem components
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      separator
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      LucideIcon | ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      ChevronRight
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Separator icon between items
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      size
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">100</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Breadcrumb size (percentage scale)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      className
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS classes
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-table-headerBg">
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Prop
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Type
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Default
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Description
+                </HeaderCell>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="bg-table-bodyBg">
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">children*</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">ReactNode</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Children (BreadcrumbItem components)
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">separator</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">LucideIcon</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Icon ngăn cách giữa các item - chỉ LucideIcon
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">size</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">number</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Kích thước breadcrumb (percentage scale)
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">className</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">string</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom class name
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
 
           {/* BreadcrumbItem Type */}
           <div className="mt-8">
             <h3 className="text-xl font-semibold text-text-primary mb-4">
               BreadcrumbItem Props
             </h3>
-            <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead className="bg-input-background">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Prop
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Type
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Default
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Description
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border-default">
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        icon
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        LucideIcon | ReactNode
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Icon for the item
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        text
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Display text (required)
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        href
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Link URL (optional)
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        onClick
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        () =&gt; void
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Click handler (optional)
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        className
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">""</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Custom CSS classes
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-table-headerBg">
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Prop
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Type
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Default
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Description
+                  </HeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody className="bg-table-bodyBg">
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    <span className="font-mono text-xs">icon</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    <span className="font-mono text-xs">LucideIcon</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    -
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    Icon của item - chỉ LucideIcon
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    <span className="font-mono text-xs">text*</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    <span className="font-mono text-xs">string</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    -
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    Text hiển thị
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    <span className="font-mono text-xs">href</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    <span className="font-mono text-xs">string</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    -
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    URL (optional)
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    <span className="font-mono text-xs">onClick</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    <span className="font-mono text-xs">() =&gt; void</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    -
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    Click handler (optional)
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    <span className="font-mono text-xs">className</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    <span className="font-mono text-xs">string</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    -
+                  </TableCell>
+                  <TableCell showVerticalDivider className="bg-table-bodyBg">
+                    Custom class name
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </div>
         </section>
       </div>

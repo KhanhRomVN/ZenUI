@@ -2,6 +2,14 @@ import { useState } from "react";
 import { Modal } from "../../../../components/package/components/modal";
 import { Button } from "../../../../components/package/components/button";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+  HeaderCell,
+} from "../../../../components/package/components/table";
 import { FileCode, Plus, Settings, AlertTriangle } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -622,234 +630,120 @@ function FullScreenModalExample() {
             Complete list of props available for the Modal component.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      open*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Controls modal visibility
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onClose*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      () =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Callback when modal closes
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      title
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Modal title content
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      children*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Modal content
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      footer
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Footer content (buttons, etc.)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      size
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "sm" | "md" | "lg" | "xl" | "full"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"md"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Modal size variant
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      position
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "center" | "top" | "bottom"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"center"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Modal position
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      animation
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "fade" | "slide" | "scale" | "none"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"fade"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Animation type
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      closeOnOverlayClick
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Close when clicking overlay
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showCloseButton
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show close button in header
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      closeOnEsc
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Close when pressing ESC key
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      className
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS classes for modal
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      overlayClassName
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS classes for overlay
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      contentClassName
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS classes for content
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      style
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      CSSProperties
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom styles for modal
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      overlayStyle
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      CSSProperties
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom styles for overlay
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      contentStyle
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      CSSProperties
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom styles for content
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-table-headerBg">
+                <HeaderCell showVerticalDivider showHorizontalDivider>Prop</HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>Type</HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>Default</HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>Description</HeaderCell>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="bg-table-bodyBg">
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">open*</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">boolean</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Hiển thị modal</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">onClose*</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">() => void</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Callback khi đóng modal</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">title</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">ReactNode</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Tiêu đề modal</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">children*</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">ReactNode</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Nội dung modal</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">footer</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">ReactNode</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Footer content</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">size</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">"sm" | "md" | "lg" | "xl" | "full"</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Kích thước modal</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">position</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">"center" | "top" | "bottom"</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Vị trí modal</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">className</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">string</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom class name</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">overlayClassName</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">string</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom overlay class</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">contentClassName</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">string</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom content class</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">closeOnOverlayClick</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">boolean</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Đóng modal khi click overlay</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">showCloseButton</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">boolean</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Hiện nút close</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">closeOnEsc</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">boolean</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Đóng modal bằng ESC</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">animation</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">"fade" | "slide" | "scale" | "none"</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Animation type</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">style</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">CSSProperties</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom styles</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">overlayStyle</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">CSSProperties</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom overlay styles</TableCell>
+              </TableRow>
+              <TableRow showHorizontalDivider className="hover:bg-table-hoverItemBodyBg">
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">contentStyle</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg"><span className="font-mono text-xs">CSSProperties</span></TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">-</TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">Custom content styles</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </section>
       </div>
 

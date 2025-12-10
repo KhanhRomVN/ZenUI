@@ -1,6 +1,13 @@
-import { useState } from "react";
 import { Divider } from "../../../../components/package/components/divider";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+  HeaderCell,
+} from "../../../../components/package/components/table";
 import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -440,110 +447,136 @@ function CustomColorExample() {
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Props API
           </h2>
-          <div className="bg-card-background border border-border-default rounded-md overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-table-header">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                    Prop
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                    Type
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                    Default
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                    Mô tả
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-card-background divide-y divide-border-default">
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
-                    orientation
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-table-headerBg">
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Prop
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Type
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Default
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Description
+                </HeaderCell>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="bg-table-bodyBg">
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">orientation</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
                     "horizontal" | "vertical"
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    "horizontal"
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    Hướng của divider
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
-                    style
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Hướng của divider
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">style</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
                     "solid" | "dashed" | "dotted"
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    "solid"
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    Kiểu hiển thị của divider
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
-                    thickness
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Kiểu hiển thị của divider
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">thickness</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
                     "thin" | "medium" | "thick" | number
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    "medium"
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    Độ dày của divider (có thể dùng px tùy chỉnh)
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
-                    align
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Độ dày của divider (có thể dùng px tùy chỉnh)
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">align</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
                     "start" | "center" | "end"
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    "center"
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    Căn chỉnh divider (trái/giữa/phải cho ngang, trên/giữa/dưới
-                    cho dọc)
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
-                    length
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    number (0-100)
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">100</td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    Độ dài của divider theo % so với container cha
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
-                    className
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    string
-                  </td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">""</td>
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    Class tùy chỉnh cho màu sắc và styling (ví dụ:
-                    "border-red-500")
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Căn chỉnh divider
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">length</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">number</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Độ dài của divider theo %
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">className</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">string</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom class name
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </section>
       </div>
 

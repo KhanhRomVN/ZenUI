@@ -746,326 +746,188 @@ function CustomTable() {
             Complete list of props available for the Table component.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      data*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      T[]
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Array of data objects
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      columns*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      TableColumn&lt;T&gt;[]
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Column definitions
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      size
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "sm" | "md" | "lg"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"md"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Table size variant
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      variant
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "default" | "bordered" | "striped"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"default"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Table style variant
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      pagination
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      TablePagination
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Pagination configuration
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      loading
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Loading state
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      emptyMessage
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      "No data available"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Message when data is empty
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onRowClick
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (record: T, index: number) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Row click handler
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onSort
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (sort: TableSort | null) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Sort change handler
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onPageChange
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (page: number, pageSize: number) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Page change handler
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      rowKey
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string | (record: T) =&gt; string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"id"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Unique key for each row
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showHeader
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show/hide table header
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showFooter
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show/hide table footer
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      stickyHeader
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Make header sticky
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      className
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Additional CSS classes
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* TableColumn Props */}
-          <div className="mt-8">
-            <h3 className="text-xl font-semibold text-text-primary mb-4">
-              TableColumn Props
-            </h3>
-            <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead className="bg-input-background">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Prop
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Type
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Default
-                      </th>
-                      <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                        Description
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border-default">
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        key*
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Unique key for column
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        title*
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Column title
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        width
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        string | number
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Column width
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        align
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        "left" | "center" | "right"
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">"left"</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Text alignment
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        sortable
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        boolean
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">false</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Enable sorting
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        sorter
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        (a: T, b: T) =&gt; number
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Custom sort function
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                        render
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                        (value: any, record: T, index: number) =&gt; ReactNode
-                      </td>
-                      <td className="px-6 py-4 text-text-secondary">-</td>
-                      <td className="px-6 py-4 text-text-secondary">
-                        Custom cell render function
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <div className="border border-table-border rounded-lg overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-table-headerBg">
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Prop
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Type
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Default
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Description
+                  </HeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody className="bg-table-bodyBg">
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>data*</TableCell>
+                  <TableCell showVerticalDivider>T[]</TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Array of data objects
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>columns*</TableCell>
+                  <TableCell showVerticalDivider>
+                    TableColumn&lt;T&gt;[]
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>Column definitions</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>size</TableCell>
+                  <TableCell showVerticalDivider>"sm" | "md" | "lg"</TableCell>
+                  <TableCell showVerticalDivider>"md"</TableCell>
+                  <TableCell showVerticalDivider>Table size variant</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>variant</TableCell>
+                  <TableCell showVerticalDivider>
+                    "default" | "bordered" | "striped"
+                  </TableCell>
+                  <TableCell showVerticalDivider>"default"</TableCell>
+                  <TableCell showVerticalDivider>Table style variant</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>pagination</TableCell>
+                  <TableCell showVerticalDivider>TablePagination</TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Pagination configuration
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>loading</TableCell>
+                  <TableCell showVerticalDivider>boolean</TableCell>
+                  <TableCell showVerticalDivider>false</TableCell>
+                  <TableCell showVerticalDivider>Loading state</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>emptyMessage</TableCell>
+                  <TableCell showVerticalDivider>string</TableCell>
+                  <TableCell showVerticalDivider>"No data available"</TableCell>
+                  <TableCell showVerticalDivider>
+                    Message when data is empty
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>onRowClick</TableCell>
+                  <TableCell showVerticalDivider>
+                    (record: T, index: number) =&gt; void
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>Row click handler</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>onSort</TableCell>
+                  <TableCell showVerticalDivider>
+                    (sort: TableSort | null) =&gt; void
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>Sort change handler</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>onPageChange</TableCell>
+                  <TableCell showVerticalDivider>
+                    (page: number, pageSize: number) =&gt; void
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>Page change handler</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>rowKey</TableCell>
+                  <TableCell showVerticalDivider>
+                    string | (record: T) =&gt; string
+                  </TableCell>
+                  <TableCell showVerticalDivider>"id"</TableCell>
+                  <TableCell showVerticalDivider>
+                    Unique key for each row
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>showHeader</TableCell>
+                  <TableCell showVerticalDivider>boolean</TableCell>
+                  <TableCell showVerticalDivider>true</TableCell>
+                  <TableCell showVerticalDivider>
+                    Show/hide table header
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>showFooter</TableCell>
+                  <TableCell showVerticalDivider>boolean</TableCell>
+                  <TableCell showVerticalDivider>true</TableCell>
+                  <TableCell showVerticalDivider>
+                    Show/hide table footer
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>stickyHeader</TableCell>
+                  <TableCell showVerticalDivider>boolean</TableCell>
+                  <TableCell showVerticalDivider>false</TableCell>
+                  <TableCell showVerticalDivider>Make header sticky</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>className</TableCell>
+                  <TableCell showVerticalDivider>string</TableCell>
+                  <TableCell showVerticalDivider>""</TableCell>
+                  <TableCell showVerticalDivider>
+                    Additional CSS classes
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </div>
         </section>
       </div>

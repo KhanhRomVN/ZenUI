@@ -1,5 +1,13 @@
 import { Carousel } from "../../../../components/package/components/carousel";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+  HeaderCell,
+} from "../../../../components/package/components/table";
 import { FileCode, Star, Heart, Zap } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -475,222 +483,390 @@ function MultipleSlidesExample() {
             Complete list of props available for Carousel component.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-md overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-table-headerBg">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      loop
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Enable continuous loop mode
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      autoplay
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Enable autoplay
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      autoplayDelay
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">3000</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Autoplay delay in ms
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      pauseOnHover
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Pause autoplay on hover
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      slidesPerView
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">1</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Number of slides to show
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      centered
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Center active slide
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      spaceBetween
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">0</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Space between slides in px
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      effect
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      CarouselEffect
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"slide"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Transition effect type
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      speed
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">500</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Transition duration in ms
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showArrows
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show navigation arrows
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showDots
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show pagination dots
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      draggable
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Enable drag/swipe
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      items
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      any[]
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">[]</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Array of slide data
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      renderItem
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (item, index) =&gt; ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Render function for slides
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onSlideChange
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (index) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Callback on slide change
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-table-rowHoverBg">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onReachEnd
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      () =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Callback when reaching last slide
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-table-headerBg">
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Prop
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Type
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Default
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Description
+                </HeaderCell>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="bg-table-bodyBg">
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">loop</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Bật chế độ lặp liên tục
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">autoplay</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Bật tự động chạy
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">autoplayDelay</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">number</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Độ trễ autoplay (ms)
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">pauseOnHover</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Tạm dừng khi hover
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">slidesPerView</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">number</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Số slide hiển thị
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">centered</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Căn giữa slide active
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">spaceBetween</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">number</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Khoảng cách giữa slides (px)
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">effect</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
+                    "slide" | "fade" | "cube" | "coverflow" | "flip" |
+                    "parallax"
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Kiểu hiệu ứng chuyển
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">speed</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">number</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Thời gian chuyển (ms)
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">parallax</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Bật hiệu ứng parallax
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">showArrows</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Hiện nút điều hướng
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">showDots</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Hiện pagination dots
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">draggable</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Cho phép kéo/vuốt
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">items*</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">any[]</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Mảng dữ liệu slide
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">renderItem*</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
+                    (item: any, index: number) =&gt; ReactNode
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Hàm render slide
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">onSlideChange</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
+                    (index: number) =&gt; void
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Callback khi đổi slide
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">onReachEnd</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">() =&gt; void</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Callback khi đến slide cuối
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">className</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">string</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom class name
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">arrowClassName</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">string</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Class cho nút điều hướng
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">dotClassName</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">string</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Class cho pagination dots
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">children</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">ReactNode</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Children (CarouselItem components)
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </section>
       </div>
 

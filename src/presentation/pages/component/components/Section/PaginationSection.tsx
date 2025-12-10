@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Pagination } from "../../../../components/package/components/pagination";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+  HeaderCell,
+} from "../../../../components/package/components/table";
 import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -537,153 +545,203 @@ function SliderExample() {
             Complete list of props available for the Pagination component.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-input-background/50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      totalItems*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Total number of items to paginate
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-input-background/50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      itemsPerPage*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Number of items per page
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-input-background/50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      currentPage*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Current active page
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-input-background/50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onPageChange*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      (page: number) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Callback when page changes
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-input-background/50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      variant
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "classic" | "minimal-dots" | "pill" | "card" | "compact" |
-                      "dropdown" | "progress" | "slider"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"classic"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Pagination variant style
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-input-background/50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      size
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "sm" | "md" | "lg"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"md"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Size of pagination elements (not applicable to all
-                      variants)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-input-background/50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      align
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      "left" | "center" | "right"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"center"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Horizontal alignment
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-input-background/50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showNavigation
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show previous/next buttons (not applicable to all
-                      variants)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-input-background/50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      maxVisiblePages
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">7</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Maximum visible page numbers (only for compact variant)
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-input-background/50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      className
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">""</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom CSS classes
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-table-headerBg">
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Prop
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Type
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Default
+                </HeaderCell>
+                <HeaderCell showVerticalDivider showHorizontalDivider>
+                  Description
+                </HeaderCell>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="bg-table-bodyBg">
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">totalItems*</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">number</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Total number of items to paginate
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">itemsPerPage*</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">number</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Number of items per page
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">currentPage*</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">number</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Current active page
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">onPageChange*</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
+                    (page: number) =&gt; void
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  -
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Callback when page changes
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">variant</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
+                    "classic" | "minimal-dots" | "pill" | "card" | "compact" |
+                    "dropdown" | "progress" | "slider"
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  "classic"
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Pagination variant style
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">size</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">"sm" | "md" | "lg"</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  "md"
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Size of pagination elements
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">align</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">
+                    "left" | "center" | "right"
+                  </span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  "center"
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Horizontal alignment
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">showNavigation</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">boolean</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  true
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Show previous/next buttons
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">maxVisiblePages</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">number</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  7
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Maximum visible page numbers (compact variant)
+                </TableCell>
+              </TableRow>
+              <TableRow
+                showHorizontalDivider
+                className="hover:bg-table-hoverItemBodyBg"
+              >
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">className</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  <span className="font-mono text-xs">string</span>
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  ""
+                </TableCell>
+                <TableCell showVerticalDivider className="bg-table-bodyBg">
+                  Custom CSS classes
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </section>
       </div>
 

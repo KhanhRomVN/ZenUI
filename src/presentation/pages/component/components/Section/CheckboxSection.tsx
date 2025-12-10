@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { Checkbox } from "../../../../components/package/components/checkbox";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
-import { Table } from "../../../../components/package/components/table";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+  HeaderCell,
+} from "../../../../components/package/components/table";
 import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -440,104 +447,225 @@ function CheckboxGroupExample() {
             Complete list of props available for the Checkbox component.
           </p>
 
-          <Table
-            data={[
-              {
-                prop: "size",
-                type: "number",
-                default: "100",
-                description: "Checkbox size (percentage scale: 50-200)",
-              },
-              {
-                prop: "checked",
-                type: "boolean",
-                default: "false",
-                description: "Checked state",
-              },
-              {
-                prop: "indeterminate",
-                type: "boolean",
-                default: "false",
-                description: "Indeterminate state",
-              },
-              {
-                prop: "label",
-                type: "string | ReactNode",
-                default: "-",
-                description: "Checkbox label",
-              },
-              {
-                prop: "labelPosition",
-                type: '"left" | "right"',
-                default: '"right"',
-                description: "Label position",
-              },
-              {
-                prop: "disabled",
-                type: "boolean",
-                default: "false",
-                description: "Disabled state",
-              },
-              {
-                prop: "loading",
-                type: "boolean",
-                default: "false",
-                description: "Loading state",
-              },
-              {
-                prop: "className",
-                type: "string",
-                default: '""',
-                description: "Custom CSS classes",
-              },
-              {
-                prop: "onChange",
-                type: "(checked: boolean) => void",
-                default: "-",
-                description: "Change event handler",
-              },
-            ]}
-            columns={[
-              {
-                key: "prop",
-                title: "Prop",
-                width: "20%",
-                render: (value) => (
-                  <span className="font-mono text-xs text-text-primary">
-                    {value}
-                  </span>
-                ),
-              },
-              {
-                key: "type",
-                title: "Type",
-                width: "30%",
-                render: (value) => (
-                  <span className="font-mono text-xs text-text-secondary">
-                    {value}
-                  </span>
-                ),
-              },
-              {
-                key: "default",
-                title: "Default",
-                width: "15%",
-                render: (value) => (
-                  <span className="text-text-secondary">{value}</span>
-                ),
-              },
-              {
-                key: "description",
-                title: "Description",
-                width: "35%",
-                render: (value) => (
-                  <span className="text-text-secondary">{value}</span>
-                ),
-              },
-            ]}
-            size="md"
-            className="rounded-lg"
-          />
+          <div className="border border-table-border rounded-lg overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-table-headerBg">
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Prop
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Type
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Default
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Description
+                  </HeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody className="bg-table-bodyBg">
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      size
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      number
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">100</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Checkbox size (percentage scale: 50-200)
+                    </span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      checked
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      boolean
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">false</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">Checked state</span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      indeterminate
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      boolean
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">false</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Indeterminate state
+                    </span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      label
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      string | ReactNode
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">-</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">Checkbox label</span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      labelPosition
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      "left" | "right"
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">"right"</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">Label position</span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      disabled
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      boolean
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">false</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">Disabled state</span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      loading
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      boolean
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">false</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">Loading state</span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      className
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      string
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">""</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Custom CSS classes
+                    </span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      onChange
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      (checked: boolean) =&gt; void
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">-</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Change event handler
+                    </span>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
         </section>
       </div>
 

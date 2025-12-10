@@ -1,41 +1,68 @@
 import React, { useState, useRef, useEffect } from "react";
 import { TextareaProps } from "./Textarea.types";
-import {
-  getTextareaBaseStyles,
-  getFocusStyles,
-  getHoverStyles,
-  getCountColor,
-} from "./Textarea.utils";
 import { cn } from "../../../../../shared/utils/cn";
+
+const extractTextareaClasses = (className: string): string => {
+  if (!className) return "";
+  return className
+    .split(" ")
+    .filter(
+      (cls) =>
+        cls.startsWith("bg-") ||
+        cls.startsWith("rounded-") ||
+        cls.startsWith("text-") ||
+        cls.startsWith("placeholder-")
+    )
+    .join(" ");
+};
 
 const Textarea: React.FC<TextareaProps> = ({
   value = "",
   onChange,
-  label,
   placeholder,
   error,
   helperText,
   maxLength,
   showCount = false,
   autoResize = false,
-  minHeight = "80px",
-  maxHeight = "300px",
   rows = 4,
+  minRows = 1,
+  maxRows,
   disabled = false,
   readOnly = false,
   required = false,
   className = "",
-  resize = "vertical",
+  resize = "none",
+  bottomWrapper,
   ...props
 }) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [lineHeight, setLineHeight] = useState<number>(20);
+  const [calculatedMinRows, setCalculatedMinRows] = useState<number>(1);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      const computed = getComputedStyle(textareaRef.current);
+      const lh = parseInt(computed.lineHeight) || 20;
+      setLineHeight(lh);
+
+      // Tính toán minRows nếu là "auto"
+      if (minRows === "auto") {
+        const parentHeight =
+          textareaRef.current.parentElement?.clientHeight || 0;
+        if (parentHeight > 0) {
+          const calculatedRows = Math.floor(parentHeight / lh);
+          setCalculatedMinRows(Math.max(1, calculatedRows));
+        }
+      } else {
+        setCalculatedMinRows(typeof minRows === "number" ? minRows : 1);
+      }
+    }
+  }, [minRows]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value;
 
-    // Enforce maxLength if specified
     if (maxLength && newValue.length > maxLength) {
       return;
     }
@@ -44,8 +71,8 @@ const Textarea: React.FC<TextareaProps> = ({
       onChange(newValue);
     }
 
-    // Auto resize
-    if (autoResize && textareaRef.current) {
+    // Chỉ điều chỉnh chiều cao nếu có maxRows hoặc autoResize
+    if (textareaRef.current && (maxRows !== undefined || autoResize)) {
       adjustHeight();
     }
   };
@@ -54,97 +81,78 @@ const Textarea: React.FC<TextareaProps> = ({
     const textarea = textareaRef.current;
     if (!textarea) return;
 
-    // Reset height to auto to get the correct scrollHeight
+    const minHeight = calculatedMinRows * lineHeight;
+
+    // Nếu không có maxRows, không tự động tăng height
+    if (maxRows === undefined) {
+      textarea.style.height = `${minHeight}px`;
+      textarea.style.overflowY = "auto";
+      return;
+    }
+
+    const maxHeight = maxRows * lineHeight;
+
+    // Reset về auto để tính đúng scrollHeight
     textarea.style.height = "auto";
 
-    // Calculate new height
     const newHeight = Math.min(
-      Math.max(textarea.scrollHeight, parseInt(minHeight)),
-      parseInt(maxHeight)
+      Math.max(textarea.scrollHeight, minHeight),
+      maxHeight
     );
 
     textarea.style.height = `${newHeight}px`;
+
+    // Hiển thị scrollbar nếu vượt quá maxHeight
+    if (textarea.scrollHeight > maxHeight) {
+      textarea.style.overflowY = "auto";
+    } else {
+      textarea.style.overflowY = autoResize ? "hidden" : "auto";
+    }
   };
 
-  // Adjust height on mount and when value changes
   useEffect(() => {
-    if (autoResize) {
+    if (maxRows !== undefined || autoResize) {
       adjustHeight();
     }
-  }, [value, autoResize]);
+  }, [value, autoResize, lineHeight, calculatedMinRows, maxRows]);
 
-  const baseStyles = getTextareaBaseStyles(!!error, disabled, readOnly, resize);
-
-  const currentStyles = {
-    ...baseStyles,
-    ...(isFocused ? getFocusStyles(!!error) : {}),
-    ...(isHovered && !isFocused ? getHoverStyles(!!error, disabled) : {}),
-    ...(autoResize
-      ? {
-          minHeight,
-          maxHeight,
-          overflow: "auto",
-        }
-      : {}),
-  };
+  const resizeClass = {
+    none: "resize-none",
+    both: "resize",
+    horizontal: "resize-x",
+    vertical: "resize-y",
+  }[resize];
 
   const characterCount = value.length;
   const showCharCount = showCount || !!maxLength;
 
-  return (
-    <div className={`textarea-container ${className}`.trim()}>
-      {/* Label */}
-      {label && (
-        <label className="block mb-1.5 text-sm font-medium">
-          {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
-      )}
+  const minHeight = calculatedMinRows * lineHeight;
+  const maxHeight = maxRows !== undefined ? maxRows * lineHeight : minHeight;
 
-      {/* Textarea */}
+  return (
+    <div className={cn("px-3 py-2", className)}>
       <textarea
         ref={textareaRef}
         value={value}
         onChange={handleChange}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
         placeholder={placeholder}
         disabled={disabled}
         readOnly={readOnly}
         required={required}
-        rows={autoResize ? undefined : rows}
-        style={currentStyles}
+        className={cn(
+          "w-full outline-none",
+          resizeClass,
+          extractTextareaClasses(className)
+        )}
+        style={{
+          minHeight: `${minHeight}px`,
+          maxHeight: maxRows !== undefined ? `${maxHeight}px` : undefined,
+          height: maxRows === undefined ? `${minHeight}px` : undefined,
+          resize: autoResize ? "none" : resize,
+        }}
         {...props}
       />
-
-      {/* Footer: Helper text and character count */}
-      {(helperText || error || showCharCount) && (
-        <div className="flex justify-between items-center mt-1.5 gap-2">
-          {/* Helper text or error */}
-          <div className="flex-1">
-            {error ? (
-              <p className="m-0 text-xs text-red-500">{error}</p>
-            ) : helperText ? (
-              <p className="m-0 text-xs">{helperText}</p>
-            ) : null}
-          </div>
-
-          {/* Character count */}
-          {showCharCount && (
-            <p
-              className="m-0 text-xs font-medium whitespace-nowrap"
-              style={{
-                color: getCountColor(characterCount, maxLength),
-              }}
-            >
-              {characterCount}
-              {maxLength && `/${maxLength}`}
-            </p>
-          )}
-        </div>
-      )}
+      {bottomWrapper && <div>{bottomWrapper}</div>}
     </div>
   );
 };

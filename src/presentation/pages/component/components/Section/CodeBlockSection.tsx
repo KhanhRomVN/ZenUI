@@ -1,7 +1,14 @@
-import { useState } from "react";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
 import { FileCode, Play, Download } from "lucide-react";
 import RightPanel from "../RightPanel";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableCell,
+  HeaderCell,
+} from "../../../../components/package/components/table";
 
 const CodeBlockSection = () => {
   // Navigation sections for right panel
@@ -328,209 +335,719 @@ print(filtered)`}
             Complete list of props available for the CodeBlock component.
           </p>
 
-          <div className="bg-card-background border border-border-default rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-input-background">
-                  <tr>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Prop
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Type
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Default
-                    </th>
-                    <th className="px-6 py-4 text-left text-text-primary font-semibold">
-                      Description
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border-default">
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      code*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Code content to display
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      language*
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      CodeBlockLanguage
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Programming language
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      theme
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+          <div className="border border-table-border rounded-lg overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-table-headerBg">
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Prop
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Type
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Default
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Description
+                  </HeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody className="bg-table-bodyBg">
+                {/* CORE PROPS */}
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">code*</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">string</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Code content to display
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">language*</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">CodeBlockLanguage</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Programming language (javascript, typescript, python, etc.)
+                  </TableCell>
+                </TableRow>
+
+                {/* BASIC CONFIGURATION */}
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">theme</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">
                       "vs-dark" | "vs-light" | "hc-black" | "hc-light"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"vs-dark"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Editor theme
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      width
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string | number
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"100%"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Width of code block
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showLineNumbers
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show line numbers
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      readOnly
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Read-only mode
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      editable
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">false</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Allow editing code
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      showCopyButton
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      boolean
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">true</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Show copy button
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      headerMode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>"vs-dark"</TableCell>
+                  <TableCell showVerticalDivider>Editor theme</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">width</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">string | number</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>"100%"</TableCell>
+                  <TableCell showVerticalDivider>Width of code block</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">size</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">number</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>100</TableCell>
+                  <TableCell showVerticalDivider>
+                    Scale percentage (100 = 100%, 120 = 120%)
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">title</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">string</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>Title of code block</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">className</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">string</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>""</TableCell>
+                  <TableCell showVerticalDivider>Custom CSS classes</TableCell>
+                </TableRow>
+
+                {/* HEADER CONFIGURATION */}
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">headerMode</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">
                       "tabs" | "path" | "none"
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">"none"</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Header display mode
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      headerIcon
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      ReactNode
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Icon in header
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      filePath
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      string
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      File path (when headerMode="path")
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      tabs
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      CodeBlockTab[]
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">[]</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Tabs (when headerMode="tabs")
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      expandConfig
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
-                      CodeBlockExpandConfig
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Expand/collapse configuration
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      toolbarActions
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>"none"</TableCell>
+                  <TableCell showVerticalDivider>Header display mode</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">headerIcon</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">ReactNode</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>Icon in header</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">filePath</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">string</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    File path (when headerMode="path")
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">tabs</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">CodeBlockTab[]</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>[]</TableCell>
+                  <TableCell showVerticalDivider>
+                    Tabs array (when headerMode="tabs")
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">activeTabId</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">string</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Active tab ID (when headerMode="tabs")
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">onTabChange</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">
+                      (tabId: string) =&gt; void
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Callback when tab changes
+                  </TableCell>
+                </TableRow>
+
+                {/* EDITOR BEHAVIOR */}
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">editable</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>false</TableCell>
+                  <TableCell showVerticalDivider>Allow editing code</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">showLineNumbers</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>true</TableCell>
+                  <TableCell showVerticalDivider>Show line numbers</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">showGutter</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>true</TableCell>
+                  <TableCell showVerticalDivider>
+                    Show gutter (line numbers area)
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">showLineHighlight</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>true</TableCell>
+                  <TableCell showVerticalDivider>
+                    Highlight current line
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">showMinimap</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>false</TableCell>
+                  <TableCell showVerticalDivider>Show minimap</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">wordWrap</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">
+                      "on" | "off" | "wordWrapColumn" | "bounded"
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>"off"</TableCell>
+                  <TableCell showVerticalDivider>Word wrap mode</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">fontSize</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">number</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>14</TableCell>
+                  <TableCell showVerticalDivider>Font size</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">fontFamily</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">string</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>Font family</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">tabSize</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">number</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>2</TableCell>
+                  <TableCell showVerticalDivider>Tab size</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">insertSpaces</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>true</TableCell>
+                  <TableCell showVerticalDivider>
+                    Insert spaces instead of tabs
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">readOnly</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>false</TableCell>
+                  <TableCell showVerticalDivider>Read-only mode</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">autoFocus</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>false</TableCell>
+                  <TableCell showVerticalDivider>
+                    Auto focus when mounted
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">
+                      highlightActiveLine
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>true</TableCell>
+                  <TableCell showVerticalDivider>
+                    Highlight active line
+                  </TableCell>
+                </TableRow>
+
+                {/* TOOLBAR & ACTIONS */}
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">showToolbar</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>true</TableCell>
+                  <TableCell showVerticalDivider>Show toolbar</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">showCopyButton</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>true</TableCell>
+                  <TableCell showVerticalDivider>Show copy button</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">showLanguageTag</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>true</TableCell>
+                  <TableCell showVerticalDivider>Show language tag</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">toolbarActions</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">
                       CodeBlockToolbarAction[]
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">[]</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Custom toolbar actions
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-text-primary font-mono text-xs">
-                      onChange
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary font-mono text-xs">
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>[]</TableCell>
+                  <TableCell showVerticalDivider>
+                    Custom toolbar actions
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">onCopy</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">() =&gt; void</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Callback when copy succeeds
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">onChange</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">
                       (value: string) =&gt; void
-                    </td>
-                    <td className="px-6 py-4 text-text-secondary">-</td>
-                    <td className="px-6 py-4 text-text-secondary">
-                      Callback when code changes
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Callback when code changes
+                  </TableCell>
+                </TableRow>
+                {/* STYLING */}
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">padding</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">CodeBlockSpacing</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Padding configuration
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">margin</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">CodeBlockSpacing</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Margin configuration
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">border</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">CodeBlockBorder</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Border configuration
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">shadow</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">
+                      CodeBlockShadow | CodeBlockShadow[]
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Shadow configuration
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">backgroundColor</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">string</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>Background color</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">
+                      toolbarBackgroundColor
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">string</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Toolbar background color
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">borderRadius</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">string | number</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>8</TableCell>
+                  <TableCell showVerticalDivider>Border radius</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">opacity</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">number</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>Opacity (0-1)</TableCell>
+                </TableRow>
+
+                {/* ADVANCED OPTIONS */}
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">monacoOptions</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">any</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Monaco editor options (override defaults)
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">lineDecorations</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">
+                      Array&lt;&#123;line, className?,
+                      backgroundColor?&#125;&gt;
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>Line decorations</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">scrollToLine</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">number</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Scroll to line on mount
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">highlightedLines</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">number[]</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>Lines to highlight</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">loading</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>false</TableCell>
+                  <TableCell showVerticalDivider>Loading state</TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">loadingComponent</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">ReactNode</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>
+                    Custom loading component
+                  </TableCell>
+                </TableRow>
+
+                {/* DEBUG */}
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">debug</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>false</TableCell>
+                  <TableCell showVerticalDivider>Enable debug logs</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </div>
         </section>
       </div>

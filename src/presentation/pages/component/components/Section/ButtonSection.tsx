@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { Button } from "../../../../components/package/components/button";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
-import { Table } from "../../../../components/package/components/table";
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableRow,
+  HeaderCell,
+  TableCell,
+} from "../../../../components/package/components/table";
 import { FileCode, Play, Download, Heart, Settings } from "lucide-react";
 import RightPanel from "../RightPanel";
 
@@ -545,117 +552,277 @@ function AlignmentExample() {
             Complete list of props available for the Button component.
           </p>
 
-          <Table
-            data={[
-              {
-                prop: "size",
-                type: "number",
-                default: "100",
-                description: "Button size (percentage scale: 50-200)",
-              },
-              {
-                prop: "width",
-                type: '"fit" | "full"',
-                default: '"fit"',
-                description: "Button width behavior",
-              },
-              {
-                prop: "children",
-                type: "ReactNode",
-                default: "-",
-                description: "Button content/text",
-              },
-              {
-                prop: "loading",
-                type: "boolean",
-                default: "false",
-                description: "Loading state",
-              },
-              {
-                prop: "disabled",
-                type: "boolean",
-                default: "false",
-                description: "Disabled state",
-              },
-              {
-                prop: "icon",
-                type: "LucideIcon | ReactNode",
-                default: "-",
-                description: "Icon (Lucide icon, emoji, SVG, text)",
-              },
-              {
-                prop: "iconPosition",
-                type: '"left" | "right"',
-                default: '"left"',
-                description: "Icon position (when icon and text present)",
-              },
-              {
-                prop: "align",
-                type: '"left" | "center" | "right"',
-                default: '"right"',
-                description: "Content alignment",
-              },
-              {
-                prop: "loadingText",
-                type: "string",
-                default: "-",
-                description: "Text to display when loading",
-              },
-              {
-                prop: "className",
-                type: "string",
-                default: '""',
-                description: "Custom CSS classes",
-              },
-              {
-                prop: "onClick",
-                type: "(e: MouseEvent) => void",
-                default: "-",
-                description: "Click event handler",
-              },
-            ]}
-            columns={[
-              {
-                key: "prop",
-                title: "Prop",
-                width: "20%",
-                render: (value) => (
-                  <span className="font-mono text-xs text-text-primary">
-                    {value}
-                  </span>
-                ),
-              },
-              {
-                key: "type",
-                title: "Type",
-                width: "30%",
-                render: (value) => (
-                  <span className="font-mono text-xs text-text-secondary">
-                    {value}
-                  </span>
-                ),
-              },
-              {
-                key: "default",
-                title: "Default",
-                width: "15%",
-                render: (value) => (
-                  <span className="text-text-secondary">{value}</span>
-                ),
-              },
-              {
-                key: "description",
-                title: "Description",
-                width: "35%",
-                render: (value) => (
-                  <span className="text-text-secondary">{value}</span>
-                ),
-              },
-            ]}
-            variant="bordered"
-            size="md"
-            className="rounded-lg"
-          />
+          <div className="border border-table-border rounded-lg overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-table-headerBg">
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Prop
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Type
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Default
+                  </HeaderCell>
+                  <HeaderCell showVerticalDivider showHorizontalDivider>
+                    Description
+                  </HeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody className="bg-table-bodyBg">
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      size
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      number
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">100</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Button size (percentage scale: 50-200)
+                    </span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      width
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      "fit" | "full"
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">"fit"</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Button width behavior
+                    </span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      children
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      ReactNode
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">-</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Button content/text
+                    </span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      loading
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      boolean
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">false</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">Loading state</span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      disabled
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      boolean
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">false</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">Disabled state</span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      icon
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      LucideIcon | ReactNode
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">-</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Icon (Lucide icon, emoji, SVG, text)
+                    </span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      iconPosition
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      "left" | "right"
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">"left"</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Icon position (when icon and text present)
+                    </span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      align
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      "left" | "center" | "right"
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">"right"</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Content alignment
+                    </span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      loadingText
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      string
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">-</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Text to display when loading
+                    </span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      className
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      string
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">""</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Custom CSS classes
+                    </span>
+                  </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-primary">
+                      onClick
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs text-text-secondary">
+                      (e: MouseEvent) =&gt; void
+                    </span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">-</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="text-text-secondary">
+                      Click event handler
+                    </span>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
         </section>
       </div>
 

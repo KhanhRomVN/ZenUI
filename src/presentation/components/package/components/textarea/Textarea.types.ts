@@ -1,4 +1,4 @@
-import { TextareaHTMLAttributes } from "react";
+import { TextareaHTMLAttributes, ReactNode } from "react";
 
 export interface TextareaProps
   extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange"> {
@@ -50,16 +50,17 @@ export interface TextareaProps
   autoResize?: boolean;
 
   /**
-   * Minimum height when auto-resize is enabled
-   * @default "80px"
+   * Minimum number of rows
+   * @default 1
+   * Can be "auto" to calculate based on parent height
    */
-  minHeight?: string;
+  minRows?: number | "auto";
 
   /**
-   * Maximum height when auto-resize is enabled
-   * @default "300px"
+   * Maximum number of rows
+   * If not provided, textarea won't auto-expand
    */
-  maxHeight?: string;
+  maxRows?: number;
 
   /**
    * Number of rows
@@ -95,4 +96,14 @@ export interface TextareaProps
    * @default "vertical"
    */
   resize?: "none" | "both" | "horizontal" | "vertical";
+
+  /**
+   * Custom bottom wrapper component
+   */
+  bottomWrapper?: ReactNode;
+
+  /**
+   * Height of bottom wrapper for proper spacing
+   */
+  bottomWrapperHeight?: string;
 }

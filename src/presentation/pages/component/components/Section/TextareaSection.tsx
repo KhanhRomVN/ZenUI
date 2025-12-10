@@ -1,9 +1,10 @@
+import { Image, CornerDownRight } from "lucide-react";
 import { useState } from "react";
 import { Textarea } from "../../../../components/package/components/textarea";
 import { CodeBlock } from "../../../../components/package/components/codeblock";
-import { Table } from "../../../../components/package/components/table";
 import { FileCode } from "lucide-react";
 import RightPanel from "../RightPanel";
+import { Button } from "../../../../components/package/components/button";
 
 const TextareaSection = () => {
   const [text1, setText1] = useState("");
@@ -25,6 +26,8 @@ const TextareaSection = () => {
   const yarnInstallCode = `yarn add @khanhromvn/zenui`;
 
   const basicUsageCode = `import { Textarea } from "@khanhromvn/zenui";
+import { Button } from "@khanhromvn/zenui";
+import { Image, Send } from "lucide-react";
 import { useState } from "react";
 
 function MyComponent() {
@@ -34,9 +37,23 @@ function MyComponent() {
     <Textarea
       value={text}
       onChange={setText}
-      label="Description"
       placeholder="Enter your description..."
-      rows={4}
+      minRows={2}
+      maxRows={10}
+      className="border border-input-border-default bg-input-background hover:border-input-border-hover rounded-t-md border-b-0"
+      bottomWrapper={
+        <div className="flex items-center justify-between px-3 py-2 border border-input-border-default border-t-0 rounded-b-md bg-input-background">
+          <button className="flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors">
+            <Image size={16} />
+            <span className="text-sm">Upload image</span>
+          </button>
+          <Button
+            icon={<Send size={16} />}
+            className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border hover:border-button-borderHover"
+            size={80}
+          />
+        </div>
+      }
     />
   );
 }`;
@@ -54,8 +71,8 @@ function AutoResizeExample() {
       label="Auto-resize Textarea"
       placeholder="Type to see auto-resize in action..."
       autoResize={true}
-      minHeight="80px"
-      maxHeight="300px"
+      minRows={2}
+      maxRows={10}
     />
   );
 }`;
@@ -170,9 +187,23 @@ function ValidationExample() {
             <Textarea
               value={text1}
               onChange={setText1}
-              label="Description"
               placeholder="Enter your description..."
-              rows={4}
+              minRows={2}
+              maxRows={10}
+              className="border border-input-border-default bg-input-background hover:border-input-border-hover rounded-md"
+              bottomWrapper={
+                <div className="flex items-center justify-between">
+                  <button className="flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors">
+                    <Image size={14} />
+                    <span className="text-xs">Upload image</span>
+                  </button>
+                  <Button
+                    icon={<CornerDownRight size={14} />}
+                    className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border hover:border-button-borderHover"
+                    size={70}
+                  />
+                </div>
+              }
             />
           </div>
 
@@ -188,349 +219,6 @@ function ValidationExample() {
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
-          />
-        </section>
-
-        {/* EXAMPLES SECTION */}
-        <section id="examples" className="mb-12">
-          <h2 className="text-2xl font-semibold text-text-primary mb-4">
-            Advanced Examples
-          </h2>
-
-          {/* Auto Resize */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Auto Resize
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Textarea automatically adjusts its height based on content.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
-              <Textarea
-                value={text2}
-                onChange={setText2}
-                label="Auto-resize Textarea"
-                placeholder="Type to see auto-resize in action..."
-                autoResize={true}
-                minHeight="80px"
-                maxHeight="300px"
-              />
-            </div>
-
-            <CodeBlock
-              code={autoResizeCode}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/AutoResizeExample.tsx"
-              showLineNumbers={true}
-            />
-          </div>
-
-          {/* Character Count */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Character Count & Limit
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Display character count with optional maximum length limit.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
-              <Textarea
-                value={text3}
-                onChange={setText3}
-                label="Tweet"
-                placeholder="What's happening?"
-                maxLength={280}
-                showCount={true}
-                helperText="Share your thoughts"
-              />
-            </div>
-
-            <CodeBlock
-              code={characterCountCode}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CharacterCountExample.tsx"
-              showLineNumbers={true}
-            />
-          </div>
-
-          {/* Validation */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Validation & Error States
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Display validation errors and required field indicators.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
-              <Textarea
-                value={text4}
-                onChange={(value) => {
-                  setText4(value);
-                }}
-                label="Description"
-                placeholder="Enter description..."
-                error={
-                  text4.length > 0 && text4.length < 10
-                    ? "Description must be at least 10 characters"
-                    : ""
-                }
-                required={true}
-                helperText="Minimum 10 characters required"
-              />
-            </div>
-
-            <CodeBlock
-              code={validationCode}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/ValidationExample.tsx"
-              showLineNumbers={true}
-            />
-          </div>
-
-          {/* States */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Different States
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Disabled and read-only states for various use cases.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
-              <div className="flex flex-col gap-6">
-                <Textarea
-                  value="This textarea is disabled"
-                  label="Disabled"
-                  disabled={true}
-                  rows={2}
-                />
-
-                <Textarea
-                  value="This textarea is read-only. You can select and copy the text but cannot edit it."
-                  label="Read-only"
-                  readOnly={true}
-                  rows={2}
-                />
-
-                <Textarea
-                  label="No Resize"
-                  placeholder="This textarea cannot be resized"
-                  resize="none"
-                  rows={3}
-                />
-              </div>
-            </div>
-
-            <CodeBlock
-              code={`import { Textarea } from "@khanhromvn/zenui";
-
-function StatesExample() {
-  return (
-    <div className="flex flex-col gap-6">
-      <Textarea
-        value="This textarea is disabled"
-        label="Disabled"
-        disabled={true}
-        rows={2}
-      />
-
-      <Textarea
-        value="This textarea is read-only"
-        label="Read-only"
-        readOnly={true}
-        rows={2}
-      />
-
-      <Textarea
-        label="No Resize"
-        placeholder="Cannot be resized"
-        resize="none"
-        rows={3}
-      />
-    </div>
-  );
-}`}
-              language="typescript"
-              theme="vs-dark"
-              readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/StatesExample.tsx"
-              showLineNumbers={true}
-            />
-          </div>
-        </section>
-
-        {/* PROPS SECTION */}
-        <section id="props" className="mb-12">
-          <h2 className="text-2xl font-semibold text-text-primary mb-4">
-            Props
-          </h2>
-          <p className="text-text-secondary mb-6">
-            Complete list of props available for the Textarea component.
-          </p>
-
-          <Table
-            data={[
-              {
-                prop: "value",
-                type: "string",
-                default: '""',
-                description: "Current value of the textarea",
-              },
-              {
-                prop: "onChange",
-                type: "(value: string) => void",
-                default: "-",
-                description: "Callback when value changes",
-              },
-              {
-                prop: "label",
-                type: "string",
-                default: "-",
-                description: "Label for the textarea",
-              },
-              {
-                prop: "placeholder",
-                type: "string",
-                default: "-",
-                description: "Placeholder text",
-              },
-              {
-                prop: "error",
-                type: "string",
-                default: "-",
-                description: "Error message to display",
-              },
-              {
-                prop: "helperText",
-                type: "string",
-                default: "-",
-                description: "Helper text below textarea",
-              },
-              {
-                prop: "maxLength",
-                type: "number",
-                default: "-",
-                description: "Maximum character length",
-              },
-              {
-                prop: "showCount",
-                type: "boolean",
-                default: "false",
-                description: "Show character count",
-              },
-              {
-                prop: "autoResize",
-                type: "boolean",
-                default: "false",
-                description: "Auto resize based on content",
-              },
-              {
-                prop: "minHeight",
-                type: "string",
-                default: '"80px"',
-                description: "Min height for auto-resize",
-              },
-              {
-                prop: "maxHeight",
-                type: "string",
-                default: '"300px"',
-                description: "Max height for auto-resize",
-              },
-              {
-                prop: "rows",
-                type: "number",
-                default: "4",
-                description: "Number of rows",
-              },
-              {
-                prop: "disabled",
-                type: "boolean",
-                default: "false",
-                description: "Disabled state",
-              },
-              {
-                prop: "readOnly",
-                type: "boolean",
-                default: "false",
-                description: "Read-only state",
-              },
-              {
-                prop: "required",
-                type: "boolean",
-                default: "false",
-                description: "Required field",
-              },
-              {
-                prop: "resize",
-                type: '"none" | "both" | "horizontal" | "vertical"',
-                default: '"vertical"',
-                description: "Resize behavior",
-              },
-              {
-                prop: "className",
-                type: "string",
-                default: '""',
-                description: "Custom CSS class",
-              },
-            ]}
-            columns={[
-              {
-                key: "prop",
-                title: "Prop",
-                width: "20%",
-                render: (value) => (
-                  <span className="font-mono text-xs text-text-primary">
-                    {value}
-                  </span>
-                ),
-              },
-              {
-                key: "type",
-                title: "Type",
-                width: "30%",
-                render: (value) => (
-                  <span className="font-mono text-xs text-text-secondary">
-                    {value}
-                  </span>
-                ),
-              },
-              {
-                key: "default",
-                title: "Default",
-                width: "15%",
-                render: (value) => (
-                  <span className="text-text-secondary">{value}</span>
-                ),
-              },
-              {
-                key: "description",
-                title: "Description",
-                width: "35%",
-                render: (value) => (
-                  <span className="text-text-secondary">{value}</span>
-                ),
-              },
-            ]}
-            variant="bordered"
-            size="md"
-            className="rounded-lg"
           />
         </section>
       </div>

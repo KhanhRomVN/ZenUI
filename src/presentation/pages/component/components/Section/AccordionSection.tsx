@@ -11,7 +11,14 @@ import { Button } from "../../../../components/package/components/button";
 import { Badge } from "../../../../components/package/components/badge";
 import { Input } from "../../../../components/package/components/input";
 import { Tab, TabItem } from "../../../../components/package/components/tab";
-import { Table } from "../../../../components/package/components/table";
+import {
+  HeaderCell,
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableRow,
+} from "../../../../components/package/components/table";
 import {
   FileCode,
   Plus,
@@ -1342,68 +1349,97 @@ function MyComponent() {
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Accordion Props
             </h3>
-            <Table
-              data={[
-                {
-                  prop: "type",
-                  type: '"single" | "multiple"',
-                  default: '"single"',
-                  description: "Allow single or multiple items open",
-                },
-                {
-                  prop: "collapsible",
-                  type: "boolean",
-                  default: "true",
-                  description: "Allow items to be closed",
-                },
-                {
-                  prop: "className",
-                  type: "string",
-                  default: "-",
-                  description: "Custom CSS classes",
-                },
-              ]}
-              columns={[
-                {
-                  key: "prop",
-                  title: "Prop",
-                  width: "20%",
-                  render: (value) => (
-                    <span className="font-mono text-xs text-text-primary">
-                      {value}
-                    </span>
-                  ),
-                },
-                {
-                  key: "type",
-                  title: "Type",
-                  width: "30%",
-                  render: (value) => (
-                    <span className="font-mono text-xs text-text-secondary">
-                      {value}
-                    </span>
-                  ),
-                },
-                {
-                  key: "default",
-                  title: "Default",
-                  width: "15%",
-                  render: (value) => (
-                    <span className="text-text-secondary">{value}</span>
-                  ),
-                },
-                {
-                  key: "description",
-                  title: "Description",
-                  width: "35%",
-                  render: (value) => (
-                    <span className="text-text-secondary">{value}</span>
-                  ),
-                },
-              ]}
-              size="md"
-              className="rounded-lg"
-            />
+            <div className="border border-table-border rounded-lg overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-table-headerBg">
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Prop
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Type
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Default
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Description
+                    </HeaderCell>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="bg-table-bodyBg">
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        type
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        "single" | "multiple"
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">"single"</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Allow single or multiple items open
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        collapsible
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        boolean
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">true</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Allow items to be closed
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        className
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        string
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Custom CSS classes
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </div>
 
           {/* AccordionItem Props */}
@@ -1411,62 +1447,74 @@ function MyComponent() {
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               AccordionItem Props
             </h3>
-            <Table
-              data={[
-                {
-                  prop: "value",
-                  type: "string",
-                  default: "-",
-                  description: "Unique identifier for the item",
-                },
-                {
-                  prop: "className",
-                  type: "string",
-                  default: "-",
-                  description: "Custom CSS classes",
-                },
-              ]}
-              columns={[
-                {
-                  key: "prop",
-                  title: "Prop",
-                  width: "20%",
-                  render: (value) => (
-                    <span className="font-mono text-xs text-text-primary">
-                      {value}
-                    </span>
-                  ),
-                },
-                {
-                  key: "type",
-                  title: "Type",
-                  width: "30%",
-                  render: (value) => (
-                    <span className="font-mono text-xs text-text-secondary">
-                      {value}
-                    </span>
-                  ),
-                },
-                {
-                  key: "default",
-                  title: "Default",
-                  width: "15%",
-                  render: (value) => (
-                    <span className="text-text-secondary">{value}</span>
-                  ),
-                },
-                {
-                  key: "description",
-                  title: "Description",
-                  width: "35%",
-                  render: (value) => (
-                    <span className="text-text-secondary">{value}</span>
-                  ),
-                },
-              ]}
-              size="md"
-              className="rounded-lg"
-            />
+            <div className="border border-table-border rounded-lg overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-table-headerBg">
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Prop
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Type
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Default
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Description
+                    </HeaderCell>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="bg-table-bodyBg">
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        value
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        string
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Unique identifier for the item
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        className
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        string
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Custom CSS classes
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </div>
 
           {/* AccordionTrigger Props */}
@@ -1474,68 +1522,97 @@ function MyComponent() {
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               AccordionTrigger Props
             </h3>
-            <Table
-              data={[
-                {
-                  prop: "icon",
-                  type: "ReactNode",
-                  default: "ChevronDown",
-                  description: "Custom icon component",
-                },
-                {
-                  prop: "iconPosition",
-                  type: '"left" | "right"',
-                  default: '"right"',
-                  description: "Position of the icon",
-                },
-                {
-                  prop: "className",
-                  type: "string",
-                  default: "-",
-                  description: "Custom CSS classes",
-                },
-              ]}
-              columns={[
-                {
-                  key: "prop",
-                  title: "Prop",
-                  width: "20%",
-                  render: (value) => (
-                    <span className="font-mono text-xs text-text-primary">
-                      {value}
-                    </span>
-                  ),
-                },
-                {
-                  key: "type",
-                  title: "Type",
-                  width: "30%",
-                  render: (value) => (
-                    <span className="font-mono text-xs text-text-secondary">
-                      {value}
-                    </span>
-                  ),
-                },
-                {
-                  key: "default",
-                  title: "Default",
-                  width: "15%",
-                  render: (value) => (
-                    <span className="text-text-secondary">{value}</span>
-                  ),
-                },
-                {
-                  key: "description",
-                  title: "Description",
-                  width: "35%",
-                  render: (value) => (
-                    <span className="text-text-secondary">{value}</span>
-                  ),
-                },
-              ]}
-              size="md"
-              className="rounded-lg"
-            />
+            <div className="border border-table-border rounded-lg overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-table-headerBg">
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Prop
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Type
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Default
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Description
+                    </HeaderCell>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="bg-table-bodyBg">
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        icon
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        ReactNode
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">ChevronDown</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Custom icon component
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        iconPosition
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        "left" | "right"
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">"right"</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Position of the icon
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        className
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        string
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Custom CSS classes
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </div>
 
           {/* AccordionContent Props */}
@@ -1543,56 +1620,51 @@ function MyComponent() {
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               AccordionContent Props
             </h3>
-            <Table
-              data={[
-                {
-                  prop: "className",
-                  type: "string",
-                  default: "-",
-                  description: "Custom CSS classes",
-                },
-              ]}
-              columns={[
-                {
-                  key: "prop",
-                  title: "Prop",
-                  width: "20%",
-                  render: (value) => (
-                    <span className="font-mono text-xs text-text-primary">
-                      {value}
-                    </span>
-                  ),
-                },
-                {
-                  key: "type",
-                  title: "Type",
-                  width: "30%",
-                  render: (value) => (
-                    <span className="font-mono text-xs text-text-secondary">
-                      {value}
-                    </span>
-                  ),
-                },
-                {
-                  key: "default",
-                  title: "Default",
-                  width: "15%",
-                  render: (value) => (
-                    <span className="text-text-secondary">{value}</span>
-                  ),
-                },
-                {
-                  key: "description",
-                  title: "Description",
-                  width: "35%",
-                  render: (value) => (
-                    <span className="text-text-secondary">{value}</span>
-                  ),
-                },
-              ]}
-              size="md"
-              className="rounded-lg"
-            />
+            <div className="border border-table-border rounded-lg overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-table-headerBg">
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Prop
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Type
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Default
+                    </HeaderCell>
+                    <HeaderCell showVerticalDivider showHorizontalDivider>
+                      Description
+                    </HeaderCell>
+                  </TableRow>
+                </TableHeader>
+                <TableBody className="bg-table-bodyBg">
+                  <TableRow
+                    showHorizontalDivider
+                    className="hover:bg-table-hoverItemBodyBg"
+                  >
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-primary">
+                        className
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="font-mono text-xs text-text-secondary">
+                        string
+                      </span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">-</span>
+                    </TableCell>
+                    <TableCell showVerticalDivider>
+                      <span className="text-text-secondary">
+                        Custom CSS classes
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </div>
         </section>
       </div>

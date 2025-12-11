@@ -8,7 +8,7 @@ const CardFooter: React.FC<CardFooterProps> = ({
   ...props
 }) => {
   return (
-    <div className={cn("px-4 py-3", className)} {...props}>
+    <div className={cn("", className)} {...props}>
       {children}
     </div>
   );

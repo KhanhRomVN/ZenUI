@@ -4,16 +4,10 @@ export { default as CardBody } from "./CardBody";
 export { default as CardFooter } from "./CardFooter";
 export type {
   CardProps,
-  CardSize,
   CardWidth,
   CardAlign,
-  CardSizeConfig,
   CardHeaderProps,
   CardBodyProps,
   CardFooterProps,
 } from "./Card.types";
-export {
-  getCardSizeConfig,
-  getCardAlignmentStyles,
-  validateCardProps,
-} from "./Card.utils";
+export { getCardAlignmentStyles, validateCardProps } from "./Card.utils";

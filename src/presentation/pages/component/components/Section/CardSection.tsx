@@ -28,8 +28,7 @@ const CardSection = () => {
       subSections: [
         { id: "basic", label: "Basic Usage" },
         { id: "alignment", label: "Alignment" },
-        { id: "size", label: "Sizes" },
-        { id: "hover", label: "Hover Effects" },
+
         { id: "complex", label: "Complex Examples" },
       ],
     },
@@ -53,7 +52,7 @@ function MyComponent() {
     <Card
       className="rounded-md"
       cardAlign={{ horizontal: "center", vertical: "center" }}
-      width={50}
+      width={0.5}
     >
       <CardHeader>
         <div>
@@ -97,7 +96,7 @@ function AlignmentExample() {
       <div className="h-96 border-2 border-dashed border-border-default rounded-lg p-4 flex">
         <Card
           cardAlign={{ horizontal: "center", vertical: "center" }}
-          width={50}
+          width={0.5}
           className="rounded-md"
         >
           <CardBody>
@@ -116,158 +115,13 @@ function AlignmentExample() {
   );
 }`;
 
-  const sizeOptionCode = `import { Card, CardHeader, CardBody } from "@khanhromvn/zenui";
-
-function SizeOptionExample() {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <Card
-        size={80}
-        className="rounded-md"
-      >
-        <CardBody>
-          <h3 className="text-lg font-semibold text-text-primary mb-1">
-            Small Card
-          </h3>
-          <p className="text-sm text-text-secondary mb-3">Size 80%</p>
-          <p className="text-text-secondary">
-            Compact card for dense layouts.
-          </p>
-        </CardBody>
-      </Card>
-      
-      <Card
-        size={100}
-        className="rounded-md"
-      >
-        <CardBody>
-          <h3 className="text-lg font-semibold text-text-primary mb-1">
-            Default Card
-          </h3>
-          <p className="text-sm text-text-secondary mb-3">Size 100%</p>
-          <p className="text-text-secondary">
-            Standard size for most use cases.
-          </p>
-        </CardBody>
-      </Card>
-      
-      <Card
-        size={120}
-        className="rounded-md"
-      >
-        <CardBody>
-          <h3 className="text-lg font-semibold text-text-primary mb-1">
-            Large Card
-          </h3>
-          <p className="text-sm text-text-secondary mb-3">Size 120%</p>
-          <p className="text-text-secondary">
-            Emphasized card for important content.
-          </p>
-        </CardBody>
-      </Card>
-    </div>
-  );
-}`;
-
-  const hoverEffectExampleCode = `import { Card, CardBody } from "@khanhromvn/zenui";
-
-function HoverEffectExample() {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <Card
-        hoverEffectVariant="lift"
-        className="rounded-md"
-      >
-        <CardBody>
-          <h3 className="text-lg font-semibold text-text-primary mb-2">
-            Lift Effect
-          </h3>
-          <p className="text-text-secondary">
-            Hover to see lift effect with shadow
-          </p>
-        </CardBody>
-      </Card>
-      
-      <Card
-        hoverEffectVariant="glow"
-        className="rounded-md"
-      >
-        <CardBody>
-          <h3 className="text-lg font-semibold text-text-primary mb-2">
-            Glow Effect
-          </h3>
-          <p className="text-text-secondary">
-            Hover to see glowing effect
-          </p>
-        </CardBody>
-      </Card>
-      
-      <Card
-        hoverEffectVariant="glass"
-        className="rounded-md"
-      >
-        <CardBody>
-          <h3 className="text-lg font-semibold text-text-primary mb-2">
-            Glass Effect
-          </h3>
-          <p className="text-text-secondary">
-            Hover to see glass morphism effect
-          </p>
-        </CardBody>
-      </Card>
-      
-      <Card
-        hoverEffectVariant="tilt"
-        className="rounded-md"
-      >
-        <CardBody>
-          <h3 className="text-lg font-semibold text-text-primary mb-2">
-            Tilt Effect
-          </h3>
-          <p className="text-text-secondary">
-            Hover to see 3D tilt effect
-          </p>
-        </CardBody>
-      </Card>
-      
-      <Card
-        hoverEffectVariant="scale"
-        className="rounded-md"
-      >
-        <CardBody>
-          <h3 className="text-lg font-semibold text-text-primary mb-2">
-            Scale Effect
-          </h3>
-          <p className="text-text-secondary">
-            Hover to see scale up effect
-          </p>
-        </CardBody>
-      </Card>
-      
-      <Card
-        hoverEffectVariant="border-glow"
-        className="rounded-md"
-      >
-        <CardBody>
-          <h3 className="text-lg font-semibold text-text-primary mb-2">
-            Border Glow
-          </h3>
-          <p className="text-text-secondary">
-            Hover to see border glowing
-          </p>
-        </CardBody>
-      </Card>
-    </div>
-  );
-}`;
-
   const loginFormCode = `import { Card, CardHeader, CardBody, CardFooter } from "@khanhromvn/zenui";
 
 function LoginFormExample() {
   return (
     <Card
       className="rounded-md"
-      width={40}
+      width={0.4}
       cardAlign={{ horizontal: "center", vertical: "center" }}
     >
       <CardHeader>
@@ -332,7 +186,7 @@ function ProductCardExample() {
   return (
     <Card
       className="rounded-md overflow-hidden"
-      width={35}
+      width={0.35}
       style={{ padding: 0 }}
     >
       <img
@@ -376,7 +230,7 @@ function FeatureCardExample() {
   return (
     <Card
       className="rounded-md hover:border-button-bg transition-colors"
-      width={40}
+      width={0.4}
     >
       <CardBody>
         <div className="space-y-3">
@@ -402,7 +256,7 @@ function StatsCardExample() {
   return (
     <Card
       className="rounded-md"
-      width={40}
+      width={0.4}
     >
       <CardBody>
         <div className="space-y-4">
@@ -504,7 +358,7 @@ function StatsCardExample() {
               <Card
                 className="rounded-md bg-card-background border-border-default"
                 cardAlign={{ horizontal: "center", vertical: "center" }}
-                width={45}
+                width={0.45}
               >
                 <CardHeader>
                   <div>
@@ -574,7 +428,7 @@ function StatsCardExample() {
                 <div className="h-96 border-2 border-dashed border-border-default rounded-lg p-4 flex">
                   <Card
                     cardAlign={{ horizontal: "center", vertical: "center" }}
-                    width={50}
+                    width={0.5}
                     className="rounded-md bg-card-background border-border-default"
                   >
                     <CardBody>
@@ -605,196 +459,6 @@ function StatsCardExample() {
             </div>
           </div>
 
-          {/* Size Options */}
-          <div id="size" className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Size Options
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Control card size with percentage scale (80%, 100%, 120%).
-            </p>
-
-            <div className="mb-4">
-              <div className="border-2 border-dashed border-border-default rounded-lg p-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card
-                    size={80}
-                    className="rounded-md bg-card-background border-border-default"
-                  >
-                    <CardBody>
-                      <h3 className="text-lg font-semibold text-text-primary mb-1">
-                        Small Card
-                      </h3>
-                      <p className="text-sm text-text-secondary mb-3">
-                        Size 80%
-                      </p>
-                      <p className="text-text-secondary">
-                        Compact card for dense layouts.
-                      </p>
-                    </CardBody>
-                  </Card>
-
-                  <Card
-                    size={100}
-                    className="rounded-md bg-card-background border-border-default"
-                  >
-                    <CardBody>
-                      <h3 className="text-lg font-semibold text-text-primary mb-1">
-                        Default Card
-                      </h3>
-                      <p className="text-sm text-text-secondary mb-3">
-                        Size 100%
-                      </p>
-                      <p className="text-text-secondary">
-                        Standard size for most use cases.
-                      </p>
-                    </CardBody>
-                  </Card>
-
-                  <Card
-                    size={120}
-                    className="rounded-md bg-card-background border-border-default"
-                  >
-                    <CardBody>
-                      <h3 className="text-lg font-semibold text-text-primary mb-1">
-                        Large Card
-                      </h3>
-                      <p className="text-sm text-text-secondary mb-3">
-                        Size 120%
-                      </p>
-                      <p className="text-text-secondary">
-                        Emphasized card for important content.
-                      </p>
-                    </CardBody>
-                  </Card>
-                </div>
-              </div>
-
-              <CodeBlock
-                code={sizeOptionCode}
-                language="typescript"
-                theme="vs-dark"
-                readOnly={true}
-                headerMode="path"
-                headerIcon={<FileCode size={16} />}
-                filePath="src/components/SizeOptionExample.tsx"
-                showLineNumbers={true}
-              />
-            </div>
-          </div>
-
-          {/* Hover Effects */}
-          <div id="hover" className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              Hover Effects
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Cards can have interactive hover effects using hoverEffectVariant
-              prop. Hover over each card to see the effect.
-            </p>
-
-            <div className="mb-4">
-              <div className="border-2 border-dashed border-border-default rounded-lg p-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <Card
-                    hoverEffectVariant="lift"
-                    className="rounded-md bg-card-background border-border-default"
-                  >
-                    <CardBody>
-                      <h3 className="text-lg font-semibold text-text-primary mb-2">
-                        Lift Effect
-                      </h3>
-                      <p className="text-text-secondary">
-                        Hover to see lift effect with shadow
-                      </p>
-                    </CardBody>
-                  </Card>
-
-                  <Card
-                    hoverEffectVariant="glow"
-                    className="rounded-md bg-card-background border-border-default"
-                  >
-                    <CardBody>
-                      <h3 className="text-lg font-semibold text-text-primary mb-2">
-                        Glow Effect
-                      </h3>
-                      <p className="text-text-secondary">
-                        Hover to see glowing effect
-                      </p>
-                    </CardBody>
-                  </Card>
-
-                  <Card
-                    hoverEffectVariant="glass"
-                    className="rounded-md bg-card-background border-border-default"
-                  >
-                    <CardBody>
-                      <h3 className="text-lg font-semibold text-text-primary mb-2">
-                        Glass Effect
-                      </h3>
-                      <p className="text-text-secondary">
-                        Hover to see glass morphism effect
-                      </p>
-                    </CardBody>
-                  </Card>
-
-                  <Card
-                    hoverEffectVariant="tilt"
-                    className="rounded-md bg-card-background border-border-default"
-                  >
-                    <CardBody>
-                      <h3 className="text-lg font-semibold text-text-primary mb-2">
-                        Tilt Effect
-                      </h3>
-                      <p className="text-text-secondary">
-                        Hover to see 3D tilt effect
-                      </p>
-                    </CardBody>
-                  </Card>
-
-                  <Card
-                    hoverEffectVariant="scale"
-                    className="rounded-md bg-card-background border-border-default"
-                  >
-                    <CardBody>
-                      <h3 className="text-lg font-semibold text-text-primary mb-2">
-                        Scale Effect
-                      </h3>
-                      <p className="text-text-secondary">
-                        Hover to see scale up effect
-                      </p>
-                    </CardBody>
-                  </Card>
-
-                  <Card
-                    hoverEffectVariant="border-glow"
-                    className="rounded-md bg-card-background border-border-default"
-                  >
-                    <CardBody>
-                      <h3 className="text-lg font-semibold text-text-primary mb-2">
-                        Border Glow
-                      </h3>
-                      <p className="text-text-secondary">
-                        Hover to see border glowing
-                      </p>
-                    </CardBody>
-                  </Card>
-                </div>
-              </div>
-
-              <CodeBlock
-                code={hoverEffectExampleCode}
-                language="typescript"
-                theme="vs-dark"
-                readOnly={true}
-                headerMode="path"
-                headerIcon={<FileCode size={16} />}
-                filePath="src/components/HoverEffectExample.tsx"
-                showLineNumbers={true}
-              />
-            </div>
-          </div>
-
           {/* Complex Examples */}
           <div id="complex" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
@@ -812,7 +476,7 @@ function StatsCardExample() {
               <div className="border-2 border-dashed border-border-default rounded-lg p-6 flex justify-center">
                 <Card
                   className="rounded-md bg-card-background border-border-default"
-                  width={45}
+                  width={0.45}
                   cardAlign={{ horizontal: "center", vertical: "center" }}
                 >
                   <CardHeader>
@@ -902,7 +566,7 @@ function StatsCardExample() {
               <div className="border-2 border-dashed border-border-default rounded-lg p-6 flex justify-center">
                 <Card
                   className="rounded-md overflow-hidden"
-                  width={35}
+                  width={0.35}
                   style={{ padding: 0 }}
                   cardAlign={{ horizontal: "center", vertical: "center" }}
                 >
@@ -962,7 +626,7 @@ function StatsCardExample() {
               <div className="border-2 border-dashed border-border-default rounded-lg p-6 flex justify-center">
                 <Card
                   className="rounded-md hover:border-button-bg transition-colors"
-                  width={40}
+                  width={0.4}
                   cardAlign={{ horizontal: "center", vertical: "center" }}
                 >
                   <CardBody>
@@ -1002,7 +666,7 @@ function StatsCardExample() {
               <div className="border-2 border-dashed border-border-default rounded-lg p-6 flex justify-center">
                 <Card
                   className="rounded-md"
-                  width={40}
+                  width={0.4}
                   cardAlign={{ horizontal: "center", vertical: "center" }}
                 >
                   <CardBody>
@@ -1102,29 +766,6 @@ function StatsCardExample() {
                   >
                     <TableCell showVerticalDivider>
                       <span className="font-mono text-xs text-text-primary">
-                        size
-                      </span>
-                    </TableCell>
-                    <TableCell showVerticalDivider>
-                      <span className="font-mono text-xs text-text-secondary">
-                        number
-                      </span>
-                    </TableCell>
-                    <TableCell showVerticalDivider>
-                      <span className="text-text-secondary">100</span>
-                    </TableCell>
-                    <TableCell showVerticalDivider>
-                      <span className="text-text-secondary">
-                        Card size (percentage scale: 50-200)
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow
-                    showHorizontalDivider
-                    className="hover:bg-table-hoverItemBodyBg"
-                  >
-                    <TableCell showVerticalDivider>
-                      <span className="font-mono text-xs text-text-primary">
                         width
                       </span>
                     </TableCell>
@@ -1138,7 +779,7 @@ function StatsCardExample() {
                     </TableCell>
                     <TableCell showVerticalDivider>
                       <span className="text-text-secondary">
-                        Card width (percentage of parent container: 1-100)
+                        Card width as fraction (0-1, e.g., 0.5 = 50%)
                       </span>
                     </TableCell>
                   </TableRow>

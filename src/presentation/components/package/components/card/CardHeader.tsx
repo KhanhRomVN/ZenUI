@@ -8,7 +8,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
   ...props
 }) => {
   return (
-    <div className={cn("px-4 py-3", className)} {...props}>
+    <div className={cn("pb-4", className)} {...props}>
       {children}
     </div>
   );

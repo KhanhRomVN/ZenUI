@@ -1,11 +1,6 @@
 import { ReactNode } from "react";
 
 /**
- * Kích thước card (percentage scale)
- */
-export type CardSize = number;
-
-/**
  * Căn chỉnh card trong container cha
  */
 export interface CardAlign {
@@ -14,7 +9,8 @@ export interface CardAlign {
 }
 
 /**
- * Chiều rộng card (percentage của container cha)
+ * Chiều rộng card (phân số từ 0-1 của container cha)
+ * Ví dụ: 0.5 = 50%, 0.33 = 33%, 1 = 100%
  */
 export type CardWidth = number;
 
@@ -22,10 +18,7 @@ export type CardWidth = number;
  * Props chính của Card component
  */
 export interface CardProps {
-  /** Kích thước card */
-  size?: CardSize;
-
-  /** Chiều rộng card (% của container cha) */
+  /** Chiều rộng card (phân số 0-1, ví dụ: 0.5 = 50%) */
   width?: CardWidth;
 
   /** Căn chỉnh card trong container cha */
@@ -42,17 +35,6 @@ export interface CardProps {
 
   /** Các props HTML div khác */
   [key: string]: any;
-}
-
-/**
- * Interface cho card size configuration
- */
-export interface CardSizeConfig {
-  /** Padding */
-  padding: string;
-
-  /** Border radius */
-  borderRadius: string;
 }
 
 /**

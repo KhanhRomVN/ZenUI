@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Editor, { OnMount, OnChange, useMonaco } from "@monaco-editor/react";
 import { Copy, Check } from "lucide-react";
 import { CodeBlockProps } from "./CodeBlock.types";
@@ -109,17 +109,15 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         setCurrentCode(tab.content);
         // Force theme update after content changes
         if (editorRef.current && monaco) {
-          setTimeout(() => {
+          const timeoutId = setTimeout(() => {
+            if (editorRef.current?.getModel()?.isDisposed()) return;
+
             const currentTheme = customTheme || theme;
             monaco.editor.setTheme(currentTheme);
             editorRef.current?.layout();
-            // Force re-render to update toolbar colors
-            editorRef.current?.trigger(
-              "source",
-              "editor.action.formatDocument",
-              {}
-            );
           }, 50);
+
+          return () => clearTimeout(timeoutId);
         }
       }
     }
@@ -141,11 +139,15 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   // Force layout update when code changes
   useEffect(() => {
     if (editorRef.current && monaco) {
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
+        if (editorRef.current?.getModel()?.isDisposed()) return;
+
         const currentTheme = customTheme || theme;
         monaco.editor.setTheme(currentTheme);
         editorRef.current?.layout();
       }, 0);
+
+      return () => clearTimeout(timeoutId);
     }
   }, [currentCode, lineCount, monaco, customTheme, theme]);
 
@@ -220,10 +222,19 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
               .replace("./themes/", "")
               .replace(".json", "");
           } else {
-            throw new Error("No built-in themes available");
+            // No built-in themes available - use Monaco's default theme
+            if (debug) {
+              console.warn(
+                "⚠️ No built-in themes available, using Monaco's default theme"
+              );
+            }
+            setCustomTheme(theme);
+            setIsLoadingTheme(false);
+            return;
           }
         }
 
+        // Define the theme in Monaco
         monaco.editor.defineTheme(themeName, themeData.default.monaco as any);
         setCustomTheme(themeName);
         setThemeColors(themeData.default.monaco.colors);
@@ -254,10 +265,12 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
       }
     };
 
+    let isMounted = true;
     loadCustomTheme();
 
     // Listen for theme preset changes
     const handleThemeChange = (event: Event) => {
+      if (!isMounted) return;
       const customEvent = event as CustomEvent;
       if (debug) {
         console.log(
@@ -271,6 +284,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     window.addEventListener("theme-preset-changed", handleThemeChange);
 
     return () => {
+      isMounted = false;
       window.removeEventListener("theme-preset-changed", handleThemeChange);
     };
   }, [monaco, theme, debug]);
@@ -343,8 +357,26 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   };
 
   // Build Monaco options
-  const editorOptions = {
-    ...getDefaultMonacoOptions({
+  const editorOptions = useMemo(
+    () => ({
+      ...getDefaultMonacoOptions({
+        showMinimap,
+        showLineNumbers,
+        showGutter,
+        showLineHighlight,
+        wordWrap,
+        fontSize,
+        fontFamily,
+        tabSize,
+        insertSpaces,
+        readOnly,
+        editable,
+        highlightActiveLine,
+        theme,
+      }),
+      ...monacoOptions,
+    }),
+    [
       showMinimap,
       showLineNumbers,
       showGutter,
@@ -358,19 +390,23 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
       editable,
       highlightActiveLine,
       theme,
-    }),
-    ...monacoOptions,
-  };
+      monacoOptions,
+    ]
+  );
 
   // Container style
-  const containerStyle = getContainerStyle({
-    borderRadius,
-    opacity,
-    padding,
-    margin,
-    border,
-    shadow,
-  });
+  const containerStyle = useMemo(
+    () =>
+      getContainerStyle({
+        borderRadius,
+        opacity,
+        padding,
+        margin,
+        border,
+        shadow,
+      }),
+    [borderRadius, opacity, padding, margin, border, shadow]
+  );
 
   // Debug logs for component render
   if (debug) {

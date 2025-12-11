@@ -49,6 +49,7 @@ module.exports = {
           hover: "var(--border-hover)",
           focus: "var(--border-focus)",
         },
+        divider: "var(--divider)",
         card: {
           background: "var(--card-background)",
         },

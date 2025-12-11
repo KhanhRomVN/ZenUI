@@ -178,16 +178,16 @@ function CustomColorExample() {
         {/* USAGE SECTION */}
         <section id="usage" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
-            Cách sử dụng cơ bản
+            Basic Usage
           </h2>
           <p className="text-text-secondary mb-6">
-            Ví dụ đơn giản để bắt đầu với component Divider.
+            Simple example to get started with the Divider component.
           </p>
 
           {/* Live Demo */}
           <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
             <p className="text-text-primary mb-4">Nội dung phía trên</p>
-            <Divider />
+            <Divider thickness="thin" className="border-divider" />
             <p className="text-text-primary mt-4">Nội dung phía dưới</p>
           </div>
 
@@ -227,17 +227,17 @@ function CustomColorExample() {
                 <p className="text-sm text-text-secondary mb-2">
                   Solid (Mặc định)
                 </p>
-                <Divider style="solid" />
+                <Divider style="solid" className="border-divider" />
               </div>
 
               <div>
                 <p className="text-sm text-text-secondary mb-2">Dashed</p>
-                <Divider style="dashed" />
+                <Divider style="dashed" className="border-divider" />
               </div>
 
               <div>
                 <p className="text-sm text-text-secondary mb-2">Dotted</p>
-                <Divider style="dotted" />
+                <Divider style="dotted" className="border-divider" />
               </div>
             </div>
 
@@ -268,24 +268,24 @@ function CustomColorExample() {
             <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
               <div>
                 <p className="text-sm text-text-secondary mb-2">Thin</p>
-                <Divider thickness="thin" />
+                <Divider thickness="thin" className="border-divider" />
               </div>
 
               <div>
                 <p className="text-sm text-text-secondary mb-2">
                   Medium (Mặc định)
                 </p>
-                <Divider thickness="medium" />
+                <Divider thickness="medium" className="border-divider" />
               </div>
 
               <div>
                 <p className="text-sm text-text-secondary mb-2">Thick</p>
-                <Divider thickness="thick" />
+                <Divider thickness="thick" className="border-divider" />
               </div>
 
               <div>
                 <p className="text-sm text-text-secondary mb-2">Custom (5px)</p>
-                <Divider thickness={5} />
+                <Divider thickness={5} className="border-divider" />
               </div>
             </div>
 
@@ -316,17 +316,21 @@ function CustomColorExample() {
             <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
               <div>
                 <p className="text-sm text-text-secondary mb-2">50% - Center</p>
-                <Divider length={50} align="center" />
+                <Divider
+                  length={50}
+                  align="center"
+                  className="border-divider"
+                />
               </div>
 
               <div>
                 <p className="text-sm text-text-secondary mb-2">70% - Start</p>
-                <Divider length={70} align="start" />
+                <Divider length={70} align="start" className="border-divider" />
               </div>
 
               <div>
                 <p className="text-sm text-text-secondary mb-2">60% - End</p>
-                <Divider length={60} align="end" />
+                <Divider length={60} align="end" className="border-divider" />
               </div>
             </div>
 
@@ -366,9 +370,16 @@ function CustomColorExample() {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   </p>
                 </div>
+              </div>
 
-                <Divider orientation="vertical" length={80} align="center" />
+              <Divider
+                orientation="vertical"
+                length={80}
+                align="center"
+                className="border-divider"
+              />
 
+              <div className="flex-1">
                 <div className="flex-1">
                   <h4 className="font-semibold text-text-primary mb-2">
                     Nội dung bên phải

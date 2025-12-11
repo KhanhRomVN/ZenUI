@@ -133,6 +133,7 @@
     "tabItemFocusBg": "#0c4a6e",
     "tabItemBorder": "transparent",
     "tabItemHoverBorder": "#0284c7",
-    "tabItemFocusBorder": "#0ea5e9"
+    "tabItemFocusBorder": "#0ea5e9",
+    "divider": "#353535"
   }
 }

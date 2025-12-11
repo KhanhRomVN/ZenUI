@@ -318,7 +318,7 @@ function FullScreenModalExample() {
             </Modal>
           </div>
 
-          {/* Code Example */}
+          {/* Code Example */}re
           <CodeBlock
             code={basicUsageCode}
             language="typescript"

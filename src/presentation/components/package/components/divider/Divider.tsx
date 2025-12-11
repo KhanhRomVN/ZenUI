@@ -31,7 +31,7 @@ const Divider: React.FC<DividerProps> = ({
         thicknessClass,
         styleClass,
         alignClass,
-        "border-gray-300",
+        "border-gray-700",
         className
       )}
       style={lengthStyle}

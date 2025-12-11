@@ -267,9 +267,8 @@ function FullScreenModalExample() {
           <p className="text-text-secondary mb-6">
             Here's a simple example to get you started with the Modal component.
           </p>
-
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <Button
               onClick={() => setBasicModalOpen(true)}
               className="bg-blue-600 hover:bg-blue-700 text-white"
@@ -317,7 +316,6 @@ function FullScreenModalExample() {
               </div>
             </Modal>
           </div>
-
           {/* Code Example */}re
           <CodeBlock
             code={basicUsageCode}
@@ -348,7 +346,7 @@ function FullScreenModalExample() {
               Choose from different modal sizes to fit your content needs.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-4 flex-wrap">
               <Button onClick={() => setSizesModalOpen(true)}>
                 Open Size Examples
               </Button>
@@ -407,7 +405,7 @@ function FullScreenModalExample() {
               Add smooth animations to your modals for better user experience.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-4 flex-wrap">
               <Button
                 onClick={() => setAnimatedModalOpen(true)}
                 className="bg-purple-600 hover:bg-purple-700 text-white"
@@ -471,7 +469,7 @@ function FullScreenModalExample() {
               Fully customize the appearance and behavior of your modals.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-4 flex-wrap">
               <Button
                 onClick={() => setCustomModalOpen(true)}
                 className="bg-yellow-600 hover:bg-yellow-700 text-white"
@@ -532,7 +530,7 @@ function FullScreenModalExample() {
               Use full-screen modals for complex forms or detailed views.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-4 flex-wrap">
               <Button
                 onClick={() => setFullModalOpen(true)}
                 className="bg-green-600 hover:bg-green-700 text-white"

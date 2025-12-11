@@ -224,7 +224,7 @@ function StateExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
             <Button className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border hover:border-button-borderHover">
               Click Me
             </Button>
@@ -273,7 +273,7 @@ function StateExample() {
               Control button size using percentage scale from 50% to 200%.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center justify-center flex-wrap">
               <Button
                 size={80}
                 className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
@@ -322,7 +322,7 @@ function StateExample() {
               positioning.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center justify-center flex-wrap">
               <Button
                 icon={<Play size={16} />}
                 iconPosition="left"
@@ -371,7 +371,7 @@ function StateExample() {
               Handle loading and disabled states with built-in visual feedback.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center justify-center flex-wrap">
               <Button
                 loading={loading}
                 onClick={handleLoadingDemo}
@@ -416,7 +416,7 @@ function StateExample() {
               options.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
               <Button
                 width="fit"
                 className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
@@ -471,7 +471,7 @@ function WidthExample() {
               Align button content to left, center, or right.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
               <Button
                 width="full"
                 align="left"

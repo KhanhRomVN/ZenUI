@@ -251,7 +251,7 @@ function FeatureExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6 space-y-4">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 space-y-4">
             <InputOTP
               length={6}
               value={otpValue}
@@ -302,7 +302,7 @@ function FeatureExample() {
               Choose from different input variants to match your design system.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 space-y-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 space-y-6">
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-2">
                   Outline Variant
@@ -358,7 +358,7 @@ function FeatureExample() {
               Control OTP input size using percentage scale from 50% to 200%.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 space-y-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 space-y-6">
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-2">
                   Small (80%)
@@ -402,7 +402,7 @@ function FeatureExample() {
               Explore different OTP lengths, types, and states.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 space-y-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 space-y-6">
               <div>
                 <label className="block text-sm font-medium text-text-secondary mb-2">
                   4-digit PIN (Password type)

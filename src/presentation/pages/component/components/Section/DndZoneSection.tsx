@@ -157,7 +157,7 @@ function CustomConfigExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <DndZone
               onFilesChange={setFiles1}
               placeholder="Drag & drop files here or click to browse"
@@ -196,7 +196,7 @@ function CustomConfigExample() {
               preview.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <DndZone
                 onFilesChange={setFiles2}
                 accept="image/*"
@@ -227,7 +227,7 @@ function CustomConfigExample() {
               Allow only one file to be uploaded at a time.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <DndZone
                 onFilesChange={setFiles3}
                 multiple={false}
@@ -257,7 +257,7 @@ function CustomConfigExample() {
               Configure file type restrictions, maximum files, and size limits.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <DndZone
                 onFilesChange={(files) => console.log("Files:", files)}
                 accept=".pdf,.doc,.docx"
@@ -290,7 +290,7 @@ function CustomConfigExample() {
               Disable the drop zone to prevent file uploads.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <DndZone
                 disabled={true}
                 placeholder="Upload disabled"

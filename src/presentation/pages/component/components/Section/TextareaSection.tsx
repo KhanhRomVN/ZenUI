@@ -183,7 +183,7 @@ function ValidationExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <Textarea
               value={text1}
               onChange={setText1}

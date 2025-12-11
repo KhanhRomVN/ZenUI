@@ -207,7 +207,7 @@ function ConfigurationExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <ColorPicker
               value={selectedColor1}
               onChange={setSelectedColor1}
@@ -246,7 +246,7 @@ function ConfigurationExample() {
               colors.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <ColorPicker
                 value={selectedColor2}
                 onChange={setSelectedColor2}
@@ -277,7 +277,7 @@ function ConfigurationExample() {
               Customize the size of color boxes, gaps, and number of columns.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="flex flex-col gap-6">
                 <div>
                   <p className="text-sm text-text-secondary mb-2">
@@ -342,7 +342,7 @@ function ConfigurationExample() {
               disabled state.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="flex flex-col gap-6">
                 <div>
                   <p className="text-sm text-text-secondary mb-2">

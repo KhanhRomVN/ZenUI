@@ -264,7 +264,7 @@ function CustomContentExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 flex items-center justify-center">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 flex items-center justify-center">
             <Dropdown>
               <DropdownTrigger>
                 <Button
@@ -331,7 +331,7 @@ function CustomContentExample() {
               left-center, left-bottom, right-top, right-center, right-bottom.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <div className="grid grid-cols-3 gap-4 mb-6">
                 <Dropdown position="top-left">
                   <DropdownTrigger>
@@ -545,7 +545,7 @@ function CustomContentExample() {
               recognition.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
               <Dropdown>
                 <DropdownTrigger>
                   <Button
@@ -633,7 +633,7 @@ function CustomContentExample() {
               and any React content.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
               <Dropdown>
                 <DropdownTrigger>
                   <Button
@@ -764,7 +764,7 @@ function CustomContentExample() {
               Control dropdown size with sm, md, and lg variants.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 flex gap-4 items-center justify-center flex-wrap">
               <Dropdown size="sm">
                 <DropdownTrigger>
                   <Button

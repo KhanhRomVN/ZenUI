@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AccordionTriggerProps } from "./Accordion.types";
 import { AccordionContext } from "./Accordion";
 import { cn } from "../../../../../shared/utils/cn";
+import Divider from "../divider/Divider";
 
 const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
   children,
@@ -15,7 +16,7 @@ const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
     return null;
   }
 
-  const { toggleItem, isOpen, currentValue } = context;
+  const { toggleItem, isOpen, currentValue, dividerColor } = context;
 
   const handleClick = () => {
     if (currentValue) {
@@ -26,16 +27,27 @@ const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
   const isItemOpen = currentValue ? isOpen(currentValue) : false;
 
   return (
-    <div
-      onClick={handleClick}
-      data-state={isItemOpen ? "open" : "closed"}
-      className={cn("px-4 py-3 cursor-pointer", className)}
-      {...props}
-    >
-      {typeof children === "function"
-        ? children({ isOpen: isItemOpen })
-        : children}
-    </div>
+    <>
+      <div
+        onClick={handleClick}
+        data-state={isItemOpen ? "open" : "closed"}
+        className={cn("px-4 py-3 cursor-pointer", className)}
+        {...props}
+      >
+        {typeof children === "function"
+          ? children({ isOpen: isItemOpen })
+          : children}
+      </div>
+      {isItemOpen && (
+        <Divider
+          orientation="horizontal"
+          style="solid"
+          thickness="thin"
+          length={100}
+          className={cn(dividerColor)}
+        />
+      )}
+    </>
   );
 };
 

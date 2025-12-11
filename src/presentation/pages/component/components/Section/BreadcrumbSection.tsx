@@ -226,7 +226,7 @@ function ClickHandlerExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <Breadcrumb>
               <BreadcrumbItem icon={Home} text="Home" href="/" />
               <BreadcrumbItem
@@ -273,7 +273,7 @@ function ClickHandlerExample() {
               Choose from different separator icons: chevron, slash, or arrow.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
               <Breadcrumb>
                 <BreadcrumbItem icon={Home} text="Home" href="/" />
                 <BreadcrumbItem
@@ -324,7 +324,7 @@ function ClickHandlerExample() {
               Control breadcrumb size using percentage scale from 50% to 200%.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex flex-col gap-4">
               <Breadcrumb size={80}>
                 <BreadcrumbItem icon={Home} text="Home" href="/" />
                 <BreadcrumbItem
@@ -387,7 +387,7 @@ function ClickHandlerExample() {
               Common use cases for breadcrumbs in different applications.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex flex-col gap-6">
               {/* E-commerce Example */}
               <div>
                 <h4 className="text-sm font-medium text-text-secondary mb-2">
@@ -505,7 +505,7 @@ function RealWorldExample() {
               Handle click events on breadcrumb items for custom navigation.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <Breadcrumb>
                 <BreadcrumbItem
                   icon={Home}

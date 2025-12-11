@@ -20,6 +20,9 @@ export interface DividerProps {
   length?: number;
 
   /** Class tùy chỉnh cho màu sắc và styling khác */
+  color?: string;
+
+  /** Class tùy chỉnh cho màu sắc và styling khác */
   className?: string;
 
   /** Props khác */

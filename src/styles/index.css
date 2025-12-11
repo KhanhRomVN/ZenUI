@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --divider: #e5e7eb;
+  }
+
+  .dark {
+    --divider: #374151;
+  }
 }
 
 @layer base {

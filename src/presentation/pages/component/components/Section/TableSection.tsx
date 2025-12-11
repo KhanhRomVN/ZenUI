@@ -576,7 +576,7 @@ function CustomTable() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-4 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-4 mb-6">
             <div className="border border-table-border rounded-lg overflow-hidden">
               <div className="max-h-[500px] overflow-y-auto">
                 <Table>

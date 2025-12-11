@@ -185,7 +185,7 @@ function CustomColorExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <p className="text-text-primary mb-4">Nội dung phía trên</p>
             <Divider thickness="thin" className="border-divider" />
             <p className="text-text-primary mt-4">Nội dung phía dưới</p>
@@ -222,7 +222,7 @@ function CustomColorExample() {
               và dotted (chấm).
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 space-y-6">
               <div>
                 <p className="text-sm text-text-secondary mb-2">
                   Solid (Mặc định)
@@ -265,7 +265,7 @@ function CustomColorExample() {
               pixel tùy chỉnh.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 space-y-6">
               <div>
                 <p className="text-sm text-text-secondary mb-2">Thin</p>
                 <Divider thickness="thin" className="border-divider" />
@@ -313,7 +313,7 @@ function CustomColorExample() {
               divider.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 space-y-6">
               <div>
                 <p className="text-sm text-text-secondary mb-2">50% - Center</p>
                 <Divider
@@ -357,7 +357,7 @@ function CustomColorExample() {
               Sử dụng divider theo chiều dọc để phân cách nội dung ngang.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <div
                 className="flex items-center gap-4"
                 style={{ height: "200px" }}
@@ -414,7 +414,7 @@ function CustomColorExample() {
               Sử dụng className để thay đổi màu sắc của divider.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 space-y-6">
               <div>
                 <p className="text-sm text-text-secondary mb-2">Red</p>
                 <Divider className="border-red-500" />

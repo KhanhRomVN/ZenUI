@@ -257,7 +257,7 @@ function MultipleSlidesExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <Carousel
               items={images.slice(0, 3)}
               renderItem={(item) => (
@@ -309,7 +309,7 @@ function MultipleSlidesExample() {
               3D coverflow effect with perspective and rotation.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <Carousel
                 items={images}
                 renderItem={(item) => (
@@ -348,7 +348,7 @@ function MultipleSlidesExample() {
               3D cube rotation effect for dramatic transitions.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <Carousel
                 items={images}
                 renderItem={(item) => (
@@ -379,7 +379,7 @@ function MultipleSlidesExample() {
               Card flip animation effect for elegant transitions.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <Carousel
                 items={features}
                 renderItem={(item) => (
@@ -407,7 +407,7 @@ function MultipleSlidesExample() {
               Smooth parallax scrolling effect with depth perception.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <Carousel
                 items={images}
                 renderItem={(item) => (
@@ -443,7 +443,7 @@ function MultipleSlidesExample() {
               Display multiple slides at once with customizable spacing.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <Carousel
                 items={images}
                 renderItem={(item) => (

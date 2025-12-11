@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import { AccordionItemProps, AccordionContextValue } from "./Accordion.types";
 import { cn } from "../../../../../shared/utils/cn";
-import { AccordionContext } from "./Accordion";
+import { AccordionContext, AccordionListContext } from "./Accordion";
+import Divider from "../divider/Divider";
 
 const AccordionItem: React.FC<AccordionItemProps> = ({
   children,
@@ -10,17 +11,26 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   ...props
 }) => {
   const parentContext = React.useContext(AccordionContext);
+  const listContext = React.useContext(AccordionListContext);
 
   const contextValue: AccordionContextValue | null = useMemo(() => {
     if (!parentContext) return null;
     return {
       ...parentContext,
       currentValue: value,
+      dividerColor: listContext?.dividerColor,
     };
-  }, [parentContext, value]);
+  }, [parentContext, value, listContext?.dividerColor]);
 
   return (
     <AccordionContext.Provider value={contextValue}>
+      <Divider
+        orientation="horizontal"
+        style="solid"
+        thickness="thin"
+        length={100}
+        className={cn(listContext?.dividerColor || "border-border-default")}
+      />
       <div
         className={cn("transition-colors duration-200", className)}
         data-value={value}

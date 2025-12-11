@@ -229,7 +229,7 @@ function LabelExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <div className="flex flex-col gap-4">
               <Checkbox
                 checked={checked1}
@@ -273,7 +273,7 @@ function LabelExample() {
               Control checkbox size using percentage scale from 50% to 200%.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="flex flex-col gap-4">
                 <Checkbox size={80} label="Small Checkbox (80%)" />
 
@@ -307,7 +307,7 @@ function LabelExample() {
               and disabled.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="flex flex-col gap-4">
                 <Checkbox
                   checked={checked2}
@@ -356,7 +356,7 @@ function LabelExample() {
               Customize label position and content with flexible options.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="flex flex-col gap-4">
                 <Checkbox label="Right side label (default)" />
 
@@ -399,7 +399,7 @@ function LabelExample() {
               Create checkbox groups for multiple selection scenarios.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="space-y-3">
                 <h4 className="font-semibold text-text-primary mb-3">
                   Select your interests:

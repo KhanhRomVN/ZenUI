@@ -289,7 +289,7 @@ function CustomStyledTree() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <Tree
               data={basicData}
               onNodeClick={(node) => setSelectedNode(node)}
@@ -337,7 +337,7 @@ function CustomStyledTree() {
               files.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <Tree
                 data={fileSystemData}
                 defaultExpandAll={true}
@@ -368,7 +368,7 @@ function CustomStyledTree() {
               Use tree view for hierarchical navigation menus.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <Tree
                 data={settingsData}
                 defaultExpandedIds={["settings", "account"]}
@@ -427,7 +427,7 @@ function SettingsTree() {
               Apply custom className to individual nodes for custom styling.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <Tree
                 data={[
                   {

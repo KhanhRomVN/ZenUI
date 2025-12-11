@@ -6,6 +6,10 @@ export const AccordionContext = createContext<AccordionContextValue | null>(
   null
 );
 
+export const AccordionListContext = createContext<{
+  dividerColor?: string;
+} | null>(null);
+
 const Accordion: React.FC<AccordionProps> = ({
   children,
   type = "single",

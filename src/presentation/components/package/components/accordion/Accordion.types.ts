@@ -9,6 +9,7 @@ export interface AccordionContextValue {
   toggleItem: (value: string) => void;
   isOpen: (value: string) => boolean;
   currentValue?: string | null;
+  dividerColor?: string;
 }
 
 export interface AccordionProps {
@@ -31,6 +32,9 @@ export interface AccordionProps {
 export interface AccordionListProps {
   /** Children components */
   children: ReactNode;
+
+  /** Custom className for divider border color */
+  dividerColor?: string;
 
   /** Custom className */
   className?: string;

@@ -162,7 +162,7 @@ function SizeExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-4">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 space-y-4">
             <Input
               placeholder="Basic input"
               value={emailValue}
@@ -202,7 +202,7 @@ function SizeExample() {
               selecting from large lists of options.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 space-y-4">
               <Input
                 type="combobox"
                 placeholder="Search countries..."
@@ -266,7 +266,7 @@ function SizeExample() {
               time-only, and datetime modes.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 space-y-4">
               {/* DateTime Picker */}
               <Input
                 type="calendar"
@@ -305,7 +305,7 @@ function SizeExample() {
               in real-time.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 space-y-4">
               <Input
                 type="password"
                 placeholder="Enter your password"
@@ -389,7 +389,7 @@ function SizeExample() {
               Enter to add tags.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6 space-y-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 space-y-6">
               <div>
                 <label className="block text-sm font-medium text-text-primary mb-2">
                   Tags with Inline Panel

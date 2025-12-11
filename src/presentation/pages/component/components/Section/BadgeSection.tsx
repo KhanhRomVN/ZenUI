@@ -146,7 +146,7 @@ function SizeExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6 flex gap-4 items-center flex-wrap">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 flex gap-4 items-center flex-wrap">
             <Badge variant="default">Default</Badge>
             <Badge variant="primary">Primary</Badge>
             <Badge variant="secondary">Secondary</Badge>
@@ -187,7 +187,7 @@ function SizeExample() {
               Add dot indicators to badges for status visualization.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center flex-wrap">
               <Badge variant="default" dot>
                 Default
               </Badge>
@@ -227,7 +227,7 @@ function SizeExample() {
               Control badge size using percentage scale from 50% to 200%.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-4 items-center flex-wrap">
               <Badge size={80} variant="primary">
                 Small (80%)
               </Badge>
@@ -264,7 +264,7 @@ function SizeExample() {
               from keyboard.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex flex-col gap-6">
               {/* Single Keys */}
               <div className="flex gap-3 items-center flex-wrap">
                 <Badge variant="kbd">Ctrl</Badge>
@@ -397,7 +397,7 @@ function KbdExample() {
               Common use cases for badges in applications.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex flex-col gap-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex flex-col gap-6">
               {/* Notification Badges */}
               <div className="flex gap-6 items-center flex-wrap">
                 <div className="flex items-center gap-2">

@@ -258,7 +258,7 @@ function InteractiveExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6 flex gap-6 items-center justify-center flex-wrap">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 flex gap-6 items-center justify-center flex-wrap">
             <Avatar
               src="src/presentation/components/package/components/avatar/avatar.jpeg"
               size={40}
@@ -303,7 +303,7 @@ function InteractiveExample() {
               Control avatar size from 16px to 200px with consistent scaling.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
               <Avatar name="Small" size={24} />
               <Avatar name="Default" size={32} />
               <Avatar name="Medium" size={48} />
@@ -332,7 +332,7 @@ function InteractiveExample() {
               Add custom icons to avatar with customizable background colors.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
               <Avatar
                 name="Online User"
                 dotIcon={<Check size={8} color="#fff" />}
@@ -377,7 +377,7 @@ function InteractiveExample() {
               Choose from circle, square, or rounded shapes.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
               <Avatar name="Circle" shape="circle" />
               <Avatar name="Square" shape="square" />
               <Avatar name="Rounded" shape="rounded" />
@@ -404,7 +404,7 @@ function InteractiveExample() {
               Graceful fallbacks when images fail to load or aren't provided.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
               {/* Icon Fallback */}
               <Avatar fallbackType="icon" />
 
@@ -443,7 +443,7 @@ function InteractiveExample() {
               initials.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
               <Avatar icon={<Mail size={20} color="#fff" />} size={40} />
               <Avatar
                 icon={<Phone size={24} color="#fff" />}
@@ -476,7 +476,7 @@ function InteractiveExample() {
               Make avatars clickable with hover effects and click handlers.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex gap-6 items-center justify-center flex-wrap">
               <Avatar
                 name="Click Me"
                 size={64}
@@ -513,7 +513,7 @@ function InteractiveExample() {
               Display multiple avatars together with automatic stacking.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="flex -space-x-3 mb-6">
                 <Avatar name="User 1" size={40} />
                 <Avatar name="User 2" size={40} />

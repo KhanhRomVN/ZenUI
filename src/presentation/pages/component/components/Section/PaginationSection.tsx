@@ -251,7 +251,7 @@ function SliderExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <Pagination
               totalItems={100}
               itemsPerPage={10}
@@ -294,7 +294,7 @@ function SliderExample() {
             <p className="text-sm text-text-secondary mb-6">
               Kiểu cổ điển với border, mỗi số là một button riêng biệt
             </p>
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 overflow-x-auto">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 overflow-x-auto">
               <div className="flex justify-center">
                 <Pagination
                   totalItems={100}
@@ -325,7 +325,7 @@ function SliderExample() {
             <p className="text-sm text-text-secondary mb-6">
               Thiết kế tối giản với dots, trang active mở rộng thành circle lớn
             </p>
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="flex justify-center">
                 <Pagination
                   totalItems={100}
@@ -356,7 +356,7 @@ function SliderExample() {
             <p className="text-sm text-text-secondary mb-6">
               Các button được nhóm trong một container hình viên thuốc
             </p>
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 overflow-x-auto">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 overflow-x-auto">
               <div className="flex justify-center">
                 <Pagination
                   totalItems={100}
@@ -387,7 +387,7 @@ function SliderExample() {
             <p className="text-sm text-text-secondary mb-6">
               Dạng thẻ với shadow, mỗi số như một card nhỏ
             </p>
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 overflow-x-auto">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 overflow-x-auto">
               <div className="flex justify-center">
                 <Pagination
                   totalItems={100}
@@ -419,7 +419,7 @@ function SliderExample() {
               Hiển thị rút gọn với dấu "..." khi có nhiều trang, tất cả trong
               một border container
             </p>
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="flex justify-center">
                 <Pagination
                   totalItems={100}
@@ -450,7 +450,7 @@ function SliderExample() {
             <p className="text-sm text-text-secondary mb-6">
               Sử dụng dropdown select để chọn trang, kết hợp với nút Trước/Sau
             </p>
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="flex justify-center">
                 <Pagination
                   totalItems={100}
@@ -481,7 +481,7 @@ function SliderExample() {
             <p className="text-sm text-text-secondary mb-6">
               Dạng thanh tiến trình hiển thị vị trí hiện tại
             </p>
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="flex justify-center">
                 <Pagination
                   totalItems={100}
@@ -512,7 +512,7 @@ function SliderExample() {
             <p className="text-sm text-text-secondary mb-6">
               Sử dụng range slider để di chuyển giữa các trang
             </p>
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4">
               <div className="flex justify-center">
                 <Pagination
                   totalItems={100}

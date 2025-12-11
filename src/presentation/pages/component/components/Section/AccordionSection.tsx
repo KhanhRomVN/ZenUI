@@ -165,9 +165,12 @@ function MyComponent() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <Accordion type="single" collapsible>
-              <AccordionList className="bg-card-background border border-border-default rounded-lg">
+              <AccordionList
+                className="bg-card-background border border-border-default rounded-lg"
+                dividerColor="border-divider"
+              >
                 <AccordionItem value="item-1">
                   <AccordionTrigger>Getting Started</AccordionTrigger>
                   <AccordionContent>
@@ -231,129 +234,20 @@ function MyComponent() {
             Advanced Examples
           </h2>
 
-          {/* Example 1: Accordion với Button Components */}
+          {/* Combined Accordion Example */}
           <div className="mb-10">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
-              1. Accordion với Button Components
+              Advanced Accordion with Form & Badges
             </h3>
             <p className="text-text-secondary mb-4">
-              Sử dụng các Button components bên trong Accordion để tạo hành động
-              tương tác.
+              Tích hợp form settings và badge components trong một Accordion duy
+              nhất.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
-              <Accordion type="single" collapsible>
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
+              <Accordion type="multiple">
                 <AccordionList className="bg-card-background border border-border-default rounded-lg">
-                  <AccordionItem value="buttons-1">
-                    <AccordionTrigger className="hover:bg-dropdown-itemHover text-text-primary font-semibold">
-                      <div className="flex items-center gap-3">
-                        <Zap size={18} className="text-yellow-500" />
-                        Action Buttons
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="space-y-4 p-4">
-                        <div className="flex flex-wrap gap-3">
-                          <Button
-                            size={100}
-                            icon={<Play size={16} />}
-                            className="bg-green-600 hover:bg-green-700 text-white border border-green-700"
-                          >
-                            Start Process
-                          </Button>
-                          <Button
-                            size={100}
-                            icon={<Pause size={16} />}
-                            className="bg-yellow-600 hover:bg-yellow-700 text-white border border-yellow-700"
-                          >
-                            Pause
-                          </Button>
-                          <Button
-                            size={100}
-                            icon={<StopCircle size={16} />}
-                            className="bg-red-600 hover:bg-red-700 text-white border border-red-700"
-                          >
-                            Stop
-                          </Button>
-                          <Button
-                            size={100}
-                            icon={<RefreshCw size={16} />}
-                            className="bg-blue-600 hover:bg-blue-700 text-white border border-blue-700"
-                          >
-                            Restart
-                          </Button>
-                        </div>
-
-                        <div className="flex flex-wrap gap-3">
-                          <Button
-                            size={80}
-                            icon={<Download size={16} />}
-                            className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
-                          >
-                            Download
-                          </Button>
-                          <Button
-                            size={80}
-                            icon={<Upload size={16} />}
-                            className="bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border"
-                          >
-                            Upload
-                          </Button>
-                          <Button
-                            size={80}
-                            icon={<Edit size={16} />}
-                            className="bg-purple-600 hover:bg-purple-700 text-white border border-purple-700"
-                          >
-                            Edit
-                          </Button>
-                          <Button
-                            size={80}
-                            icon={<Trash2 size={16} />}
-                            className="bg-red-600 hover:bg-red-700 text-white border border-red-700"
-                          >
-                            Delete
-                          </Button>
-                        </div>
-
-                        <div className="flex flex-wrap gap-3">
-                          <Button
-                            size={120}
-                            width="fit"
-                            icon={<Rocket size={16} />}
-                            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0"
-                          >
-                            Launch Project
-                          </Button>
-                          <Button
-                            size={120}
-                            width="fit"
-                            icon={<Sparkles size={16} />}
-                            className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white border-0"
-                          >
-                            Upgrade Plan
-                          </Button>
-                        </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </AccordionList>
-              </Accordion>
-            </div>
-          </div>
-
-          {/* Example 2: Accordion với Input Components */}
-          <div className="mb-10">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              2. Accordion với Input Components
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Tích hợp các Input components để tạo form bên trong Accordion.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
-              <Accordion type="single" collapsible>
-                <AccordionList className="bg-card-background border border-border-default rounded-lg">
-                  <AccordionItem value="inputs-1">
+                  <AccordionItem value="form-settings">
                     <AccordionTrigger className="hover:bg-dropdown-itemHover text-text-primary font-semibold">
                       <div className="flex items-center gap-3">
                         <Settings size={18} className="text-primary" />
@@ -361,104 +255,58 @@ function MyComponent() {
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <div className="space-y-6 p-4">
-                        <div>
-                          <label className="block text-sm font-medium text-text-primary mb-2">
-                            Search Input
-                          </label>
-                          <Input
-                            leftIcon={<Search size={16} />}
-                            placeholder="Search settings..."
-                            value={searchValue}
-                            onChange={(e) => setSearchValue(e.target.value)}
-                            rightIcon={[
-                              searchValue && (
-                                <X
-                                  size={16}
-                                  onClick={() => setSearchValue("")}
-                                />
-                              ),
-                            ].filter(Boolean)}
-                            className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
-                          />
+                      <div className="p-4">
+                        <div className="space-y-4">
+                          <div>
+                            <label className="block text-sm font-medium text-text-primary mb-1">
+                              Email
+                            </label>
+                            <input
+                              type="email"
+                              placeholder="Enter your email"
+                              value={emailValue}
+                              onChange={(e) => setEmailValue(e.target.value)}
+                              className="w-full px-3 py-2 border border-border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-button-bg bg-input-background text-text-primary"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-text-primary mb-1">
+                              Password
+                            </label>
+                            <input
+                              type="password"
+                              placeholder="Enter your password"
+                              value={passwordValue}
+                              onChange={(e) => setPasswordValue(e.target.value)}
+                              className="w-full px-3 py-2 border border-border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-button-bg bg-input-background text-text-primary"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-text-primary mb-1">
+                              Search
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="Search settings..."
+                              value={searchValue}
+                              onChange={(e) => setSearchValue(e.target.value)}
+                              className="w-full px-3 py-2 border border-border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-button-bg bg-input-background text-text-primary"
+                            />
+                          </div>
                         </div>
-
-                        <div>
-                          <label className="block text-sm font-medium text-text-primary mb-2">
-                            Email Input
-                          </label>
-                          <Input
-                            leftIcon={<Mail size={16} />}
-                            placeholder="Enter your email"
-                            value={emailValue}
-                            onChange={(e) => setEmailValue(e.target.value)}
-                            className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-medium text-text-primary mb-2">
-                            Password Input
-                          </label>
-                          <Input
-                            leftIcon={<Lock size={16} />}
-                            placeholder="Enter your password"
-                            type="password"
-                            value={passwordValue}
-                            onChange={(e) => setPasswordValue(e.target.value)}
-                            className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-medium text-text-primary mb-2">
-                            Calendar Input
-                          </label>
-                          <Input
-                            leftIcon={<Calendar size={16} />}
-                            placeholder="Select date"
-                            type="calendar"
-                            className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
-                          />
-                        </div>
-
-                        <div className="flex gap-3">
-                          <Button
-                            size={100}
-                            width="full"
-                            className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
-                          >
+                        <div className="flex gap-3 mt-6">
+                          <button className="px-4 py-2 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors w-full">
                             Save Changes
-                          </Button>
-                          <Button
-                            size={100}
-                            width="full"
-                            className="bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border"
-                          >
+                          </button>
+                          <button className="px-4 py-2 bg-button-secondBg hover:bg-button-secondBgHover text-text-primary rounded-lg transition-colors w-full">
                             Cancel
-                          </Button>
+                          </button>
                         </div>
                       </div>
                     </AccordionContent>
                   </AccordionItem>
-                </AccordionList>
-              </Accordion>
-            </div>
-          </div>
 
-          {/* Example 3: Accordion với Badge Components */}
-          <div className="mb-10">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              3. Accordion với Badge Components
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Sử dụng Badge components để hiển thị trạng thái và phân loại.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
-              <Accordion type="multiple">
-                <AccordionList className="bg-card-background border border-border-default rounded-lg">
-                  <AccordionItem value="badges-1">
+                  <AccordionItem value="badge-variants">
                     <AccordionTrigger className="hover:bg-dropdown-itemHover text-text-primary font-semibold">
                       <div className="flex items-center justify-between w-full">
                         <div className="flex items-center gap-3">
@@ -565,7 +413,7 @@ function MyComponent() {
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="badges-2">
+                  <AccordionItem value="filter-tags">
                     <AccordionTrigger className="hover:bg-dropdown-itemHover text-text-primary font-semibold">
                       <div className="flex items-center justify-between w-full">
                         <div className="flex items-center gap-3">
@@ -573,7 +421,7 @@ function MyComponent() {
                           Filter Tags
                         </div>
                         <Badge variant="outline" size={90}>
-                          5 tags
+                          8 tags
                         </Badge>
                       </div>
                     </AccordionTrigger>
@@ -639,693 +487,10 @@ function MyComponent() {
                             AWS
                           </Badge>
                         </div>
-                        <Button
-                          size={80}
-                          icon={<X size={14} />}
-                          className="bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border"
-                        >
+                        <button className="px-4 py-2 bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border rounded-lg transition-colors text-sm flex items-center gap-2">
+                          <X size={14} />
                           Clear All Filters
-                        </Button>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </AccordionList>
-              </Accordion>
-            </div>
-          </div>
-
-          {/* Example 4: Accordion với Tab Components */}
-          <div className="mb-10">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              4. Accordion với Tab Components
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Tích hợp Tab components để tạo navigation bên trong Accordion.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
-              <Accordion type="single" collapsible>
-                <AccordionList className="bg-card-background border border-border-default rounded-lg">
-                  <AccordionItem value="tabs-1">
-                    <AccordionTrigger className="hover:bg-dropdown-itemHover text-text-primary font-semibold">
-                      <div className="flex items-center gap-3">
-                        <Layout size={18} />
-                        Tab Navigation
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="p-4 space-y-6">
-                        <div>
-                          <h4 className="text-sm font-medium text-text-primary mb-3">
-                            Basic Tabs
-                          </h4>
-                          <Tab defaultActive="tab1" width="full">
-                            <TabItem
-                              id="tab1"
-                              icon={<Home size={16} />}
-                              className="border-b-2 border-transparent"
-                              hoverClassName="hover:bg-gray-100 hover:border-gray-300"
-                              activeClassName="border-primary text-primary"
-                            >
-                              Home
-                            </TabItem>
-                            <TabItem
-                              id="tab2"
-                              icon={<User size={16} />}
-                              className="border-b-2 border-transparent"
-                              hoverClassName="hover:bg-gray-100 hover:border-gray-300"
-                              activeClassName="border-primary text-primary"
-                            >
-                              Profile
-                            </TabItem>
-                            <TabItem
-                              id="tab3"
-                              icon={<Settings size={16} />}
-                              className="border-b-2 border-transparent"
-                              hoverClassName="hover:bg-gray-100 hover:border-gray-300"
-                              activeClassName="border-primary text-primary"
-                            >
-                              Settings
-                            </TabItem>
-                          </Tab>
-                        </div>
-
-                        <div>
-                          <h4 className="text-sm font-medium text-text-primary mb-3">
-                            Pill Style Tabs
-                          </h4>
-                          <Tab
-                            width="full"
-                            className="bg-gray-100 dark:bg-gray-800 p-1 rounded-lg"
-                          >
-                            <TabItem
-                              id="view1"
-                              icon={<Grid size={16} />}
-                              className="rounded-md border-0"
-                              hoverClassName="hover:bg-white/50 dark:hover:bg-gray-700/50"
-                              activeClassName="bg-white dark:bg-gray-900 shadow-sm text-primary"
-                            >
-                              Grid
-                            </TabItem>
-                            <TabItem
-                              id="view2"
-                              icon={<List size={16} />}
-                              className="rounded-md border-0"
-                              hoverClassName="hover:bg-white/50 dark:hover:bg-gray-700/50"
-                              activeClassName="bg-white dark:bg-gray-900 shadow-sm text-primary"
-                            >
-                              List
-                            </TabItem>
-                            <TabItem
-                              id="view3"
-                              icon={<Calendar size={16} />}
-                              className="rounded-md border-0"
-                              hoverClassName="hover:bg-white/50 dark:hover:bg-gray-700/50"
-                              activeClassName="bg-white dark:bg-gray-900 shadow-sm text-primary"
-                            >
-                              Calendar
-                            </TabItem>
-                          </Tab>
-                        </div>
-
-                        <div>
-                          <h4 className="text-sm font-medium text-text-primary mb-3">
-                            Vertical Border Tabs
-                          </h4>
-                          <Tab width="full" className="border-l-0">
-                            <TabItem
-                              id="info1"
-                              icon={<Info size={16} />}
-                              className="border-l-4 border-transparent"
-                              hoverClassName="hover:bg-gray-100 hover:border-l-gray-300"
-                              activeClassName="border-l-primary bg-blue-50 text-primary"
-                            >
-                              Information
-                            </TabItem>
-                            <TabItem
-                              id="info2"
-                              icon={<FileText size={16} />}
-                              className="border-l-4 border-transparent"
-                              hoverClassName="hover:bg-gray-100 hover:border-l-gray-300"
-                              activeClassName="border-l-primary bg-blue-50 text-primary"
-                            >
-                              Documents
-                            </TabItem>
-                            <TabItem
-                              id="info3"
-                              icon={<History size={16} />}
-                              className="border-l-4 border-transparent"
-                              hoverClassName="hover:bg-gray-100 hover:border-l-gray-300"
-                              activeClassName="border-l-primary bg-blue-50 text-primary"
-                            >
-                              History
-                            </TabItem>
-                          </Tab>
-                        </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </AccordionList>
-              </Accordion>
-            </div>
-          </div>
-
-          {/* Example 5: Accordion phức tạp với nhiều components */}
-          <div className="mb-10">
-            <h3 className="text-lg font-semibold text-text-primary mb-3">
-              5. Dashboard Settings (Accordion phức tạp)
-            </h3>
-            <p className="text-text-secondary mb-4">
-              Một ví dụ thực tế với sự kết hợp của nhiều components.
-            </p>
-
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
-              <Accordion type="multiple" collapsible>
-                <AccordionList className="bg-card-background border border-border-default rounded-lg">
-                  {/* Profile Settings */}
-                  <AccordionItem value="dashboard-profile">
-                    <AccordionTrigger className="hover:bg-dropdown-itemHover text-text-primary font-semibold">
-                      <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                            <User size={18} className="text-primary" />
-                          </div>
-                          <div>
-                            <div className="font-semibold">
-                              Profile Settings
-                            </div>
-                            <div className="text-xs text-text-secondary">
-                              Manage your personal information
-                            </div>
-                          </div>
-                        </div>
-                        <Badge variant="success" size={80} dot>
-                          Updated
-                        </Badge>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="p-6 space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div>
-                            <label className="block text-sm font-medium text-text-primary mb-2">
-                              Full Name
-                            </label>
-                            <Input
-                              leftIcon={<User size={16} />}
-                              placeholder="John Doe"
-                              className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm font-medium text-text-primary mb-2">
-                              Email Address
-                            </label>
-                            <Input
-                              leftIcon={<Mail size={16} />}
-                              placeholder="john@example.com"
-                              className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
-                            />
-                          </div>
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-medium text-text-primary mb-2">
-                            Bio
-                          </label>
-                          <textarea
-                            className="w-full h-32 px-3 py-2 bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus rounded-md resize-none"
-                            placeholder="Tell us about yourself..."
-                          />
-                        </div>
-
-                        <div className="flex gap-3">
-                          <Button
-                            size={100}
-                            className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
-                          >
-                            Save Changes
-                          </Button>
-                          <Button
-                            size={100}
-                            className="bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border"
-                          >
-                            Cancel
-                          </Button>
-                        </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-
-                  {/* Security Settings */}
-                  <AccordionItem value="dashboard-security">
-                    <AccordionTrigger className="hover:bg-dropdown-itemHover text-text-primary font-semibold">
-                      <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-green-500/10 rounded-full flex items-center justify-center">
-                            <Shield size={18} className="text-green-500" />
-                          </div>
-                          <div>
-                            <div className="font-semibold">Security</div>
-                            <div className="text-xs text-text-secondary">
-                              Password, 2FA, and sessions
-                            </div>
-                          </div>
-                        </div>
-                        <Badge variant="warning" size={80}>
-                          2FA Off
-                        </Badge>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="p-6 space-y-6">
-                        <div>
-                          <h4 className="text-sm font-medium text-text-primary mb-4">
-                            Password
-                          </h4>
-                          <div className="space-y-4">
-                            <Input
-                              leftIcon={<Lock size={16} />}
-                              placeholder="Current password"
-                              type="password"
-                              className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
-                            />
-                            <Input
-                              leftIcon={<Key size={16} />}
-                              placeholder="New password"
-                              type="password"
-                              className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
-                            />
-                            <Input
-                              leftIcon={<Key size={16} />}
-                              placeholder="Confirm new password"
-                              type="password"
-                              className="bg-input-background border border-input-border hover:border-input-borderHover focus:border-input-borderFocus"
-                            />
-                          </div>
-                        </div>
-
-                        <div>
-                          <h4 className="text-sm font-medium text-text-primary mb-4">
-                            Two-Factor Authentication
-                          </h4>
-                          <div className="flex items-center justify-between p-4 bg-card-background border border-border-default rounded-lg">
-                            <div className="flex items-center gap-3">
-                              <Smartphone size={20} className="text-primary" />
-                              <div>
-                                <div className="font-medium text-text-primary">
-                                  Authenticator App
-                                </div>
-                                <div className="text-sm text-text-secondary">
-                                  Use an app like Google Authenticator
-                                </div>
-                              </div>
-                            </div>
-                            <Button
-                              size={80}
-                              className="bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
-                            >
-                              Enable
-                            </Button>
-                          </div>
-                        </div>
-
-                        <div>
-                          <h4 className="text-sm font-medium text-text-primary mb-4">
-                            Active Sessions
-                          </h4>
-                          <div className="space-y-3">
-                            <div className="flex items-center justify-between p-3 bg-card-background border border-border-default rounded-lg">
-                              <div className="flex items-center gap-3">
-                                <Monitor
-                                  size={16}
-                                  className="text-text-secondary"
-                                />
-                                <div>
-                                  <div className="font-medium text-text-primary">
-                                    Chrome on Windows
-                                  </div>
-                                  <div className="text-xs text-text-secondary">
-                                    Last active: 2 hours ago
-                                  </div>
-                                </div>
-                              </div>
-                              <Badge variant="success" size={70} dot>
-                                Current
-                              </Badge>
-                            </div>
-                            <div className="flex items-center justify-between p-3 bg-card-background border border-border-default rounded-lg">
-                              <div className="flex items-center gap-3">
-                                <Smartphone
-                                  size={16}
-                                  className="text-text-secondary"
-                                />
-                                <div>
-                                  <div className="font-medium text-text-primary">
-                                    Safari on iPhone
-                                  </div>
-                                  <div className="text-xs text-text-secondary">
-                                    Last active: 3 days ago
-                                  </div>
-                                </div>
-                              </div>
-                              <Button
-                                size={70}
-                                icon={<LogOut size={14} />}
-                                className="bg-red-100 hover:bg-red-200 text-red-700 border border-red-300"
-                              >
-                                Revoke
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-
-                  {/* Notification Settings */}
-                  <AccordionItem value="dashboard-notifications">
-                    <AccordionTrigger className="hover:bg-dropdown-itemHover text-text-primary font-semibold">
-                      <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-purple-500/10 rounded-full flex items-center justify-center">
-                            <Bell size={18} className="text-purple-500" />
-                          </div>
-                          <div>
-                            <div className="font-semibold">Notifications</div>
-                            <div className="text-xs text-text-secondary">
-                              Email, push, and SMS alerts
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Badge variant="primary" size={70}>
-                            3 New
-                          </Badge>
-                        </div>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="p-6">
-                        <Tab
-                          defaultActive="email"
-                          width="full"
-                          className="mb-6"
-                        >
-                          <TabItem
-                            id="email"
-                            icon={<Mail size={16} />}
-                            className="border-b-2 border-transparent"
-                            hoverClassName="hover:bg-gray-100 hover:border-gray-300"
-                            activeClassName="border-primary text-primary"
-                          >
-                            Email
-                          </TabItem>
-                          <TabItem
-                            id="push"
-                            icon={<Bell size={16} />}
-                            className="border-b-2 border-transparent"
-                            hoverClassName="hover:bg-gray-100 hover:border-gray-300"
-                            activeClassName="border-primary text-primary"
-                          >
-                            Push
-                          </TabItem>
-                          <TabItem
-                            id="sms"
-                            icon={<MessageSquare size={16} />}
-                            className="border-b-2 border-transparent"
-                            hoverClassName="hover:bg-gray-100 hover:border-gray-300"
-                            activeClassName="border-primary text-primary"
-                          >
-                            SMS
-                          </TabItem>
-                        </Tab>
-
-                        <div className="space-y-4">
-                          <div className="flex items-center justify-between p-3 bg-card-background border border-border-default rounded-lg">
-                            <div>
-                              <div className="font-medium text-text-primary">
-                                New Messages
-                              </div>
-                              <div className="text-sm text-text-secondary">
-                                Get notified when you receive new messages
-                              </div>
-                            </div>
-                            <div className="w-12 h-6 bg-primary rounded-full relative cursor-pointer">
-                              <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center justify-between p-3 bg-card-background border border-border-default rounded-lg">
-                            <div>
-                              <div className="font-medium text-text-primary">
-                                Mention Notifications
-                              </div>
-                              <div className="text-sm text-text-secondary">
-                                Get notified when someone mentions you
-                              </div>
-                            </div>
-                            <div className="w-12 h-6 bg-primary rounded-full relative cursor-pointer">
-                              <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center justify-between p-3 bg-card-background border border-border-default rounded-lg">
-                            <div>
-                              <div className="font-medium text-text-primary">
-                                System Updates
-                              </div>
-                              <div className="text-sm text-text-secondary">
-                                Important updates about the system
-                              </div>
-                            </div>
-                            <div className="w-12 h-6 bg-gray-300 rounded-full relative cursor-pointer">
-                              <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></div>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center justify-between p-3 bg-card-background border border-border-default rounded-lg">
-                            <div>
-                              <div className="font-medium text-text-primary">
-                                Marketing Emails
-                              </div>
-                              <div className="text-sm text-text-secondary">
-                                Receive emails about new features and offers
-                              </div>
-                            </div>
-                            <div className="w-12 h-6 bg-gray-300 rounded-full relative cursor-pointer">
-                              <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="mt-6 pt-6 border-t border-border-default">
-                          <div className="flex justify-between items-center">
-                            <div>
-                              <div className="font-medium text-text-primary">
-                                Notification Sound
-                              </div>
-                              <div className="text-sm text-text-secondary">
-                                Choose a sound for notifications
-                              </div>
-                            </div>
-                            <div className="flex items-center gap-3">
-                              <Button
-                                size={70}
-                                icon={<Volume2 size={14} />}
-                                className="bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border"
-                              >
-                                Test
-                              </Button>
-                              <select className="px-3 py-1.5 bg-input-background border border-border-default rounded-md text-text-primary text-sm">
-                                <option>Default</option>
-                                <option>Chime</option>
-                                <option>Bell</option>
-                                <option>Alert</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-
-                  {/* Billing Settings */}
-                  <AccordionItem value="dashboard-billing">
-                    <AccordionTrigger className="hover:bg-dropdown-itemHover text-text-primary font-semibold">
-                      <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-blue-500/10 rounded-full flex items-center justify-center">
-                            <CreditCard size={18} className="text-blue-500" />
-                          </div>
-                          <div>
-                            <div className="font-semibold">Billing</div>
-                            <div className="text-xs text-text-secondary">
-                              Plans, payment methods, and invoices
-                            </div>
-                          </div>
-                        </div>
-                        <Badge variant="primary" size={80}>
-                          Pro Plan
-                        </Badge>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="p-6 space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <div className="p-4 bg-card-background border border-border-default rounded-lg">
-                            <div className="text-sm text-text-secondary mb-1">
-                              Current Plan
-                            </div>
-                            <div className="text-xl font-bold text-text-primary mb-2">
-                              Pro
-                            </div>
-                            <div className="text-sm text-text-secondary">
-                              $29/month
-                            </div>
-                          </div>
-                          <div className="p-4 bg-card-background border border-border-default rounded-lg">
-                            <div className="text-sm text-text-secondary mb-1">
-                              Next Billing
-                            </div>
-                            <div className="text-xl font-bold text-text-primary mb-2">
-                              Dec 15, 2024
-                            </div>
-                            <div className="text-sm text-text-secondary">
-                              Auto-renewal
-                            </div>
-                          </div>
-                          <div className="p-4 bg-card-background border border-border-default rounded-lg">
-                            <div className="text-sm text-text-secondary mb-1">
-                              Storage Used
-                            </div>
-                            <div className="text-xl font-bold text-text-primary mb-2">
-                              45.2 GB
-                            </div>
-                            <div className="text-sm text-text-secondary">
-                              of 100 GB
-                            </div>
-                          </div>
-                        </div>
-
-                        <div>
-                          <h4 className="text-sm font-medium text-text-primary mb-4">
-                            Payment Methods
-                          </h4>
-                          <div className="space-y-3">
-                            <div className="flex items-center justify-between p-3 bg-card-background border border-border-default rounded-lg">
-                              <div className="flex items-center gap-3">
-                                <div className="w-10 h-6 bg-blue-500 rounded flex items-center justify-center">
-                                  <span className="text-white text-xs font-bold">
-                                    VISA
-                                  </span>
-                                </div>
-                                <div>
-                                  <div className="font-medium text-text-primary">
-                                    •••• 4242
-                                  </div>
-                                  <div className="text-xs text-text-secondary">
-                                    Expires 12/25
-                                  </div>
-                                </div>
-                              </div>
-                              <Badge variant="success" size={70} dot>
-                                Default
-                              </Badge>
-                            </div>
-                            <div className="flex items-center justify-between p-3 bg-card-background border border-border-default rounded-lg">
-                              <div className="flex items-center gap-3">
-                                <div className="w-10 h-6 bg-red-500 rounded flex items-center justify-center">
-                                  <span className="text-white text-xs font-bold">
-                                    MC
-                                  </span>
-                                </div>
-                                <div>
-                                  <div className="font-medium text-text-primary">
-                                    •••• 5555
-                                  </div>
-                                  <div className="text-xs text-text-secondary">
-                                    Expires 10/24
-                                  </div>
-                                </div>
-                              </div>
-                              <Button
-                                size={70}
-                                className="bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border"
-                              >
-                                Make Default
-                              </Button>
-                            </div>
-                          </div>
-                          <Button
-                            size={80}
-                            icon={<Plus size={14} />}
-                            className="mt-3 bg-button-bg hover:bg-button-bgHover text-button-bgText border border-button-border"
-                          >
-                            Add Payment Method
-                          </Button>
-                        </div>
-
-                        <div>
-                          <h4 className="text-sm font-medium text-text-primary mb-4">
-                            Recent Invoices
-                          </h4>
-                          <div className="space-y-2">
-                            {[
-                              {
-                                id: "INV-001",
-                                date: "Nov 15, 2024",
-                                amount: "$29.00",
-                                status: "Paid",
-                              },
-                              {
-                                id: "INV-002",
-                                date: "Oct 15, 2024",
-                                amount: "$29.00",
-                                status: "Paid",
-                              },
-                              {
-                                id: "INV-003",
-                                date: "Sep 15, 2024",
-                                amount: "$29.00",
-                                status: "Paid",
-                              },
-                            ].map((invoice) => (
-                              <div
-                                key={invoice.id}
-                                className="flex items-center justify-between p-3 bg-card-background border border-border-default rounded-lg"
-                              >
-                                <div>
-                                  <div className="font-medium text-text-primary">
-                                    {invoice.id}
-                                  </div>
-                                  <div className="text-sm text-text-secondary">
-                                    {invoice.date}
-                                  </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                  <div className="text-text-primary font-medium">
-                                    {invoice.amount}
-                                  </div>
-                                  <Badge
-                                    variant="success"
-                                    size={70}
-                                    className="capitalize"
-                                  >
-                                    {invoice.status}
-                                  </Badge>
-                                  <Button
-                                    size={60}
-                                    icon={<Download size={12} />}
-                                    className="bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border"
-                                  >
-                                    Download
-                                  </Button>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                        </button>
                       </div>
                     </AccordionContent>
                   </AccordionItem>

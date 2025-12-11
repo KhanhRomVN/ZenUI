@@ -1,4 +1,8 @@
-export { default as Accordion, AccordionContext } from "./Accordion";
+export {
+  default as Accordion,
+  AccordionContext,
+  AccordionListContext,
+} from "./Accordion";
 export { default as AccordionList } from "./AccordionList";
 export { default as AccordionItem } from "./AccordionItem";
 export { default as AccordionTrigger } from "./AccordionTrigger";

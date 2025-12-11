@@ -230,7 +230,7 @@ function SettingsDrawerExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-lg p-8 mb-6 flex items-center justify-center">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6 flex items-center justify-center">
             <button
               onClick={() => setIsBasicOpen(true)}
               className="px-6 py-3 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors font-medium"
@@ -313,7 +313,7 @@ function SettingsDrawerExample() {
               components.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex items-center justify-center">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex items-center justify-center">
               <button
                 onClick={() => setIsCardOpen(true)}
                 className="px-6 py-3 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors font-medium flex items-center gap-2"
@@ -504,7 +504,7 @@ function SettingsDrawerExample() {
               Drawers can slide from any edge: left, right, top, or bottom.
             </p>
 
-            <div className="bg-card-background border border-border-default rounded-lg p-8 mb-4 flex items-center justify-center gap-4">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-4 flex items-center justify-center gap-4">
               <button
                 onClick={() => setIsLeftOpen(true)}
                 className="px-6 py-3 bg-button-bg hover:bg-button-bgHover text-button-bgText rounded-lg transition-colors font-medium"

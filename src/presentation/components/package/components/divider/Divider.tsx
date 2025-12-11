@@ -15,6 +15,7 @@ const Divider: React.FC<DividerProps> = ({
   thickness = "medium",
   align = "center",
   length = 100,
+  color = "border-gray-700",
   className = "",
   ...props
 }) => {
@@ -31,7 +32,7 @@ const Divider: React.FC<DividerProps> = ({
         thicknessClass,
         styleClass,
         alignClass,
-        "border-gray-700",
+        color,
         className
       )}
       style={lengthStyle}

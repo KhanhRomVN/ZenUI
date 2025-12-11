@@ -145,7 +145,7 @@ function CustomStylesExample() {
           </p>
 
           {/* Live Demo */}
-          <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+          <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
             <Tab
               defaultActive="home"
               width="full"
@@ -229,7 +229,7 @@ function CustomStylesExample() {
             </p>
 
             {/* Live Demo */}
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <div className="mb-4 text-text-secondary text-sm">
                 Active Tab:{" "}
                 <span className="font-semibold text-primary">
@@ -298,7 +298,7 @@ function CustomStylesExample() {
             </p>
 
             {/* Live Demo */}
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <Tab
                 width="full"
                 className="bg-gray-100 dark:bg-gray-800 p-1 rounded-lg"
@@ -367,7 +367,7 @@ function CustomStylesExample() {
             </p>
 
             {/* Live Demo */}
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <Tab width="full" className="border-l-0">
                 <TabItem
                   id="home"
@@ -459,7 +459,7 @@ function VerticalBorderExample() {
             </p>
 
             {/* Live Demo */}
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <Tab width="full" className="gap-2">
                 <TabItem
                   id="home"
@@ -568,7 +568,7 @@ function MinimalStyleExample() {
               <p className="text-sm text-text-secondary mb-2">
                 Left Aligned (default)
               </p>
-              <div className="bg-card-background border border-border-default rounded-md p-8">
+              <div className="border-2 border-dashed border-border-default rounded-lg p-8">
                 <Tab
                   width="full"
                   align="left"
@@ -597,7 +597,7 @@ function MinimalStyleExample() {
             {/* Center Align Demo */}
             <div className="mb-6">
               <p className="text-sm text-text-secondary mb-2">Center Aligned</p>
-              <div className="bg-card-background border border-border-default rounded-md p-8">
+              <div className="border-2 border-dashed border-border-default rounded-lg p-8">
                 <Tab
                   width="full"
                   align="center"
@@ -626,7 +626,7 @@ function MinimalStyleExample() {
             {/* Right Align Demo */}
             <div className="mb-6">
               <p className="text-sm text-text-secondary mb-2">Right Aligned</p>
-              <div className="bg-card-background border border-border-default rounded-md p-8">
+              <div className="border-2 border-dashed border-border-default rounded-lg p-8">
                 <Tab
                   width="full"
                   align="right"
@@ -655,7 +655,7 @@ function MinimalStyleExample() {
             {/* Space Between Demo */}
             <div className="mb-6">
               <p className="text-sm text-text-secondary mb-2">Space Between</p>
-              <div className="bg-card-background border border-border-default rounded-md p-8">
+              <div className="border-2 border-dashed border-border-default rounded-lg p-8">
                 <Tab
                   width="full"
                   align="space-between"
@@ -740,7 +740,7 @@ function AlignmentExamples() {
             </p>
 
             {/* Live Demo */}
-            <div className="bg-card-background border border-border-default rounded-md p-8 mb-6">
+            <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
               <Tab
                 width="full"
                 className="bg-tab-background border-b border-tab-border mb-4"

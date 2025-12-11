@@ -12,8 +12,19 @@ const TabSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "controlled", label: "Controlled" },
+        { id: "pill", label: "Pill Style" },
+        { id: "vertical", label: "Vertical Border" },
+        { id: "minimal", label: "Minimal Style" },
+        { id: "alignment", label: "Alignment" },
+        { id: "icon", label: "Icon Position" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -136,7 +147,7 @@ function CustomStylesExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -212,7 +223,7 @@ function CustomStylesExample() {
           </h2>
 
           {/* Controlled Tab Example */}
-          <div className="mb-10">
+          <div id="controlled" className="mb-10">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Controlled Tab
             </h3>
@@ -288,7 +299,7 @@ function CustomStylesExample() {
           </div>
 
           {/* Pill Style Example */}
-          <div className="mb-10">
+          <div id="pill" className="mb-10">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Pill Style Tabs
             </h3>
@@ -358,7 +369,7 @@ function CustomStylesExample() {
           </div>
 
           {/* Vertical Border Style Example */}
-          <div className="mb-10">
+          <div id="vertical" className="mb-10">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Vertical Border Style
             </h3>
@@ -450,7 +461,7 @@ function VerticalBorderExample() {
           </div>
 
           {/* Minimal Style Example */}
-          <div className="mb-10">
+          <div id="minimal" className="mb-10">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Minimal Style Tabs
             </h3>
@@ -551,7 +562,7 @@ function MinimalStyleExample() {
           </div>
 
           {/* Alignment Examples */}
-          <div className="mb-10">
+          <div id="alignment" className="mb-10">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Tab Alignment
             </h3>
@@ -727,7 +738,7 @@ function AlignmentExamples() {
           </div>
 
           {/* Icon Position Example */}
-          <div className="mb-10">
+          <div id="icon" className="mb-10">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Icon Position
             </h3>

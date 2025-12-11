@@ -45,8 +45,16 @@ const DrawerSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "card", label: "With Cards" },
+        { id: "direction", label: "Directions" },
+        { id: "custom", label: "Custom Styling" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -221,7 +229,7 @@ function SettingsDrawerExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -304,7 +312,7 @@ function SettingsDrawerExample() {
           </h2>
 
           {/* Example 1: With Card Components */}
-          <div className="mb-8">
+          <div id="card" className="mb-8">
             <h3 className="text-xl font-semibold text-text-primary mb-3">
               Using Card Components
             </h3>
@@ -496,7 +504,7 @@ function SettingsDrawerExample() {
           </div>
 
           {/* Example 2: Different Directions */}
-          <div className="mb-8">
+          <div id="direction" className="mb-8">
             <h3 className="text-xl font-semibold text-text-primary mb-3">
               Different Directions
             </h3>
@@ -567,7 +575,7 @@ function SettingsDrawerExample() {
           </div>
 
           {/* Example 3: Custom Styling */}
-          <div className="mb-8">
+          <div id="custom" className="mb-8">
             <h3 className="text-xl font-semibold text-text-primary mb-3">
               Custom Styling
             </h3>

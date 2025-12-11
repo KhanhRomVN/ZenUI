@@ -9,7 +9,6 @@ const Card: React.FC<CardProps> = ({
   cardAlign,
   children,
   className = "",
-  style = {},
   onClick,
   ...props
 }) => {
@@ -23,17 +22,9 @@ const Card: React.FC<CardProps> = ({
     }
   };
 
-  const baseStyles = {
-    ...cardAlignmentStyles,
-    ...(width && { width: `${width}%` }),
-    borderRadius: sizeConfig.borderRadius,
-    ...style,
-  };
-
   return (
     <div
-      className={cn(className)}
-      style={baseStyles}
+      className={cn("border rounded-md", className)}
       onClick={handleClick}
       {...props}
     >

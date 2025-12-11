@@ -21,8 +21,17 @@ const DndZoneSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "image", label: "Image Upload" },
+        { id: "single", label: "Single File" },
+        { id: "custom", label: "Custom Config" },
+        { id: "disabled", label: "Disabled State" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -147,7 +156,7 @@ function CustomConfigExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -187,7 +196,7 @@ function CustomConfigExample() {
           </h2>
 
           {/* Image Only */}
-          <div className="mb-8">
+          <div id="image" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Image Upload Only
             </h3>
@@ -219,7 +228,7 @@ function CustomConfigExample() {
           </div>
 
           {/* Single File */}
-          <div className="mb-8">
+          <div id="single" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Single File Upload
             </h3>
@@ -249,7 +258,7 @@ function CustomConfigExample() {
           </div>
 
           {/* Custom Configuration */}
-          <div className="mb-8">
+          <div id="custom" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Custom Configuration
             </h3>
@@ -282,7 +291,7 @@ function CustomConfigExample() {
           </div>
 
           {/* Disabled State */}
-          <div className="mb-8">
+          <div id="disabled" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Disabled State
             </h3>

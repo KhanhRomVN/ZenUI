@@ -65,8 +65,14 @@ const AccordionSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "advanced", label: "Advanced Form" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -84,7 +90,10 @@ const AccordionSection = () => {
 function MyComponent() {
   return (
     <Accordion type="single" collapsible>
-      <AccordionList className="bg-card-background border border-border-default rounded-lg">
+      <AccordionList 
+        className="bg-card-background border border-border-default rounded-lg"
+        dividerColor="border-divider"
+      >
         <AccordionItem value="item-1">
           <AccordionTrigger>
             Getting Started
@@ -155,7 +164,7 @@ function MyComponent() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -229,7 +238,7 @@ function MyComponent() {
         </section>
 
         {/* EXAMPLES SECTION */}
-        <section id="examples" className="mb-12">
+        <section id="advanced" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Advanced Examples
           </h2>
@@ -302,195 +311,6 @@ function MyComponent() {
                             Cancel
                           </button>
                         </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-
-                  <AccordionItem value="badge-variants">
-                    <AccordionTrigger className="hover:bg-dropdown-itemHover text-text-primary font-semibold">
-                      <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-3">
-                          <Tag size={18} />
-                          Badge Variants
-                        </div>
-                        <div className="flex gap-2">
-                          <Badge variant="primary" size={90}>
-                            New
-                          </Badge>
-                          <Badge variant="success" size={90} dot>
-                            Active
-                          </Badge>
-                        </div>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="p-4 space-y-4">
-                        <div>
-                          <h4 className="text-sm font-medium text-text-primary mb-2">
-                            Badge Display
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            <Badge variant="default" size={100}>
-                              Default
-                            </Badge>
-                            <Badge variant="primary" size={100} dot>
-                              Primary
-                            </Badge>
-                            <Badge variant="secondary" size={100}>
-                              Secondary
-                            </Badge>
-                            <Badge variant="success" size={100} dot>
-                              Success
-                            </Badge>
-                            <Badge variant="warning" size={100}>
-                              Warning
-                            </Badge>
-                            <Badge variant="error" size={100} dot>
-                              Error
-                            </Badge>
-                            <Badge variant="outline" size={100}>
-                              Outline
-                            </Badge>
-                          </div>
-                        </div>
-
-                        <div>
-                          <h4 className="text-sm font-medium text-text-primary mb-2">
-                            Badge Sizes
-                          </h4>
-                          <div className="flex flex-wrap items-center gap-3">
-                            <Badge variant="primary" size={70}>
-                              Small (70%)
-                            </Badge>
-                            <Badge variant="primary" size={100}>
-                              Default (100%)
-                            </Badge>
-                            <Badge variant="primary" size={130}>
-                              Large (130%)
-                            </Badge>
-                            <Badge variant="primary" size={160}>
-                              XL (160%)
-                            </Badge>
-                          </div>
-                        </div>
-
-                        <div>
-                          <h4 className="text-sm font-medium text-text-primary mb-2">
-                            Badge với Icons
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            <Badge
-                              variant="primary"
-                              size={100}
-                              className="flex items-center gap-1"
-                            >
-                              <Star size={12} /> Featured
-                            </Badge>
-                            <Badge
-                              variant="success"
-                              size={100}
-                              className="flex items-center gap-1"
-                            >
-                              <CheckCircle size={12} /> Verified
-                            </Badge>
-                            <Badge
-                              variant="warning"
-                              size={100}
-                              className="flex items-center gap-1"
-                            >
-                              <AlertCircle size={12} /> Pending
-                            </Badge>
-                            <Badge
-                              variant="error"
-                              size={100}
-                              className="flex items-center gap-1"
-                            >
-                              <X size={12} /> Rejected
-                            </Badge>
-                          </div>
-                        </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-
-                  <AccordionItem value="filter-tags">
-                    <AccordionTrigger className="hover:bg-dropdown-itemHover text-text-primary font-semibold">
-                      <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-3">
-                          <Filter size={18} />
-                          Filter Tags
-                        </div>
-                        <Badge variant="outline" size={90}>
-                          8 tags
-                        </Badge>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="p-4">
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          <Badge
-                            variant="primary"
-                            size={100}
-                            className="cursor-pointer hover:opacity-80"
-                          >
-                            React
-                          </Badge>
-                          <Badge
-                            variant="secondary"
-                            size={100}
-                            className="cursor-pointer hover:opacity-80"
-                          >
-                            TypeScript
-                          </Badge>
-                          <Badge
-                            variant="success"
-                            size={100}
-                            className="cursor-pointer hover:opacity-80"
-                          >
-                            Tailwind
-                          </Badge>
-                          <Badge
-                            variant="warning"
-                            size={100}
-                            className="cursor-pointer hover:opacity-80"
-                          >
-                            Node.js
-                          </Badge>
-                          <Badge
-                            variant="error"
-                            size={100}
-                            className="cursor-pointer hover:opacity-80"
-                          >
-                            MongoDB
-                          </Badge>
-                          <Badge
-                            variant="outline"
-                            size={100}
-                            className="cursor-pointer hover:opacity-80"
-                          >
-                            GraphQL
-                          </Badge>
-                          <Badge
-                            variant="primary"
-                            size={100}
-                            dot
-                            className="cursor-pointer hover:opacity-80"
-                          >
-                            Docker
-                          </Badge>
-                          <Badge
-                            variant="success"
-                            size={100}
-                            dot
-                            className="cursor-pointer hover:opacity-80"
-                          >
-                            AWS
-                          </Badge>
-                        </div>
-                        <button className="px-4 py-2 bg-button-secondBg hover:bg-button-secondBgHover text-text-primary border border-button-border rounded-lg transition-colors text-sm flex items-center gap-2">
-                          <X size={14} />
-                          Clear All Filters
-                        </button>
                       </div>
                     </AccordionContent>
                   </AccordionItem>

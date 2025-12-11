@@ -37,9 +37,6 @@ export interface CardProps {
   /** Custom class name */
   className?: string;
 
-  /** Custom style */
-  style?: React.CSSProperties;
-
   /** Click handler */
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 

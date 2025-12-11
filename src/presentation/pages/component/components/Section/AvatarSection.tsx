@@ -26,8 +26,20 @@ const AvatarSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "size-variants", label: "Size Variants" },
+        { id: "icon-dot", label: "Icon Dot" },
+        { id: "shape-variants", label: "Shape Variants" },
+        { id: "fallback", label: "Fallback Options" },
+        { id: "icon-avatar", label: "Icon Avatar" },
+        { id: "interactive", label: "Interactive" },
+        { id: "group", label: "Avatar Group" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -36,33 +48,23 @@ const AvatarSection = () => {
   const yarnInstallCode = `yarn add @khanhromvn/zenui`;
 
   const basicUsageCode = `import { Avatar } from "@khanhromvn/zenui";
-import { Check, Clock, Mail } from "lucide-react";
+import { Check, Mail } from "lucide-react";
 
 function MyComponent() {
   return (
     <div className="flex gap-4 items-center justify-center flex-wrap">
-      {/* Image Avatar */}
       <Avatar 
-        src="/path/to/image.jpg"
-        name="John Doe"
+        src="src/presentation/components/package/components/avatar/avatar.jpeg"
         size={40}
       />
-      
-      {/* Name Avatar with dot icon */}
       <Avatar 
         name="Jane Smith"
         size={48}
         dotIcon={<Check size={8} color="#fff" />}
         dotBgColor="#10B981"
       />
-      
-      {/* Icon Avatar */}
-      <Avatar 
-        icon={<Mail size={20} color="#fff" />}
-        size={40}
-        dotIcon={<Clock size={6} color="#fff" />}
-        dotBgColor="#F59E0B"
-      />
+      <Avatar name="Alice Johnson" fallbackType="initials" size={32} />
+      <Avatar icon={<Mail size={20} color="#fff" />} size={40} />
     </div>
   );
 }`;
@@ -176,26 +178,24 @@ function IconAvatarExample() {
 }`;
 
   const interactiveExampleCode = `import { Avatar } from "@khanhromvn/zenui";
-import { useState } from "react";
+import { Check } from "lucide-react";
 
 function InteractiveExample() {
-  const [clickCount, setClickCount] = useState(0);
-
-  const handleAvatarClick = () => {
-    setClickCount(prev => prev + 1);
-  };
-
   return (
-    <div className="flex flex-col gap-4 items-center">
+    <div className="flex gap-6 items-center justify-center flex-wrap">
       <Avatar 
         name="Click Me"
         size={64}
-        onClick={handleAvatarClick}
+        onClick={() => alert("Avatar clicked!")}
         className="cursor-pointer transition-transform hover:scale-110"
       />
-      <p className="text-text-secondary">
-        Clicked {clickCount} times
-      </p>
+      <Avatar
+        name="Hover Me"
+        dotIcon={<Check size={8} color="#fff" />}
+        dotBgColor="#10B981"
+        onClick={() => console.log("Avatar clicked")}
+        className="cursor-pointer transition-all hover:shadow-lg hover:border-2 hover:border-blue-500"
+      />
     </div>
   );
 }`;
@@ -248,7 +248,7 @@ function InteractiveExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -295,7 +295,7 @@ function InteractiveExample() {
           </h2>
 
           {/* Size Variants */}
-          <div className="mb-8">
+          <div id="size-variants" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Size Variants
             </h3>
@@ -324,7 +324,7 @@ function InteractiveExample() {
           </div>
 
           {/* Icon Dot */}
-          <div className="mb-8">
+          <div id="icon-dot" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Icon Dot
             </h3>
@@ -369,7 +369,7 @@ function InteractiveExample() {
           </div>
 
           {/* Shape Variants */}
-          <div className="mb-8">
+          <div id="shape-variants" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Shape Variants
             </h3>
@@ -396,7 +396,7 @@ function InteractiveExample() {
           </div>
 
           {/* Fallback Types */}
-          <div className="mb-8">
+          <div id="fallback" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Fallback Options
             </h3>
@@ -434,7 +434,7 @@ function InteractiveExample() {
           </div>
 
           {/* Icon Avatar */}
-          <div className="mb-8">
+          <div id="icon-avatar" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Icon Avatar
             </h3>
@@ -468,7 +468,7 @@ function InteractiveExample() {
           </div>
 
           {/* Interactive Avatar */}
-          <div className="mb-8">
+          <div id="interactive" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Interactive Avatar
             </h3>
@@ -505,7 +505,7 @@ function InteractiveExample() {
           </div>
 
           {/* Group Avatars */}
-          <div className="mb-8">
+          <div id="group" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Avatar Group
             </h3>
@@ -551,13 +551,36 @@ function InteractiveExample() {
 
 function GroupExample() {
   return (
-    <div className="flex -space-x-3">
-      <Avatar name="User 1" size={40} />
-      <Avatar name="User 2" size={40} />
-      <Avatar name="User 3" size={40} />
-      <Avatar name="User 4" size={40} />
-      <div className="w-10 h-10 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center text-xs font-medium text-gray-600">
-        +2
+    <div className="space-y-6">
+      <div className="flex -space-x-3">
+        <Avatar name="User 1" size={40} />
+        <Avatar name="User 2" size={40} />
+        <Avatar name="User 3" size={40} />
+        <Avatar name="User 4" size={40} />
+        <div className="w-10 h-10 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center text-xs font-medium text-gray-600">
+          +2
+        </div>
+      </div>
+
+      <div className="flex -space-x-4">
+        <Avatar
+          name="Team A"
+          size={56}
+          dotIcon={<Check size={10} color="#fff" />}
+          dotBgColor="#10B981"
+        />
+        <Avatar
+          name="Team B"
+          size={56}
+          dotIcon={<Clock size={10} color="#fff" />}
+          dotBgColor="#F59E0B"
+        />
+        <Avatar
+          name="Team C"
+          size={56}
+          dotIcon={<Phone size={10} color="#fff" />}
+          dotBgColor="#EF4444"
+        />
       </div>
     </div>
   );

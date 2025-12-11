@@ -20,8 +20,17 @@ const BreadcrumbSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "separator", label: "Separator Types" },
+        { id: "size", label: "Size Variants" },
+        { id: "real-world", label: "Real-world Usage" },
+        { id: "click-handler", label: "Click Handler" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -53,6 +62,7 @@ function SeparatorExample() {
       <Breadcrumb>
         <BreadcrumbItem icon={Home} text="Home" href="/" />
         <BreadcrumbItem icon={Folder} text="Documents" href="/documents" />
+        <BreadcrumbItem icon={Folder} text="Projects" href="/documents/projects" />
         <BreadcrumbItem icon={FileText} text="zenui.pdf" />
       </Breadcrumb>
 
@@ -60,7 +70,15 @@ function SeparatorExample() {
       <Breadcrumb>
         <BreadcrumbItem text="Home" href="/" />
         <BreadcrumbItem text="Documents" href="/documents" />
+        <BreadcrumbItem text="Projects" href="/documents/projects" />
         <BreadcrumbItem text="zenui.pdf" />
+      </Breadcrumb>
+
+      {/* Custom Separator */}
+      <Breadcrumb>
+        <BreadcrumbItem text="Home" href="/" />
+        <BreadcrumbItem text="Documents" href="/documents" />
+        <BreadcrumbItem text="Projects" />
       </Breadcrumb>
     </div>
   );
@@ -216,7 +234,7 @@ function ClickHandlerExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -265,7 +283,7 @@ function ClickHandlerExample() {
           </h2>
 
           {/* Separator Types */}
-          <div className="mb-8">
+          <div id="separator" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Separator Types
             </h3>
@@ -316,7 +334,7 @@ function ClickHandlerExample() {
           </div>
 
           {/* Size Variants */}
-          <div className="mb-8">
+          <div id="size" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Size Variants
             </h3>
@@ -379,7 +397,7 @@ function ClickHandlerExample() {
           </div>
 
           {/* Real-world Examples */}
-          <div className="mb-8">
+          <div id="real-world" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Real-world Usage
             </h3>
@@ -483,6 +501,18 @@ function RealWorldExample() {
           <BreadcrumbItem text="Two-Factor Authentication" />
         </Breadcrumb>
       </div>
+
+      {/* Without Home Icon */}
+      <div>
+        <h4 className="text-sm font-medium text-text-secondary mb-2">
+          Without Home Icon
+        </h4>
+        <Breadcrumb>
+          <BreadcrumbItem text="Documents" href="/documents" />
+          <BreadcrumbItem text="Projects" href="/documents/projects" />
+          <BreadcrumbItem text="zenui.pdf" />
+        </Breadcrumb>
+      </div>
     </div>
   );
 }`}
@@ -497,7 +527,7 @@ function RealWorldExample() {
           </div>
 
           {/* Click Handler */}
-          <div className="mb-8">
+          <div id="click-handler" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Click Handler
             </h3>

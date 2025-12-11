@@ -27,8 +27,21 @@ const PaginationSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "variants", label: "Variants" },
+    {
+      id: "variants",
+      label: "Variants",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "classic", label: "Classic" },
+        { id: "minimal", label: "Minimal Dots" },
+        { id: "pill", label: "Pill Group" },
+        { id: "card", label: "Card Style" },
+        { id: "compact", label: "Compact" },
+        { id: "dropdown", label: "Dropdown" },
+        { id: "progress", label: "Progress Bar" },
+        { id: "slider", label: "Slider" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -241,7 +254,7 @@ function SliderExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -287,7 +300,7 @@ function SliderExample() {
           </p>
 
           {/* Variant 1: Classic */}
-          <div className="mb-12">
+          <div id="classic" className="mb-12">
             <h3 className="text-xl font-semibold text-text-primary mb-2">
               1. Classic Outlined
             </h3>
@@ -318,7 +331,7 @@ function SliderExample() {
           </div>
 
           {/* Variant 2: Minimal Dots */}
-          <div className="mb-12">
+          <div id="minimal" className="mb-12">
             <h3 className="text-xl font-semibold text-text-primary mb-2">
               2. Minimal Dots
             </h3>
@@ -349,7 +362,7 @@ function SliderExample() {
           </div>
 
           {/* Variant 3: Pill Group */}
-          <div className="mb-12">
+          <div id="pill" className="mb-12">
             <h3 className="text-xl font-semibold text-text-primary mb-2">
               3. Pill Group
             </h3>
@@ -380,7 +393,7 @@ function SliderExample() {
           </div>
 
           {/* Variant 4: Card Style */}
-          <div className="mb-12">
+          <div id="card" className="mb-12">
             <h3 className="text-xl font-semibold text-text-primary mb-2">
               4. Card Style
             </h3>
@@ -411,7 +424,7 @@ function SliderExample() {
           </div>
 
           {/* Variant 5: Compact Ellipsis */}
-          <div className="mb-12">
+          <div id="compact" className="mb-12">
             <h3 className="text-xl font-semibold text-text-primary mb-2">
               5. Compact with Ellipsis
             </h3>
@@ -443,7 +456,7 @@ function SliderExample() {
           </div>
 
           {/* Variant 6: Dropdown */}
-          <div className="mb-12">
+          <div id="dropdown" className="mb-12">
             <h3 className="text-xl font-semibold text-text-primary mb-2">
               6. Dropdown Style
             </h3>
@@ -474,7 +487,7 @@ function SliderExample() {
           </div>
 
           {/* Variant 7: Progress Bar */}
-          <div className="mb-12">
+          <div id="progress" className="mb-12">
             <h3 className="text-xl font-semibold text-text-primary mb-2">
               7. Progress Bar Style
             </h3>
@@ -505,7 +518,7 @@ function SliderExample() {
           </div>
 
           {/* Variant 8: Slider */}
-          <div className="mb-12">
+          <div id="slider" className="mb-12">
             <h3 className="text-xl font-semibold text-text-primary mb-2">
               8. Slider Style
             </h3>

@@ -16,8 +16,18 @@ const DividerSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "style", label: "Style Variants" },
+        { id: "thickness", label: "Thickness" },
+        { id: "length", label: "Length & Align" },
+        { id: "vertical", label: "Vertical Divider" },
+        { id: "custom", label: "Custom Colors" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -176,7 +186,7 @@ function CustomColorExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -213,7 +223,7 @@ function CustomColorExample() {
           </h2>
 
           {/* Style Variants */}
-          <div className="mb-8">
+          <div id="style" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Kiểu hiển thị
             </h3>
@@ -256,7 +266,7 @@ function CustomColorExample() {
           </div>
 
           {/* Thickness Variants */}
-          <div className="mb-8">
+          <div id="thickness" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Độ dày
             </h3>
@@ -304,7 +314,7 @@ function CustomColorExample() {
           </div>
 
           {/* Length and Align */}
-          <div className="mb-8">
+          <div id="length" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Chiều dài và căn chỉnh
             </h3>
@@ -349,7 +359,7 @@ function CustomColorExample() {
           </div>
 
           {/* Vertical Divider */}
-          <div className="mb-8">
+          <div id="vertical" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Divider dọc
             </h3>
@@ -406,7 +416,7 @@ function CustomColorExample() {
           </div>
 
           {/* Custom Colors */}
-          <div className="mb-8">
+          <div id="custom" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Tùy chỉnh màu sắc
             </h3>

@@ -42,8 +42,17 @@ const InputSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "combobox", label: "Combobox Input" },
+        { id: "calendar", label: "Calendar Input" },
+        { id: "password", label: "Password Validation" },
+        { id: "multi", label: "Multi-Value Tags" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -153,7 +162,7 @@ function SizeExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -193,7 +202,7 @@ function SizeExample() {
           </h2>
 
           {/* Combobox Type */}
-          <div className="mb-8">
+          <div id="combobox" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Combobox Input
             </h3>
@@ -257,7 +266,7 @@ function SizeExample() {
           </div>
 
           {/* Calendar Type */}
-          <div className="mb-8">
+          <div id="calendar" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Calendar Input
             </h3>
@@ -296,7 +305,7 @@ function SizeExample() {
           </div>
 
           {/* Password Type with Validation */}
-          <div className="mb-8">
+          <div id="password" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Password Input with Validation
             </h3>
@@ -380,7 +389,7 @@ function SizeExample() {
           </div>
 
           {/* Multi-Value Input */}
-          <div className="mb-8">
+          <div id="multi" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Multi-Value Input with Tags
             </h3>

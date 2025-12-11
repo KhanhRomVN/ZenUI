@@ -17,8 +17,17 @@ const BadgeSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "dot", label: "Dot Indicator" },
+        { id: "size", label: "Size Variants" },
+        { id: "kbd", label: "Keyboard Input" },
+        { id: "real-world", label: "Real-world Usage" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -137,7 +146,7 @@ function SizeExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -179,7 +188,7 @@ function SizeExample() {
           </h2>
 
           {/* Dot Indicator */}
-          <div className="mb-8">
+          <div id="dot" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Dot Indicator
             </h3>
@@ -219,7 +228,7 @@ function SizeExample() {
           </div>
 
           {/* Size Variants */}
-          <div className="mb-8">
+          <div id="size" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Size Variants
             </h3>
@@ -255,7 +264,7 @@ function SizeExample() {
           </div>
 
           {/* Keyboard Input (kbd) Variant */}
-          <div className="mb-8">
+          <div id="kbd" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Keyboard Input (kbd) Variant
             </h3>
@@ -358,6 +367,12 @@ function KbdExample() {
           <span>+</span>
           <Badge variant="kbd">S</Badge>
         </div>
+        <div className="flex gap-2 items-center">
+          <span>Search:</span>
+          <Badge variant="kbd">Ctrl</Badge>
+          <span>+</span>
+          <Badge variant="kbd">K</Badge>
+        </div>
       </div>
 
       {/* Arrow Keys */}
@@ -372,6 +387,8 @@ function KbdExample() {
       <div className="flex gap-2 items-center flex-wrap">
         <Badge variant="kbd">F1</Badge>
         <Badge variant="kbd">F2</Badge>
+        <Badge variant="kbd">F3</Badge>
+        <Badge variant="kbd">F4</Badge>
         <Badge variant="kbd">F5</Badge>
         <Badge variant="kbd">F12</Badge>
       </div>
@@ -389,7 +406,7 @@ function KbdExample() {
           </div>
 
           {/* Usage with Avatars */}
-          <div className="mb-8">
+          <div id="real-world" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Real-world Usage
             </h3>

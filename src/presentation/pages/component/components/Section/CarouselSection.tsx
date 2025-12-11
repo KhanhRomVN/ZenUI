@@ -71,8 +71,18 @@ const CarouselSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "coverflow", label: "Coverflow Effect" },
+        { id: "cube", label: "Cube Effect" },
+        { id: "flip", label: "Flip Effect" },
+        { id: "parallax", label: "Parallax Effect" },
+        { id: "multiple", label: "Multiple Slides" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -115,32 +125,17 @@ function AutoplayExample() {
   );
 }`;
 
-  const effectsCode = `import { Carousel } from "@khanhromvn/zenui";
-
-function EffectsExample() {
+  const coverflowEffectCode = `import { Carousel } from "@khanhromvn/zenui";
+  
+function CoverflowEffectExample() {
   return (
-    <>
-      {/* Slide Effect (Default) */}
-      <Carousel
-        items={slides}
-        renderItem={(item) => <SlideContent item={item} />}
-        effect="slide"
-      />
-
-      {/* Coverflow Effect */}
-      <Carousel
-        items={slides}
-        renderItem={(item) => <SlideContent item={item} />}
-        effect="coverflow"
-      />
-
-      {/* Cube Effect */}
-      <Carousel
-        items={slides}
-        renderItem={(item) => <SlideContent item={item} />}
-        effect="cube"
-      />
-    </>
+    <Carousel
+      items={slides}
+      renderItem={(item) => <SlideContent item={item} />}
+      effect="coverflow"
+      centered={true}
+      className="py-8"
+    />
   );
 }`;
 
@@ -247,7 +242,7 @@ function MultipleSlidesExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -301,7 +296,7 @@ function MultipleSlidesExample() {
           </h2>
 
           {/* Coverflow Effect */}
-          <div className="mb-8">
+          <div id="coverflow" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Coverflow Effect
             </h3>
@@ -328,19 +323,19 @@ function MultipleSlidesExample() {
             </div>
 
             <CodeBlock
-              code={effectsCode}
+              code={coverflowEffectCode}
               language="typescript"
               theme="vs-dark"
               readOnly={true}
               headerMode="path"
               headerIcon={<FileCode size={16} />}
-              filePath="src/components/EffectsExample.tsx"
+              filePath="src/components/CoverflowExample.tsx"
               showLineNumbers={true}
             />
           </div>
 
           {/* Cube Effect */}
-          <div className="mb-8">
+          <div id="cube" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Cube Effect
             </h3>
@@ -368,10 +363,21 @@ function MultipleSlidesExample() {
                 className="bg-card-background"
               />
             </div>
+
+            <CodeBlock
+              code={cubeEffectCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/CubeEffectExample.tsx"
+              showLineNumbers={true}
+            />
           </div>
 
           {/* Flip Effect */}
-          <div className="mb-8">
+          <div id="flip" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Flip Effect
             </h3>
@@ -396,10 +402,21 @@ function MultipleSlidesExample() {
                 className="bg-card-background"
               />
             </div>
+
+            <CodeBlock
+              code={flipEffectCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/FlipEffectExample.tsx"
+              showLineNumbers={true}
+            />
           </div>
 
           {/* Parallax Effect */}
-          <div className="mb-8">
+          <div id="parallax" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Parallax Effect
             </h3>
@@ -432,10 +449,21 @@ function MultipleSlidesExample() {
                 className="bg-card-background"
               />
             </div>
+
+            <CodeBlock
+              code={parallaxEffectCode}
+              language="typescript"
+              theme="vs-dark"
+              readOnly={true}
+              headerMode="path"
+              headerIcon={<FileCode size={16} />}
+              filePath="src/components/ParallaxEffectExample.tsx"
+              showLineNumbers={true}
+            />
           </div>
 
           {/* Multiple Slides */}
-          <div className="mb-8">
+          <div id="multiple" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Multiple Slides Per View
             </h3>

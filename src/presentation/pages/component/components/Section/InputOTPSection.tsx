@@ -20,8 +20,16 @@ const InputOTPSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "variant", label: "Variants" },
+        { id: "size", label: "Size Variants" },
+        { id: "features", label: "Advanced Features" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -241,7 +249,7 @@ function FeatureExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -294,7 +302,7 @@ function FeatureExample() {
           </h2>
 
           {/* Variants */}
-          <div className="mb-8">
+          <div id="variant" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               OTP Variants
             </h3>
@@ -350,7 +358,7 @@ function FeatureExample() {
           </div>
 
           {/* Sizes */}
-          <div className="mb-8">
+          <div id="size" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Size Variants
             </h3>
@@ -394,7 +402,7 @@ function FeatureExample() {
           </div>
 
           {/* Features */}
-          <div className="mb-8">
+          <div id="features" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Advanced Features
             </h3>

@@ -33,8 +33,16 @@ const ColorPickerSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "custom", label: "Custom Colors" },
+        { id: "size", label: "Size Variants" },
+        { id: "config", label: "Configuration" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -197,7 +205,7 @@ function ConfigurationExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -237,7 +245,7 @@ function ConfigurationExample() {
           </h2>
 
           {/* Custom Colors */}
-          <div className="mb-8">
+          <div id="custom" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Custom Color Palette
             </h3>
@@ -269,7 +277,7 @@ function ConfigurationExample() {
           </div>
 
           {/* Size Variants */}
-          <div className="mb-8">
+          <div id="size" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Size Variants
             </h3>
@@ -333,7 +341,7 @@ function ConfigurationExample() {
           </div>
 
           {/* Configuration Options */}
-          <div className="mb-8">
+          <div id="config" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Configuration Options
             </h3>

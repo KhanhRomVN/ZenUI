@@ -34,8 +34,19 @@ const DropdownSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "position", label: "Positioning" },
+        { id: "icons", label: "With Icons" },
+        { id: "custom", label: "Custom Content" },
+        { id: "size", label: "Size Variants" },
+        { id: "controlled", label: "Controlled" },
+        { id: "disabled", label: "Disabled State" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -254,7 +265,7 @@ function CustomContentExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -321,7 +332,7 @@ function CustomContentExample() {
           </h2>
 
           {/* Position Examples */}
-          <div className="mb-8">
+          <div id="position" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Positioning Options
             </h3>
@@ -536,7 +547,7 @@ function CustomContentExample() {
           </div>
 
           {/* With Icons */}
-          <div className="mb-8">
+          <div id="icons" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               With Icons
             </h3>
@@ -624,7 +635,7 @@ function CustomContentExample() {
           </div>
 
           {/* Custom Content */}
-          <div className="mb-8">
+          <div id="custom" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Custom Content
             </h3>
@@ -756,7 +767,7 @@ function CustomContentExample() {
           </div>
 
           {/* Size Variants */}
-          <div className="mb-8">
+          <div id="size" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Size Variants
             </h3>
@@ -858,7 +869,7 @@ function CustomContentExample() {
           </div>
 
           {/* Controlled Dropdown */}
-          <div className="mb-8">
+          <div id="controlled" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Controlled Dropdown
             </h3>
@@ -905,7 +916,7 @@ function CustomContentExample() {
           </div>
 
           {/* Disabled State */}
-          <div className="mb-8">
+          <div id="disabled" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Disabled State
             </h3>

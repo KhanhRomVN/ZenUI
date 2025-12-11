@@ -23,8 +23,17 @@ const CheckboxSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "size", label: "Size Variants" },
+        { id: "state", label: "State Variants" },
+        { id: "label", label: "Label Positions" },
+        { id: "group", label: "Checkbox Group" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -219,7 +228,7 @@ function LabelExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -265,7 +274,7 @@ function LabelExample() {
           </h2>
 
           {/* Size Variants */}
-          <div className="mb-8">
+          <div id="size" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Size Variants
             </h3>
@@ -298,7 +307,7 @@ function LabelExample() {
           </div>
 
           {/* State Variants */}
-          <div className="mb-8">
+          <div id="state" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               State Variants
             </h3>
@@ -348,7 +357,7 @@ function LabelExample() {
           </div>
 
           {/* Label Positions */}
-          <div className="mb-8">
+          <div id="label" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Label Positions
             </h3>
@@ -391,7 +400,7 @@ function LabelExample() {
           </div>
 
           {/* Checkbox Group Example */}
-          <div className="mb-8">
+          <div id="group" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Checkbox Group
             </h3>

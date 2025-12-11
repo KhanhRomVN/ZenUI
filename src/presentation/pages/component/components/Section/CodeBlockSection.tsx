@@ -15,8 +15,16 @@ const CodeBlockSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "tabs", label: "With Tabs" },
+        { id: "expand", label: "With Expand/Collapse" },
+        { id: "toolbar", label: "Custom Toolbar" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -145,7 +153,7 @@ function ExpandExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -190,7 +198,7 @@ function ExpandExample() {
           </h2>
 
           {/* Tabs Example */}
-          <div className="mb-8">
+          <div id="tabs" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               With Tabs
             </h3>
@@ -242,7 +250,7 @@ function ExpandExample() {
           </div>
 
           {/* Expand/Collapse Example */}
-          <div className="mb-8">
+          <div id="expand" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               With Expand/Collapse
             </h3>
@@ -295,7 +303,7 @@ print(filtered)`}
           </div>
 
           {/* Custom Toolbar Actions */}
-          <div className="mb-8">
+          <div id="toolbar" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               With Custom Toolbar Actions
             </h3>

@@ -22,8 +22,17 @@ const CardSection = () => {
   const navigationSections = [
     { id: "about", label: "About" },
     { id: "install", label: "Install" },
-    { id: "usage", label: "Usage" },
-    { id: "examples", label: "Examples" },
+    {
+      id: "examples",
+      label: "Examples",
+      subSections: [
+        { id: "basic", label: "Basic Usage" },
+        { id: "alignment", label: "Alignment" },
+        { id: "size", label: "Sizes" },
+        { id: "hover", label: "Hover Effects" },
+        { id: "complex", label: "Complex Examples" },
+      ],
+    },
     { id: "props", label: "Props" },
   ];
 
@@ -361,18 +370,18 @@ function ProductCardExample() {
 }`;
 
   const featureCardCode = `import { Card, CardBody } from "@khanhromvn/zenui";
-import { Zap } from "lucide-react";
+import { Star } from "lucide-react";
 
 function FeatureCardExample() {
   return (
     <Card
       className="rounded-md hover:border-button-bg transition-colors"
-      width={30}
+      width={40}
     >
       <CardBody>
         <div className="space-y-3">
           <div className="w-12 h-12 bg-button-bg/10 rounded-lg flex items-center justify-center">
-            <Zap className="text-button-bg" size={24} />
+            <Star className="text-button-bg" size={24} />
           </div>
           <h3 className="text-xl font-semibold text-text-primary">
             Lightning Fast
@@ -387,20 +396,20 @@ function FeatureCardExample() {
 }`;
 
   const statsCardCode = `import { Card, CardBody, CardFooter } from "@khanhromvn/zenui";
-import { TrendingUp } from "lucide-react";
+import { User } from "lucide-react";
 
 function StatsCardExample() {
   return (
     <Card
       className="rounded-md"
-      width={30}
+      width={40}
     >
       <CardBody>
         <div className="space-y-4">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
               <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center">
-                <TrendingUp className="text-green-500" size={20} />
+                <User className="text-green-500" size={20} />
               </div>
               <h3 className="text-lg font-semibold text-text-primary pt-2">
                 Total Revenue
@@ -481,7 +490,7 @@ function StatsCardExample() {
         </section>
 
         {/* USAGE SECTION */}
-        <section id="usage" className="mb-12">
+        <section id="basic" className="mb-12">
           <h2 className="text-2xl font-semibold text-text-primary mb-4">
             Basic Usage
           </h2>
@@ -493,9 +502,9 @@ function StatsCardExample() {
           <div className="mb-6">
             <div className="border-2 border-dashed border-border-default rounded-lg p-6">
               <Card
-                className="rounded-md"
+                className="rounded-md bg-card-background border-border-default"
                 cardAlign={{ horizontal: "center", vertical: "center" }}
-                width={50}
+                width={45}
               >
                 <CardHeader>
                   <div>
@@ -548,7 +557,7 @@ function StatsCardExample() {
         {/* EXAMPLES SECTION */}
         <section id="examples" className="mb-12">
           {/* Alignment */}
-          <div className="mb-8">
+          <div id="alignment" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Alignment Options
             </h3>
@@ -566,7 +575,7 @@ function StatsCardExample() {
                   <Card
                     cardAlign={{ horizontal: "center", vertical: "center" }}
                     width={50}
-                    className="rounded-md"
+                    className="rounded-md bg-card-background border-border-default"
                   >
                     <CardBody>
                       <div className="text-center">
@@ -597,7 +606,7 @@ function StatsCardExample() {
           </div>
 
           {/* Size Options */}
-          <div className="mb-8">
+          <div id="size" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Size Options
             </h3>
@@ -608,7 +617,10 @@ function StatsCardExample() {
             <div className="mb-4">
               <div className="border-2 border-dashed border-border-default rounded-lg p-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card size={80} className="rounded-md">
+                  <Card
+                    size={80}
+                    className="rounded-md bg-card-background border-border-default"
+                  >
                     <CardBody>
                       <h3 className="text-lg font-semibold text-text-primary mb-1">
                         Small Card
@@ -622,7 +634,10 @@ function StatsCardExample() {
                     </CardBody>
                   </Card>
 
-                  <Card size={100} className="rounded-md">
+                  <Card
+                    size={100}
+                    className="rounded-md bg-card-background border-border-default"
+                  >
                     <CardBody>
                       <h3 className="text-lg font-semibold text-text-primary mb-1">
                         Default Card
@@ -636,7 +651,10 @@ function StatsCardExample() {
                     </CardBody>
                   </Card>
 
-                  <Card size={120} className="rounded-md">
+                  <Card
+                    size={120}
+                    className="rounded-md bg-card-background border-border-default"
+                  >
                     <CardBody>
                       <h3 className="text-lg font-semibold text-text-primary mb-1">
                         Large Card
@@ -666,7 +684,7 @@ function StatsCardExample() {
           </div>
 
           {/* Hover Effects */}
-          <div className="mb-8">
+          <div id="hover" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Hover Effects
             </h3>
@@ -678,7 +696,10 @@ function StatsCardExample() {
             <div className="mb-4">
               <div className="border-2 border-dashed border-border-default rounded-lg p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <Card hoverEffectVariant="lift" className="rounded-md">
+                  <Card
+                    hoverEffectVariant="lift"
+                    className="rounded-md bg-card-background border-border-default"
+                  >
                     <CardBody>
                       <h3 className="text-lg font-semibold text-text-primary mb-2">
                         Lift Effect
@@ -689,7 +710,10 @@ function StatsCardExample() {
                     </CardBody>
                   </Card>
 
-                  <Card hoverEffectVariant="glow" className="rounded-md">
+                  <Card
+                    hoverEffectVariant="glow"
+                    className="rounded-md bg-card-background border-border-default"
+                  >
                     <CardBody>
                       <h3 className="text-lg font-semibold text-text-primary mb-2">
                         Glow Effect
@@ -700,7 +724,10 @@ function StatsCardExample() {
                     </CardBody>
                   </Card>
 
-                  <Card hoverEffectVariant="glass" className="rounded-md">
+                  <Card
+                    hoverEffectVariant="glass"
+                    className="rounded-md bg-card-background border-border-default"
+                  >
                     <CardBody>
                       <h3 className="text-lg font-semibold text-text-primary mb-2">
                         Glass Effect
@@ -711,7 +738,10 @@ function StatsCardExample() {
                     </CardBody>
                   </Card>
 
-                  <Card hoverEffectVariant="tilt" className="rounded-md">
+                  <Card
+                    hoverEffectVariant="tilt"
+                    className="rounded-md bg-card-background border-border-default"
+                  >
                     <CardBody>
                       <h3 className="text-lg font-semibold text-text-primary mb-2">
                         Tilt Effect
@@ -722,7 +752,10 @@ function StatsCardExample() {
                     </CardBody>
                   </Card>
 
-                  <Card hoverEffectVariant="scale" className="rounded-md">
+                  <Card
+                    hoverEffectVariant="scale"
+                    className="rounded-md bg-card-background border-border-default"
+                  >
                     <CardBody>
                       <h3 className="text-lg font-semibold text-text-primary mb-2">
                         Scale Effect
@@ -733,7 +766,10 @@ function StatsCardExample() {
                     </CardBody>
                   </Card>
 
-                  <Card hoverEffectVariant="border-glow" className="rounded-md">
+                  <Card
+                    hoverEffectVariant="border-glow"
+                    className="rounded-md bg-card-background border-border-default"
+                  >
                     <CardBody>
                       <h3 className="text-lg font-semibold text-text-primary mb-2">
                         Border Glow
@@ -760,7 +796,7 @@ function StatsCardExample() {
           </div>
 
           {/* Complex Examples */}
-          <div className="mb-8">
+          <div id="complex" className="mb-8">
             <h3 className="text-lg font-semibold text-text-primary mb-3">
               Complex Examples
             </h3>
@@ -775,7 +811,7 @@ function StatsCardExample() {
               </h4>
               <div className="border-2 border-dashed border-border-default rounded-lg p-6 flex justify-center">
                 <Card
-                  className="rounded-md"
+                  className="rounded-md bg-card-background border-border-default"
                   width={45}
                   cardAlign={{ horizontal: "center", vertical: "center" }}
                 >

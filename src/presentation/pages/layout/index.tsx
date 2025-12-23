@@ -3,6 +3,7 @@ import LayoutSidebar from "./components/LayoutSidebar";
 import GridLayoutSection from "./components/Section/GridLayoutSection";
 import KanbanLayoutSection from "./components/Section/KanbanLayoutSection";
 import MasonryLayoutSection from "./components/Section/MasonryLayoutSection";
+import DiagramLayoutSection from "./components/Section/DiagramLayoutSection";
 
 const LayoutPage = () => {
   const location = useLocation();
@@ -16,6 +17,8 @@ const LayoutPage = () => {
         return <KanbanLayoutSection />;
       case "masonry":
         return <MasonryLayoutSection />;
+      case "diagram":
+        return <DiagramLayoutSection />;
       default:
         return <GridLayoutSection />;
     }

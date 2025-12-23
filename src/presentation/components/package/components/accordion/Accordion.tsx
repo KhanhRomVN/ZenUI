@@ -24,11 +24,9 @@ const Accordion: React.FC<AccordionProps> = ({
       const next = new Set(prev);
 
       if (type === "single") {
-        // Nếu item đang mở và collapsible = true, thì đóng nó (không thêm gì)
         if (prev.has(value) && collapsible) {
           next.clear();
         } else {
-          // Nếu item chưa mở, hoặc collapsible = false, thì mở item đó
           next.clear();
           next.add(value);
         }

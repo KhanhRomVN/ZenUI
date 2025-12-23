@@ -12,6 +12,7 @@ const LayoutSidebar = () => {
     { name: "Split Layout", slug: "split" },
     { name: "Masonry Layout", slug: "masonry" },
     { name: "Kanban Layout", slug: "kanban" },
+    { name: "Diagram Layout", slug: "diagram" },
   ].sort((a, b) => a.name.localeCompare(b.name));
 
   return (

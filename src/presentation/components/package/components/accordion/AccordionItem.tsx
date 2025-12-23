@@ -29,10 +29,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         style="solid"
         thickness="thin"
         length={100}
-        className={cn(
-          listContext?.dividerColor || "border-border-default",
-          "first:hidden"
-        )}
+        className={cn("first:hidden")}
       />
       <div
         className={cn("transition-colors duration-200", className)}

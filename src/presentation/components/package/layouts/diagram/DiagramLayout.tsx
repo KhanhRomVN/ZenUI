@@ -201,7 +201,11 @@ const DiagramEdges = ({
   version: number;
 }) => {
   // Helper to calculate positions
-  const getPos = (id: string, dot: "top" | "right" | "bottom" | "left") => {
+  const getPos = (
+    id: string,
+    dot: "top" | "right" | "bottom" | "left" | "auto" = "auto",
+    targetId?: string
+  ) => {
     const el = items[id];
     if (!el) return null;
 
@@ -219,8 +223,39 @@ const DiagramEdges = ({
     const w = elRect.width / scale;
     const h = elRect.height / scale;
 
+    // Resolve 'auto' dot if needed
+    let finalDot = dot;
+    if (dot === "auto" && targetId && items[targetId]) {
+      const targetEl = items[targetId];
+      const targetRect = targetEl.getBoundingClientRect();
+
+      // Calculate relative position based on centers (screen coords is fine)
+      const center1 = {
+        x: elRect.left + elRect.width / 2,
+        y: elRect.top + elRect.height / 2,
+      };
+      const center2 = {
+        x: targetRect.left + targetRect.width / 2,
+        y: targetRect.top + targetRect.height / 2,
+      };
+
+      const dx = center2.x - center1.x;
+      const dy = center2.y - center1.y;
+
+      if (Math.abs(dx) > Math.abs(dy)) {
+        // Horizontal dominant
+        finalDot = dx > 0 ? "right" : "left";
+      } else {
+        // Vertical dominant
+        finalDot = dy > 0 ? "bottom" : "top";
+      }
+    } else if (dot === "auto") {
+      // Fallback default
+      finalDot = "right";
+    }
+
     let dir = { x: 0, y: 0 };
-    switch (dot) {
+    switch (finalDot) {
       case "top":
         dir = { x: 0, y: -1 };
         return { x: x + w / 2, y: y, dir };
@@ -308,8 +343,8 @@ const DiagramEdges = ({
   return (
     <>
       {edges.map((edge) => {
-        const fromPos = getPos(edge.from, edge.fromDot || "right");
-        const toPos = getPos(edge.to, edge.toDot || "left");
+        const fromPos = getPos(edge.from, edge.fromDot || "auto", edge.to);
+        const toPos = getPos(edge.to, edge.toDot || "auto", edge.from);
 
         if (!fromPos || !toPos) return null;
 

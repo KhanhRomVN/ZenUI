@@ -37,8 +37,8 @@ export interface DiagramEdgeOptions {
   id: string;
   from: string;
   to: string;
-  fromDot?: "top" | "right" | "bottom" | "left";
-  toDot?: "top" | "right" | "bottom" | "left";
+  fromDot?: "top" | "right" | "bottom" | "left" | "auto";
+  toDot?: "top" | "right" | "bottom" | "left" | "auto";
   label?: string;
   color?: string;
   width?: number;

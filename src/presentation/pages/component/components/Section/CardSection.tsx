@@ -316,30 +316,27 @@ function StatsCardExample() {
             Installation
           </h2>
           <CodeBlock
-            code={npmInstallCode}
-            language="bash"
+            items={[
+              {
+                id: "npm",
+                title: "npm",
+                code: npmInstallCode,
+                language: "bash",
+                icon: <FileCode size={16} />,
+              },
+              {
+                id: "yarn",
+                title: "yarn",
+                code: yarnInstallCode,
+                language: "bash",
+                icon: <FileCode size={16} />,
+              },
+            ]}
             theme="vs-dark"
             showLineNumbers={false}
             showGutter={false}
             showLineHighlight={false}
             readOnly={true}
-            headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
-            tabs={[
-              {
-                id: "npm",
-                label: "npm",
-                content: npmInstallCode,
-                language: "bash",
-              },
-              {
-                id: "yarn",
-                label: "yarn",
-                content: yarnInstallCode,
-                language: "bash",
-              },
-            ]}
-            activeTabId="npm"
           />
         </section>
 
@@ -399,9 +396,7 @@ function StatsCardExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -451,9 +446,7 @@ function StatsCardExample() {
                 language="typescript"
                 theme="vs-dark"
                 readOnly={true}
-                headerMode="path"
-                headerIcon={<FileCode size={16} />}
-                filePath="src/components/AlignmentExample.tsx"
+                filename="src/components/AlignmentExample.tsx"
                 showLineNumbers={true}
               />
             </div>
@@ -551,9 +544,7 @@ function StatsCardExample() {
                 language="typescript"
                 theme="vs-dark"
                 readOnly={true}
-                headerMode="path"
-                headerIcon={<FileCode size={16} />}
-                filePath="src/components/LoginFormExample.tsx"
+                filename="src/components/LoginFormExample.tsx"
                 showLineNumbers={true}
               />
             </div>
@@ -611,9 +602,7 @@ function StatsCardExample() {
                 language="typescript"
                 theme="vs-dark"
                 readOnly={true}
-                headerMode="path"
-                headerIcon={<FileCode size={16} />}
-                filePath="src/components/ProductCardExample.tsx"
+                filename="src/components/ProductCardExample.tsx"
                 showLineNumbers={true}
               />
             </div>
@@ -651,9 +640,7 @@ function StatsCardExample() {
                 language="typescript"
                 theme="vs-dark"
                 readOnly={true}
-                headerMode="path"
-                headerIcon={<FileCode size={16} />}
-                filePath="src/components/FeatureCardExample.tsx"
+                filename="src/components/FeatureCardExample.tsx"
                 showLineNumbers={true}
               />
             </div>
@@ -718,9 +705,7 @@ function StatsCardExample() {
                 language="typescript"
                 theme="vs-dark"
                 readOnly={true}
-                headerMode="path"
-                headerIcon={<FileCode size={16} />}
-                filePath="src/components/StatsCardExample.tsx"
+                filename="src/components/StatsCardExample.tsx"
                 showLineNumbers={true}
               />
             </div>

@@ -127,7 +127,6 @@ function CustomStylesExample() {
             showLineHighlight={false}
             readOnly={true}
             headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
             tabs={[
               {
                 id: "npm",
@@ -207,9 +206,7 @@ function CustomStylesExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -289,9 +286,7 @@ function CustomStylesExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/ControlledExample.tsx"
+              filename="src/components/ControlledExample.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}
@@ -359,9 +354,7 @@ function CustomStylesExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/PillStyleExample.tsx"
+              filename="src/components/PillStyleExample.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}
@@ -451,9 +444,7 @@ function VerticalBorderExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/VerticalBorderExample.tsx"
+              filename="src/components/VerticalBorderExample.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}
@@ -552,9 +543,7 @@ function MinimalStyleExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/MinimalStyleExample.tsx"
+              filename="src/components/MinimalStyleExample.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}
@@ -728,9 +717,7 @@ function AlignmentExamples() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/AlignmentExamples.tsx"
+              filename="src/components/AlignmentExamples.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}
@@ -807,9 +794,7 @@ function IconPositionExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/IconPositionExample.tsx"
+              filename="src/components/IconPositionExample.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}
@@ -893,9 +878,7 @@ function DisabledExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/DisabledExample.tsx"
+              filename="src/components/DisabledExample.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}

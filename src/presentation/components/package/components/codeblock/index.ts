@@ -1,17 +1,15 @@
 export { default as CodeBlock } from "./CodeBlock";
+export { default as CodeBlockHeader } from "./CodeBlockHeader";
+export { default as CodeBlockBody } from "./CodeBlockBody";
 export type {
   CodeBlockProps,
   CodeBlockLanguage,
-  CodeBlockTheme,
-  CodeBlockSize,
+  CodeBlockItem, // Replaces CodeBlockTheme, CodeBlockTab
+  CodeBlockHeaderStyle, // Replaces CodeBlockHeaderMode
+  CodeBlockToolbarAction, // Replaces CodeBlockToolbarConfig
   CodeBlockSpacing,
   CodeBlockBorder,
   CodeBlockShadow,
-  CodeBlockToolbarAction,
-  CodeBlockState,
-  CodeBlockToolbarConfig,
-  CodeBlockHeaderMode,
-  CodeBlockTab,
 } from "./CodeBlock.types";
 export {
   parseSize,
@@ -27,5 +25,3 @@ export {
   countLines,
   getBuiltInThemes,
 } from "./CodeBlock.utils";
-export type { CodeBlockThemeData } from "./CodeBlock.types";
-export { CodeBlockThemeLoader } from "./CodeBlock.themeLoader";

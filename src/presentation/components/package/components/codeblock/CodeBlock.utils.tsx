@@ -1,6 +1,5 @@
 import { CSSProperties } from "react";
 import {
-  CodeBlockSize,
   CodeBlockSpacing,
   CodeBlockBorder,
   CodeBlockShadow,

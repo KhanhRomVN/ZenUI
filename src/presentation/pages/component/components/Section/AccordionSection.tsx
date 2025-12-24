@@ -136,30 +136,22 @@ function MyComponent() {
             Installation
           </h2>
           <CodeBlock
-            code={npmInstallCode}
-            language="bash"
-            theme="vs-dark"
-            showLineNumbers={false}
-            showGutter={false}
-            showLineHighlight={false}
-            readOnly={true}
-            headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
-            tabs={[
+            items={[
               {
                 id: "npm",
-                label: "npm",
-                content: npmInstallCode,
+                title: "npm",
+                code: npmInstallCode,
                 language: "bash",
+                icon: <FileCode size={16} />,
               },
               {
                 id: "yarn",
-                label: "yarn",
-                content: yarnInstallCode,
+                title: "yarn",
+                code: yarnInstallCode,
                 language: "bash",
+                icon: <FileCode size={16} />,
               },
             ]}
-            activeTabId="npm"
           />
         </section>
 
@@ -228,9 +220,7 @@ function MyComponent() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}

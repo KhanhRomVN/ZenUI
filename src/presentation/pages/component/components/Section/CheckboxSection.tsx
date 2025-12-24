@@ -200,30 +200,27 @@ function LabelExample() {
             Installation
           </h2>
           <CodeBlock
-            code={npmInstallCode}
-            language="bash"
+            items={[
+              {
+                id: "npm",
+                title: "npm",
+                code: npmInstallCode,
+                language: "bash",
+                icon: <FileCode size={16} />,
+              },
+              {
+                id: "yarn",
+                title: "yarn",
+                code: yarnInstallCode,
+                language: "bash",
+                icon: <FileCode size={16} />,
+              },
+            ]}
             theme="vs-dark"
             showLineNumbers={false}
             showGutter={false}
             showLineHighlight={false}
             readOnly={true}
-            headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
-            tabs={[
-              {
-                id: "npm",
-                label: "npm",
-                content: npmInstallCode,
-                language: "bash",
-              },
-              {
-                id: "yarn",
-                label: "yarn",
-                content: yarnInstallCode,
-                language: "bash",
-              },
-            ]}
-            activeTabId="npm"
           />
         </section>
 
@@ -258,9 +255,7 @@ function LabelExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -299,9 +294,7 @@ function LabelExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/SizeExample.tsx"
+              filename="src/components/SizeExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -349,9 +342,7 @@ function LabelExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/StateExample.tsx"
+              filename="src/components/StateExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -392,9 +383,7 @@ function LabelExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/LabelExample.tsx"
+              filename="src/components/LabelExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -439,9 +428,7 @@ function CheckboxGroupExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CheckboxGroupExample.tsx"
+              filename="src/components/CheckboxGroupExample.tsx"
               showLineNumbers={true}
             />
           </div>

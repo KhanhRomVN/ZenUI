@@ -220,30 +220,27 @@ function InteractiveExample() {
             Installation
           </h2>
           <CodeBlock
-            code={npmInstallCode}
-            language="bash"
+            items={[
+              {
+                id: "npm",
+                title: "npm",
+                code: npmInstallCode,
+                language: "bash",
+                icon: <FileCode size={16} />,
+              },
+              {
+                id: "yarn",
+                title: "yarn",
+                code: yarnInstallCode,
+                language: "bash",
+                icon: <FileCode size={16} />,
+              },
+            ]}
             theme="vs-dark"
             showLineNumbers={false}
             showGutter={false}
             showLineHighlight={false}
             readOnly={true}
-            headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
-            tabs={[
-              {
-                id: "npm",
-                label: "npm",
-                content: npmInstallCode,
-                language: "bash",
-              },
-              {
-                id: "yarn",
-                label: "yarn",
-                content: yarnInstallCode,
-                language: "bash",
-              },
-            ]}
-            activeTabId="npm"
           />
         </section>
 
@@ -279,9 +276,7 @@ function InteractiveExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -316,9 +311,7 @@ function InteractiveExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/SizeExample.tsx"
+              filename="src/components/SizeExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -361,9 +354,7 @@ function InteractiveExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/IconExample.tsx"
+              filename="src/components/IconExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -388,9 +379,7 @@ function InteractiveExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/ShapeExample.tsx"
+              filename="src/components/ShapeExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -426,9 +415,7 @@ function InteractiveExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/FallbackExample.tsx"
+              filename="src/components/FallbackExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -460,9 +447,7 @@ function InteractiveExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/IconAvatarExample.tsx"
+              filename="src/components/IconAvatarExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -497,9 +482,7 @@ function InteractiveExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/InteractiveExample.tsx"
+              filename="src/components/InteractiveExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -588,9 +571,7 @@ function GroupExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/GroupExample.tsx"
+              filename="src/components/GroupExample.tsx"
               showLineNumbers={true}
             />
           </div>

@@ -126,7 +126,6 @@ function SizeExample() {
             showLineHighlight={false}
             readOnly={true}
             headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
             tabs={[
               {
                 id: "npm",
@@ -172,9 +171,7 @@ function SizeExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -220,9 +217,7 @@ function SizeExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/DotExample.tsx"
+              filename="src/components/DotExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -256,9 +251,7 @@ function SizeExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/SizeExample.tsx"
+              filename="src/components/SizeExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -398,9 +391,7 @@ function KbdExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/KbdExample.tsx"
+              filename="src/components/KbdExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -488,9 +479,7 @@ function RealWorldExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/RealWorldExample.tsx"
+              filename="src/components/RealWorldExample.tsx"
               showLineNumbers={true}
             />
           </div>

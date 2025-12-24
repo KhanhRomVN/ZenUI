@@ -234,7 +234,6 @@ function SliderExample() {
             showLineHighlight={false}
             readOnly={true}
             headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
             tabs={[
               {
                 id: "npm",
@@ -280,9 +279,7 @@ function SliderExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -323,9 +320,7 @@ function SliderExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/ClassicExample.tsx"
+              filename="src/components/ClassicExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -354,9 +349,7 @@ function SliderExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/MinimalDotsExample.tsx"
+              filename="src/components/MinimalDotsExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -385,9 +378,7 @@ function SliderExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/PillExample.tsx"
+              filename="src/components/PillExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -416,9 +407,7 @@ function SliderExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CardExample.tsx"
+              filename="src/components/CardExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -448,9 +437,7 @@ function SliderExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CompactExample.tsx"
+              filename="src/components/CompactExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -479,9 +466,7 @@ function SliderExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/DropdownExample.tsx"
+              filename="src/components/DropdownExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -510,9 +495,7 @@ function SliderExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/ProgressExample.tsx"
+              filename="src/components/ProgressExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -541,9 +524,7 @@ function SliderExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/SliderExample.tsx"
+              filename="src/components/SliderExample.tsx"
               showLineNumbers={true}
             />
           </div>

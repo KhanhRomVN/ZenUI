@@ -245,7 +245,6 @@ function CustomContentExample() {
             showLineHighlight={false}
             readOnly={true}
             headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
             tabs={[
               {
                 id: "npm",
@@ -316,9 +315,7 @@ function CustomContentExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -539,9 +536,7 @@ function CustomContentExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/PositionExample.tsx"
+              filename="src/components/PositionExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -759,9 +754,7 @@ function CustomContentExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CustomContentExample.tsx"
+              filename="src/components/CustomContentExample.tsx"
               showLineNumbers={true}
             />
           </div>

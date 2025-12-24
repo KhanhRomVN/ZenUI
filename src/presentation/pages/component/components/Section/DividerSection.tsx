@@ -166,7 +166,6 @@ function CustomColorExample() {
             showLineHighlight={false}
             readOnly={true}
             headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
             tabs={[
               {
                 id: "npm",
@@ -207,9 +206,7 @@ function CustomColorExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -256,9 +253,7 @@ function CustomColorExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/StyleExample.tsx"
+              filename="src/components/StyleExample.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}
@@ -304,9 +299,7 @@ function CustomColorExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/ThicknessExample.tsx"
+              filename="src/components/ThicknessExample.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}
@@ -349,9 +342,7 @@ function CustomColorExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/LengthAlignExample.tsx"
+              filename="src/components/LengthAlignExample.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}
@@ -406,9 +397,7 @@ function CustomColorExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/VerticalExample.tsx"
+              filename="src/components/VerticalExample.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}
@@ -453,9 +442,7 @@ function CustomColorExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CustomColorExample.tsx"
+              filename="src/components/CustomColorExample.tsx"
               showLineNumbers={true}
               showGutter={true}
               showLineHighlight={false}

@@ -229,7 +229,6 @@ function FeatureExample() {
             showLineHighlight={false}
             readOnly={true}
             headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
             tabs={[
               {
                 id: "npm",
@@ -286,9 +285,7 @@ function FeatureExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -350,9 +347,7 @@ function FeatureExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/VariantExample.tsx"
+              filename="src/components/VariantExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -394,9 +389,7 @@ function FeatureExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/SizeExample.tsx"
+              filename="src/components/SizeExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -451,9 +444,7 @@ function FeatureExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/FeatureExample.tsx"
+              filename="src/components/FeatureExample.tsx"
               showLineNumbers={true}
             />
           </div>

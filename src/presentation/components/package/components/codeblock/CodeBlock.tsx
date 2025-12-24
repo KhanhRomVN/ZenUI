@@ -23,6 +23,7 @@ const CodeBlock: React.FC<CodeBlockProps> = (props) => {
     showToolbar: true,
     showCopyButton: true,
     showFileIcon: true,
+    showDivider: true,
     showLineNumbers: true,
     showGutter: true,
     showLineHighlight: true,
@@ -221,8 +222,27 @@ const CodeBlock: React.FC<CodeBlockProps> = (props) => {
           transformOrigin: "top left",
         }}
       >
-        {mergedProps.showToolbar && <CodeBlockHeader />}
-        <CodeBlockBody />
+        {props.children ? (
+          props.children
+        ) : (
+          <>
+            {mergedProps.showToolbar && <CodeBlockHeader />}
+            {mergedProps.showToolbar && mergedProps.showDivider && (
+              <div
+                style={{
+                  height: "1px",
+                  width: "100%",
+                  backgroundColor:
+                    themeColors?.["editorGroup.border"] ||
+                    (props.theme === "vs-dark" || customTheme === "vs-dark"
+                      ? "rgba(128, 128, 128, 0.2)"
+                      : "rgba(0, 0, 0, 0.1)"),
+                }}
+              />
+            )}
+            <CodeBlockBody />
+          </>
+        )}
       </div>
     </CodeBlockContext.Provider>
   );

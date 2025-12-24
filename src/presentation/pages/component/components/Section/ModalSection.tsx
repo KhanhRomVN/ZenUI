@@ -249,7 +249,6 @@ function FullScreenModalExample() {
             showLineHighlight={false}
             readOnly={true}
             headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
             tabs={[
               {
                 id: "npm",
@@ -331,9 +330,7 @@ function FullScreenModalExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -398,9 +395,7 @@ function FullScreenModalExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/SizeExamples.tsx"
+              filename="src/components/SizeExamples.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -462,9 +457,7 @@ function FullScreenModalExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/AnimationExamples.tsx"
+              filename="src/components/AnimationExamples.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -523,9 +516,7 @@ function FullScreenModalExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CustomExample.tsx"
+              filename="src/components/CustomExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -620,9 +611,7 @@ function FullScreenModalExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/FullScreenExample.tsx"
+              filename="src/components/FullScreenExample.tsx"
               showLineNumbers={true}
             />
           </div>

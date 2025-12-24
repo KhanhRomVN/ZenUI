@@ -60,7 +60,7 @@ const CodeBlockHeader: React.FC = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 0.5rem",
+        padding: items.length > 1 ? "0 0.5rem" : "0.5rem",
         backgroundColor:
           toolbarBackgroundColor ||
           themeColors?.["editor.background"] ||

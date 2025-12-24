@@ -136,7 +136,6 @@ function CustomConfigExample() {
             showLineHighlight={false}
             readOnly={true}
             headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
             tabs={[
               {
                 id: "npm",
@@ -180,9 +179,7 @@ function CustomConfigExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -220,9 +217,7 @@ function CustomConfigExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/ImageUploadExample.tsx"
+              filename="src/components/ImageUploadExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -250,9 +245,7 @@ function CustomConfigExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/SingleFileExample.tsx"
+              filename="src/components/SingleFileExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -283,9 +276,7 @@ function CustomConfigExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CustomConfigExample.tsx"
+              filename="src/components/CustomConfigExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -322,9 +313,7 @@ function DisabledExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/DisabledExample.tsx"
+              filename="src/components/DisabledExample.tsx"
               showLineNumbers={true}
             />
           </div>

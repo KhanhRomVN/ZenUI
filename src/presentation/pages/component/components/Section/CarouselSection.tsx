@@ -222,7 +222,6 @@ function MultipleSlidesExample() {
             showLineHighlight={false}
             readOnly={true}
             headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
             tabs={[
               {
                 id: "npm",
@@ -280,9 +279,7 @@ function MultipleSlidesExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -327,9 +324,7 @@ function MultipleSlidesExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CoverflowExample.tsx"
+              filename="src/components/CoverflowExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -369,9 +364,7 @@ function MultipleSlidesExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CubeEffectExample.tsx"
+              filename="src/components/CubeEffectExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -408,9 +401,7 @@ function MultipleSlidesExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/FlipEffectExample.tsx"
+              filename="src/components/FlipEffectExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -455,9 +446,7 @@ function MultipleSlidesExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/ParallaxEffectExample.tsx"
+              filename="src/components/ParallaxEffectExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -494,9 +483,7 @@ function MultipleSlidesExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/MultipleSlidesExample.tsx"
+              filename="src/components/MultipleSlidesExample.tsx"
               showLineNumbers={true}
             />
           </div>

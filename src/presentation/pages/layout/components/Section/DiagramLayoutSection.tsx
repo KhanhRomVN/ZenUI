@@ -2,33 +2,30 @@ import {
   DiagramLayout,
   DiagramItem,
 } from "../../../../components/package/layouts/diagram";
-import { CodeBlock } from "../../../../components/package/components/codeblock";
+import {
+  CodeBlock,
+  CodeBlockHeader,
+  CodeBlockBody,
+} from "../../../../components/package/components/codeblock";
 import { FileCode, Activity } from "lucide-react";
 
 const DiagramLayoutSection = () => {
   const usageCode = `import { DiagramLayout, DiagramItem } from "@khanhromvn/zenui";
-import { CodeBlock } from "@khanhromvn/zenui";
+import { CodeBlock, CodeBlockHeader, CodeBlockBody } from "src/presentation/components/package/components/codeblock";
 
 function MyDiagram() {
   return (
     <DiagramLayout className="h-[500px] border border-border-default rounded-xl">
-      <DiagramItem style={{ position: "absolute", top: 50, left: 50, width: 400 }}>
-        {/* Header */}
-        <div className="flex items-center gap-2 p-3 border-b border-border-default bg-gray-50 dark:bg-gray-900/50">
-           <FileCode size={16} className="text-blue-500" />
-           <span className="text-sm font-medium text-text-primary">utils.ts</span>
-        </div>
-        
-        {/* Body */}
-        <div className="p-0">
-          <CodeBlock 
-             code="export const add = (a, b) => a + b;"
-             language="typescript"
-             theme="vs-dark"
-             showLineNumbers={false}
-             className="rounded-none border-none"
-          />
-        </div>
+      <DiagramItem className="absolute top-[50px] left-[50px] w-[400px]">
+        <CodeBlock 
+           code="export const add = (a, b) => a + b;"
+           language="typescript"
+           filename="utils.ts"
+           theme="vs-dark"
+        >
+           <CodeBlockHeader />
+           <CodeBlockBody />
+        </CodeBlock>
       </DiagramItem>
     </DiagramLayout>
   );
@@ -49,6 +46,30 @@ console.log(result); // 30`;
   email: string;
 }`;
 
+  const edges: any[] = [
+    {
+      id: "e1",
+      from: "node-1",
+      to: "node-2",
+      fromDot: "bottom",
+      toDot: "left",
+      type: "bezier",
+      label: "Imports",
+      color: "#9ca3af",
+    },
+    {
+      id: "e2",
+      from: "node-3",
+      to: "node-2",
+      fromDot: "bottom",
+      toDot: "top",
+      type: "step",
+      style: "dashed",
+      label: "References",
+      color: "#9ca3af",
+    },
+  ];
+
   return (
     <section id="diagram-layout" className="mb-12">
       <div className="flex items-center gap-3 mb-4">
@@ -65,68 +86,62 @@ console.log(result); // 30`;
       {/* Live Demo */}
       <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
         <div className="h-[500px] relative rounded-xl border border-border-default overflow-hidden">
-          <DiagramLayout className="h-full w-full bg-transparent">
+          <DiagramLayout className="h-full w-full bg-transparent" edges={edges}>
             {/* Node 1 */}
             <DiagramItem
-              style={{ position: "absolute", top: 50, left: 50, width: 350 }}
+              id="node-1"
+              fit={false}
+              className="absolute top-[50px] left-[50px] w-[450px]"
             >
-              <div className="flex items-center gap-2 p-3 border-b border-border-default bg-gray-50 dark:bg-gray-900/50 rounded-t-lg">
-                <FileCode size={16} className="text-blue-500" />
-                <span className="text-sm font-medium text-text-primary">
-                  utils.ts
-                </span>
-              </div>
-              <div className="p-0">
-                <CodeBlock
-                  code={node1Code}
-                  language="typescript"
-                  theme="vs-dark"
-                  showLineNumbers={true}
-                  className="rounded-t-none border-none m-0"
-                />
-              </div>
+              <CodeBlock
+                code={node1Code}
+                language="typescript"
+                filename="utils.ts"
+                theme="vs-dark"
+                showLineNumbers={true}
+                className="h-full"
+              >
+                <CodeBlockHeader />
+                <CodeBlockBody />
+              </CodeBlock>
             </DiagramItem>
 
             {/* Node 2 */}
             <DiagramItem
-              style={{ position: "absolute", top: 250, left: 450, width: 400 }}
+              id="node-2"
+              fit={false}
+              className="absolute top-[250px] left-[450px] w-[500px]"
             >
-              <div className="flex items-center gap-2 p-3 border-b border-border-default bg-gray-50 dark:bg-gray-900/50 rounded-t-lg">
-                <FileCode size={16} className="text-green-500" />
-                <span className="text-sm font-medium text-text-primary">
-                  main.ts
-                </span>
-              </div>
-              <div className="p-0">
-                <CodeBlock
-                  code={node2Code}
-                  language="typescript"
-                  theme="vs-dark"
-                  showLineNumbers={true}
-                  className="rounded-t-none border-none m-0"
-                />
-              </div>
+              <CodeBlock
+                code={node2Code}
+                language="typescript"
+                filename="main.ts"
+                theme="vs-dark"
+                showLineNumbers={true}
+                className="h-full"
+              >
+                <CodeBlockHeader />
+                <CodeBlockBody />
+              </CodeBlock>
             </DiagramItem>
 
             {/* Node 3 */}
             <DiagramItem
-              style={{ position: "absolute", top: 50, left: 550, width: 300 }}
+              id="node-3"
+              fit={false}
+              className="absolute top-[50px] left-[550px] w-[400px]"
             >
-              <div className="flex items-center gap-2 p-3 border-b border-border-default bg-gray-50 dark:bg-gray-900/50 rounded-t-lg">
-                <FileCode size={16} className="text-yellow-500" />
-                <span className="text-sm font-medium text-text-primary">
-                  types.ts
-                </span>
-              </div>
-              <div className="p-0">
-                <CodeBlock
-                  code={node3Code}
-                  language="typescript"
-                  theme="vs-dark"
-                  showLineNumbers={true}
-                  className="rounded-t-none border-none m-0"
-                />
-              </div>
+              <CodeBlock
+                code={node3Code}
+                language="typescript"
+                filename="types.ts"
+                theme="vs-dark"
+                showLineNumbers={true}
+                className="h-full"
+              >
+                <CodeBlockHeader />
+                <CodeBlockBody />
+              </CodeBlock>
             </DiagramItem>
           </DiagramLayout>
         </div>

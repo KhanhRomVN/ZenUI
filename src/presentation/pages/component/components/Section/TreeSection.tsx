@@ -260,7 +260,6 @@ function CustomStyledTree() {
             showLineHighlight={false}
             readOnly={true}
             headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
             tabs={[
               {
                 id: "npm",
@@ -312,9 +311,7 @@ function CustomStyledTree() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -352,9 +349,7 @@ function CustomStyledTree() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/FileSystemTree.tsx"
+              filename="src/components/FileSystemTree.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -411,9 +406,7 @@ function SettingsTree() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/SettingsTree.tsx"
+              filename="src/components/SettingsTree.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -456,9 +449,7 @@ function SettingsTree() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CustomStyledTree.tsx"
+              filename="src/components/CustomStyledTree.tsx"
               showLineNumbers={true}
             />
           </div>

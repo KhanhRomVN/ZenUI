@@ -3,6 +3,7 @@ import React from "react";
 export interface DiagramLayoutProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
+  edges?: DiagramEdgeOptions[];
 }
 
 export interface DiagramItemProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -15,4 +16,40 @@ export interface DiagramItemProps extends React.HTMLAttributes<HTMLDivElement> {
   fit?: boolean;
   maxWidth?: string | number;
   maxHeight?: string | number;
+  /**
+   * If true, dots will always be visible.
+   * If false or undefined, dots will only appear on hover.
+   */
+  showDots?: boolean;
+  /**
+   * Custom class name for the connection dots.
+   */
+  dotClassName?: string;
+  /**
+   * Unique identifier for the item. Required for connecting edges.
+   */
+  id?: string;
+}
+
+export type DiagramEdgeType = "straight" | "step" | "bezier" | "smooth";
+
+export interface DiagramEdgeOptions {
+  id: string;
+  from: string;
+  to: string;
+  fromDot?: "top" | "right" | "bottom" | "left";
+  toDot?: "top" | "right" | "bottom" | "left";
+  label?: string;
+  color?: string;
+  width?: number;
+  type?: DiagramEdgeType;
+  style?: "solid" | "dashed" | "dotted";
+}
+
+export interface DiagramContextType {
+  registerItem: (id: string, element: HTMLElement) => void;
+  unregisterItem: (id: string) => void;
+  updateItemPosition: (id: string) => void;
+  items: Record<string, HTMLElement>;
+  version: number; // Increment to force re-render
 }

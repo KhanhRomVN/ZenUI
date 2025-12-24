@@ -128,6 +128,7 @@ export interface CodeBlockProps {
   showCopyButton?: boolean;
   showLanguageTag?: boolean;
   showFileIcon?: boolean;
+  showDivider?: boolean; // New prop for divider
   toolbarActions?: CodeBlockToolbarAction[];
 
   // Events
@@ -165,6 +166,7 @@ export interface CodeBlockProps {
   tabs?: any;
   activeTabId?: any;
   onTabChange?: any;
+  children?: ReactNode;
 }
 
 export interface CodeBlockContextValue {

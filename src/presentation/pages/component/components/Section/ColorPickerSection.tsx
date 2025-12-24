@@ -185,7 +185,6 @@ function ConfigurationExample() {
             showLineHighlight={false}
             readOnly={true}
             headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
             tabs={[
               {
                 id: "npm",
@@ -229,9 +228,7 @@ function ConfigurationExample() {
             language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
+            filename="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
@@ -269,9 +266,7 @@ function ConfigurationExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/CustomColorsExample.tsx"
+              filename="src/components/CustomColorsExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -333,9 +328,7 @@ function ConfigurationExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/SizeVariantsExample.tsx"
+              filename="src/components/SizeVariantsExample.tsx"
               showLineNumbers={true}
             />
           </div>
@@ -394,9 +387,7 @@ function ConfigurationExample() {
               language="typescript"
               theme="vs-dark"
               readOnly={true}
-              headerMode="path"
-              headerIcon={<FileCode size={16} />}
-              filePath="src/components/ConfigurationExample.tsx"
+              filename="src/components/ConfigurationExample.tsx"
               showLineNumbers={true}
             />
           </div>

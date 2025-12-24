@@ -358,5 +358,5 @@ export const countLines = (code: string): number => {
 export const getBuiltInThemes = (): Record<string, () => Promise<any>> => {
   // Use Vite's glob import to load all JSON files in themes folder
   // This is evaluated at build time, so it's safe and efficient
-  return import.meta.glob("./themes/*.json");
+  return import.meta.glob("../../../../constants/themes/*.json");
 };

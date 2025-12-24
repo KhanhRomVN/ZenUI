@@ -197,7 +197,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         // Get all built-in themes dynamically
         const builtInThemes = getBuiltInThemes();
         const themeLoader = presetName
-          ? builtInThemes[`./themes/${presetName}.json`]
+          ? builtInThemes[`../../../../constants/themes/${presetName}.json`]
           : null;
 
         if (themeLoader && presetName) {
@@ -217,10 +217,10 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
             const firstThemePath = availableThemes[0];
             const firstThemeLoader = builtInThemes[firstThemePath];
             themeData = await firstThemeLoader();
-            // Extract theme name from path: "./themes/MyTheme.json" -> "MyTheme"
-            themeName = firstThemePath
-              .replace("./themes/", "")
-              .replace(".json", "");
+            // Extract theme name from path: "../../../../constants/themes/MyTheme.json" -> "MyTheme"
+            themeName =
+              firstThemePath.split("/").pop()?.replace(".json", "") ||
+              "default-theme";
           } else {
             // No built-in themes available - use Monaco's default theme
             if (debug) {

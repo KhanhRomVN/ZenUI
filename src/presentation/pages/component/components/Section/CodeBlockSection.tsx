@@ -60,27 +60,25 @@ console.log(fibonacci(10)); // Output: 55`;
 function TabsExample() {
   return (
     <CodeBlock
-       
-      code=""
-      language="javascript"
       theme="vs-dark"
-      headerMode="tabs"
-      headerIcon={<FileCode size={16} />}
-      tabs={[
+      headerStyle="tab"
+
+      items={[
         {
           id: "js",
-          label: "JavaScript",
-          content: "console.log('Hello from JS');",
+          title: "JavaScript",
+          filename: "script.js",
+          code: "console.log('Hello from JS');",
           language: "javascript",
         },
         {
           id: "ts",
-          label: "TypeScript",
-          content: "const message: string = 'Hello TS';",
+          title: "TypeScript",
+          filename: "script.ts",
+          code: "const message: string = 'Hello TS';",
           language: "typescript",
         },
       ]}
-      activeTabId="js"
     />
   );
 }`;
@@ -125,30 +123,28 @@ function ExpandExample() {
             Installation
           </h2>
           <CodeBlock
-            code={npmInstallCode}
-            language="bash"
             theme="vs-dark"
             showLineNumbers={false}
             showGutter={false}
             showLineHighlight={false}
             readOnly={true}
-            headerMode="tabs"
-            headerIcon={<FileCode size={16} />}
-            tabs={[
+            headerStyle="tab"
+            items={[
               {
                 id: "npm",
-                label: "npm",
-                content: npmInstallCode,
+                title: "npm",
+                code: npmInstallCode,
                 language: "bash",
+                icon: <FileCode size={16} />,
               },
               {
                 id: "yarn",
-                label: "yarn",
-                content: yarnInstallCode,
+                title: "yarn",
+                code: yarnInstallCode,
                 language: "bash",
+                icon: <FileCode size={16} />,
               },
             ]}
-            activeTabId="npm"
           />
         </section>
 
@@ -164,16 +160,18 @@ function ExpandExample() {
 
           {/* Code Example */}
           <CodeBlock
-            code={basicUsageCode}
-            language="typescript"
             theme="vs-dark"
             readOnly={true}
-            headerMode="path"
-            headerIcon={<FileCode size={16} />}
-            filePath="src/components/BasicExample.tsx"
             showLineNumbers={true}
             showGutter={true}
             showLineHighlight={false}
+            items={[
+              {
+                code: basicUsageCode,
+                language: "typescript",
+                filename: "src/components/BasicExample.tsx",
+              },
+            ]}
           />
 
           {/* Live Demo */}
@@ -207,44 +205,45 @@ function ExpandExample() {
             </p>
 
             <CodeBlock
-              code=""
-              language="javascript"
               theme="vs-dark"
-              headerMode="tabs"
-              headerIcon={<FileCode size={16} />}
-              tabs={[
+              headerStyle="tab"
+              items={[
                 {
                   id: "js",
-                  label: "JavaScript",
-                  content: `console.log("Hello from JavaScript!");\n\nfunction greet(name) {\n  return \`Hello, \${name}!\`;\n}\n\ngreet("World");`,
+                  title: "JavaScript",
+                  filename: "script.js",
+                  code: `console.log("Hello from JavaScript!");\n\nfunction greet(name) {\n  return \`Hello, \${name}!\`;\n}\n\ngreet("World");`,
                   language: "javascript",
                 },
                 {
                   id: "ts",
-                  label: "TypeScript",
-                  content: `const message: string = "Hello TypeScript";\n\ninterface User {\n  name: string;\n  age: number;\n}\n\nconst user: User = {\n  name: "Alice",\n  age: 25\n};`,
+                  title: "TypeScript",
+                  filename: "script.ts",
+                  code: `const message: string = "Hello TypeScript";\n\ninterface User {\n  name: string;\n  age: number;\n}\n\nconst user: User = {\n  name: "Alice",\n  age: 25\n};`,
                   language: "typescript",
                 },
                 {
                   id: "py",
-                  label: "Python",
-                  content: `def greet(name):\n    return f"Hello, {name}!"\n\nprint(greet("World"))`,
+                  title: "Python",
+                  filename: "script.py",
+                  code: `def greet(name):\n    return f"Hello, {name}!"\n\nprint(greet("World"))`,
                   language: "python",
                 },
               ]}
-              activeTabId="js"
             />
 
             <div className="mt-4">
               <CodeBlock
-                code={tabsExampleCode}
-                language="typescript"
                 theme="vs-dark"
                 readOnly={true}
-                headerMode="path"
-                headerIcon={<FileCode size={16} />}
-                filePath="src/components/TabsExample.tsx"
                 showLineNumbers={true}
+                items={[
+                  {
+                    code: tabsExampleCode,
+                    language: "typescript",
+                    filename: "src/components/TabsExample.tsx",
+                  },
+                ]}
               />
             </div>
           </div>
@@ -259,45 +258,28 @@ function ExpandExample() {
             </p>
 
             <CodeBlock
-              code={`# Python Example - Data Processing
-
-def process_data(data):
-    """Process raw data and return cleaned results"""
-    result = []
-    
-    for item in data:
-        if item is not None:
-            cleaned = item.strip().lower()
-            result.append(cleaned)
-    
-    return result
-
-# Example usage
-raw_data = ["  Hello  ", "WORLD", None, "  Python  "]
-processed = process_data(raw_data)
-print(processed)
-
-# Advanced filtering
-def filter_by_length(items, min_length=3):
-    return [item for item in items if len(item) >= min_length]
-
-filtered = filter_by_length(processed)
-print(filtered)`}
-              language="python"
+              items={[
+                {
+                  code: `# Python Example - Data Processing\n\ndef process_data(data):\n    """Process raw data and return cleaned results"""\n    result = []\n    \n    for item in data:\n        if item is not None:\n            cleaned = item.strip().lower()\n            result.append(cleaned)\n    \n    return result\n\n# Example usage\nraw_data = ["  Hello  ", "WORLD", None, "  Python  "]\nprocessed = process_data(raw_data)\nprint(processed)\n\n# Advanced filtering\ndef filter_by_length(items, min_length=3):\n    return [item for item in items if len(item) >= min_length]\n\nfiltered = filter_by_length(processed)\nprint(filtered)`,
+                  language: "python",
+                },
+              ]}
               theme="vs-dark"
               readOnly={true}
             />
 
             <div className="mt-4">
               <CodeBlock
-                code={expandExampleCode}
-                language="typescript"
                 theme="vs-dark"
                 readOnly={true}
-                headerMode="path"
-                headerIcon={<FileCode size={16} />}
-                filePath="src/components/ExpandExample.tsx"
                 showLineNumbers={true}
+                items={[
+                  {
+                    code: expandExampleCode,
+                    language: "typescript",
+                    filename: "src/components/ExpandExample.tsx",
+                  },
+                ]}
               />
             </div>
           </div>
@@ -471,90 +453,43 @@ print(filtered)`}
                   className="hover:bg-table-hoverItemBodyBg"
                 >
                   <TableCell showVerticalDivider>
-                    <span className="font-mono text-xs">headerMode</span>
+                    <span className="font-mono text-xs">items</span>
                   </TableCell>
                   <TableCell showVerticalDivider>
-                    <span className="font-mono text-xs">
-                      "tabs" | "path" | "none"
-                    </span>
-                  </TableCell>
-                  <TableCell showVerticalDivider>"none"</TableCell>
-                  <TableCell showVerticalDivider>Header display mode</TableCell>
-                </TableRow>
-                <TableRow
-                  showHorizontalDivider
-                  className="hover:bg-table-hoverItemBodyBg"
-                >
-                  <TableCell showVerticalDivider>
-                    <span className="font-mono text-xs">headerIcon</span>
-                  </TableCell>
-                  <TableCell showVerticalDivider>
-                    <span className="font-mono text-xs">ReactNode</span>
-                  </TableCell>
-                  <TableCell showVerticalDivider>-</TableCell>
-                  <TableCell showVerticalDivider>Icon in header</TableCell>
-                </TableRow>
-                <TableRow
-                  showHorizontalDivider
-                  className="hover:bg-table-hoverItemBodyBg"
-                >
-                  <TableCell showVerticalDivider>
-                    <span className="font-mono text-xs">filePath</span>
-                  </TableCell>
-                  <TableCell showVerticalDivider>
-                    <span className="font-mono text-xs">string</span>
-                  </TableCell>
-                  <TableCell showVerticalDivider>-</TableCell>
-                  <TableCell showVerticalDivider>
-                    File path (when headerMode="path")
-                  </TableCell>
-                </TableRow>
-                <TableRow
-                  showHorizontalDivider
-                  className="hover:bg-table-hoverItemBodyBg"
-                >
-                  <TableCell showVerticalDivider>
-                    <span className="font-mono text-xs">tabs</span>
-                  </TableCell>
-                  <TableCell showVerticalDivider>
-                    <span className="font-mono text-xs">CodeBlockTab[]</span>
+                    <span className="font-mono text-xs">CodeBlockItem[]</span>
                   </TableCell>
                   <TableCell showVerticalDivider>[]</TableCell>
-                  <TableCell showVerticalDivider>
-                    Tabs array (when headerMode="tabs")
-                  </TableCell>
+                  <TableCell showVerticalDivider>Array of code items</TableCell>
                 </TableRow>
                 <TableRow
                   showHorizontalDivider
                   className="hover:bg-table-hoverItemBodyBg"
                 >
                   <TableCell showVerticalDivider>
-                    <span className="font-mono text-xs">activeTabId</span>
-                  </TableCell>
-                  <TableCell showVerticalDivider>
-                    <span className="font-mono text-xs">string</span>
-                  </TableCell>
-                  <TableCell showVerticalDivider>-</TableCell>
-                  <TableCell showVerticalDivider>
-                    Active tab ID (when headerMode="tabs")
-                  </TableCell>
-                </TableRow>
-                <TableRow
-                  showHorizontalDivider
-                  className="hover:bg-table-hoverItemBodyBg"
-                >
-                  <TableCell showVerticalDivider>
-                    <span className="font-mono text-xs">onTabChange</span>
+                    <span className="font-mono text-xs">headerStyle</span>
                   </TableCell>
                   <TableCell showVerticalDivider>
                     <span className="font-mono text-xs">
-                      (tabId: string) =&gt; void
+                      "tab" | "dropdown"
                     </span>
                   </TableCell>
-                  <TableCell showVerticalDivider>-</TableCell>
+                  <TableCell showVerticalDivider>"tab"</TableCell>
                   <TableCell showVerticalDivider>
-                    Callback when tab changes
+                    Style of header navigation
                   </TableCell>
+                </TableRow>
+                <TableRow
+                  showHorizontalDivider
+                  className="hover:bg-table-hoverItemBodyBg"
+                >
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">showFileIcon</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>
+                    <span className="font-mono text-xs">boolean</span>
+                  </TableCell>
+                  <TableCell showVerticalDivider>true</TableCell>
+                  <TableCell showVerticalDivider>Show file icons</TableCell>
                 </TableRow>
 
                 {/* EDITOR BEHAVIOR */}

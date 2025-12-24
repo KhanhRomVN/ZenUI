@@ -231,7 +231,7 @@ export const getDefaultMonacoOptions = (props: any): any => {
   const leftPadding = !props.showLineNumbers || !props.showGutter ? 20 : 12;
 
   return {
-    automaticLayout: false,
+    automaticLayout: true,
     scrollBeyondLastLine: false,
     scrollBeyondLastColumn: 0,
     fixedOverflowWidgets: true,

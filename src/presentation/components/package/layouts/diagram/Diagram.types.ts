@@ -6,7 +6,7 @@ export interface DiagramLayoutProps
   edges?: DiagramEdgeOptions[];
 }
 
-export interface DiagramItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DiagramNodeProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   /**
    * If true, the item will fit its content size.
@@ -14,8 +14,10 @@ export interface DiagramItemProps extends React.HTMLAttributes<HTMLDivElement> {
    * Defaults to true (fit content).
    */
   fit?: boolean;
-  maxWidth?: string | number;
-  maxHeight?: string | number;
+  minWidth: string | number;
+  minHeight: string | number;
+  maxWidth: string | number;
+  maxHeight: string | number;
   /**
    * If true, dots will always be visible.
    * If false or undefined, dots will only appear on hover.
@@ -30,6 +32,8 @@ export interface DiagramItemProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   id?: string;
 }
+
+export type DiagramWrapperProps = DiagramNodeProps;
 
 export type DiagramEdgeType = "straight" | "step" | "bezier" | "smooth";
 
@@ -52,4 +56,7 @@ export interface DiagramContextType {
   updateItemPosition: (id: string) => void;
   items: Record<string, HTMLElement>;
   version: number; // Increment to force re-render
+  activeId: string | null;
+  activeNodeIds: Set<string>;
+  setActiveId: (id: string | null) => void;
 }

@@ -16,6 +16,7 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
 
   // Context State
   const [items, setItems] = useState<Record<string, HTMLElement>>({});
+  const [activeId, setActiveId] = useState<string | null>(null);
   const [version, setVersion] = useState(0);
 
   const registerItem = useCallback((id: string, element: HTMLElement) => {
@@ -34,6 +35,35 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
     setVersion((v) => v + 1);
   }, []);
 
+  // Highlight Logic Helper
+  const getActiveConnections = useCallback(
+    (id: string | null, edges: DiagramEdgeOptions[]) => {
+      if (!id)
+        return { edgeIds: new Set<string>(), nodeIds: new Set<string>() };
+
+      const edgeIds = new Set<string>();
+      const nodeIds = new Set<string>();
+
+      edges.forEach((edge) => {
+        if (edge.from === id) {
+          edgeIds.add(edge.id);
+          nodeIds.add(edge.to);
+        } else if (edge.to === id) {
+          edgeIds.add(edge.id);
+          nodeIds.add(edge.from);
+        }
+      });
+
+      return { edgeIds, nodeIds };
+    },
+    []
+  );
+
+  const { edgeIds: activeEdgeIds, nodeIds: activeNodeIds } = useMemo(
+    () => getActiveConnections(activeId, edges),
+    [activeId, edges, getActiveConnections]
+  );
+
   const contextValue = useMemo(
     () => ({
       registerItem,
@@ -41,91 +71,76 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
       updateItemPosition,
       items,
       version,
+      activeId,
+      activeNodeIds,
+      setActiveId,
     }),
-    [registerItem, unregisterItem, updateItemPosition, items, version]
+    [
+      registerItem,
+      unregisterItem,
+      updateItemPosition,
+      items,
+      version,
+      activeNodeIds,
+    ]
   );
 
-  // Wheel Handler for Pan and Zoom
-  React.useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+  const isPanning = React.useRef(false);
+  const startPanPos = React.useRef({ x: 0, y: 0 });
+  const startPanOffset = React.useRef({ x: 0, y: 0 });
+  const isHovering = React.useRef(false);
 
-    const onWheel = (e: WheelEvent) => {
+  // Wheel Handler (Zoom & Pan)
+  React.useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      if (!isHovering.current) return;
       e.preventDefault();
 
       if (e.ctrlKey) {
         // Zoom
         const zoomSensitivity = 0.001;
-        setScale((prevScale) => {
-          const newScale = prevScale - e.deltaY * zoomSensitivity;
-          return Math.min(Math.max(0.1, newScale), 5);
-        });
+        const delta = -e.deltaY * zoomSensitivity;
+        const newScale = Math.min(Math.max(0.1, scale + delta), 5);
+
+        // Zoom towards cursor
+        const rect = containerRef.current?.getBoundingClientRect();
+        if (rect) {
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+
+          setPosition((pos) => ({
+            x: mouseX - ((mouseX - pos.x) / scale) * newScale,
+            y: mouseY - ((mouseY - pos.y) / scale) * newScale,
+          }));
+        }
+
+        setScale(newScale);
       } else {
         // Pan
-        setPosition((prevPos) => ({
-          x: prevPos.x - e.deltaX,
-          y: prevPos.y - e.deltaY,
+        setPosition((pos) => ({
+          x: pos.x - e.deltaX,
+          y: pos.y - e.deltaY,
         }));
       }
     };
 
-    container.addEventListener("wheel", onWheel, { passive: false });
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("wheel", handleWheel, { passive: false });
+    }
 
     return () => {
-      container.removeEventListener("wheel", onWheel);
-    };
-  }, []);
-
-  const isHovering = React.useRef(false);
-
-  React.useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isHovering.current) return;
-
-      if (e.ctrlKey || e.metaKey) {
-        if (e.key === "=" || e.key === "+") {
-          e.preventDefault();
-          setScale((prev) => Math.min(5, prev + 0.1));
-        } else if (e.key === "-") {
-          e.preventDefault();
-          setScale((prev) => Math.max(0.1, prev - 0.1));
-        } else if (e.key === "0") {
-          e.preventDefault();
-          setScale(1);
-          setPosition({ x: 0, y: 0 });
-        }
+      if (container) {
+        container.removeEventListener("wheel", handleWheel);
       }
     };
-
-    window.addEventListener("keydown", handleKeyDown, { passive: false });
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
-
-  // Right Click Pan Logic
-  const isPanning = React.useRef(false);
-  const startPanPos = React.useRef({ x: 0, y: 0 });
-  const startPanOffset = React.useRef({ x: 0, y: 0 });
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    // Middle click (1) or Right click (2)
-    if (e.button === 2 || e.button === 1) {
-      e.preventDefault();
-      // Only start pan if clicking directly on the container or if the target bubbles up and isn't stopped
-      isPanning.current = true;
-      startPanPos.current = { x: e.clientX, y: e.clientY };
-      startPanOffset.current = { ...position };
-
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-    }
-  };
+  }, [scale]);
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isPanning.current) return;
     const deltaX = e.clientX - startPanPos.current.x;
     const deltaY = e.clientY - startPanPos.current.y;
+
     setPosition({
       x: startPanOffset.current.x + deltaX,
       y: startPanOffset.current.y + deltaY,
@@ -142,18 +157,26 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
     e.preventDefault();
   };
 
-  // Edge Rendering Helper
-  const getDotPosition = (
-    el: HTMLElement,
-    dot: "top" | "right" | "bottom" | "left" = "right"
-  ) => {
-    // We need relative position to the container content
-    // Since items are children of the transform div, their offsetLeft/Top should be relative to it?
-    // DiagramItems are absolute positioned.
-    // However, they might have transforms (drag).
-    // Let's use getBoundingClientRect and convert to local coordinate space.
-    // Warning: This depends on the transform div ref.
-    // Ideally we have a ref to the content div.
+  const handleMouseDown = (e: React.MouseEvent) => {
+    // Clear activeId on background click
+    if (
+      e.target === e.currentTarget ||
+      (e.target as Element).id === "diagram-content"
+    ) {
+      setActiveId(null);
+    }
+
+    // Middle click (1) or Right click (2)
+    if (e.button === 2 || e.button === 1) {
+      e.preventDefault();
+      // Only start pan if clicking directly on the container or if the target bubbles up and isn't stopped
+      isPanning.current = true;
+      startPanPos.current = { x: e.clientX, y: e.clientY };
+      startPanOffset.current = { ...position };
+
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+    }
   };
 
   return (
@@ -180,7 +203,13 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
         >
           {/* Edges Layer */}
           <svg className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none z-0">
-            <DiagramEdges edges={edges} items={items} version={version} />
+            <DiagramEdges
+              edges={edges}
+              items={items}
+              version={version}
+              activeEdgeIds={activeEdgeIds}
+              activeId={activeId}
+            />
           </svg>
 
           {/* Items Layer */}
@@ -195,10 +224,14 @@ const DiagramEdges = ({
   edges,
   items,
   version,
+  activeEdgeIds,
+  activeId,
 }: {
   edges: DiagramEdgeOptions[];
   items: Record<string, HTMLElement>;
   version: number;
+  activeEdgeIds: Set<string>;
+  activeId: string | null;
 }) => {
   // Helper to calculate positions
   const getPos = (
@@ -357,17 +390,28 @@ const DiagramEdges = ({
           path = getBezierPath(fromPos, toPos);
         }
 
+        // Highlight Logic
+        const isActive = activeId ? activeEdgeIds.has(edge.id) : true;
+        const isDimmed = activeId && !isActive;
+        const baseColor = edge.color || "#9ca3af";
+        const finalColor = isActive ? baseColor : "#e5e7eb"; // Gray-200 if dimmed
+        const strokeWidth = isActive ? edge.width || 2 : 1;
+        const style = isActive && activeId ? "dashed" : edge.style; // Force dashed if highlighted
+
         return (
-          <g key={edge.id}>
+          <g
+            key={edge.id}
+            style={{ opacity: isDimmed ? 0.3 : 1, transition: "opacity 0.2s" }}
+          >
             <path
               d={path}
-              stroke={edge.color || "#9ca3af"}
-              strokeWidth={edge.width || 2}
+              stroke={finalColor}
+              strokeWidth={strokeWidth}
               fill="none"
               strokeDasharray={
-                edge.style === "dashed"
+                style === "dashed"
                   ? "5,5"
-                  : edge.style === "dotted"
+                  : style === "dotted"
                   ? "2,2"
                   : undefined
               }
@@ -376,7 +420,7 @@ const DiagramEdges = ({
               <text
                 x={(fromPos.x + toPos.x) / 2}
                 y={(fromPos.y + toPos.y) / 2 - 10}
-                fill={edge.color || "#9ca3af"}
+                fill={finalColor}
                 textAnchor="middle"
                 fontSize={12}
                 className="bg-white px-1 font-medium text-xs rounded"

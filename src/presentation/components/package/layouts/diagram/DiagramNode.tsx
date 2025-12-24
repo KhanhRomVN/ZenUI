@@ -1,14 +1,16 @@
 import React from "react";
-import { DiagramItemProps } from "./Diagram.types";
+import { DiagramNodeProps } from "./Diagram.types";
 import { cn } from "../../../../../shared/utils/cn";
 
 import { useDiagram } from "./DiagramContext";
 
-const DiagramItem: React.FC<DiagramItemProps> = ({
+const DiagramNode: React.FC<DiagramNodeProps> = ({
   children,
   className = "",
   style = {},
   fit = true,
+  minWidth,
+  minHeight,
   maxWidth,
   maxHeight,
   showDots = false,
@@ -18,35 +20,65 @@ const DiagramItem: React.FC<DiagramItemProps> = ({
   const containerStyles: React.CSSProperties = {
     maxWidth: maxWidth,
     maxHeight: maxHeight,
+    minWidth: minWidth,
+    minHeight: minHeight,
     width: fit ? "fit-content" : undefined,
     height: fit ? "fit-content" : undefined,
     ...style,
   };
 
-  const [dragOffset, setDragOffset] = React.useState({ x: 0, y: 0 });
+  // Performance Optimization: Use Ref for drag offset to avoid re-renders on every mouse move
+  const dragOffsetRef = React.useRef({ x: 0, y: 0 });
   const isDragging = React.useRef(false);
   const startPos = React.useRef({ x: 0, y: 0 });
   const startOffset = React.useRef({ x: 0, y: 0 });
+  const rafRef = React.useRef<number | null>(null);
 
   // Context Integration
-  const { registerItem, unregisterItem, updateItemPosition } = useDiagram();
+  const {
+    registerItem,
+    unregisterItem,
+    updateItemPosition,
+    activeId,
+    setActiveId,
+    activeNodeIds,
+  } = useDiagram();
   const itemRef = React.useRef<HTMLDivElement>(null);
 
   React.useLayoutEffect(() => {
     if (props.id && itemRef.current) {
       registerItem(props.id, itemRef.current);
-      return () => unregisterItem(props.id!);
+
+      // Resize Observer to auto-update connections when content size changes
+      const observer = new ResizeObserver(() => {
+        updateItemPosition(props.id!);
+      });
+      observer.observe(itemRef.current);
+
+      return () => {
+        observer.disconnect();
+        unregisterItem(props.id!);
+        if (rafRef.current) {
+          cancelAnimationFrame(rafRef.current);
+        }
+      };
     }
-  }, [props.id, registerItem, unregisterItem]);
+  }, [props.id, registerItem, unregisterItem, updateItemPosition]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    // Left click to select
+    if (e.button === 0) {
+      e.stopPropagation(); // Prevent clearing selection
+      if (props.id) setActiveId(props.id);
+    }
+
     if (e.button === 2) {
       // Right click
       e.preventDefault();
       e.stopPropagation();
       isDragging.current = true;
       startPos.current = { x: e.clientX, y: e.clientY };
-      startOffset.current = { ...dragOffset };
+      startOffset.current = { ...dragOffsetRef.current };
 
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouseup", handleMouseUp);
@@ -54,22 +86,41 @@ const DiagramItem: React.FC<DiagramItemProps> = ({
   };
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging.current) return;
-    const deltaX = e.clientX - startPos.current.x;
-    const deltaY = e.clientY - startPos.current.y;
-    setDragOffset({
-      x: startOffset.current.x + deltaX,
-      y: startOffset.current.y + deltaY,
-    });
+    if (!isDragging.current || !itemRef.current) return;
 
-    // Notify context to update edges
-    if (props.id) {
-      updateItemPosition(props.id);
-    }
+    if (rafRef.current) return; // Drop frame if already scheduled
+
+    rafRef.current = requestAnimationFrame(() => {
+      if (!isDragging.current || !itemRef.current) return;
+
+      const deltaX = e.clientX - startPos.current.x;
+      const deltaY = e.clientY - startPos.current.y;
+
+      // Update ref directly
+      dragOffsetRef.current = {
+        x: startOffset.current.x + deltaX,
+        y: startOffset.current.y + deltaY,
+      };
+
+      // Direct DOM manipulation for performance
+      itemRef.current.style.transform = `translate(${dragOffsetRef.current.x}px, ${dragOffsetRef.current.y}px)`;
+
+      // Notify context to update edges (still needed for edges to follow)
+      // This might still cause some overhead but much less than full component re-render
+      if (props.id) {
+        updateItemPosition(props.id);
+      }
+
+      rafRef.current = null;
+    });
   };
 
   const handleMouseUp = () => {
     isDragging.current = false;
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
     document.removeEventListener("mousemove", handleMouseMove);
     document.removeEventListener("mouseup", handleMouseUp);
   };
@@ -85,12 +136,22 @@ const DiagramItem: React.FC<DiagramItemProps> = ({
     e.preventDefault();
   };
 
+  const isActive = activeId === props.id;
+  const isRelated = props.id ? activeNodeIds?.has(props.id) : false;
+
   // Merge drag transform with valid style
   const finalStyle = {
     ...containerStyles,
     transform: `${containerStyles.transform || ""} translate(${
-      dragOffset.x
-    }px, ${dragOffset.y}px)`,
+      dragOffsetRef.current.x
+    }px, ${dragOffsetRef.current.y}px)`,
+    // Visual feedback for selection
+    borderColor: isActive ? "#3b82f6" : isRelated ? "#3b82f6" : undefined,
+    borderStyle: isRelated ? "dashed" : containerStyles.borderStyle,
+    borderWidth: isActive || isRelated ? 2 : containerStyles.borderWidth,
+    zIndex: isActive || isDragging.current ? 50 : undefined,
+    opacity: activeId && !isActive && !isRelated ? 0.3 : 1, // Dim others
+    transition: "all 0.2s",
   };
 
   const dotClass = cn(
@@ -146,4 +207,4 @@ const DiagramItem: React.FC<DiagramItemProps> = ({
   );
 };
 
-export default DiagramItem;
+export default DiagramNode;

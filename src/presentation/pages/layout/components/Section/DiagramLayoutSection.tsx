@@ -1,6 +1,7 @@
 import {
   DiagramLayout,
-  DiagramItem,
+  DiagramNode,
+  DiagramWrapper,
 } from "../../../../components/package/layouts/diagram";
 import {
   CodeBlock,
@@ -10,23 +11,37 @@ import {
 import { FileCode, Activity } from "lucide-react";
 
 const DiagramLayoutSection = () => {
-  const usageCode = `import { DiagramLayout, DiagramItem } from "@khanhromvn/zenui";
+  const usageCode = `import { DiagramLayout, DiagramNode, DiagramWrapper } from "@khanhromvn/zenui";
 import { CodeBlock, CodeBlockHeader, CodeBlockBody } from "src/presentation/components/package/components/codeblock";
 
 function MyDiagram() {
   return (
     <DiagramLayout className="h-[500px] border border-border-default rounded-xl">
-      <DiagramItem className="absolute top-[50px] left-[50px] w-[400px]">
-        <CodeBlock 
-           code="export const add = (a, b) => a + b;"
-           language="typescript"
-           filename="utils.ts"
-           theme="vs-dark"
+      <DiagramWrapper
+        id="node-group"
+        fit={true}
+        minWidth={200}
+        minHeight={100}
+        maxWidth={1000}
+        maxHeight={1000}
+        className="absolute top-[50px] left-[50px] border border-dashed border-gray-300 rounded-xl bg-gray-50/50 p-4"
+      >
+        <div className="absolute top-2 left-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
+          Module A
+        </div>
+        
+        <DiagramNode 
+          id="node-1" 
+          fit={false}
+          minWidth={200}
+          minHeight={100}
+          maxWidth={800}
+          maxHeight={800} 
+          className="absolute top-[40px] left-[20px]"
         >
-           <CodeBlockHeader />
-           <CodeBlockBody />
-        </CodeBlock>
-      </DiagramItem>
+           {/* ... */}
+        </DiagramNode>
+      </DiagramWrapper>
     </DiagramLayout>
   );
 }`;
@@ -87,30 +102,78 @@ console.log(result); // 30`;
       <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
         <div className="h-[500px] relative rounded-xl border border-border-default overflow-hidden">
           <DiagramLayout className="h-full w-full bg-transparent" edges={edges}>
-            {/* Node 1 */}
-            <DiagramItem
-              id="node-1"
-              fit={false}
-              className="absolute top-[50px] left-[50px] w-[450px]"
+            {/* Group Node */}
+            <DiagramWrapper
+              id="node-group"
+              fit={true}
+              minWidth={200}
+              minHeight={100}
+              maxWidth={1000}
+              maxHeight={1000}
+              className="absolute top-[50px] left-[50px] border border-dashed border-border-hover rounded-md p-4"
             >
-              <CodeBlock
-                code={node1Code}
-                language="typescript"
-                filename="utils.ts"
-                theme="vs-dark"
-                showLineNumbers={true}
-                className="h-full"
+              <div className="absolute top-2 left-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                Module A
+              </div>
+
+              {/* Node 1 (Nested) */}
+              <DiagramNode
+                id="node-1"
+                fit={false}
+                minWidth={300}
+                minHeight={100}
+                maxWidth={600}
+                maxHeight={600}
+                className="absolute top-[40px] left-[20px]"
               >
-                <CodeBlockHeader />
-                <CodeBlockBody />
-              </CodeBlock>
-            </DiagramItem>
+                <div className="flex flex-col h-full gap-2">
+                  <CodeBlock
+                    code={node1Code}
+                    language="typescript"
+                    filename="utils.ts"
+                    theme="vs-dark"
+                    showLineNumbers={true}
+                    className="h-full transition-all duration-300"
+                  >
+                    <CodeBlockHeader />
+                    <CodeBlockBody />
+                  </CodeBlock>
+                </div>
+              </DiagramNode>
+
+              {/* Node 3 (Nested) */}
+              <DiagramNode
+                id="node-3"
+                fit={false}
+                minWidth={300}
+                minHeight={100}
+                maxWidth={600}
+                maxHeight={600}
+                className="absolute top-[40px] left-[500px]"
+              >
+                <CodeBlock
+                  code={node3Code}
+                  language="typescript"
+                  filename="types.ts"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
+              </DiagramNode>
+            </DiagramWrapper>
 
             {/* Node 2 */}
-            <DiagramItem
+            <DiagramNode
               id="node-2"
               fit={false}
-              className="absolute top-[250px] left-[450px] w-[500px]"
+              minWidth={300}
+              minHeight={100}
+              maxWidth={600}
+              maxHeight={600}
+              className="absolute top-[410px] left-[250px]"
             >
               <CodeBlock
                 code={node2Code}
@@ -123,26 +186,7 @@ console.log(result); // 30`;
                 <CodeBlockHeader />
                 <CodeBlockBody />
               </CodeBlock>
-            </DiagramItem>
-
-            {/* Node 3 */}
-            <DiagramItem
-              id="node-3"
-              fit={false}
-              className="absolute top-[50px] left-[550px] w-[400px]"
-            >
-              <CodeBlock
-                code={node3Code}
-                language="typescript"
-                filename="types.ts"
-                theme="vs-dark"
-                showLineNumbers={true}
-                className="h-full"
-              >
-                <CodeBlockHeader />
-                <CodeBlockBody />
-              </CodeBlock>
-            </DiagramItem>
+            </DiagramNode>
           </DiagramLayout>
         </div>
       </div>

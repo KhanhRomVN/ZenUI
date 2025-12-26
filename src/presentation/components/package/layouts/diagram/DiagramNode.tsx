@@ -155,7 +155,7 @@ const DiagramNode: React.FC<DiagramNodeProps> = ({
   };
 
   const dotClass = cn(
-    "absolute w-3 h-3 bg-blue-500 rounded-full transition-all cursor-pointer z-10",
+    "absolute w-2 h-2 bg-blue-500 rounded-full transition-all cursor-pointer z-10",
     !showDots && "opacity-0 group-hover:opacity-100",
     dotClassName
   );

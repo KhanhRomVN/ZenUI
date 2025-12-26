@@ -16,20 +16,20 @@ import { CodeBlock, CodeBlockHeader, CodeBlockBody } from "src/presentation/comp
 
 function MyDiagram() {
   return (
-    <DiagramLayout className="h-[500px] border border-border-default rounded-xl">
+    <DiagramLayout 
+      className="h-[1000px] border border-border-default rounded-xl"
+      minimap={true} // Enable Minimap
+    >
       <DiagramWrapper
         id="node-group"
         fit={true}
+        title={<span className="text-xs font-bold text-gray-500 uppercase">Module A</span>}
         minWidth={200}
         minHeight={100}
         maxWidth={1000}
         maxHeight={1000}
         className="absolute top-[50px] left-[50px] border border-dashed border-gray-300 rounded-xl bg-gray-50/50 p-4"
       >
-        <div className="absolute top-2 left-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
-          Module A
-        </div>
-        
         <DiagramNode 
           id="node-1" 
           fit={false}
@@ -95,28 +95,32 @@ console.log(result); // 30`;
       <p className="text-lg text-text-secondary mb-6 leading-relaxed">
         A specialized layout for node-based diagrams and flowcharts. Provides
         items with connection points (dots) on all four sides. Supports
-        auto-fitting content or fixed dimensions.
+        auto-fitting content or fixed dimensions, minimap, and grouping.
       </p>
 
       {/* Live Demo */}
       <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
-        <div className="h-[500px] relative rounded-xl border border-border-default overflow-hidden">
-          <DiagramLayout className="h-full w-full bg-transparent" edges={edges}>
+        <div className="h-[1000px] relative rounded-xl border border-border-default overflow-hidden">
+          <DiagramLayout
+            className="h-full w-full"
+            edges={edges}
+            minimap="bottom-right"
+          >
             {/* Group Node */}
             <DiagramWrapper
               id="node-group"
               fit={true}
+              title={
+                <span className="text-xs font-bold text-text-primary">
+                  Module A
+                </span>
+              }
               minWidth={200}
               minHeight={100}
               maxWidth={1000}
               maxHeight={1000}
               className="absolute top-[50px] left-[50px] border border-dashed border-border-hover rounded-md p-4"
             >
-              <div className="absolute top-2 left-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                Module A
-              </div>
-
-              {/* Node 1 (Nested) */}
               <DiagramNode
                 id="node-1"
                 fit={false}
@@ -126,22 +130,19 @@ console.log(result); // 30`;
                 maxHeight={600}
                 className="absolute top-[40px] left-[20px]"
               >
-                <div className="flex flex-col h-full gap-2">
-                  <CodeBlock
-                    code={node1Code}
-                    language="typescript"
-                    filename="utils.ts"
-                    theme="vs-dark"
-                    showLineNumbers={true}
-                    className="h-full transition-all duration-300"
-                  >
-                    <CodeBlockHeader />
-                    <CodeBlockBody />
-                  </CodeBlock>
-                </div>
+                <CodeBlock
+                  code={node1Code}
+                  language="typescript"
+                  filename="utils.ts"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full transition-all duration-300"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
               </DiagramNode>
 
-              {/* Node 3 (Nested) */}
               <DiagramNode
                 id="node-3"
                 fit={false}
@@ -173,7 +174,7 @@ console.log(result); // 30`;
               minHeight={100}
               maxWidth={600}
               maxHeight={600}
-              className="absolute top-[410px] left-[250px]"
+              className="absolute top-[450px] left-[250px]"
             >
               <CodeBlock
                 code={node2Code}

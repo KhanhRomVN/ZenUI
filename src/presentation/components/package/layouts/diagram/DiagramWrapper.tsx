@@ -15,29 +15,19 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
   maxHeight,
   showDots = false,
   dotClassName,
+  title,
   ...props
 }) => {
-  // Styles for the anchor (logical parent). Needs to be transparent/invisible.
-  const anchorStyles: React.CSSProperties = {
-    position: "absolute", // Ensures we can transform it
-    background: "transparent",
-    border: "none",
-    boxShadow: "none",
-    width: 0, // Anchor has no size, children define its extent context
-    height: 0,
-    overflow: "visible", // Must see children
-    pointerEvents: "none", // Let clicks pass through empty areas? Or maybe not.
-    ...style,
-  };
-
   const finalAnchorStyle: React.CSSProperties = {
     ...style,
+    position: "absolute",
     width: 0,
     height: 0,
     background: "transparent",
     border: "none",
     boxShadow: "none",
-    // Maintain transform
+    overflow: "visible",
+    pointerEvents: "auto", // Cho phép bắt events
   };
 
   const dragOffsetRef = React.useRef({ x: 0, y: 0 });
@@ -180,9 +170,11 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
   const handleMouseDown = (e: React.MouseEvent) => {
     // Left click
     if (e.button === 0) {
-      e.stopPropagation();
-      // Click on wrapper background acts like clicking canvas
-      setActiveId(null);
+      // Nếu click vào visual box (border), select wrapper
+      if (e.target === visualRef.current) {
+        e.stopPropagation();
+        if (props.id) setActiveId(props.id);
+      }
     }
 
     if (e.button === 2) {
@@ -251,13 +243,9 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
     position: "absolute",
     left: visualBox.x,
     top: visualBox.y,
-    width: fit && visualBox.width > 0 ? visualBox.width : undefined, // Fallback?
-    height: fit && visualBox.height > 0 ? visualBox.height : undefined,
-    minWidth: minWidth,
-    minHeight: minHeight,
-    maxWidth: maxWidth,
-    maxHeight: maxHeight,
-    ...(!fit ? { width: maxWidth, height: maxHeight } : {}),
+    width: fit && visualBox.width > 0 ? visualBox.width : "auto",
+    height: fit && visualBox.height > 0 ? visualBox.height : "auto",
+    // KHÔNG áp dụng min/max constraints cho wrapper
   };
 
   const highlightStyles: React.CSSProperties = {
@@ -266,7 +254,7 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
     borderWidth: isActive || isRelated ? 2 : undefined,
     opacity: activeId && !isActive && !isRelated ? 0.3 : 1,
     transition: "all 0.2s",
-    pointerEvents: "auto", // Visual box captures clicks
+    pointerEvents: "none", // Cho phép click xuyên qua wrapper background
     zIndex: isActive || isDragging.current ? 40 : undefined,
   };
 
@@ -307,18 +295,20 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
         onMouseDown={handleMouseDown}
         onContextMenu={handleContextMenu}
       >
-        {/* Dots */}
+        {/* Dots - bắt pointer events */}
         <div
           className={cn(
             dotClass,
             "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
           )}
+          style={{ pointerEvents: "auto" }}
         />
         <div
           className={cn(
             dotClass,
             "top-1/2 right-0 translate-x-1/2 -translate-y-1/2"
           )}
+          style={{ pointerEvents: "auto" }}
         />
         <div
           className={cn(

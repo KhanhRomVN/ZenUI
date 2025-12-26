@@ -2,12 +2,14 @@ import React, { useState, useCallback, useMemo } from "react";
 import { DiagramLayoutProps, DiagramEdgeOptions } from "./Diagram.types";
 import { DiagramContext } from "./DiagramContext";
 import { cn } from "../../../../../shared/utils/cn";
+import DiagramMinimap from "./DiagramMinimap";
 
 const DiagramLayout: React.FC<DiagramLayoutProps> = ({
   children,
   className = "",
   style = {},
   edges = [],
+  minimap,
   ...props
 }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -62,27 +64,6 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
   const { edgeIds: activeEdgeIds, nodeIds: activeNodeIds } = useMemo(
     () => getActiveConnections(activeId, edges),
     [activeId, edges, getActiveConnections]
-  );
-
-  const contextValue = useMemo(
-    () => ({
-      registerItem,
-      unregisterItem,
-      updateItemPosition,
-      items,
-      version,
-      activeId,
-      activeNodeIds,
-      setActiveId,
-    }),
-    [
-      registerItem,
-      unregisterItem,
-      updateItemPosition,
-      items,
-      version,
-      activeNodeIds,
-    ]
   );
 
   const isPanning = React.useRef(false);
@@ -179,12 +160,47 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
     }
   };
 
+  const setViewport = useCallback(
+    (v: { x: number; y: number; zoom: number }) => {
+      setPosition({ x: v.x, y: v.y });
+      setScale(v.zoom);
+    },
+    []
+  );
+
+  const contextValue = useMemo(
+    () => ({
+      registerItem,
+      unregisterItem,
+      updateItemPosition,
+      items,
+      version,
+      activeId,
+      activeNodeIds,
+      setActiveId,
+      viewport: { x: position.x, y: position.y, zoom: scale },
+      setViewport,
+    }),
+    [
+      registerItem,
+      unregisterItem,
+      updateItemPosition,
+      items,
+      version,
+      activeNodeIds,
+      activeId,
+      position,
+      scale,
+      setViewport,
+    ]
+  );
+
   return (
     <DiagramContext.Provider value={contextValue}>
       <div
         ref={containerRef}
         className={cn(
-          "relative w-full h-full overflow-hidden bg-gray-50/50 cursor-grab active:cursor-grabbing",
+          "relative w-full h-full overflow-hidden cursor-grab active:cursor-grabbing",
           className
         )}
         onMouseEnter={() => (isHovering.current = true)}
@@ -215,6 +231,12 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
           {/* Items Layer */}
           <div className="z-10 relative w-full h-full">{children}</div>
         </div>
+
+        {minimap && (
+          <DiagramMinimap
+            position={typeof minimap === "string" ? minimap : undefined}
+          />
+        )}
       </div>
     </DiagramContext.Provider>
   );

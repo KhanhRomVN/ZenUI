@@ -1,9 +1,20 @@
 import React from "react";
 
+export type DiagramWrapperProps = Omit<DiagramNodeProps, "title"> & {
+  title?: React.ReactNode;
+};
+
+export type DiagramMinimapPosition =
+  | "top-right"
+  | "top-left"
+  | "bottom-right"
+  | "bottom-left";
+
 export interface DiagramLayoutProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   edges?: DiagramEdgeOptions[];
+  minimap?: boolean | DiagramMinimapPosition;
 }
 
 export interface DiagramNodeProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -33,8 +44,6 @@ export interface DiagramNodeProps extends React.HTMLAttributes<HTMLDivElement> {
   id?: string;
 }
 
-export type DiagramWrapperProps = DiagramNodeProps;
-
 export type DiagramEdgeType = "straight" | "step" | "bezier" | "smooth";
 
 export interface DiagramEdgeOptions {
@@ -59,4 +68,6 @@ export interface DiagramContextType {
   activeId: string | null;
   activeNodeIds: Set<string>;
   setActiveId: (id: string | null) => void;
+  viewport: { x: number; y: number; zoom: number };
+  setViewport: (viewport: { x: number; y: number; zoom: number }) => void;
 }

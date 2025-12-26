@@ -4,17 +4,10 @@ export type DiagramWrapperProps = Omit<DiagramNodeProps, "title"> & {
   title?: React.ReactNode;
 };
 
-export type DiagramMinimapPosition =
-  | "top-right"
-  | "top-left"
-  | "bottom-right"
-  | "bottom-left";
-
 export interface DiagramLayoutProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   edges?: DiagramEdgeOptions[];
-  minimap?: boolean | DiagramMinimapPosition;
 }
 
 export interface DiagramNodeProps extends React.HTMLAttributes<HTMLDivElement> {

@@ -2,14 +2,12 @@ import React, { useState, useCallback, useMemo } from "react";
 import { DiagramLayoutProps, DiagramEdgeOptions } from "./Diagram.types";
 import { DiagramContext } from "./DiagramContext";
 import { cn } from "../../../../../shared/utils/cn";
-import DiagramMinimap from "./DiagramMinimap";
 
 const DiagramLayout: React.FC<DiagramLayoutProps> = ({
   children,
   className = "",
   style = {},
   edges = [],
-  minimap,
   ...props
 }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -231,12 +229,6 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
           {/* Items Layer */}
           <div className="z-10 relative w-full h-full">{children}</div>
         </div>
-
-        {minimap && (
-          <DiagramMinimap
-            position={typeof minimap === "string" ? minimap : undefined}
-          />
-        )}
       </div>
     </DiagramContext.Provider>
   );

@@ -101,20 +101,11 @@ console.log(result); // 30`;
       {/* Live Demo */}
       <div className="border-2 border-dashed border-border-default rounded-lg p-8 mb-6">
         <div className="h-[1000px] relative rounded-xl border border-border-default overflow-hidden">
-          <DiagramLayout
-            className="h-full w-full"
-            edges={edges}
-            minimap="bottom-right"
-          >
+          <DiagramLayout className="h-full w-full" edges={edges}>
             {/* Group Node */}
             <DiagramWrapper
               id="node-group"
               fit={true}
-              title={
-                <span className="text-xs font-bold text-text-primary">
-                  Module A
-                </span>
-              }
               minWidth={200}
               minHeight={100}
               maxWidth={1000}

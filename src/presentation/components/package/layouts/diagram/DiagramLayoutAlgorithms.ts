@@ -227,8 +227,8 @@ function layoutGroupInternals(
 
   // ORGANIC GRID LAYOUT - Balance structure with strong randomness
   const localPositions: Record<string, { x: number; y: number }> = {};
-  const NODE_GAP = 50; // Further increased gap for better visual separation
-  const RANDOM_POSITION_OFFSET = 45; // Increased random offset for breaking alignment
+  const NODE_GAP = 80; // Increased gap to prevent node overlap in wrappers
+  const RANDOM_POSITION_OFFSET = 25; // Moderate random offset for subtle variation
 
   // Highly randomized column calculation to break patterns
   let baseColumns = 1;
@@ -287,19 +287,13 @@ function layoutGroupInternals(
     const w = node.width || CODE_NODE_WIDTH;
     const h = node.height || CODE_NODE_DEFAULT_HEIGHT;
 
-    // Add exponentially strong random offset
-    const randomX = rng.range(
-      -RANDOM_POSITION_OFFSET * 1.8,
-      RANDOM_POSITION_OFFSET * 1.8
-    );
-    const randomY = rng.range(
-      -RANDOM_POSITION_OFFSET * 1.8,
-      RANDOM_POSITION_OFFSET * 1.8
-    );
+    // Add moderate random offset for subtle organic feel
+    const randomX = rng.range(-RANDOM_POSITION_OFFSET, RANDOM_POSITION_OFFSET);
+    const randomY = rng.range(-RANDOM_POSITION_OFFSET, RANDOM_POSITION_OFFSET);
 
-    // Extra chaotic offset for grid breaking
-    const rowOffsetX = currentCol > 0 ? rng.range(-40, 40) : 0;
-    const rowOffsetY = rng.range(-35, 35);
+    // Subtle row offset for natural variation
+    const rowOffsetX = currentCol > 0 ? rng.range(-15, 15) : 0;
+    const rowOffsetY = rng.range(-15, 15);
 
     localPositions[node.id] = {
       x: currentX + randomX + rowOffsetX,
@@ -314,24 +308,25 @@ function layoutGroupInternals(
       currentX = FILE_GROUP_PADDING;
       currentY += rowHeights[currentRow - 1] + NODE_GAP;
     } else {
-      // Move to next column with exponential variation
-      const columnGapVariation = NODE_GAP + rng.range(-50, 50);
-      currentX += maxColWidth[currentCol - 1] + columnGapVariation;
+      // Move to next column with controlled variation
+      const gapVariation = rng.range(-20, 30);
+      const columnGap = Math.max(NODE_GAP * 0.7, NODE_GAP + gapVariation);
+      currentX += maxColWidth[currentCol - 1] + columnGap;
     }
   });
 
-  // Calculate total dimensions with extra padding for random offsets
-  const extraPadding = RANDOM_POSITION_OFFSET + 20;
+  // Calculate total dimensions with sufficient padding
+  const extraPadding = RANDOM_POSITION_OFFSET * 2 + 30;
   const totalWidth =
     maxColWidth.reduce((a, b) => a + b, 0) +
     (columns - 1) * NODE_GAP +
     FILE_GROUP_PADDING * 2 +
-    extraPadding * 3;
+    extraPadding * 2;
   const totalHeight =
     rowHeights.reduce((a, b) => a + b, 0) +
     (rowHeights.length - 1) * NODE_GAP +
     FILE_GROUP_PADDING * 2 +
-    extraPadding * 3;
+    extraPadding * 2;
 
   return {
     width: totalWidth,

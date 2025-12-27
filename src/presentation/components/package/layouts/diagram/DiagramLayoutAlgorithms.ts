@@ -57,8 +57,9 @@ export function smartHierarchicalLayout(
 ): LayoutResult {
   if (nodes.length === 0) return { positions: {} };
 
-  // Create seeded random generator - different seed each time for true randomness
-  const randomSeed = Date.now() + Math.random() * 10000;
+  // Create truly random seed using multiple entropy sources
+  const randomSeed =
+    Date.now() + Math.random() * 100000 + performance.now() * Math.random();
   const rng = new SeededRandom(randomSeed);
   const positions: Record<string, { x: number; y: number }> = {};
 
@@ -91,14 +92,12 @@ export function smartHierarchicalLayout(
   levels.forEach((levelGroups) => {
     if (levelGroups.length === 0) return;
 
-    // Sort groups based on Barycenter Heuristic (Average Parent X)
-    // This keeps connected nodes close to each other.
+    // Add random shuffle with Barycenter influence (70% structure, 30% chaos)
     if (levelGroups.length > 0) {
       levelGroups.forEach((group) => {
         let sumX = 0;
         let count = 0;
 
-        // Find incoming edges from nodes already positioned (previous levels)
         const groupNodeIds = new Set(group.nodes.map((n) => n.id));
 
         edges.forEach((edge) => {
@@ -108,23 +107,26 @@ export function smartHierarchicalLayout(
           }
         });
 
-        // Store a sort score.
-        // If no parents, use Infinity or -Infinity?
-        // Use a stable secondary sort (label) if no parents.
-        // Or finding "file" order from original nodes list?
-        // Let's use a very large number if no parents, but maintain label order among them.
-        (group as any)._sortScore = count > 0 ? sumX / count : null;
+        // Add significant random noise to break determinism
+        const randomNoise = rng.range(-500, 500);
+        const baryCenter = count > 0 ? sumX / count : rng.range(-1000, 1000);
+        (group as any)._sortScore = baryCenter + randomNoise;
       });
 
       levelGroups.sort((a: any, b: any) => {
-        if (a._sortScore !== null && b._sortScore !== null) {
-          return a._sortScore - b._sortScore;
-        }
-        if (a._sortScore !== null) return 1; // Parents go last? No.
-        if (b._sortScore !== null) return -1;
-
-        return a.label.localeCompare(b.label);
+        // Primary sort by score with random noise
+        const scoreA = a._sortScore ?? rng.range(-2000, 2000);
+        const scoreB = b._sortScore ?? rng.range(-2000, 2000);
+        return scoreA - scoreB;
       });
+    }
+
+    // Shuffle group order slightly for variation
+    if (rng.next() > 0.3) {
+      for (let i = levelGroups.length - 1; i > 0; i--) {
+        const j = Math.floor(rng.next() * (i + 1));
+        [levelGroups[i], levelGroups[j]] = [levelGroups[j], levelGroups[i]];
+      }
     }
 
     // First pass: Calculate dimensions for all groups in this level
@@ -150,9 +152,12 @@ export function smartHierarchicalLayout(
 
     groupLayouts.forEach(
       ({ width, height, nodePositions, group }, groupIndex) => {
-        // Add strong random offset to break grid pattern
-        const randomXOffset = rng.range(-RANDOM_OFFSET, RANDOM_OFFSET);
-        const randomYOffset = rng.range(-RANDOM_OFFSET / 2, RANDOM_OFFSET / 2);
+        // Add very strong random offset with exponential variation
+        const randomXOffset = rng.range(-RANDOM_OFFSET * 2, RANDOM_OFFSET * 2);
+        const randomYOffset = rng.range(
+          -RANDOM_OFFSET * 1.5,
+          RANDOM_OFFSET * 1.5
+        );
 
         // Assign global positions relative to group layout with randomization
         Object.entries(nodePositions).forEach(([nodeId, pos]) => {
@@ -225,19 +230,23 @@ function layoutGroupInternals(
   const NODE_GAP = 50; // Further increased gap for better visual separation
   const RANDOM_POSITION_OFFSET = 45; // Increased random offset for breaking alignment
 
-  // Dynamic column calculation with randomization to avoid uniform grids
-  // Add slight variation to column count
+  // Highly randomized column calculation to break patterns
   let baseColumns = 1;
   if (sortedNodes.length === 1) baseColumns = 1;
-  else if (sortedNodes.length === 2) baseColumns = 2; // 2 nodes horizontal
-  else if (sortedNodes.length <= 4) baseColumns = 2; // 3-4 nodes: 2 columns
-  else if (sortedNodes.length <= 6)
-    baseColumns = 2; // 5-6 nodes: 2 columns (avoid 3-col grid)
-  else if (sortedNodes.length <= 9) baseColumns = rng.next() > 0.5 ? 2 : 3;
-  // 7-9 nodes: randomly 2 or 3 columns
-  else baseColumns = Math.min(4, Math.ceil(Math.sqrt(sortedNodes.length))); // Max 4 columns
+  else if (sortedNodes.length === 2) baseColumns = rng.next() > 0.3 ? 2 : 1;
+  else if (sortedNodes.length <= 4) baseColumns = rng.next() > 0.5 ? 2 : 3;
+  else if (sortedNodes.length <= 6) baseColumns = rng.next() > 0.4 ? 2 : 3;
+  else if (sortedNodes.length <= 9) {
+    const r = rng.next();
+    baseColumns = r > 0.6 ? 2 : r > 0.3 ? 3 : 4;
+  } else {
+    baseColumns = Math.min(
+      4,
+      Math.ceil(Math.sqrt(sortedNodes.length)) + Math.floor(rng.range(-1, 2))
+    );
+  }
 
-  const columns = baseColumns;
+  const columns = Math.max(1, baseColumns);
 
   // Calculate positions in grid with better space utilization
   let currentX = FILE_GROUP_PADDING;
@@ -278,13 +287,19 @@ function layoutGroupInternals(
     const w = node.width || CODE_NODE_WIDTH;
     const h = node.height || CODE_NODE_DEFAULT_HEIGHT;
 
-    // Add strong random offset to break strict grid alignment
-    const randomX = rng.range(-RANDOM_POSITION_OFFSET, RANDOM_POSITION_OFFSET);
-    const randomY = rng.range(-RANDOM_POSITION_OFFSET, RANDOM_POSITION_OFFSET);
+    // Add exponentially strong random offset
+    const randomX = rng.range(
+      -RANDOM_POSITION_OFFSET * 1.8,
+      RANDOM_POSITION_OFFSET * 1.8
+    );
+    const randomY = rng.range(
+      -RANDOM_POSITION_OFFSET * 1.8,
+      RANDOM_POSITION_OFFSET * 1.8
+    );
 
-    // Add extra offset for nodes in same row to prevent horizontal alignment
-    const rowOffsetX = currentCol > 0 ? rng.range(-15, 15) : 0;
-    const rowOffsetY = rng.range(-20, 20);
+    // Extra chaotic offset for grid breaking
+    const rowOffsetX = currentCol > 0 ? rng.range(-40, 40) : 0;
+    const rowOffsetY = rng.range(-35, 35);
 
     localPositions[node.id] = {
       x: currentX + randomX + rowOffsetX,
@@ -299,8 +314,8 @@ function layoutGroupInternals(
       currentX = FILE_GROUP_PADDING;
       currentY += rowHeights[currentRow - 1] + NODE_GAP;
     } else {
-      // Move to next column in same row with strong variation
-      const columnGapVariation = NODE_GAP + rng.range(-30, 30);
+      // Move to next column with exponential variation
+      const columnGapVariation = NODE_GAP + rng.range(-50, 50);
       currentX += maxColWidth[currentCol - 1] + columnGapVariation;
     }
   });

@@ -2,9 +2,9 @@ import React from "react";
 import { DiagramNodeProps } from "./Diagram.types";
 import { cn } from "../../../../../shared/utils/cn";
 
-import { useDiagram } from "./DiagramContext";
+import { useDiagramActions, useDiagramItems } from "./DiagramContext";
 
-const DiagramNode: React.FC<DiagramNodeProps> = ({
+const DiagramNode: React.FC<DiagramNodeProps & { filename?: string }> = ({
   children,
   className = "",
   style = {},
@@ -15,8 +15,20 @@ const DiagramNode: React.FC<DiagramNodeProps> = ({
   maxHeight,
   showDots = false,
   dotClassName,
+  filename,
   ...props
 }) => {
+  const { layoutPositions, activeId, activeNodeIds } = useDiagramItems();
+  const {
+    registerItem,
+    unregisterItem,
+    updateItemPosition,
+    setActiveId,
+    setIsDragging,
+  } = useDiagramActions();
+
+  const autoPos = props.id ? layoutPositions[props.id] : undefined;
+
   const containerStyles: React.CSSProperties = {
     maxWidth: maxWidth,
     maxHeight: maxHeight,
@@ -25,6 +37,12 @@ const DiagramNode: React.FC<DiagramNodeProps> = ({
     width: fit ? "fit-content" : undefined,
     height: fit ? "fit-content" : undefined,
     ...style,
+    // Apply auto layout position if available
+    ...(autoPos && {
+      position: "absolute",
+      left: autoPos.x,
+      top: autoPos.y,
+    }),
   };
 
   // Performance Optimization: Use Ref for drag offset to avoid re-renders on every mouse move
@@ -34,15 +52,6 @@ const DiagramNode: React.FC<DiagramNodeProps> = ({
   const startOffset = React.useRef({ x: 0, y: 0 });
   const rafRef = React.useRef<number | null>(null);
 
-  // Context Integration
-  const {
-    registerItem,
-    unregisterItem,
-    updateItemPosition,
-    activeId,
-    setActiveId,
-    activeNodeIds,
-  } = useDiagram();
   const itemRef = React.useRef<HTMLDivElement>(null);
 
   React.useLayoutEffect(() => {
@@ -68,8 +77,33 @@ const DiagramNode: React.FC<DiagramNodeProps> = ({
   const handleMouseDown = (e: React.MouseEvent) => {
     // Left click to select
     if (e.button === 0) {
-      e.stopPropagation(); // Prevent clearing selection
-      if (props.id) setActiveId(props.id);
+      if (props.id) {
+        const target = e.target as HTMLElement;
+        const containsTarget = itemRef.current?.contains(target);
+
+        console.log("[DiagramNode] handleMouseDown", {
+          nodeId: props.id,
+          targetTagName: target.tagName,
+          targetId: target.id,
+          targetClassName: target.className,
+          containsTarget,
+          isItemRef: target === itemRef.current,
+          clientX: e.clientX,
+          clientY: e.clientY,
+        });
+
+        // Chỉ stop propagation nếu click vào chính node hoặc children của nó
+        // Không stop nếu click vào vùng margin/padding ngoài
+        if (containsTarget) {
+          console.log(
+            "[DiagramNode] Contains target -> stop propagation & set active"
+          );
+          e.stopPropagation();
+          setActiveId(props.id);
+        } else {
+          console.log("[DiagramNode] NOT contains target -> bubble lên");
+        }
+      }
     }
 
     if (e.button === 2) {
@@ -77,6 +111,7 @@ const DiagramNode: React.FC<DiagramNodeProps> = ({
       e.preventDefault();
       e.stopPropagation();
       isDragging.current = true;
+      setIsDragging(true); // Notify context
       startPos.current = { x: e.clientX, y: e.clientY };
       startOffset.current = { ...dragOffsetRef.current };
 
@@ -117,6 +152,7 @@ const DiagramNode: React.FC<DiagramNodeProps> = ({
 
   const handleMouseUp = () => {
     isDragging.current = false;
+    setIsDragging(false); // Notify context
     if (rafRef.current) {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
@@ -168,6 +204,7 @@ const DiagramNode: React.FC<DiagramNodeProps> = ({
       onMouseDown={handleMouseDown}
       onContextMenu={handleContextMenu}
       id={props.id}
+      data-filename={filename}
       {...props}
     >
       {/* Top Dot */}

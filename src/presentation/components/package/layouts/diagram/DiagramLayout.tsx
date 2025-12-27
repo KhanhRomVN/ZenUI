@@ -1,23 +1,39 @@
-import React, { useState, useCallback, useMemo } from "react";
-import { DiagramLayoutProps, DiagramEdgeOptions } from "./Diagram.types";
-import { DiagramContext } from "./DiagramContext";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
+import {
+  DiagramLayoutProps,
+  DiagramEdgeOptions,
+  LayoutNode,
+} from "./Diagram.types";
+import {
+  DiagramActionContext,
+  DiagramItemContext,
+  DiagramRenderContext,
+} from "./DiagramContext";
 import { cn } from "../../../../../shared/utils/cn";
+import { calculateLayout } from "./DiagramLayoutAlgorithms";
 
 const DiagramLayout: React.FC<DiagramLayoutProps> = ({
   children,
   className = "",
   style = {},
   edges = [],
+  autoLayout = false,
+  layoutStrategy = "smart",
+  layoutOptions = {},
   ...props
 }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [scale, setScale] = useState(1);
+  const [hasFittedView, setHasFittedView] = useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   // Context State
   const [items, setItems] = useState<Record<string, HTMLElement>>({});
   const [activeId, setActiveId] = useState<string | null>(null);
   const [version, setVersion] = useState(0);
+  const [layoutPositions, setLayoutPositions] = useState<
+    Record<string, { x: number; y: number }>
+  >({});
 
   const registerItem = useCallback((id: string, element: HTMLElement) => {
     setItems((prev) => ({ ...prev, [id]: element }));
@@ -34,6 +50,136 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
   const updateItemPosition = useCallback(() => {
     setVersion((v) => v + 1);
   }, []);
+
+  const [isDragging, setIsDragging] = useState(false);
+  const [layoutVersion, setLayoutVersion] = useState(0);
+
+  // ResizeObserver to handle content loading
+  useEffect(() => {
+    if (!autoLayout) return;
+    const ro = new ResizeObserver(() => setLayoutVersion((v) => v + 1));
+    Object.values(items).forEach((el) => {
+      // Exclude items explicitly marked to ignore layout (e.g. auto-fitting wrappers)
+      if (el.getAttribute("data-layout-ignore") !== "true") {
+        ro.observe(el);
+      }
+    });
+    return () => ro.disconnect();
+  }, [items, autoLayout]);
+
+  // Auto Layout Calculation
+  useEffect(() => {
+    if (!autoLayout) {
+      setLayoutPositions({});
+      return;
+    }
+
+    if (isDragging) {
+      console.log("[DiagramLayout] Skipping auto layout while dragging");
+      return;
+    }
+
+    const nodeIds = Object.keys(items).filter((id) => {
+      const el = items[id];
+      // Exclude items explicitly marked to ignore layout (e.g. auto-fitting wrappers)
+      return el && el.getAttribute("data-layout-ignore") !== "true";
+    });
+    if (nodeIds.length === 0) return;
+
+    // ... existing logic ...
+
+    console.log("[DiagramLayout] Running auto layout for nodes:", nodeIds);
+
+    // Wait for all nodes to be measured
+    const layoutNodes: LayoutNode[] = nodeIds.map((id) => {
+      const el = items[id];
+      const rect = el.getBoundingClientRect();
+      const currentScale = scale || 1;
+
+      console.log(`[DiagramLayout] Node ${id} measured:`, {
+        width: Math.round(rect.width / currentScale),
+        height: Math.round(rect.height / currentScale),
+        rawWidth: Math.round(rect.width),
+      });
+
+      return {
+        id,
+        width: (rect.width || 200) / currentScale,
+        height: (rect.height || 150) / currentScale,
+        file: el.getAttribute("data-filename") || undefined,
+        groupId:
+          el.closest("[data-wrapper-id]")?.getAttribute("data-wrapper-id") ||
+          undefined,
+      };
+    });
+
+    // Run layout algorithm based on strategy
+    const result = calculateLayout(
+      layoutStrategy,
+      layoutNodes,
+      edges,
+      layoutOptions
+    );
+
+    console.log("[DiagramLayout] Layout result applied");
+    setLayoutPositions(result.positions);
+
+    // Auto-fit view to content (ONLY ONCE)
+    if (!hasFittedView && Object.keys(result.positions).length > 0) {
+      let minX = Infinity;
+      let minY = Infinity;
+      let maxX = -Infinity;
+      let maxY = -Infinity;
+
+      // Calculate bounds including node sizes
+      nodeIds.forEach((id) => {
+        const pos = result.positions[id];
+        const node = layoutNodes.find((n) => n.id === id);
+        const w = node?.width || 200;
+        const h = node?.height || 150;
+
+        if (pos) {
+          minX = Math.min(minX, pos.x);
+          minY = Math.min(minY, pos.y);
+          maxX = Math.max(maxX, pos.x + w);
+          maxY = Math.max(maxY, pos.y + h);
+        }
+      });
+
+      if (minX !== Infinity && containerRef.current) {
+        const padding = 100;
+        const contentWidth = maxX - minX + padding * 2;
+        const contentHeight = maxY - minY + padding * 2;
+
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const containerW = containerRect.width;
+        const containerH = containerRect.height;
+
+        // Calculate fit scale
+        const scaleX = containerW / contentWidth;
+        const scaleY = containerH / contentHeight;
+        let newScale = Math.min(scaleX, scaleY, 1); // Max scale 1 to avoid zooming in too much on small content
+        newScale = Math.max(newScale, 0.1); // Min scale constraint
+
+        // Center content
+        // Formula: center of viewport - (center of content * scale)
+        const contentCenterX = (minX + maxX) / 2;
+        const contentCenterY = (minY + maxY) / 2;
+
+        const viewportCenterX = containerW / 2;
+        const viewportCenterY = containerH / 2;
+
+        const newX = viewportCenterX - contentCenterX * newScale;
+        const newY = viewportCenterY - contentCenterY * newScale;
+
+        // console.log("[DiagramLayout] Auto-fitting view:", { ... });
+
+        setPosition({ x: newX, y: newY });
+        setScale(newScale);
+        setHasFittedView(true);
+      }
+    }
+  }, [autoLayout, edges, layoutVersion, hasFittedView]); // Depend on layoutVersion
 
   // Highlight Logic Helper
   const getActiveConnections = useCallback(
@@ -137,12 +283,34 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    console.log("[DiagramLayout] handleMouseDown", {
+      targetTagName: target.tagName,
+      targetId: target.id,
+      targetClassName: target.className,
+      isCurrentTarget: e.target === e.currentTarget,
+      isDiagramContent: target.id === "diagram-content",
+      hasZIndex: target.className.includes("z-10"),
+      clientX: e.clientX,
+      clientY: e.clientY,
+    });
+
     // Clear activeId on background click
+    // Check cho Items Layer hoặc Diagram Content
+    const isItemsLayer = target.getAttribute("data-diagram-layer") === "items";
+
     if (
       e.target === e.currentTarget ||
-      (e.target as Element).id === "diagram-content"
+      target.id === "diagram-content" ||
+      isItemsLayer
     ) {
+      console.log(
+        "[DiagramLayout] Click vào background/items layer -> clear selection"
+      );
       setActiveId(null);
+    } else {
+      console.log("[DiagramLayout] Click vào element con -> không clear");
     }
 
     // Middle click (1) or Right click (2)
@@ -166,71 +334,84 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
     []
   );
 
-  const contextValue = useMemo(
+  const actionValue = useMemo(
     () => ({
       registerItem,
       unregisterItem,
       updateItemPosition,
-      items,
-      version,
-      activeId,
-      activeNodeIds,
       setActiveId,
-      viewport: { x: position.x, y: position.y, zoom: scale },
       setViewport,
+      setIsDragging,
     }),
-    [
-      registerItem,
-      unregisterItem,
-      updateItemPosition,
+    [registerItem, unregisterItem, updateItemPosition, setActiveId, setViewport]
+  );
+
+  const itemValue = useMemo(
+    () => ({
+      activeId,
+      activeNodeIds,
+      layoutPositions,
+      isDragging,
+    }),
+    [activeId, activeNodeIds, layoutPositions, isDragging]
+  );
+
+  const renderValue = useMemo(
+    () => ({
       items,
       version,
-      activeNodeIds,
-      activeId,
-      position,
-      scale,
-      setViewport,
-    ]
+      viewport: { x: position.x, y: position.y, zoom: scale },
+    }),
+    [items, version, position, scale]
   );
 
   return (
-    <DiagramContext.Provider value={contextValue}>
-      <div
-        ref={containerRef}
-        className={cn(
-          "relative w-full h-full overflow-hidden cursor-grab active:cursor-grabbing",
-          className
-        )}
-        onMouseEnter={() => (isHovering.current = true)}
-        onMouseLeave={() => (isHovering.current = false)}
-        onMouseDown={handleMouseDown}
-        onContextMenu={handleContextMenu}
-        style={style}
-        {...props}
-      >
-        <div
-          id="diagram-content"
-          className="absolute top-0 left-0 w-full h-full origin-top-left transition-transform duration-75 ease-out"
-          style={{
-            transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
-          }}
-        >
-          {/* Edges Layer */}
-          <svg className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none z-0">
-            <DiagramEdges
-              edges={edges}
-              items={items}
-              version={version}
-              activeEdgeIds={activeEdgeIds}
-              activeId={activeId}
-            />
-          </svg>
+    <DiagramActionContext.Provider value={actionValue}>
+      <DiagramItemContext.Provider value={itemValue}>
+        <DiagramRenderContext.Provider value={renderValue}>
+          <div
+            ref={containerRef}
+            className={cn(
+              "relative w-full h-full overflow-hidden cursor-grab active:cursor-grabbing",
+              className
+            )}
+            onMouseEnter={() => (isHovering.current = true)}
+            onMouseLeave={() => (isHovering.current = false)}
+            onMouseDown={handleMouseDown}
+            onContextMenu={handleContextMenu}
+            style={style}
+            {...props}
+          >
+            <div
+              id="diagram-content"
+              className="absolute top-0 left-0 w-full h-full origin-top-left transition-transform duration-75 ease-out"
+              style={{
+                transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
+              }}
+            >
+              {/* Edges Layer */}
+              <svg className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none z-0">
+                <DiagramEdges
+                  edges={edges}
+                  items={items}
+                  version={version}
+                  activeEdgeIds={activeEdgeIds}
+                  activeId={activeId}
+                />
+              </svg>
 
-          {/* Items Layer */}
-          <div className="z-10 relative w-full h-full">{children}</div>
-        </div>
-      </div>
-    </DiagramContext.Provider>
+              {/* Items Layer */}
+              <div
+                className="z-10 relative w-full h-full"
+                data-diagram-layer="items"
+              >
+                {children}
+              </div>
+            </div>
+          </div>
+        </DiagramRenderContext.Provider>
+      </DiagramItemContext.Provider>
+    </DiagramActionContext.Provider>
   );
 };
 

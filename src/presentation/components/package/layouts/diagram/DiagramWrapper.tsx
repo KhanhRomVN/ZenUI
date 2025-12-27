@@ -2,7 +2,7 @@ import React from "react";
 import { DiagramWrapperProps } from "./Diagram.types";
 import { cn } from "../../../../../shared/utils/cn";
 
-import { useDiagram } from "./DiagramContext";
+import { useDiagramActions, useDiagramItems } from "./DiagramContext";
 
 const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
   children,
@@ -18,6 +18,16 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
   title,
   ...props
 }) => {
+  const { layoutPositions, activeId, activeNodeIds } = useDiagramItems();
+  const {
+    registerItem,
+    unregisterItem,
+    updateItemPosition,
+    setActiveId,
+    setIsDragging,
+  } = useDiagramActions();
+  const autoPos = props.id ? layoutPositions[props.id] : undefined;
+
   const finalAnchorStyle: React.CSSProperties = {
     ...style,
     position: "absolute",
@@ -28,6 +38,11 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
     boxShadow: "none",
     overflow: "visible",
     pointerEvents: "auto", // Cho phép bắt events
+    // Apply auto layout position if available
+    ...(autoPos && {
+      left: autoPos.x,
+      top: autoPos.y,
+    }),
   };
 
   const dragOffsetRef = React.useRef({ x: 0, y: 0 });
@@ -44,16 +59,6 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
 
   const rafDragRef = React.useRef<number | null>(null);
   const rafSizeRef = React.useRef<number | null>(null);
-
-  // Context Integration
-  const {
-    registerItem,
-    unregisterItem,
-    updateItemPosition,
-    activeId,
-    setActiveId,
-    activeNodeIds,
-  } = useDiagram();
 
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const visualRef = React.useRef<HTMLDivElement>(null);
@@ -168,25 +173,55 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
   }, [props.id, registerItem, unregisterItem, updateItemPosition, fit]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    // Left click
-    if (e.button === 0) {
-      // Nếu click vào visual box (border), select wrapper
-      if (e.target === visualRef.current) {
-        e.stopPropagation();
-        if (props.id) setActiveId(props.id);
-      }
-    }
-
-    if (e.button === 2) {
-      // Right click to drag group
+    // Check if we should start drag
+    const startDrag = (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
       isDragging.current = true;
+      setIsDragging(true); // Notify context
       startPos.current = { x: e.clientX, y: e.clientY };
       startOffset.current = { ...dragOffsetRef.current };
 
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouseup", handleMouseUp);
+    };
+
+    // Left click
+    if (e.button === 0) {
+      const target = e.target as HTMLElement;
+
+      console.log("[DiagramWrapper] handleMouseDown", {
+        wrapperId: props.id,
+        targetTagName: target.tagName,
+        targetId: target.id,
+        targetClassName: target.className,
+        isVisualBox: target === visualRef.current,
+        isAnchor: target === anchorRef.current,
+      });
+
+      // Nếu click vào visual box (border hoặc background của wrapper)
+      // -> Select wrapper VÀ Start Drag
+      if (target === visualRef.current) {
+        console.log("[DiagramWrapper] Click visual box -> Select & Drag");
+        setActiveId(props.id || null);
+        startDrag(e);
+        return;
+      }
+
+      // Nếu click vào anchor (vùng trống xung quanh), KHÔNG stop propagation
+      if (target === anchorRef.current) {
+        return;
+      }
+
+      // Nếu click vào probe, bỏ qua
+      if (target === probeRef.current) {
+        return;
+      }
+    }
+
+    if (e.button === 2) {
+      // Right click to drag group
+      startDrag(e);
     }
   };
 
@@ -220,6 +255,7 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
 
   const handleMouseUp = () => {
     isDragging.current = false;
+    setIsDragging(false); // Notify context
     if (rafDragRef.current) {
       cancelAnimationFrame(rafDragRef.current);
       rafDragRef.current = null;
@@ -254,7 +290,7 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
     borderWidth: isActive || isRelated ? 2 : undefined,
     opacity: activeId && !isActive && !isRelated ? 0.3 : 1,
     transition: "all 0.2s",
-    pointerEvents: "none", // Cho phép click xuyên qua wrapper background
+    pointerEvents: "none", // Để children xử lý pointer events
     zIndex: isActive || isDragging.current ? 40 : undefined,
   };
 
@@ -273,6 +309,17 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
           dragOffsetRef.current.x
         }px, ${dragOffsetRef.current.y}px)`,
       }}
+      onMouseDown={handleMouseDown}
+      onContextMenu={handleContextMenu}
+      onClick={(e) => {
+        // Bắt click vào anchor để không bị children chặn
+        const target = e.target as HTMLElement;
+        if (target === anchorRef.current || target === probeRef.current) {
+          // Click vào vùng trống, không làm gì để bubble lên
+          return;
+        }
+      }}
+      data-wrapper-id={props.id}
       {...props}
     >
       {/* Scale Probe - Invisible, fixed width 100px */}
@@ -290,10 +337,9 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
       {/* Visual Box */}
       <div
         ref={visualRef}
-        className={cn("relative group", className)}
+        data-layout-ignore={fit ? "true" : undefined}
+        className={cn("relative group bg-transparent", className)}
         style={{ ...visualStyles, ...highlightStyles }}
-        onMouseDown={handleMouseDown}
-        onContextMenu={handleContextMenu}
       >
         {/* Dots - bắt pointer events */}
         <div
@@ -315,12 +361,14 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
             dotClass,
             "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2"
           )}
+          style={{ pointerEvents: "auto" }}
         />
         <div
           className={cn(
             dotClass,
             "top-1/2 left-0 -translate-x-1/2 -translate-y-1/2"
           )}
+          style={{ pointerEvents: "auto" }}
         />
       </div>
 

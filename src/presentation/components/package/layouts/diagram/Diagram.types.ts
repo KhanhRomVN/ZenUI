@@ -4,10 +4,31 @@ export type DiagramWrapperProps = Omit<DiagramNodeProps, "title"> & {
   title?: React.ReactNode;
 };
 
+export type LayoutStrategy = "smart" | "vertical" | "grid";
+
 export interface DiagramLayoutProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   edges?: DiagramEdgeOptions[];
+  /**
+   * Enable smart auto layout algorithm.
+   * When true, nodes will be automatically positioned for optimal visualization.
+   */
+  autoLayout?: boolean;
+  /**
+   * Layout strategy to use.
+   * Default is "smart".
+   */
+  layoutStrategy?: LayoutStrategy;
+  /**
+   * Options for smart layout algorithm
+   */
+  layoutOptions?: {
+    nodeSpacing?: number; // Minimum space between nodes (default: 80)
+    iterations?: number; // Number of simulation iterations (default: 100)
+    edgeWeight?: number; // How much edges pull connected nodes together (default: 0.5)
+    repulsionStrength?: number; // How much nodes push each other apart (default: 5000)
+  };
 }
 
 export interface DiagramNodeProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -52,15 +73,39 @@ export interface DiagramEdgeOptions {
   style?: "solid" | "dashed" | "dotted";
 }
 
-export interface DiagramContextType {
+export interface DiagramActionContextType {
   registerItem: (id: string, element: HTMLElement) => void;
   unregisterItem: (id: string) => void;
   updateItemPosition: (id: string) => void;
-  items: Record<string, HTMLElement>;
-  version: number; // Increment to force re-render
+  setActiveId: (id: string | null) => void;
+  setViewport: (viewport: { x: number; y: number; zoom: number }) => void;
+  setIsDragging: (isDragging: boolean) => void;
+}
+
+export interface DiagramItemContextType {
   activeId: string | null;
   activeNodeIds: Set<string>;
-  setActiveId: (id: string | null) => void;
+  layoutPositions: Record<string, { x: number; y: number }>;
+  isDragging: boolean;
+}
+
+export interface DiagramRenderContextType {
+  items: Record<string, HTMLElement>;
+  version: number;
   viewport: { x: number; y: number; zoom: number };
-  setViewport: (viewport: { x: number; y: number; zoom: number }) => void;
+}
+
+export type DiagramContextType = DiagramActionContextType &
+  DiagramItemContextType &
+  DiagramRenderContextType;
+
+export interface LayoutNode {
+  id: string;
+  width: number;
+  height: number;
+  file?: string;
+  data?: any;
+  groupId?: string; // Wrapper ID this node belongs to
+  x?: number; // Internal use for simulation
+  y?: number; // Internal use for simulation
 }

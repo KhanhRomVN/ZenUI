@@ -531,7 +531,7 @@ func Error(w http.ResponseWriter, statusCode int, message string) {
               minHeight={200}
               maxWidth={1200}
               maxHeight={1200}
-              className="border border-dashed border-purple-300 rounded-xl bg-purple-50/30 p-4"
+              className="border border-dashed border-purple-300 rounded-xl p-4"
             >
               <DiagramNode
                 id="node-handler"
@@ -570,7 +570,7 @@ func Error(w http.ResponseWriter, statusCode int, message string) {
               minHeight={200}
               maxWidth={1200}
               maxHeight={1200}
-              className="border border-dashed border-blue-300 rounded-xl bg-blue-50/30 p-4"
+              className="border border-dashed border-blue-300 rounded-xl p-4"
             >
               <DiagramNode
                 id="node-dto"
@@ -609,7 +609,7 @@ func Error(w http.ResponseWriter, statusCode int, message string) {
               minHeight={200}
               maxWidth={1400}
               maxHeight={1400}
-              className="border border-dashed border-violet-300 rounded-xl bg-violet-50/30 p-4"
+              className="border border-dashed border-violet-300 rounded-xl p-4"
             >
               <DiagramNode
                 id="node-validator"
@@ -717,7 +717,7 @@ func Error(w http.ResponseWriter, statusCode int, message string) {
               minHeight={200}
               maxWidth={1200}
               maxHeight={1200}
-              className="border border-dashed border-emerald-300 rounded-xl bg-emerald-50/30 p-4"
+              className="border border-dashed border-emerald-300 rounded-xl p-4"
             >
               <DiagramNode
                 id="node-service"
@@ -756,7 +756,7 @@ func Error(w http.ResponseWriter, statusCode int, message string) {
               minHeight={200}
               maxWidth={1200}
               maxHeight={1200}
-              className="border border-dashed border-teal-300 rounded-xl bg-teal-50/30 p-4"
+              className="border border-dashed border-teal-300 rounded-xl p-4"
             >
               <DiagramNode
                 id="node-repo-check"
@@ -818,7 +818,7 @@ func Error(w http.ResponseWriter, statusCode int, message string) {
               minHeight={200}
               maxWidth={1200}
               maxHeight={1200}
-              className="border border-dashed border-cyan-300 rounded-xl bg-cyan-50/30 p-4"
+              className="border border-dashed border-cyan-300 rounded-xl  p-4"
             >
               <DiagramNode
                 id="node-entity"
@@ -857,7 +857,7 @@ func Error(w http.ResponseWriter, statusCode int, message string) {
               minHeight={200}
               maxWidth={1400}
               maxHeight={1400}
-              className="border border-dashed border-amber-300 rounded-xl bg-amber-50/30 p-4"
+              className="border border-dashed border-amber-300 rounded-xl  p-4"
             >
               <DiagramNode
                 id="node-bcrypt"

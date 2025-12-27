@@ -495,34 +495,157 @@ const DiagramEdges = ({
     return { x: x + w, y: y + h / 2, dir: { x: 1, y: 0 } };
   };
 
-  const getBezierPath = (
+  // ============== SMART PATH ALGORITHM ==============
+
+  /**
+   * Phân tích edge và quyết định kiểu đường tối ưu
+   */
+  const analyzeEdgeComplexity = (
+    start: { x: number; y: number; dir: { x: number; y: number } },
+    end: { x: number; y: number; dir: { x: number; y: number } }
+  ): { type: "simple" | "polyline" | "bezier"; complexity: number } => {
+    const dx = end.x - start.x;
+    const dy = end.y - start.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    // Vector giữa 2 điểm
+    const directionX = dx / dist;
+    const directionY = dy / dist;
+
+    // Độ lệch hướng (dot product)
+    const startDot = start.dir.x * directionX + start.dir.y * directionY;
+    const endDot = end.dir.x * -directionX + end.dir.y * -directionY;
+
+    // Tính góc lệch (0 = cùng hướng, 1 = vuông góc, 2 = ngược hướng)
+    const angleDeviation = (2 - startDot - endDot) / 2;
+
+    // Case 1: Simple Path (thẳng/gần thẳng)
+    if (dist < 150 && angleDeviation < 0.3) {
+      return { type: "simple", complexity: 0 };
+    }
+
+    // Case 2: Polyline (1 cong, đổi hướng đơn giản)
+    if (dist < 400 && angleDeviation < 0.8) {
+      return { type: "polyline", complexity: 1 };
+    }
+
+    // Case 3: Bézier (2+ cong, phức tạp)
+    return { type: "bezier", complexity: angleDeviation };
+  };
+
+  /**
+   * Simple Path - Đường thẳng hoặc góc vuông đơn giản
+   */
+  const getSimplePath = (
+    start: { x: number; y: number; dir: { x: number; y: number } },
+    end: { x: number; y: number; dir: { x: number; y: number } }
+  ) => {
+    const dx = end.x - start.x;
+    const dy = end.y - start.y;
+
+    // Nếu gần như thẳng hàng
+    if (Math.abs(dx) < 50 || Math.abs(dy) < 50) {
+      return `M ${start.x} ${start.y} L ${end.x} ${end.y}`;
+    }
+
+    // Góc vuông đơn giản
+    const midX = start.x + dx * 0.5;
+    return `M ${start.x} ${start.y} L ${midX} ${start.y} L ${midX} ${end.y} L ${end.x} ${end.y}`;
+  };
+
+  /**
+   * Polyline Curve - 1 đoạn cong mượt (Quadratic Bézier)
+   */
+  const getPolylinePath = (
     start: { x: number; y: number; dir: { x: number; y: number } },
     end: { x: number; y: number; dir: { x: number; y: number } }
   ) => {
     const dist = Math.sqrt(
       Math.pow(end.x - start.x, 2) + Math.pow(end.y - start.y, 2)
     );
-    // Straight segment length: 15% of dist or max 50px
-    const straight = Math.min(dist * 0.15, 50);
 
+    // Đoạn thẳng ban đầu
+    const straight = Math.min(dist * 0.2, 60);
     const p1 = {
       x: start.x + straight * start.dir.x,
       y: start.y + straight * start.dir.y,
     };
-
     const p2 = {
       x: end.x + straight * end.dir.x,
       y: end.y + straight * end.dir.y,
     };
 
-    // Control points
-    const k = Math.min(dist * 0.5, 150);
-    const cp1 = { x: p1.x + k * start.dir.x, y: p1.y + k * start.dir.y };
-    const cp2 = { x: p2.x + k * end.dir.x, y: p2.y + k * end.dir.y };
+    // Control point ở giữa để tạo 1 cong
+    const midX = (p1.x + p2.x) / 2;
+    const midY = (p1.y + p2.y) / 2;
 
-    return `M ${start.x} ${start.y} L ${p1.x} ${p1.y} C ${cp1.x} ${cp1.y}, ${cp2.x} ${cp2.y}, ${p2.x} ${p2.y} L ${end.x} ${end.y}`;
+    // Offset control point để tạo độ cong tự nhiên
+    const offsetDist = Math.min(dist * 0.25, 80);
+    const perpX = -(p2.y - p1.y) / dist;
+    const perpY = (p2.x - p1.x) / dist;
+
+    const cp = {
+      x: midX + perpX * offsetDist * 0.3,
+      y: midY + perpY * offsetDist * 0.3,
+    };
+
+    return `M ${start.x} ${start.y} L ${p1.x} ${p1.y} Q ${cp.x} ${cp.y}, ${p2.x} ${p2.y} L ${end.x} ${end.y}`;
   };
 
+  /**
+   * Smooth Bézier - Đường cong S tự nhiên (Cubic Bézier với 2+ điểm uốn)
+   */
+  const getSmoothBezierPath = (
+    start: { x: number; y: number; dir: { x: number; y: number } },
+    end: { x: number; y: number; dir: { x: number; y: number } },
+    complexity: number
+  ) => {
+    const dist = Math.sqrt(
+      Math.pow(end.x - start.x, 2) + Math.pow(end.y - start.y, 2)
+    );
+
+    // Đoạn thẳng ban đầu (ngắn hơn cho đường cong mượt hơn)
+    const straight = Math.min(dist * 0.12, 40);
+    const p1 = {
+      x: start.x + straight * start.dir.x,
+      y: start.y + straight * start.dir.y,
+    };
+    const p2 = {
+      x: end.x + straight * end.dir.x,
+      y: end.y + straight * end.dir.y,
+    };
+
+    // Control points với độ cong động dựa trên complexity
+    const curveFactor = Math.min(dist * (0.35 + complexity * 0.15), 200);
+
+    const cp1 = {
+      x: p1.x + curveFactor * start.dir.x,
+      y: p1.y + curveFactor * start.dir.y,
+    };
+    const cp2 = {
+      x: p2.x + curveFactor * end.dir.x,
+      y: p2.y + curveFactor * end.dir.y,
+    };
+
+    // Thêm điểm giữa với offset nhỏ để tạo độ uốn tự nhiên
+    const midX = (p1.x + p2.x) / 2;
+    const midY = (p1.y + p2.y) / 2;
+    const perpX = -(p2.y - p1.y) / dist;
+    const perpY = (p2.x - p1.x) / dist;
+    const naturalOffset = Math.sin(complexity * Math.PI) * 20;
+
+    const midControl = {
+      x: midX + perpX * naturalOffset,
+      y: midY + perpY * naturalOffset,
+    };
+
+    // Cubic Bézier với điểm giữa để tạo đường S
+    return `M ${start.x} ${start.y} L ${p1.x} ${p1.y} C ${cp1.x} ${cp1.y}, ${midControl.x} ${midControl.y}, ${midX} ${midY} C ${midControl.x} ${midControl.y}, ${cp2.x} ${cp2.y}, ${p2.x} ${p2.y} L ${end.x} ${end.y}`;
+  };
+
+  /**
+   * Step Path - Giữ nguyên cho edge type="step"
+   */
   const getStepPath = (
     start: { x: number; y: number; dir: { x: number; y: number } },
     end: { x: number; y: number; dir: { x: number; y: number } }
@@ -539,28 +662,53 @@ const DiagramEdges = ({
 
     let midPath = "";
 
-    // Determine orientation based on start direction
     if (Math.abs(start.dir.x) > 0) {
       if (Math.abs(end.dir.x) > 0) {
-        // Horizontal -> Horizontal
         const midX = (p1.x + p2.x) / 2;
         midPath = `L ${midX} ${p1.y} L ${midX} ${p2.y}`;
       } else {
-        // Horizontal -> Vertical
         midPath = `L ${p2.x} ${p1.y}`;
       }
     } else {
       if (Math.abs(end.dir.y) > 0) {
-        // Vertical -> Vertical
         const midY = (p1.y + p2.y) / 2;
         midPath = `L ${p1.x} ${midY} L ${p2.x} ${midY}`;
       } else {
-        // Vertical -> Horizontal
         midPath = `L ${p1.x} ${p2.y}`;
       }
     }
 
     return `M ${start.x} ${start.y} L ${p1.x} ${p1.y} ${midPath} L ${p2.x} ${p2.y} L ${end.x} ${end.y}`;
+  };
+
+  /**
+   * Smart Path Router - Chọn kiểu đường tối ưu
+   */
+  const getSmartPath = (
+    start: { x: number; y: number; dir: { x: number; y: number } },
+    end: { x: number; y: number; dir: { x: number; y: number } },
+    edgeType?: string
+  ): string => {
+    // Ưu tiên edge type từ config
+    if (edgeType === "step") {
+      return getStepPath(start, end);
+    }
+    if (edgeType === "straight") {
+      return `M ${start.x} ${start.y} L ${end.x} ${end.y}`;
+    }
+
+    // Phân tích và chọn tự động
+    const analysis = analyzeEdgeComplexity(start, end);
+
+    switch (analysis.type) {
+      case "simple":
+        return getSimplePath(start, end);
+      case "polyline":
+        return getPolylinePath(start, end);
+      case "bezier":
+      default:
+        return getSmoothBezierPath(start, end, analysis.complexity);
+    }
   };
 
   return (
@@ -571,14 +719,8 @@ const DiagramEdges = ({
 
         if (!fromPos || !toPos) return null;
 
-        let path = "";
-        if (edge.type === "step") {
-          path = getStepPath(fromPos, toPos);
-        } else if (edge.type === "straight") {
-          path = `M ${fromPos.x} ${fromPos.y} L ${toPos.x} ${toPos.y}`;
-        } else {
-          path = getBezierPath(fromPos, toPos);
-        }
+        // Smart path routing - tự động chọn kiểu đường tối ưu
+        const path = getSmartPath(fromPos, toPos, edge.type);
 
         // Highlight Logic
         const isActive = activeId ? activeEdgeIds.has(edge.id) : true;

@@ -2,7 +2,7 @@ import { DiagramEdgeOptions, LayoutNode } from "./Diagram.types";
 
 // ==================== CONSTANTS ====================
 export const FILE_GROUP_PADDING = 40; // Increased padding for better spacing
-export const FILE_GROUP_MARGIN = 80; // Increased margin for visual separation
+export const FILE_GROUP_MARGIN = 180; // TĂNG: Margin giữa các wrapper xa hơn
 export const CODE_NODE_WIDTH = 420; // Slightly smaller for better horizontal fit
 export const CODE_NODE_MIN_HEIGHT = 206;
 export const CODE_NODE_DEFAULT_HEIGHT = 300; // Reduced default height
@@ -11,9 +11,8 @@ export const DECLARATION_NODE_HEIGHT = 180; // Reduced height
 export const MIN_NODE_SPACING = 50; // Further increased for better visual separation
 export const DECLARATION_GRID_COLUMNS = 3; // Increased from 2 to 3
 export const DECLARATION_GRID_SPACING = 60; // Further increased for better spacing
-export const MIN_CONTAINER_SPACING = 100; // Increased for better container separation
+export const MIN_CONTAINER_SPACING = 200; // TĂNG: Khoảng cách tối thiểu giữa các container
 
-// ==================== HELPER: GROUP NODES BY FILE ====================
 // ==================== HELPER: GROUP NODES BY CLUSTER ====================
 export interface ClusterGroup {
   id: string; // wrapper ID or file name

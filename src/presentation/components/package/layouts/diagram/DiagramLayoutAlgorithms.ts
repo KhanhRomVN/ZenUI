@@ -85,8 +85,8 @@ export function smartHierarchicalLayout(
 
   // 4. Layout Each Level with strong randomization
   let currentY = 0;
-  const LEVEL_SPACING = 150; // Increased vertical spacing for better separation
-  const GROUP_SPACING = 120; // Increased horizontal spacing between groups
+  const LEVEL_SPACING = 250; // TĂNG: Khoảng cách dọc giữa các level
+  const GROUP_SPACING = 200; // TĂNG: Khoảng cách ngang giữa các group
   const RANDOM_OFFSET = 80; // Increased random offset range for breaking grid patterns
 
   levels.forEach((levelGroups) => {
@@ -227,7 +227,7 @@ function layoutGroupInternals(
 
   // ORGANIC GRID LAYOUT - Balance structure with strong randomness
   const localPositions: Record<string, { x: number; y: number }> = {};
-  const NODE_GAP = 80; // Increased gap to prevent node overlap in wrappers
+  const NODE_GAP = 120; // TĂNG: Khoảng cách giữa các node trong wrapper
   const RANDOM_POSITION_OFFSET = 25; // Moderate random offset for subtle variation
 
   // Highly randomized column calculation to break patterns
@@ -316,16 +316,16 @@ function layoutGroupInternals(
   });
 
   // Calculate total dimensions with sufficient padding
-  const extraPadding = RANDOM_POSITION_OFFSET * 2 + 30;
+  const extraPadding = RANDOM_POSITION_OFFSET * 2 + 60; // TĂNG: Extra padding nhiều hơn
   const totalWidth =
     maxColWidth.reduce((a, b) => a + b, 0) +
     (columns - 1) * NODE_GAP +
-    FILE_GROUP_PADDING * 2 +
+    FILE_GROUP_PADDING * 3 + // TĂNG: x3 thay vì x2
     extraPadding * 2;
   const totalHeight =
     rowHeights.reduce((a, b) => a + b, 0) +
     (rowHeights.length - 1) * NODE_GAP +
-    FILE_GROUP_PADDING * 2 +
+    FILE_GROUP_PADDING * 3 + // TĂNG: x3 thay vì x2
     extraPadding * 2;
 
   return {

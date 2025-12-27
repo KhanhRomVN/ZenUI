@@ -18,7 +18,6 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
   style = {},
   edges = [],
   autoLayout = false,
-  layoutStrategy = "smart",
   layoutOptions = {},
   ...props
 }) => {
@@ -114,8 +113,8 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
       };
     });
 
-    // Run layout algorithm based on strategy
-    const result = calculateLayout("smart", layoutNodes, edges, layoutOptions);
+    // Run layout algorithm
+    const result = calculateLayout(layoutNodes, edges, layoutOptions);
 
     console.log("[DiagramLayout] Layout result applied");
     setLayoutPositions(result.positions);

@@ -8,219 +8,482 @@ import {
   CodeBlockHeader,
   CodeBlockBody,
 } from "../../../../components/package/components/codeblock";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownContent,
-  DropdownItem,
-} from "../../../../components/package/components/dropdown";
-import { FileCode, Activity, Settings, ChevronDown } from "lucide-react";
-import { useState, useEffect } from "react";
-import { DIAGRAM_ALGORITHMS } from "../../../../components/package/layouts/diagram/DiagramLayoutStrategies";
-import { LayoutStrategy } from "../../../../components/package/layouts/diagram/Diagram.types";
+import { FileCode, Activity } from "lucide-react";
 
 const DiagramLayoutSection = () => {
-  // State for layout algorithm, persisted in localStorage
-  const [algorithm, setAlgorithm] = useState<LayoutStrategy>("smart");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("zenui_diagram_algorithm");
-    if (saved && ["smart", "vertical", "grid"].includes(saved)) {
-      setAlgorithm(saved as LayoutStrategy);
-    }
-  }, []);
-
-  const handleAlgorithmChange = (id: LayoutStrategy) => {
-    setAlgorithm(id);
-    localStorage.setItem("zenui_diagram_algorithm", id);
-  };
-
   const usageCode = `import { DiagramLayout, DiagramNode, DiagramWrapper } from "@khanhromvn/zenui";
-import { CodeBlock, CodeBlockHeader, CodeBlockBody } from "src/presentation/components/package/components/codeblock";
 
 function MyDiagram() {
   return (
     <DiagramLayout 
       className="h-[1000px] border border-border-default rounded-xl"
-      minimap={true} // Enable Minimap
+      autoLayout={true}
+      layoutOptions={{
+        nodeSpacing: 200,
+        iterations: 300,
+        edgeWeight: 0.2,
+        repulsionStrength: 10000,
+      }}
     >
       <DiagramWrapper
-        id="node-group"
+        id="wrapper-handler"
+        title="handlers/auth.handler.go"
         fit={true}
-        title={<span className="text-xs font-bold text-gray-500 uppercase">Module A</span>}
-        minWidth={200}
-        minHeight={100}
-        maxWidth={1000}
-        maxHeight={1000}
-        className="absolute top-[50px] left-[50px] border border-dashed border-gray-300 rounded-xl bg-gray-50/50 p-4"
+        className="border border-dashed border-purple-300 rounded-xl p-4"
       >
-        <DiagramNode 
-          id="node-1" 
-          fit={false}
-          minWidth={200}
-          minHeight={100}
-          maxWidth={800}
-          maxHeight={800} 
-          className="absolute top-[40px] left-[20px]"
-        >
-           {/* ... */}
+        <DiagramNode id="node-handler">
+          {/* Handler code */}
         </DiagramNode>
       </DiagramWrapper>
     </DiagramLayout>
   );
 }`;
 
-  const mainCode = `func main() {
-	fmt.Println("=== Bắt đầu chương trình ===")
-	FunctionA()
-	fmt.Println("=== Kết thúc chương trình ===")
+  // Handler Code
+  const handlerCode = `func HandleRegister(w http.ResponseWriter, r *http.Request) {
+    var req dto.RegisterRequest
+    if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+        response.Error(w, http.StatusBadRequest, "Invalid request body")
+        return
+    }
+
+    // Validate request
+    if err := validator.ValidateRegisterRequest(req); err != nil {
+        response.Error(w, http.StatusBadRequest, err.Error())
+        return
+    }
+
+    // Call service
+    user, err := service.RegisterUser(req)
+    if err != nil {
+        response.Error(w, http.StatusInternalServerError, err.Error())
+        return
+    }
+
+    response.Success(w, http.StatusCreated, user)
 }`;
 
-  const functionACode = `func FunctionA() {
-	fmt.Println("\\n[A] Function A được gọi")
+  // DTO Types
+  const dtoCode = `type RegisterRequest struct {
+    Email     string \`json:"email" validate:"required,email"\`
+    Username  string \`json:"username" validate:"required,min=3,max=50"\`
+    Password  string \`json:"password" validate:"required,min=8"\`
+    FullName  string \`json:"full_name" validate:"required"\`
+}
 
-	fmt.Println("[A] Đang gọi Function B...")
-	resultB := FunctionB()
-	fmt.Printf("[A] Function B trả về: %s\\n", resultB)
-	fmt.Println("[A] Đang gọi Function C...")
-	resultC := FunctionC()
-	fmt.Printf("[A] Function C trả về: %s\\n", resultC)
-	fmt.Println("[A] Function A hoàn thành")
+type RegisterResponse struct {
+    ID        string    \`json:"id"\`
+    Email     string    \`json:"email"\`
+    Username  string    \`json:"username"\`
+    FullName  string    \`json:"full_name"\`
+    CreatedAt time.Time \`json:"created_at"\`
 }`;
 
-  const functionBCode = `func FunctionB() string {
-	fmt.Println("  [B] Function B được gọi")
-	
-	fmt.Println("  [B] Đang gọi Function D (không return)...")
-	FunctionD()
-	
-	fmt.Println("  [B] Đang gọi Function E...")
-	resultE := FunctionE()
-	fmt.Printf("  [B] Function E trả về: %s\\n", resultE)
-	
-	fmt.Println("  [B] Function B hoàn thành")
-	return "Kết quả từ B"
+  // Validator Code
+  const validatorCode = `func ValidateRegisterRequest(req dto.RegisterRequest) error {
+    // Email validation
+    if err := ValidateEmail(req.Email); err != nil {
+        return fmt.Errorf("invalid email: %w", err)
+    }
+
+    // Username validation
+    if err := ValidateUsername(req.Username); err != nil {
+        return fmt.Errorf("invalid username: %w", err)
+    }
+
+    // Password strength validation
+    if err := ValidatePasswordStrength(req.Password); err != nil {
+        return fmt.Errorf("weak password: %w", err)
+    }
+
+    return nil
 }`;
 
-  const functionCCode = `func FunctionC() string {
-	fmt.Println("  [C] Function C được gọi")
-	
-	fmt.Println("  [C] Đang gọi Function E...")
-	resultE := FunctionE()
-	fmt.Printf("  [C] Function E trả về: %s\\n", resultE)
-	
-	fmt.Println("  [C] Đang gọi Function F (không return)...")
-	FunctionF()
-	
-	fmt.Println("  [C] Function C hoàn thành")
-	return "Kết quả từ C"
+  const validateEmailCode = `func ValidateEmail(email string) error {
+    emailRegex := regexp.MustCompile(\`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\`)
+    
+    if !emailRegex.MatchString(email) {
+        return errors.New("invalid email format")
+    }
+    
+    return nil
 }`;
 
-  const functionDCode = `func FunctionD() {
-	fmt.Println("    [D] Function D được gọi")
-	fmt.Println("    [D] Function D đang thực hiện công việc...")
-	fmt.Println("    [D] Function D hoàn thành (không return)")
+  const validateUsernameCode = `func ValidateUsername(username string) error {
+    if len(username) < 3 {
+        return errors.New("username too short")
+    }
+    
+    if len(username) > 50 {
+        return errors.New("username too long")
+    }
+    
+    usernameRegex := regexp.MustCompile(\`^[a-zA-Z0-9_]+$\`)
+    if !usernameRegex.MatchString(username) {
+        return errors.New("username contains invalid characters")
+    }
+    
+    return nil
 }`;
 
-  const functionECode = `func FunctionE() string {
-	fmt.Println("    [E] Function E được gọi")
-	fmt.Println("    [E] Function E đang xử lý dữ liệu...")
-	fmt.Println("    [E] Function E hoàn thành và trả về kết quả")
-	return "Dữ liệu từ E"
+  const validatePasswordCode = `func ValidatePasswordStrength(password string) error {
+    if len(password) < 8 {
+        return errors.New("password must be at least 8 characters")
+    }
+    
+    hasUpper := regexp.MustCompile(\`[A-Z]\`).MatchString(password)
+    hasLower := regexp.MustCompile(\`[a-z]\`).MatchString(password)
+    hasNumber := regexp.MustCompile(\`[0-9]\`).MatchString(password)
+    hasSpecial := regexp.MustCompile(\`[!@#$%^&*]\`).MatchString(password)
+    
+    if !hasUpper || !hasLower || !hasNumber || !hasSpecial {
+        return errors.New("password must contain uppercase, lowercase, number, and special character")
+    }
+    
+    return nil
 }`;
 
-  const functionFCode = `func FunctionF() {
-	fmt.Println("    [F] Function F được gọi")
-	fmt.Println("    [F] Function F đang thực thi...")
-	fmt.Println("    [F] Function F hoàn thành (không return)")
+  // Service Code
+  const serviceCode = `func RegisterUser(req dto.RegisterRequest) (*dto.RegisterResponse, error) {
+    // Check if user exists
+    exists, err := repository.CheckUserExists(req.Email, req.Username)
+    if err != nil {
+        return nil, fmt.Errorf("failed to check user: %w", err)
+    }
+    
+    if exists {
+        return nil, errors.New("user already exists")
+    }
+
+    // Hash password
+    hashedPassword, err := bcrypt.HashPassword(req.Password)
+    if err != nil {
+        return nil, fmt.Errorf("failed to hash password: %w", err)
+    }
+
+    // Create user entity
+    user := entity.User{
+        ID:        uuid.New().String(),
+        Email:     req.Email,
+        Username:  req.Username,
+        Password:  hashedPassword,
+        FullName:  req.FullName,
+        CreatedAt: time.Now(),
+        UpdatedAt: time.Now(),
+    }
+
+    // Save to database
+    if err := repository.CreateUser(&user); err != nil {
+        return nil, fmt.Errorf("failed to create user: %w", err)
+    }
+
+    // Send welcome email
+    go email.SendWelcomeEmail(user.Email, user.FullName)
+
+    return &dto.RegisterResponse{
+        ID:        user.ID,
+        Email:     user.Email,
+        Username:  user.Username,
+        FullName:  user.FullName,
+        CreatedAt: user.CreatedAt,
+    }, nil
+}`;
+
+  // Repository Code
+  const repoCheckCode = `func CheckUserExists(email, username string) (bool, error) {
+    var count int
+    query := \`
+        SELECT COUNT(*) FROM users 
+        WHERE email = $1 OR username = $2
+    \`
+    
+    err := db.QueryRow(query, email, username).Scan(&count)
+    if err != nil {
+        return false, fmt.Errorf("query error: %w", err)
+    }
+    
+    return count > 0, nil
+}`;
+
+  const repoCreateCode = `func CreateUser(user *entity.User) error {
+    query := \`
+        INSERT INTO users (id, email, username, password, full_name, created_at, updated_at)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
+    \`
+    
+    _, err := db.Exec(
+        query,
+        user.ID,
+        user.Email,
+        user.Username,
+        user.Password,
+        user.FullName,
+        user.CreatedAt,
+        user.UpdatedAt,
+    )
+    
+    if err != nil {
+        return fmt.Errorf("insert error: %w", err)
+    }
+    
+    return nil
+}`;
+
+  // Entity Code
+  const entityCode = `type User struct {
+    ID        string    \`db:"id" json:"id"\`
+    Email     string    \`db:"email" json:"email"\`
+    Username  string    \`db:"username" json:"username"\`
+    Password  string    \`db:"password" json:"-"\`
+    FullName  string    \`db:"full_name" json:"full_name"\`
+    CreatedAt time.Time \`db:"created_at" json:"created_at"\`
+    UpdatedAt time.Time \`db:"updated_at" json:"updated_at"\`
+    DeletedAt *time.Time \`db:"deleted_at" json:"deleted_at,omitempty"\`
+}
+
+func (u *User) TableName() string {
+    return "users"
+}`;
+
+  // Bcrypt Utility
+  const bcryptCode = `func HashPassword(password string) (string, error) {
+    hashedBytes, err := bcrypt.GenerateFromPassword(
+        []byte(password),
+        bcrypt.DefaultCost,
+    )
+    
+    if err != nil {
+        return "", fmt.Errorf("hash generation failed: %w", err)
+    }
+    
+    return string(hashedBytes), nil
+}
+
+func ComparePassword(hashedPassword, password string) error {
+    return bcrypt.CompareHashAndPassword(
+        []byte(hashedPassword),
+        []byte(password),
+    )
+}`;
+
+  // Email Service
+  const emailCode = `func SendWelcomeEmail(to, fullName string) error {
+    subject := "Welcome to Our Platform!"
+    body := fmt.Sprintf(\`
+        Hello %s,
+
+        Thank you for registering with us!
+        We're excited to have you on board.
+
+        Best regards,
+        The Team
+    \`, fullName)
+
+    msg := mail.NewMessage()
+    msg.SetHeader("From", config.SMTPFrom)
+    msg.SetHeader("To", to)
+    msg.SetHeader("Subject", subject)
+    msg.SetBody("text/plain", body)
+
+    dialer := mail.NewDialer(
+        config.SMTPHost,
+        config.SMTPPort,
+        config.SMTPUser,
+        config.SMTPPassword,
+    )
+
+    if err := dialer.DialAndSend(msg); err != nil {
+        log.Printf("Failed to send welcome email: %v", err)
+        return err
+    }
+
+    return nil
+}`;
+
+  // Response Utility
+  const responseCode = `func Success(w http.ResponseWriter, statusCode int, data interface{}) {
+    w.Header().Set("Content-Type", "application/json")
+    w.WriteHeader(statusCode)
+    
+    response := map[string]interface{}{
+        "success": true,
+        "data":    data,
+    }
+    
+    json.NewEncoder(w).Encode(response)
+}
+
+func Error(w http.ResponseWriter, statusCode int, message string) {
+    w.Header().Set("Content-Type", "application/json")
+    w.WriteHeader(statusCode)
+    
+    response := map[string]interface{}{
+        "success": false,
+        "error":   message,
+    }
+    
+    json.NewEncoder(w).Encode(response)
 }`;
 
   const edges: any[] = [
-    // main() -> FunctionA()
+    // Handler -> DTO
     {
       id: "e1",
-      from: "node-main",
-      to: "node-a",
+      from: "node-handler",
+      to: "node-dto",
       fromDot: "auto",
       toDot: "auto",
       type: "bezier",
-      label: "calls",
+      label: "uses",
       color: "#3b82f6",
       width: 2,
     },
-    // FunctionA() -> FunctionB()
+
+    // Handler -> Validator
     {
       id: "e2",
-      from: "node-a",
-      to: "node-b",
+      from: "node-handler",
+      to: "node-validator",
       fromDot: "auto",
       toDot: "auto",
       type: "bezier",
-      label: "calls",
+      label: "validates",
       color: "#8b5cf6",
       width: 2,
     },
-    // FunctionA() -> FunctionC()
+
+    // Handler -> Service
     {
       id: "e3",
-      from: "node-a",
-      to: "node-c",
+      from: "node-handler",
+      to: "node-service",
       fromDot: "auto",
       toDot: "auto",
       type: "bezier",
       label: "calls",
-      color: "#8b5cf6",
+      color: "#10b981",
       width: 2,
     },
-    // FunctionB() -> FunctionD()
+
+    // Handler -> Response
     {
       id: "e4",
-      from: "node-b",
-      to: "node-d",
+      from: "node-handler",
+      to: "node-response",
       fromDot: "auto",
       toDot: "auto",
       type: "bezier",
-      label: "calls",
-      color: "#10b981",
+      label: "returns",
+      color: "#f59e0b",
       width: 2,
     },
-    // FunctionB() -> FunctionE()
+
+    // Validator -> ValidateEmail
     {
       id: "e5",
-      from: "node-b",
-      to: "node-e",
+      from: "node-validator",
+      to: "node-validate-email",
       fromDot: "auto",
       toDot: "auto",
       type: "bezier",
-      label: "calls (returns data)",
-      color: "#10b981",
+      label: "checks",
+      color: "#8b5cf6",
       width: 2,
       style: "dashed",
     },
-    // FunctionC() -> FunctionE()
+
+    // Validator -> ValidateUsername
     {
       id: "e6",
-      from: "node-c",
-      to: "node-e",
+      from: "node-validator",
+      to: "node-validate-username",
       fromDot: "auto",
       toDot: "auto",
       type: "bezier",
-      label: "calls (returns data)",
-      color: "#10b981",
+      label: "checks",
+      color: "#8b5cf6",
       width: 2,
       style: "dashed",
     },
-    // FunctionC() -> FunctionF()
+
+    // Validator -> ValidatePassword
     {
       id: "e7",
-      from: "node-c",
-      to: "node-f",
+      from: "node-validator",
+      to: "node-validate-password",
       fromDot: "auto",
       toDot: "auto",
       type: "bezier",
-      label: "calls",
+      label: "checks",
+      color: "#8b5cf6",
+      width: 2,
+      style: "dashed",
+    },
+
+    // Service -> Repository Check
+    {
+      id: "e8",
+      from: "node-service",
+      to: "node-repo-check",
+      fromDot: "auto",
+      toDot: "auto",
+      type: "bezier",
+      label: "checks",
       color: "#10b981",
       width: 2,
+    },
+
+    // Service -> Bcrypt
+    {
+      id: "e9",
+      from: "node-service",
+      to: "node-bcrypt",
+      fromDot: "auto",
+      toDot: "auto",
+      type: "bezier",
+      label: "hashes",
+      color: "#10b981",
+      width: 2,
+    },
+
+    // Service -> Entity
+    {
+      id: "e10",
+      from: "node-service",
+      to: "node-entity",
+      fromDot: "auto",
+      toDot: "auto",
+      type: "bezier",
+      label: "creates",
+      color: "#10b981",
+      width: 2,
+    },
+
+    // Service -> Repository Create
+    {
+      id: "e11",
+      from: "node-service",
+      to: "node-repo-create",
+      fromDot: "auto",
+      toDot: "auto",
+      type: "bezier",
+      label: "saves",
+      color: "#10b981",
+      width: 2,
+    },
+
+    // Service -> Email
+    {
+      id: "e12",
+      from: "node-service",
+      to: "node-email",
+      fromDot: "auto",
+      toDot: "auto",
+      type: "bezier",
+      label: "sends",
+      color: "#10b981",
+      width: 2,
+      style: "dashed",
     },
   ];
 
@@ -233,42 +496,12 @@ function MyDiagram() {
             Diagram Layout
           </h2>
         </div>
-
-        {/* Algorithm Selector */}
-        <Dropdown>
-          <DropdownTrigger className="flex items-center gap-2 px-4 py-2 bg-white border border-border-default rounded-lg hover:bg-gray-50 transition-colors">
-            <Settings size={16} className="text-gray-500" />
-            <span className="font-medium text-sm text-text-primary">
-              {DIAGRAM_ALGORITHMS.find((a) => a.id === algorithm)?.name ||
-                "Layout Strategy"}
-            </span>
-            <ChevronDown size={14} className="text-gray-400" />
-          </DropdownTrigger>
-          <DropdownContent className="w-64">
-            {DIAGRAM_ALGORITHMS.map((algo) => (
-              <DropdownItem
-                key={algo.id}
-                onClick={() => handleAlgorithmChange(algo.id as LayoutStrategy)}
-                className={
-                  algorithm === algo.id ? "bg-blue-50 text-blue-600" : ""
-                }
-              >
-                <div className="flex flex-col gap-1">
-                  <span className="font-medium">{algo.name}</span>
-                  <span className="text-xs text-gray-500">
-                    {algo.description}
-                  </span>
-                </div>
-              </DropdownItem>
-            ))}
-          </DropdownContent>
-        </Dropdown>
       </div>
 
       <p className="text-lg text-text-secondary mb-6 leading-relaxed">
-        A specialized layout for node-based diagrams and flowcharts. Provides
-        items with connection points (dots) on all four sides. Supports
-        auto-fitting content or fixed dimensions, minimap, and grouping.
+        A specialized layout for node-based diagrams and flowcharts. This
+        example demonstrates a complete backend registration flow with handlers,
+        validators, services, repositories, and utilities.
       </p>
 
       {/* Live Demo */}
@@ -278,7 +511,6 @@ function MyDiagram() {
             className="h-full w-full"
             edges={edges}
             autoLayout={true}
-            layoutStrategy={algorithm}
             layoutOptions={{
               nodeSpacing: 200,
               iterations: 300,
@@ -286,12 +518,12 @@ function MyDiagram() {
               repulsionStrength: 10000,
             }}
           >
-            {/* Diagram Wrapper for Main and E */}
+            {/* Handler Layer */}
             <DiagramWrapper
-              id="wrapper-main-e"
+              id="wrapper-handler"
               title={
-                <span className="text-xs font-bold text-gray-500 uppercase">
-                  Main Group
+                <span className="text-xs font-semibold text-purple-600">
+                  handlers/auth.handler.go
                 </span>
               }
               fit={true}
@@ -299,47 +531,22 @@ function MyDiagram() {
               minHeight={200}
               maxWidth={1200}
               maxHeight={1200}
-              className="absolute border border-dashed border-gray-300 rounded-xl p-4"
+              className="border border-dashed border-purple-300 rounded-xl bg-purple-50/30 p-4"
             >
-              {/* Level 0: Main Function - Entry Point */}
               <DiagramNode
-                id="node-main"
-                filename="main.go"
+                id="node-handler"
+                filename="handlers/auth.handler.go"
                 fit={false}
-                minWidth={380}
-                minHeight={180}
-                maxWidth={650}
-                maxHeight={650}
-                className="absolute top-[40px] left-[20px]"
+                minWidth={450}
+                minHeight={280}
+                maxWidth={750}
+                maxHeight={750}
+                className="absolute"
               >
                 <CodeBlock
-                  code={mainCode}
+                  code={handlerCode}
                   language="go"
-                  filename="main.go"
-                  theme="vs-dark"
-                  showLineNumbers={true}
-                  className="h-full"
-                >
-                  <CodeBlockHeader />
-                  <CodeBlockBody />
-                </CodeBlock>
-              </DiagramNode>
-
-              {/* Function E - Called by both B and C (returns data) */}
-              <DiagramNode
-                id="node-e"
-                filename="function_e.go"
-                fit={false}
-                minWidth={380}
-                minHeight={180}
-                maxWidth={640}
-                maxHeight={640}
-                className="absolute top-[300px] left-[20px]"
-              >
-                <CodeBlock
-                  code={functionECode}
-                  language="go"
-                  filename="function_e.go"
+                  filename="handlers/auth.handler.go"
                   theme="vs-dark"
                   showLineNumbers={true}
                   className="h-full"
@@ -350,61 +557,12 @@ function MyDiagram() {
               </DiagramNode>
             </DiagramWrapper>
 
-            {/* Level 1: Function A - Called by main() */}
-            <DiagramNode
-              id="node-a"
-              filename="function_a.go"
-              fit={false}
-              minWidth={450}
-              minHeight={250}
-              maxWidth={750}
-              maxHeight={750}
-              className="absolute top-[280px] left-[480px]"
-            >
-              <CodeBlock
-                code={functionACode}
-                language="go"
-                filename="function_a.go"
-                theme="vs-dark"
-                showLineNumbers={true}
-                className="h-full"
-              >
-                <CodeBlockHeader />
-                <CodeBlockBody />
-              </CodeBlock>
-            </DiagramNode>
-
-            {/* Level 2 Nodes (formerly wrapped) - Functions called by A */}
-            {/* Function B - First call from A */}
-            <DiagramNode
-              id="node-b"
-              filename="function_b.go"
-              fit={false}
-              minWidth={420}
-              minHeight={220}
-              maxWidth={720}
-              maxHeight={720}
-              className="absolute top-[30px] left-[20px]"
-            >
-              <CodeBlock
-                code={functionBCode}
-                language="go"
-                filename="function_b.go"
-                theme="vs-dark"
-                showLineNumbers={true}
-                className="h-full"
-              >
-                <CodeBlockHeader />
-                <CodeBlockBody />
-              </CodeBlock>
-            </DiagramNode>
-
-            {/* Diagram Wrapper for C and F */}
+            {/* DTO Layer */}
             <DiagramWrapper
-              id="wrapper-c-f"
+              id="wrapper-dto"
               title={
-                <span className="text-xs font-bold text-gray-500 uppercase">
-                  Functions C Group
+                <span className="text-xs font-semibold text-blue-600">
+                  dto/auth.dto.go
                 </span>
               }
               fit={true}
@@ -412,23 +570,61 @@ function MyDiagram() {
               minHeight={200}
               maxWidth={1200}
               maxHeight={1200}
-              className="absolute border border-dashed border-gray-300 rounded-xl p-4"
+              className="border border-dashed border-blue-300 rounded-xl bg-blue-50/30 p-4"
             >
-              {/* Function C - Second call from A */}
               <DiagramNode
-                id="node-c"
-                filename="function_c.go"
+                id="node-dto"
+                filename="dto/auth.dto.go"
+                fit={false}
+                minWidth={420}
+                minHeight={240}
+                maxWidth={720}
+                maxHeight={720}
+                className="absolute"
+              >
+                <CodeBlock
+                  code={dtoCode}
+                  language="go"
+                  filename="dto/auth.dto.go"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
+              </DiagramNode>
+            </DiagramWrapper>
+
+            {/* Validator Layer */}
+            <DiagramWrapper
+              id="wrapper-validator"
+              title={
+                <span className="text-xs font-semibold text-violet-600">
+                  validators/auth.validator.go
+                </span>
+              }
+              fit={true}
+              minWidth={300}
+              minHeight={200}
+              maxWidth={1400}
+              maxHeight={1400}
+              className="border border-dashed border-violet-300 rounded-xl bg-violet-50/30 p-4"
+            >
+              <DiagramNode
+                id="node-validator"
+                filename="validators/auth.validator.go"
                 fit={false}
                 minWidth={420}
                 minHeight={220}
                 maxWidth={720}
                 maxHeight={720}
-                className="absolute top-[40px] left-[20px]"
+                className="absolute"
               >
                 <CodeBlock
-                  code={functionCCode}
+                  code={validatorCode}
                   language="go"
-                  filename="function_c.go"
+                  filename="validators/auth.validator.go"
                   theme="vs-dark"
                   showLineNumbers={true}
                   className="h-full"
@@ -438,21 +634,66 @@ function MyDiagram() {
                 </CodeBlock>
               </DiagramNode>
 
-              {/* Function F - Called by C (no return) */}
               <DiagramNode
-                id="node-f"
-                filename="function_f.go"
+                id="node-validate-email"
+                filename="validators/email.validator.go"
                 fit={false}
-                minWidth={360}
-                minHeight={160}
-                maxWidth={620}
-                maxHeight={620}
-                className="absolute top-[40px] left-[460px]"
+                minWidth={380}
+                minHeight={180}
+                maxWidth={680}
+                maxHeight={680}
+                className="absolute"
               >
                 <CodeBlock
-                  code={functionFCode}
+                  code={validateEmailCode}
                   language="go"
-                  filename="function_f.go"
+                  filename="validators/email.validator.go"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
+              </DiagramNode>
+
+              <DiagramNode
+                id="node-validate-username"
+                filename="validators/username.validator.go"
+                fit={false}
+                minWidth={400}
+                minHeight={200}
+                maxWidth={700}
+                maxHeight={700}
+                className="absolute"
+              >
+                <CodeBlock
+                  code={validateUsernameCode}
+                  language="go"
+                  filename="validators/username.validator.go"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
+              </DiagramNode>
+
+              <DiagramNode
+                id="node-validate-password"
+                filename="validators/password.validator.go"
+                fit={false}
+                minWidth={420}
+                minHeight={240}
+                maxWidth={720}
+                maxHeight={720}
+                className="absolute"
+              >
+                <CodeBlock
+                  code={validatePasswordCode}
+                  language="go"
+                  filename="validators/password.validator.go"
                   theme="vs-dark"
                   showLineNumbers={true}
                   className="h-full"
@@ -463,30 +704,230 @@ function MyDiagram() {
               </DiagramNode>
             </DiagramWrapper>
 
-            {/* Level 3 Nodes (formerly wrapped) - Leaf functions (D, E, F) */}
-            {/* Function D - Called by B (no return) */}
-            <DiagramNode
-              id="node-d"
-              filename="function_d.go"
-              fit={false}
-              minWidth={360}
-              minHeight={160}
-              maxWidth={620}
-              maxHeight={620}
-              className="absolute top-[30px] left-[20px]"
+            {/* Service Layer */}
+            <DiagramWrapper
+              id="wrapper-service"
+              title={
+                <span className="text-xs font-semibold text-emerald-600">
+                  services/auth.service.go
+                </span>
+              }
+              fit={true}
+              minWidth={300}
+              minHeight={200}
+              maxWidth={1200}
+              maxHeight={1200}
+              className="border border-dashed border-emerald-300 rounded-xl bg-emerald-50/30 p-4"
             >
-              <CodeBlock
-                code={functionDCode}
-                language="go"
-                filename="function_d.go"
-                theme="vs-dark"
-                showLineNumbers={true}
-                className="h-full"
+              <DiagramNode
+                id="node-service"
+                filename="services/auth.service.go"
+                fit={false}
+                minWidth={480}
+                minHeight={360}
+                maxWidth={780}
+                maxHeight={780}
+                className="absolute"
               >
-                <CodeBlockHeader />
-                <CodeBlockBody />
-              </CodeBlock>
-            </DiagramNode>
+                <CodeBlock
+                  code={serviceCode}
+                  language="go"
+                  filename="services/auth.service.go"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
+              </DiagramNode>
+            </DiagramWrapper>
+
+            {/* Repository Layer */}
+            <DiagramWrapper
+              id="wrapper-repository"
+              title={
+                <span className="text-xs font-semibold text-teal-600">
+                  repositories/user.repository.go
+                </span>
+              }
+              fit={true}
+              minWidth={300}
+              minHeight={200}
+              maxWidth={1200}
+              maxHeight={1200}
+              className="border border-dashed border-teal-300 rounded-xl bg-teal-50/30 p-4"
+            >
+              <DiagramNode
+                id="node-repo-check"
+                filename="repositories/user.repository.go"
+                fit={false}
+                minWidth={420}
+                minHeight={220}
+                maxWidth={720}
+                maxHeight={720}
+                className="absolute"
+              >
+                <CodeBlock
+                  code={repoCheckCode}
+                  language="go"
+                  filename="repositories/check_user.go"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
+              </DiagramNode>
+
+              <DiagramNode
+                id="node-repo-create"
+                filename="repositories/user.repository.go"
+                fit={false}
+                minWidth={420}
+                minHeight={240}
+                maxWidth={720}
+                maxHeight={720}
+                className="absolute"
+              >
+                <CodeBlock
+                  code={repoCreateCode}
+                  language="go"
+                  filename="repositories/create_user.go"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
+              </DiagramNode>
+            </DiagramWrapper>
+
+            {/* Entity Layer */}
+            <DiagramWrapper
+              id="wrapper-entity"
+              title={
+                <span className="text-xs font-semibold text-cyan-600">
+                  entities/user.entity.go
+                </span>
+              }
+              fit={true}
+              minWidth={300}
+              minHeight={200}
+              maxWidth={1200}
+              maxHeight={1200}
+              className="border border-dashed border-cyan-300 rounded-xl bg-cyan-50/30 p-4"
+            >
+              <DiagramNode
+                id="node-entity"
+                filename="entities/user.entity.go"
+                fit={false}
+                minWidth={420}
+                minHeight={220}
+                maxWidth={720}
+                maxHeight={720}
+                className="absolute"
+              >
+                <CodeBlock
+                  code={entityCode}
+                  language="go"
+                  filename="entities/user.entity.go"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
+              </DiagramNode>
+            </DiagramWrapper>
+
+            {/* Utilities Layer */}
+            <DiagramWrapper
+              id="wrapper-utils"
+              title={
+                <span className="text-xs font-semibold text-amber-600">
+                  utils/
+                </span>
+              }
+              fit={true}
+              minWidth={300}
+              minHeight={200}
+              maxWidth={1400}
+              maxHeight={1400}
+              className="border border-dashed border-amber-300 rounded-xl bg-amber-50/30 p-4"
+            >
+              <DiagramNode
+                id="node-bcrypt"
+                filename="utils/bcrypt.util.go"
+                fit={false}
+                minWidth={400}
+                minHeight={220}
+                maxWidth={700}
+                maxHeight={700}
+                className="absolute"
+              >
+                <CodeBlock
+                  code={bcryptCode}
+                  language="go"
+                  filename="utils/bcrypt.util.go"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
+              </DiagramNode>
+
+              <DiagramNode
+                id="node-email"
+                filename="utils/email.util.go"
+                fit={false}
+                minWidth={420}
+                minHeight={280}
+                maxWidth={720}
+                maxHeight={720}
+                className="absolute"
+              >
+                <CodeBlock
+                  code={emailCode}
+                  language="go"
+                  filename="utils/email.util.go"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
+              </DiagramNode>
+
+              <DiagramNode
+                id="node-response"
+                filename="utils/response.util.go"
+                fit={false}
+                minWidth={400}
+                minHeight={240}
+                maxWidth={700}
+                maxHeight={700}
+                className="absolute"
+              >
+                <CodeBlock
+                  code={responseCode}
+                  language="go"
+                  filename="utils/response.util.go"
+                  theme="vs-dark"
+                  showLineNumbers={true}
+                  className="h-full"
+                >
+                  <CodeBlockHeader />
+                  <CodeBlockBody />
+                </CodeBlock>
+              </DiagramNode>
+            </DiagramWrapper>
           </DiagramLayout>
         </div>
       </div>

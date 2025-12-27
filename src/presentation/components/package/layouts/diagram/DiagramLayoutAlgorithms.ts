@@ -9,88 +9,36 @@ import {
   FileGroup,
   ClusterGroup,
 } from "./LayoutUtils";
-import { LayoutStrategy } from "./Diagram.types";
+
+// Seeded Random Generator for reproducible randomness
+class SeededRandom {
+  private seed: number;
+
+  constructor(seed: number) {
+    this.seed = seed;
+  }
+
+  next(): number {
+    // Simple LCG (Linear Congruential Generator)
+    this.seed = (this.seed * 9301 + 49297) % 233280;
+    return this.seed / 233280;
+  }
+
+  range(min: number, max: number): number {
+    return min + this.next() * (max - min);
+  }
+}
 
 export interface LayoutResult {
   positions: Record<string, { x: number; y: number }>;
 }
 
-/**
- * Main Layout Dispatcher
- */
 export function calculateLayout(
-  strategy: LayoutStrategy = "smart",
   nodes: LayoutNode[],
   edges: DiagramEdgeOptions[],
   options: any = {}
 ): LayoutResult {
-  switch (strategy) {
-    case "vertical":
-      return verticalStackLayout(nodes);
-    case "grid":
-      return gridLayout(nodes);
-    case "smart":
-    default:
-      return smartHierarchicalLayout(nodes, edges, options);
-  }
-}
-
-/**
- * Simple Vertical Stack Layout
- * Groups by file, then stacks files vertically.
- */
-function verticalStackLayout(nodes: LayoutNode[]): LayoutResult {
-  const positions: Record<string, { x: number; y: number }> = {};
-  const fileGroups = groupNodesByFile(nodes, []);
-
-  let currentY = 0;
-  const GAP_X = 50;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const GAP_Y = 50;
-  const GROUP_GAP = 100;
-
-  fileGroups.forEach((group) => {
-    let currentX = 0;
-    let maxHeightInRow = 0;
-
-    // Position nodes in this group loosely horizontally
-    group.nodes.forEach((node: any) => {
-      const w = node.width || CODE_NODE_WIDTH;
-      const h = node.height || CODE_NODE_DEFAULT_HEIGHT;
-
-      positions[node.id] = { x: currentX, y: currentY };
-
-      currentX += w + GAP_X;
-      maxHeightInRow = Math.max(maxHeightInRow, h);
-    });
-
-    currentY += maxHeightInRow + GROUP_GAP;
-  });
-
-  return { positions };
-}
-
-/**
- * Simple Grid Layout
- * Ignores file groups, just packs everything in a grid.
- */
-function gridLayout(nodes: LayoutNode[]): LayoutResult {
-  const positions: Record<string, { x: number; y: number }> = {};
-  const COLUMNS = Math.ceil(Math.sqrt(nodes.length));
-  const X_SPACING = 400;
-  const Y_SPACING = 300;
-
-  nodes.forEach((node, index) => {
-    const col = index % COLUMNS;
-    const row = Math.floor(index / COLUMNS);
-
-    positions[node.id] = {
-      x: col * X_SPACING,
-      y: row * Y_SPACING,
-    };
-  });
-
-  return { positions };
+  return smartHierarchicalLayout(nodes, edges, options);
 }
 
 // ==================== NEW HIERARCHICAL LAYOUT ====================
@@ -109,6 +57,9 @@ export function smartHierarchicalLayout(
 ): LayoutResult {
   if (nodes.length === 0) return { positions: {} };
 
+  // Create seeded random generator - different seed each time for true randomness
+  const randomSeed = Date.now() + Math.random() * 10000;
+  const rng = new SeededRandom(randomSeed);
   const positions: Record<string, { x: number; y: number }> = {};
 
   // 1. Group nodes by "Cluster" (Wrapper OR File)
@@ -131,9 +82,11 @@ export function smartHierarchicalLayout(
     levels[levelIndex].push(group);
   });
 
-  // 4. Layout Each Level
+  // 4. Layout Each Level with strong randomization
   let currentY = 0;
-  const LEVEL_SPACING = 150; // Vertical spacing (Reduced)
+  const LEVEL_SPACING = 150; // Increased vertical spacing for better separation
+  const GROUP_SPACING = 120; // Increased horizontal spacing between groups
+  const RANDOM_OFFSET = 80; // Increased random offset range for breaking grid patterns
 
   levels.forEach((levelGroups) => {
     if (levelGroups.length === 0) return;
@@ -174,15 +127,13 @@ export function smartHierarchicalLayout(
       });
     }
 
-    // Calculate Grid Width for this Level to Center it
-    const GROUP_SPACING = 80; // Horizontal spacing (Reduced)
-
-    // First pass: Calculate dimensions
+    // First pass: Calculate dimensions for all groups in this level
     const groupLayouts = levelGroups.map((group) => {
-      const layout = layoutGroupInternals(group, edges);
+      const layout = layoutGroupInternals(group, edges, rng);
       return { ...layout, group };
     });
 
+    // Calculate total width to center the level
     const totalLevelWidth =
       groupLayouts.reduce((acc, l) => acc + l.width, 0) +
       (groupLayouts.length - 1) * GROUP_SPACING;
@@ -197,18 +148,24 @@ export function smartHierarchicalLayout(
     let currentX = -totalLevelWidth / 2;
     let maxGroupHeight = 0;
 
-    groupLayouts.forEach(({ width, height, nodePositions, group }) => {
-      // Assign global positions relative to group layout
-      Object.entries(nodePositions).forEach(([nodeId, pos]) => {
-        positions[nodeId] = {
-          x: currentX + pos.x,
-          y: currentY + pos.y,
-        };
-      });
+    groupLayouts.forEach(
+      ({ width, height, nodePositions, group }, groupIndex) => {
+        // Add strong random offset to break grid pattern
+        const randomXOffset = rng.range(-RANDOM_OFFSET, RANDOM_OFFSET);
+        const randomYOffset = rng.range(-RANDOM_OFFSET / 2, RANDOM_OFFSET / 2);
 
-      currentX += width + GROUP_SPACING;
-      maxGroupHeight = Math.max(maxGroupHeight, height);
-    });
+        // Assign global positions relative to group layout with randomization
+        Object.entries(nodePositions).forEach(([nodeId, pos]) => {
+          positions[nodeId] = {
+            x: currentX + pos.x + randomXOffset,
+            y: currentY + pos.y + randomYOffset,
+          };
+        });
+
+        currentX += width + GROUP_SPACING;
+        maxGroupHeight = Math.max(maxGroupHeight, height);
+      }
+    );
 
     currentY += maxGroupHeight + LEVEL_SPACING;
   });
@@ -225,7 +182,8 @@ export function smartHierarchicalLayout(
  */
 function layoutGroupInternals(
   group: ClusterGroup | FileGroup,
-  allEdges: DiagramEdgeOptions[]
+  allEdges: DiagramEdgeOptions[],
+  rng: SeededRandom
 ): {
   width: number;
   height: number;
@@ -244,11 +202,11 @@ function layoutGroupInternals(
   const exitNodes = new Set<string>();
 
   externalEdges.forEach((e) => {
-    if (nodeIds.has(e.to)) entryNodes.add(e.to); // Incoming from outside
-    if (nodeIds.has(e.from)) exitNodes.add(e.from); // Outgoing to outside
+    if (nodeIds.has(e.to)) entryNodes.add(e.to);
+    if (nodeIds.has(e.from)) exitNodes.add(e.from);
   });
 
-  // Sort nodes
+  // Sort nodes: Entry -> Internal -> Exit
   const sortedNodes = [...group.nodes].sort((a, b) => {
     const aIsEntry = entryNodes.has(a.id);
     const bIsEntry = entryNodes.has(b.id);
@@ -259,29 +217,110 @@ function layoutGroupInternals(
     if (!aIsEntry && bIsEntry) return 1;
     if (aIsExit && !bIsExit) return 1;
     if (!aIsExit && bIsExit) return -1;
-    return 0; // Keep relative order if same category
+    return 0;
   });
 
-  // Simple Vertical Stack for Internals
+  // ORGANIC GRID LAYOUT - Balance structure with strong randomness
   const localPositions: Record<string, { x: number; y: number }> = {};
-  let y = FILE_GROUP_PADDING;
-  const x = FILE_GROUP_PADDING;
-  let maxW = 0;
-  const NODE_GAP = 20; // Reduced from 40
+  const NODE_GAP = 50; // Further increased gap for better visual separation
+  const RANDOM_POSITION_OFFSET = 45; // Increased random offset for breaking alignment
 
-  sortedNodes.forEach((node) => {
+  // Dynamic column calculation with randomization to avoid uniform grids
+  // Add slight variation to column count
+  let baseColumns = 1;
+  if (sortedNodes.length === 1) baseColumns = 1;
+  else if (sortedNodes.length === 2) baseColumns = 2; // 2 nodes horizontal
+  else if (sortedNodes.length <= 4) baseColumns = 2; // 3-4 nodes: 2 columns
+  else if (sortedNodes.length <= 6)
+    baseColumns = 2; // 5-6 nodes: 2 columns (avoid 3-col grid)
+  else if (sortedNodes.length <= 9) baseColumns = rng.next() > 0.5 ? 2 : 3;
+  // 7-9 nodes: randomly 2 or 3 columns
+  else baseColumns = Math.min(4, Math.ceil(Math.sqrt(sortedNodes.length))); // Max 4 columns
+
+  const columns = baseColumns;
+
+  // Calculate positions in grid with better space utilization
+  let currentX = FILE_GROUP_PADDING;
+  let currentY = FILE_GROUP_PADDING;
+  let maxColWidth: number[] = new Array(columns).fill(0);
+  let rowHeights: number[] = [];
+  let currentRow = 0;
+  let currentCol = 0;
+
+  sortedNodes.forEach((node, idx) => {
     const w = node.width || CODE_NODE_WIDTH;
     const h = node.height || CODE_NODE_DEFAULT_HEIGHT;
 
-    localPositions[node.id] = { x, y };
+    // Track max width for this column (use slightly smaller default for better fit)
+    maxColWidth[currentCol] = Math.max(
+      maxColWidth[currentCol],
+      Math.min(w, CODE_NODE_WIDTH * 0.95)
+    );
 
-    y += h + NODE_GAP;
-    maxW = Math.max(maxW, w);
+    // Track max height for this row
+    if (!rowHeights[currentRow]) rowHeights[currentRow] = 0;
+    rowHeights[currentRow] = Math.max(rowHeights[currentRow], h);
+
+    currentCol++;
+    if (currentCol >= columns) {
+      currentCol = 0;
+      currentRow++;
+    }
   });
 
+  // Second pass: Place nodes using calculated column widths and row heights
+  currentCol = 0;
+  currentRow = 0;
+  currentX = FILE_GROUP_PADDING;
+  currentY = FILE_GROUP_PADDING;
+
+  sortedNodes.forEach((node, idx) => {
+    const w = node.width || CODE_NODE_WIDTH;
+    const h = node.height || CODE_NODE_DEFAULT_HEIGHT;
+
+    // Add strong random offset to break strict grid alignment
+    const randomX = rng.range(-RANDOM_POSITION_OFFSET, RANDOM_POSITION_OFFSET);
+    const randomY = rng.range(-RANDOM_POSITION_OFFSET, RANDOM_POSITION_OFFSET);
+
+    // Add extra offset for nodes in same row to prevent horizontal alignment
+    const rowOffsetX = currentCol > 0 ? rng.range(-15, 15) : 0;
+    const rowOffsetY = rng.range(-20, 20);
+
+    localPositions[node.id] = {
+      x: currentX + randomX + rowOffsetX,
+      y: currentY + randomY + rowOffsetY,
+    };
+
+    currentCol++;
+    if (currentCol >= columns) {
+      // Move to next row
+      currentCol = 0;
+      currentRow++;
+      currentX = FILE_GROUP_PADDING;
+      currentY += rowHeights[currentRow - 1] + NODE_GAP;
+    } else {
+      // Move to next column in same row with strong variation
+      const columnGapVariation = NODE_GAP + rng.range(-30, 30);
+      currentX += maxColWidth[currentCol - 1] + columnGapVariation;
+    }
+  });
+
+  // Calculate total dimensions with extra padding for random offsets
+  const extraPadding = RANDOM_POSITION_OFFSET + 20;
+  const totalWidth =
+    maxColWidth.reduce((a, b) => a + b, 0) +
+    (columns - 1) * NODE_GAP +
+    FILE_GROUP_PADDING * 2 +
+    extraPadding * 3;
+  const totalHeight =
+    rowHeights.reduce((a, b) => a + b, 0) +
+    (rowHeights.length - 1) * NODE_GAP +
+    FILE_GROUP_PADDING * 2 +
+    extraPadding * 3;
+
   return {
-    width: maxW + FILE_GROUP_PADDING * 2,
-    height: y + FILE_GROUP_PADDING - NODE_GAP, // remove last gap
+    width: totalWidth,
+    height: totalHeight,
     nodePositions: localPositions,
   };
 }

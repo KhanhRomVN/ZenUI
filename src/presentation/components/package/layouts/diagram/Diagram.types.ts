@@ -4,8 +4,6 @@ export type DiagramWrapperProps = Omit<DiagramNodeProps, "title"> & {
   title?: React.ReactNode;
 };
 
-export type LayoutStrategy = "smart" | "vertical" | "grid";
-
 export interface DiagramLayoutProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -14,12 +12,11 @@ export interface DiagramLayoutProps
    * Enable smart auto layout algorithm.
    * When true, nodes will be automatically positioned for optimal visualization.
    */
-  autoLayout?: boolean;
   /**
-   * Layout strategy to use.
-   * Default is "smart".
+   * Enable smart auto layout algorithm.
+   * When true, nodes will be automatically positioned for optimal visualization.
    */
-  layoutStrategy?: LayoutStrategy;
+  autoLayout?: boolean;
   /**
    * Options for smart layout algorithm
    */

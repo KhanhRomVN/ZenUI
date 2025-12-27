@@ -133,39 +133,78 @@ export function smartHierarchicalLayout(
 
   // 4. Layout Each Level
   let currentY = 0;
-  const LEVEL_SPACING = 250; // Vertical spacing between cluster rows
+  const LEVEL_SPACING = 150; // Vertical spacing (Reduced)
 
   levels.forEach((levelGroups) => {
     if (levelGroups.length === 0) return;
 
-    let currentX = 0;
+    // Sort groups based on Barycenter Heuristic (Average Parent X)
+    // This keeps connected nodes close to each other.
+    if (levelGroups.length > 0) {
+      levelGroups.forEach((group) => {
+        let sumX = 0;
+        let count = 0;
+
+        // Find incoming edges from nodes already positioned (previous levels)
+        const groupNodeIds = new Set(group.nodes.map((n) => n.id));
+
+        edges.forEach((edge) => {
+          if (groupNodeIds.has(edge.to) && positions[edge.from]) {
+            sumX += positions[edge.from].x;
+            count++;
+          }
+        });
+
+        // Store a sort score.
+        // If no parents, use Infinity or -Infinity?
+        // Use a stable secondary sort (label) if no parents.
+        // Or finding "file" order from original nodes list?
+        // Let's use a very large number if no parents, but maintain label order among them.
+        (group as any)._sortScore = count > 0 ? sumX / count : null;
+      });
+
+      levelGroups.sort((a: any, b: any) => {
+        if (a._sortScore !== null && b._sortScore !== null) {
+          return a._sortScore - b._sortScore;
+        }
+        if (a._sortScore !== null) return 1; // Parents go last? No.
+        if (b._sortScore !== null) return -1;
+
+        return a.label.localeCompare(b.label);
+      });
+    }
+
+    // Calculate Grid Width for this Level to Center it
+    const GROUP_SPACING = 80; // Horizontal spacing (Reduced)
+
+    // First pass: Calculate dimensions
+    const groupLayouts = levelGroups.map((group) => {
+      const layout = layoutGroupInternals(group, edges);
+      return { ...layout, group };
+    });
+
+    const totalLevelWidth =
+      groupLayouts.reduce((acc, l) => acc + l.width, 0) +
+      (groupLayouts.length - 1) * GROUP_SPACING;
+
+    // Assume diagram center is X=0 or we just start from -totalWidth/2
+    // Let's effectively center around 0, or just shift relative to a "Canvas Center".
+    // A simple visual trick is to align the "center" of this row to the "center" of the Layout.
+    // Since we don't know the layout width yet, we can't perfectly center.
+    // BUT, we can make them relatively centered.
+    // Let's start X at -totalLevelWidth / 2.
+
+    let currentX = -totalLevelWidth / 2;
     let maxGroupHeight = 0;
-    const GROUP_SPACING = 200; // Horizontal spacing between clusters
 
-    // Sort groups in this level by ID/Label for stability
-    levelGroups.sort((a, b) => a.label.localeCompare(b.label));
-
-    levelGroups.forEach((group) => {
-      // 5. Layout Internal Nodes for this Group
-      const { width, height, nodePositions } = layoutGroupInternals(
-        group,
-        edges
-      );
-
-      // Assign global positions relative to group position
+    groupLayouts.forEach(({ width, height, nodePositions, group }) => {
+      // Assign global positions relative to group layout
       Object.entries(nodePositions).forEach(([nodeId, pos]) => {
         positions[nodeId] = {
           x: currentX + pos.x,
           y: currentY + pos.y,
         };
       });
-
-      // If this group corresponds to a Wrapper (has actual groupId),
-      // The wrapper itself needs no position in 'positions' map because
-      // DiagramLayout only positions NODES.
-      // The DiagramWrapper auto-fits to these nodes.
-      // BUT, if the user explicitly added the Wrapper as a node (which is happening in our "buggy" code but we fixed it with ignore),
-      // we don't need to do anything special. Wrapper just follows children.
 
       currentX += width + GROUP_SPACING;
       maxGroupHeight = Math.max(maxGroupHeight, height);
@@ -228,7 +267,7 @@ function layoutGroupInternals(
   let y = FILE_GROUP_PADDING;
   const x = FILE_GROUP_PADDING;
   let maxW = 0;
-  const NODE_GAP = 40;
+  const NODE_GAP = 20; // Reduced from 40
 
   sortedNodes.forEach((node) => {
     const w = node.width || CODE_NODE_WIDTH;

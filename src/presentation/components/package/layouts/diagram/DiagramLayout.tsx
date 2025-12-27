@@ -53,6 +53,12 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
 
   const [isDragging, setIsDragging] = useState(false);
   const [layoutVersion, setLayoutVersion] = useState(0);
+  const [itemsVersion, setItemsVersion] = useState(0);
+
+  // Force layout update when items are added/removed (via itemsVersion change)
+  useEffect(() => {
+    setLayoutVersion((v) => v + 1);
+  }, [itemsVersion]);
 
   // ResizeObserver to handle content loading
   useEffect(() => {
@@ -93,19 +99,14 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
     // Wait for all nodes to be measured
     const layoutNodes: LayoutNode[] = nodeIds.map((id) => {
       const el = items[id];
-      const rect = el.getBoundingClientRect();
-      const currentScale = scale || 1;
-
-      console.log(`[DiagramLayout] Node ${id} measured:`, {
-        width: Math.round(rect.width / currentScale),
-        height: Math.round(rect.height / currentScale),
-        rawWidth: Math.round(rect.width),
-      });
+      // Use offsetWidth/Height for stable logical size, independent of parent transform/scale
+      const width = el.offsetWidth;
+      const height = el.offsetHeight;
 
       return {
         id,
-        width: (rect.width || 200) / currentScale,
-        height: (rect.height || 150) / currentScale,
+        width: width || 200,
+        height: height || 150,
         file: el.getAttribute("data-filename") || undefined,
         groupId:
           el.closest("[data-wrapper-id]")?.getAttribute("data-wrapper-id") ||
@@ -114,12 +115,7 @@ const DiagramLayout: React.FC<DiagramLayoutProps> = ({
     });
 
     // Run layout algorithm based on strategy
-    const result = calculateLayout(
-      layoutStrategy,
-      layoutNodes,
-      edges,
-      layoutOptions
-    );
+    const result = calculateLayout("smart", layoutNodes, edges, layoutOptions);
 
     console.log("[DiagramLayout] Layout result applied");
     setLayoutPositions(result.positions);

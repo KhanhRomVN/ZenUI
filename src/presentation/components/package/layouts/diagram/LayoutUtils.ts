@@ -1,17 +1,17 @@
 import { DiagramEdgeOptions, LayoutNode } from "./Diagram.types";
 
 // ==================== CONSTANTS ====================
-export const FILE_GROUP_PADDING = 60;
-export const FILE_GROUP_MARGIN = 150;
+export const FILE_GROUP_PADDING = 40;
+export const FILE_GROUP_MARGIN = 80;
 export const CODE_NODE_WIDTH = 450;
 export const CODE_NODE_MIN_HEIGHT = 206;
 export const CODE_NODE_DEFAULT_HEIGHT = 320;
 export const DECLARATION_NODE_WIDTH = 350;
 export const DECLARATION_NODE_HEIGHT = 200;
-export const MIN_NODE_SPACING = 60;
+export const MIN_NODE_SPACING = 30; // Reduced from 60
 export const DECLARATION_GRID_COLUMNS = 2;
-export const DECLARATION_GRID_SPACING = 60;
-export const MIN_CONTAINER_SPACING = 150;
+export const DECLARATION_GRID_SPACING = 30; // Reduced from 60
+export const MIN_CONTAINER_SPACING = 80; // Reduced from 150
 
 // ==================== HELPER: GROUP NODES BY FILE ====================
 // ==================== HELPER: GROUP NODES BY CLUSTER ====================

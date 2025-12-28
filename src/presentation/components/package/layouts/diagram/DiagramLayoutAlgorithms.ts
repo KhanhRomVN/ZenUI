@@ -33,6 +33,51 @@ export interface LayoutResult {
   positions: Record<string, { x: number; y: number }>;
 }
 
+/**
+ * Calculate node centrality (importance) based on connections
+ * Returns a map of nodeId -> centrality score (0-1)
+ */
+function calculateNodeCentrality(
+  nodes: LayoutNode[],
+  edges: DiagramEdgeOptions[]
+): Map<string, number> {
+  const centrality = new Map<string, number>();
+  const degree = new Map<string, number>();
+
+  // Initialize
+  nodes.forEach((node) => {
+    degree.set(node.id, 0);
+  });
+
+  // Count connections (both in and out)
+  edges.forEach((edge) => {
+    degree.set(edge.from, (degree.get(edge.from) || 0) + 1);
+    degree.set(edge.to, (degree.get(edge.to) || 0) + 1);
+  });
+
+  // Normalize to 0-1 range
+  const maxDegree = Math.max(...Array.from(degree.values()), 1);
+  degree.forEach((deg, nodeId) => {
+    centrality.set(nodeId, deg / maxDegree);
+  });
+
+  return centrality;
+}
+
+/**
+ * Calculate cluster centrality based on its nodes
+ */
+function calculateClusterCentrality(
+  cluster: ClusterGroup,
+  nodeCentrality: Map<string, number>
+): number {
+  const centralitySum = cluster.nodes.reduce(
+    (sum, node) => sum + (nodeCentrality.get(node.id) || 0),
+    0
+  );
+  return cluster.nodes.length > 0 ? centralitySum / cluster.nodes.length : 0;
+}
+
 export function calculateLayout(
   nodes: LayoutNode[],
   edges: DiagramEdgeOptions[],
@@ -66,6 +111,16 @@ export function smartHierarchicalLayout(
   // 1. Group nodes by "Cluster" (Wrapper OR File)
   const clusters = groupNodesByCluster(nodes, edges);
 
+  // 1.5. Calculate Node Centrality (NEW)
+  const nodeCentrality = calculateNodeCentrality(nodes, edges);
+  const clusterCentrality = new Map<string, number>();
+  clusters.forEach((cluster) => {
+    clusterCentrality.set(
+      cluster.id,
+      calculateClusterCentrality(cluster, nodeCentrality)
+    );
+  });
+
   // 2. Calculate Cluster Dependencies and Levels (Global Layering)
   const clusterLevels = calculateClusterLevels(clusters, edges);
   const maxLevel = Math.max(
@@ -92,7 +147,7 @@ export function smartHierarchicalLayout(
   levels.forEach((levelGroups) => {
     if (levelGroups.length === 0) return;
 
-    // Add random shuffle with Barycenter influence (70% structure, 30% chaos)
+    // CENTRALITY-BASED SORTING: High-centrality clusters towards center
     if (levelGroups.length > 0) {
       levelGroups.forEach((group) => {
         let sumX = 0;
@@ -107,17 +162,36 @@ export function smartHierarchicalLayout(
           }
         });
 
-        // Add significant random noise to break determinism
-        const randomNoise = rng.range(-500, 500);
-        const baryCenter = count > 0 ? sumX / count : rng.range(-1000, 1000);
-        (group as any)._sortScore = baryCenter + randomNoise;
+        // Barycenter (weighted by parent positions)
+        const baryCenter = count > 0 ? sumX / count : 0;
+
+        // Centrality score (0-1, higher = more important)
+        const centrality = clusterCentrality.get(group.id) || 0;
+
+        // Centrality pull towards center (0)
+        // High centrality -> score closer to 0 (center)
+        // Low centrality -> score farther from 0 (edges)
+        const centralityPull = (1 - centrality) * 2000; // Range: 0-2000
+
+        // Random noise for variation (reduced from 500 to 300)
+        const randomNoise = rng.range(-300, 300);
+
+        // Combined score: Barycenter + Centrality Pull + Random Noise
+        // Goal: High centrality nodes get scores near 0 (center)
+        const sortScore =
+          baryCenter +
+          centralityPull * Math.sign(baryCenter || 1) +
+          randomNoise;
+
+        (group as any)._sortScore = sortScore;
       });
 
       levelGroups.sort((a: any, b: any) => {
-        // Primary sort by score with random noise
-        const scoreA = a._sortScore ?? rng.range(-2000, 2000);
-        const scoreB = b._sortScore ?? rng.range(-2000, 2000);
-        return scoreA - scoreB;
+        // Sort by absolute distance from center (0)
+        // Clusters with high centrality will be closer to 0
+        const scoreA = Math.abs(a._sortScore ?? 0);
+        const scoreB = Math.abs(b._sortScore ?? 0);
+        return scoreA - scoreB; // Ascending: closest to center first
       });
     }
 
@@ -211,18 +285,37 @@ function layoutGroupInternals(
     if (nodeIds.has(e.from)) exitNodes.add(e.from);
   });
 
-  // Sort nodes: Entry -> Internal -> Exit
+  // Calculate node degree (connections) for internal sorting
+  const nodeDegree = new Map<string, number>();
+  group.nodes.forEach((node) => {
+    const internalConnections = localEdges.filter(
+      (e) => e.from === node.id || e.to === node.id
+    ).length;
+    const externalConnections = externalEdges.filter(
+      (e) => e.from === node.id || e.to === node.id
+    ).length;
+    nodeDegree.set(node.id, internalConnections + externalConnections);
+  });
+
+  // Sort nodes: Entry -> High-Degree Internal -> Low-Degree Internal -> Exit
   const sortedNodes = [...group.nodes].sort((a, b) => {
     const aIsEntry = entryNodes.has(a.id);
     const bIsEntry = entryNodes.has(b.id);
     const aIsExit = exitNodes.has(a.id);
     const bIsExit = exitNodes.has(b.id);
 
+    // Priority 1: Entry nodes first
     if (aIsEntry && !bIsEntry) return -1;
     if (!aIsEntry && bIsEntry) return 1;
+
+    // Priority 2: Exit nodes last
     if (aIsExit && !bIsExit) return 1;
     if (!aIsExit && bIsExit) return -1;
-    return 0;
+
+    // Priority 3: Within internal nodes, sort by degree (high to low)
+    const aDegree = nodeDegree.get(a.id) || 0;
+    const bDegree = nodeDegree.get(b.id) || 0;
+    return bDegree - aDegree; // Descending: high degree first
   });
 
   // ORGANIC GRID LAYOUT - Balance structure with strong randomness
@@ -230,23 +323,48 @@ function layoutGroupInternals(
   const NODE_GAP = 120; // TĂNG: Khoảng cách giữa các node trong wrapper
   const RANDOM_POSITION_OFFSET = 25; // Moderate random offset for subtle variation
 
-  // Highly randomized column calculation to break patterns
+  // CENTRALITY-AWARE COLUMN CALCULATION
+  // Goal: Place high-degree nodes in center columns
   let baseColumns = 1;
   if (sortedNodes.length === 1) baseColumns = 1;
-  else if (sortedNodes.length === 2) baseColumns = rng.next() > 0.3 ? 2 : 1;
-  else if (sortedNodes.length <= 4) baseColumns = rng.next() > 0.5 ? 2 : 3;
-  else if (sortedNodes.length <= 6) baseColumns = rng.next() > 0.4 ? 2 : 3;
-  else if (sortedNodes.length <= 9) {
-    const r = rng.next();
-    baseColumns = r > 0.6 ? 2 : r > 0.3 ? 3 : 4;
-  } else {
-    baseColumns = Math.min(
-      4,
-      Math.ceil(Math.sqrt(sortedNodes.length)) + Math.floor(rng.range(-1, 2))
-    );
+  else if (sortedNodes.length === 2) baseColumns = 2;
+  else if (sortedNodes.length <= 4) baseColumns = 2;
+  else if (sortedNodes.length <= 6) baseColumns = 3;
+  else if (sortedNodes.length <= 9) baseColumns = 3;
+  else {
+    baseColumns = Math.min(4, Math.ceil(Math.sqrt(sortedNodes.length)));
   }
 
   const columns = Math.max(1, baseColumns);
+
+  // Re-arrange nodes to place high-degree ones in center columns
+  const centerColumn = Math.floor(columns / 2);
+  const reorderedNodes: typeof sortedNodes = [];
+  const tempNodes = [...sortedNodes];
+
+  // Fill center column first with high-degree nodes
+  while (tempNodes.length > 0 && reorderedNodes.length < sortedNodes.length) {
+    const targetCol = reorderedNodes.length % columns;
+    const distanceFromCenter = Math.abs(targetCol - centerColumn);
+
+    // Prefer high-degree nodes for center columns
+    if (distanceFromCenter === 0) {
+      // Center column: pick highest degree remaining
+      const maxIdx = tempNodes.reduce(
+        (maxI, node, i, arr) =>
+          (nodeDegree.get(node.id) || 0) > (nodeDegree.get(arr[maxI].id) || 0)
+            ? i
+            : maxI,
+        0
+      );
+      reorderedNodes.push(tempNodes.splice(maxIdx, 1)[0]);
+    } else {
+      // Side columns: pick normally
+      reorderedNodes.push(tempNodes.shift()!);
+    }
+  }
+
+  const finalSortedNodes = reorderedNodes;
 
   // Calculate positions in grid with better space utilization
   let currentX = FILE_GROUP_PADDING;
@@ -256,7 +374,7 @@ function layoutGroupInternals(
   let currentRow = 0;
   let currentCol = 0;
 
-  sortedNodes.forEach((node, idx) => {
+  finalSortedNodes.forEach((node, idx) => {
     const w = node.width || CODE_NODE_WIDTH;
     const h = node.height || CODE_NODE_DEFAULT_HEIGHT;
 
@@ -283,7 +401,7 @@ function layoutGroupInternals(
   currentX = FILE_GROUP_PADDING;
   currentY = FILE_GROUP_PADDING;
 
-  sortedNodes.forEach((node, idx) => {
+  finalSortedNodes.forEach((node, idx) => {
     const w = node.width || CODE_NODE_WIDTH;
     const h = node.height || CODE_NODE_DEFAULT_HEIGHT;
 
